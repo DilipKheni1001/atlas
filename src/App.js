@@ -19,26 +19,26 @@ function App() {
 
   return (
 
-    
+
     <div className="App">
       <Router>
-        <Header1/>
-        <Sidebar/>
+        {/* <Header1 /> */}
+        <Sidebar />
 
         <Switch>
           <Route path="/home">
-            <Home/>
-           
+            <Home />
+
           </Route>
           <Route path="/home_2">
-            <Home_2/>
+            <Home_2 />
 
           </Route>
         </Switch>
-     
-    </Router>
-     
-    
+
+      </Router>
+
+
     </div>
   );
 }
