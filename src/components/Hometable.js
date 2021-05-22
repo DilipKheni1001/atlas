@@ -25,8 +25,7 @@ const Hometable = (props) => {
     pages.push(i);
   }
 
-
- const renderPageNumbers = pages.map((number) => {
+  const renderPageNumbers = pages.map((number) => {
     if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
       return (
         <li
@@ -43,8 +42,7 @@ const Hometable = (props) => {
     }
   });
 
-
-  const handleNextbtn = () => {
+const handleNextbtn = () => {
    if (Math.ceil(tableTotal?.length/ itemsPerPage) === currentPage) {
       setcurrentPage(currentPage);
    } else {setcurrentPage(currentPage + 1);
@@ -116,58 +114,22 @@ async function getData() {
    }
 }
 
-   
-
- 
-
-
-   
-   
-   //     const jsonArr=[    
-   //     {name:"John Christensen", 
-   //     staget:"Pre-Approved",
-   //     createdDate:'3 days ago ',
-   //     loanSenarios:[{
-   //             subtitle:'Stone HP 30 100k Cashout',title:'Home Possible ',subData:[{label:'Upfront',value:'450'},{label:'rate',value:'450'},{label:'rate',value:'450'}]
-   //     },{  subtitle:'Stone HP 30 100k Cashout',title:'Home Possible ',subData:[{label:'Upfront',value:'450'},{label:'rate',value:'450'},{label:'rate',value:'450'}]},
-   //     {  subtitle:'Stone HP 30 100k Cashout',title:'Home Possible ',subData:[{label:'rate',value:'450'},{label:'rate',value:'450'},{label:'rate',value:'450'}]}],
-   //     campaigns:[{title:'Home Possible ' },{title:'Home Possible ' }],
-   //      browsApp:[{
-   //             title:' Stone HP 30 100k Cashout'
-   //     }]
-   //    } ,  {name:"mike Christensen", 
-   //     staget:"Pre-Approved",
-   //     createdDate:'5 days ago',
-   //     loanSenarios:[{
-   //             subtitle:'Stone HP 30 100k Cashout',title:'Home Possible ',subData:[{label:'Upfront',value:'450'},{label:'rate',value:'450'},{label:'rate',value:'450'}]
-   //     },{  subtitle:'Stone HP 30 100k Cashout',title:'Home Possible ',subData:[{label:'Upfront',value:'450'},{label:'rate',value:'450'},{label:'rate',value:'450'}]},
-   //     {  subtitle:'Stone HP 30 100k Cashout',title:'Home Possible ',subData:[{label:'rate',value:'450'},{label:'rate',value:'450'},{label:'rate',value:'450'}]}],
-   //     campaigns:[{title:'Home Possible ' },{title:'Home Possible ' }],
-   //      browsApp:[{
-   //             title:' Stone HP 30 100k Cashout'
-   //     }]
-   //    }   
-
-   // ]
-
-  
-       useEffect(()=>{
-
-         getmyData('','')
-
-       },[])
+        useEffect(()=>{
+          getmyData('','')
+         },[])
        const getmyData=(filed,order)=>{
+         
          if(order==='ASC'){
-            console.log("asc");
-           
-             setTableArr(tableArr.sort())
-         }
-         if(order==='DESC'){
-            console.log('desc');
-             setTableArr(tableArr.reverse())
-         }
-         setTableArr(tableArr)
+           let latestArr=[...tableArr]
+          setTableArr(latestArr.reverse())
+      }
+          if(order==='DESC'){
+             let latestArr=[...tableArr]
+             setTableArr(latestArr.reverse())
+             
+          }
        }
+      
 
    //     const ascSorting=async(field)=>{
    //      let array=  tableArr;
@@ -198,20 +160,19 @@ async function getData() {
                         <div className="thblock">
                          Name
                   <span>
-                             
-                                 <button type="button" onClick={()=>{getmyData('title','ASC')}}>
+                             <button type="button" onClick={()=>{getmyData('firstName','ASC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 5.5L5.5 1L10 5.5" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
                               </button>
                              
-                                 <button type="button"  onClick={()=>{getmyData('title','DESC')}}>
+                                 <button type="button"  onClick={()=>{getmyData('firstName','DESC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1L5.5 5.5L10 1" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
                               </button>
                            </span>
-                        </div>
+                        </div>   
                      </th>
                      <th>
                         <div className="thblock">
@@ -237,13 +198,13 @@ async function getData() {
                            Created
                   <span>
                               
-                                 <button type="button" onClick={()=>{getmyData('created','ASC')}} >
+                                 <button type="button" onClick={()=>{getmyData('createdDate','ASC')}} >
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 5.5L5.5 1L10 5.5" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
                               </button>
                               
-                                 <button type="button" onClick={()=>{getmyData('created','DESC')}}>
+                                 <button type="button" onClick={()=>{getmyData('createdDate','DESC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1L5.5 5.5L10 1" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
