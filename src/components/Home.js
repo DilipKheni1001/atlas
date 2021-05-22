@@ -7,14 +7,19 @@ const Home = () => {
 
     const [headers, setHeaders] = useState("");
     const handleProps = (e) => {
-          setHeaders(e);
+        setHeaders(e);
     }
+
+    // const handleData=()=>{
+    //     console.log("datas");
+    // }
+   
     return (
         <>
             <Header value={handleProps} />
             <div className="maindiv">
-                <Hometable name={headers} />
-                <Pagination />
+                <Hometable name={headers}  />
+                {/* <Pagination /> */}
             </div>
         </>
 

@@ -3,8 +3,8 @@ import head_img from '../images/head-profile.jpg';
 import Hometable from './Hometable'
 
 const Header = (props) => {
-   const [searchs, setSearchs] = useState("");
-   console.log("searchs", searchs);
+  
+  
 
 
    return (

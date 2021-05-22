@@ -1,47 +1,128 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import axios from 'axios';
+import "../style.css";
+
 
 const Hometable = (props) => {
    const [tableArr, setTableArr] = useState();
-   const [tableSortedArr, setTableSortedArr] = useState();
+   const [tableTotal,setTableTotal]= useState()
+   const [currentPage, setcurrentPage] = useState(1);
+   const [itemsPerPage, setitemsPerPage] = useState(50);
+   const [pageNumberLimit, setpageNumberLimit] = useState(5);
+   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
+   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
-   useEffect(() => {
-      getData('');
-   }, [])
+  const handleClick = (event) => {
+   setcurrentPage(Number(event.target.id));
+ };
 
-   useEffect(()=>{
-      getData(props.name)
-   },[props.name])
-   async function getData(search) {
-      try {
-       var abcd= {
-            userId: 1,
-            page:1,
-         }
+ const indexOfLastItem = currentPage * itemsPerPage;
+ const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+ 
+ const pages = [];
+  for (let i = 1; i <= Math.ceil(tableTotal?.length/ itemsPerPage); i++) {
+    pages.push(i);
+  }
 
-         if(search)
-         {
-            abcd.search=search
-         }
-         console.log("abcd",abcd);
-         const data = await axios({
-            method: "get",
-            url: "https://atlas.keystonefunding.com/api/contact/list",
-            params: abcd
-         })
-            .then((res) => {
-               if (res.status === 200) {
-                  setTableArr(res.data.data);
-               }
-            })
-      }
-      catch (e) {
-         console.log(e);
-      }
+
+ const renderPageNumbers = pages.map((number) => {
+    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+      return (
+        <li
+          key={number}
+          id={number}
+          onClick={handleClick}
+          className={currentPage === number ? "active" : null}
+        >
+          {number}
+        </li>
+      );
+    } else {
+      return null;
+    }
+  });
+
+
+  const handleNextbtn = () => {
+   if (Math.ceil(tableTotal?.length/ itemsPerPage) === currentPage) {
+      setcurrentPage(currentPage);
+   } else {setcurrentPage(currentPage + 1);
+      if (currentPage + 1 > maxPageNumberLimit) {
+     setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+     setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
    }
+}
+ };
+
+ const handlePrevbtn = () => {
+   if (currentPage === 1) {
+      setcurrentPage(1)
+} else {
+      setcurrentPage(currentPage - 1);
+      if ((currentPage - 1) % pageNumberLimit == 0) {
+     setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+     setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+   }
+ }
+ };
+
+ let pageIncrementBtn = null;
+ if (pages.length > maxPageNumberLimit) {
+   pageIncrementBtn = <li onClick={handleNextbtn}> &hellip; </li>;
+ }
+
+ let pageDecrementBtn = null;
+ if (minPageNumberLimit >= 1) {
+   pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
+ }
+
+ useEffect(() => {
+   getData('');
+}, [currentPage,props.name])
+
+async function getData() {
+   try {
+       var result = {
+         userId: 1,
+         page:1
+       }
+      if(currentPage)
+      {
+         result.page=currentPage
+      }
+      if(props.name)
+      {
+         if(currentPage)
+         {
+            result.page=currentPage
+         }
+         result.search=props.name
+      }
+     
+      const data = await axios({
+         method: "get",
+         url: "https://atlas.keystonefunding.com/api/contact/list",
+         params: result
+      }).then((res) => {
+            if (res.status === 200) {
+               setTableArr(res.data.data);
+               setTableTotal(res.data.totalResults);
+              }
+         })
+   }
+   catch (e) {
+      console.log(e);
+   }
+}
+
+   
+
+ 
 
 
+   
+   
    //     const jsonArr=[    
    //     {name:"John Christensen", 
    //     staget:"Pre-Approved",
@@ -68,39 +149,45 @@ const Hometable = (props) => {
    //    }   
 
    // ]
-   //     useEffect(()=>{
 
-   //       getData('','')
+  
+       useEffect(()=>{
 
-   //     },[])
-   //     const getData=(filed,order)=>{
-   //       if(order==='ASC'){
-   //           setTableArr(jsonArr.sort())
-   //       }
-   //       if(order==='DESC'){
-   //           setTableArr(jsonArr.reverse())
-   //       }
-   //       setTableArr(jsonArr)
-   //     }
+         getmyData('','')
+
+       },[])
+       const getmyData=(filed,order)=>{
+         if(order==='ASC'){
+            console.log("asc");
+           
+             setTableArr(tableArr.sort())
+         }
+         if(order==='DESC'){
+            console.log('desc');
+             setTableArr(tableArr.reverse())
+         }
+         setTableArr(tableArr)
+       }
 
    //     const ascSorting=async(field)=>{
-   //      let array=  tableArr
+   //      let array=  tableArr;
    //      array.sort((a, b) => {
    //   return a.name.localeCompare(b.name)
-   // });
+   //      }
+   // }
 
 
 
 
-   //     }
+       
    //     const descSorting=async (field)=>{
-   //        let array=  tableArr
+   //        let array=  tableArr;
    //      array.sort((a, b) => {
-   //   return b.name.localeCompare(a.name)
-   // });
-   //       setTableArr(array)
-   //     }
-
+   //   return b.name.localeCompare(a.name);
+   //      }
+   // }
+       
+ 
    return (
       <>
          <div className="td-main">
@@ -109,16 +196,16 @@ const Hometable = (props) => {
                   <tr className="head-td">
                      <th>
                         <div className="thblock">
-                           First Name
+                         Name
                   <span>
-                              <button>
-                                 {/* <button type="button" onClick={()=>{getData('name','ASC')}}> */}
+                             
+                                 <button type="button" onClick={()=>{getmyData('title','ASC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 5.5L5.5 1L10 5.5" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
                               </button>
-                              <button>
-                                 {/* <button type="button"  onClick={()=>{getData('name','DESC')}}> */}
+                             
+                                 <button type="button"  onClick={()=>{getmyData('title','DESC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1L5.5 5.5L10 1" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
@@ -130,14 +217,14 @@ const Hometable = (props) => {
                         <div className="thblock">
                            Stage
                   <span>
-                              <button>
-                                 {/* <button type="button" onClick={()=>{getData('stage','ASC')}}> */}
+                              
+                                 <button type="button" onClick={()=>{getmyData('stage','ASC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 5.5L5.5 1L10 5.5" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
                               </button>
-                              <button>
-                                 {/* <button type="button" onClick={()=>{getData('stage','DESC')}}> */}
+                           
+                                 <button type="button" onClick={()=>{getmyData('stage','DESC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1L5.5 5.5L10 1" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
@@ -149,14 +236,14 @@ const Hometable = (props) => {
                         <div className="thblock">
                            Created
                   <span>
-                              <button>
-                                 {/* <button type="button" onClick={()=>{getData('created','ASC')}} > */}
+                              
+                                 <button type="button" onClick={()=>{getmyData('created','ASC')}} >
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 5.5L5.5 1L10 5.5" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
                               </button>
-                              <button>
-                                 {/* <button type="button" onClick={()=>{getData('created','DESC')}}> */}
+                              
+                                 <button type="button" onClick={()=>{getmyData('created','DESC')}}>
                                  <svg width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1L5.5 5.5L10 1" stroke="#CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                  </svg>
@@ -181,7 +268,7 @@ const Hometable = (props) => {
                      </th>
                   </tr>
 
-                  {tableArr?.map((element, index) => {
+                  {tableArr?.slice(indexOfFirstItem, indexOfLastItem)?.map((element, index) => {
                      return (
                         <>
                            <tr>
@@ -189,10 +276,9 @@ const Hometable = (props) => {
                               <td>{element.stage}</td>
                               <td>{element.createdDate}</td>
                               <td><div className="loan-td">
-                                 {element?.loanScenarios?.map((ele, index) => {
-                                    console.log("ele", ele);
-                                    return (
-                                       <>
+                                 {/* {element?.loanScenarios?.map((ele, index) => {
+                                   return (
+                                       <> */}
                                           <div className="loan-box">
                                              <div className="box-l">
                                              Stone HP 30 100k Cashout
@@ -222,9 +308,9 @@ const Hometable = (props) => {
                                                 </div>
                                              </div>
                                           </div>
-                                       </>
+                                       {/* </>
                                     )
-                                 })}
+                                 })} */}
                               </div>
                               </td>
 
@@ -1129,14 +1215,35 @@ const Hometable = (props) => {
          </tr> */}
                   {/* </tr> */}
 
+                 
                </Table>
 
             </div>
          </div>
-
+        <div className="pagination">
+             <ul className="pageNumbers" >
+            <li>
+          <button
+            onClick={handlePrevbtn}
+            disabled={currentPage == pages[0] ? true : false}
+          >
+            Prev
+          </button>
+        </li>
+        {pageDecrementBtn}
+        {renderPageNumbers}
+        {pageIncrementBtn}
+        <li>
+          <button
+            onClick={handleNextbtn}
+            disabled={currentPage == pages[pages.length - 1] ? true : false}
+          >
+            Next
+          </button>
+        </li>
+        </ul>
+      </div>
       </>
-
-   )
-
-}
+      )
+   }
 export default Hometable
