@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import axios from 'axios';
 import "../style.css";
+import ReactPaginate from 'react-paginate';
 
 
 const Hometable = (props) => {
    const [tableArr, setTableArr] = useState();
-   const [tableTotal,setTableTotal]= useState()
+   const [tableTotal,setTableTotal]= useState();
+   const [pageCount,setPageCount]= useState();
    const [currentPage, setcurrentPage] = useState(1);
    const [itemsPerPage, setitemsPerPage] = useState(50);
    const [pageNumberLimit, setpageNumberLimit] = useState(5);
@@ -75,6 +77,11 @@ const handleNextbtn = () => {
    pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
  }
 
+ const handlePageClick = (data) => {
+   let selected = data.selected;
+   setcurrentPage(selected + 1);
+ }
+
  useEffect(() => {
    getData('');
 }, [currentPage,props.name])
@@ -97,14 +104,16 @@ async function getData() {
          }
          result.search=props.name
       }
-     
+     console.log("result",result);
       const data = await axios({
          method: "get",
          url: "https://atlas.keystonefunding.com/api/contact/list",
          params: result
       }).then((res) => {
             if (res.status === 200) {
+               console.log("data--",res.data);
                setTableArr(res.data.data);
+               setPageCount(Math.ceil(res.data.totalResults / itemsPerPage));
                setTableTotal(res.data.totalResults);
               }
          })
@@ -120,14 +129,31 @@ async function getData() {
        const getmyData=(filed,order)=>{
          
          if(order==='ASC'){
-           let latestArr=[...tableArr]
-          setTableArr(latestArr.reverse())
-      }
-          if(order==='DESC'){
-             let latestArr=[...tableArr]
-             setTableArr(latestArr.reverse())
-             
-          }
+         //   let latestArr=[...tableArr]
+         //  setTableArr(latestArr.reverse())
+          const myData = [].concat(tableArr)
+               .sort((a, b) => a[filed] > b[filed] ? 1 : -1)
+               .map(item=> {
+                  return item;
+               });
+               setTableArr(myData);
+               console.log("Sorting Asc Data--",myData);
+         }
+         if(order==='DESC'){
+            //  let latestArr=[...tableArr]
+            //  setTableArr(latestArr.reverse())
+             const myData = [].concat(tableArr)
+               .sort((a, b) => a[filed] < b[filed] ? 1 : -1)
+               .map(item=> {
+                  return item;
+               });
+               setTableArr(myData);
+               console.log("Sorting Desc Data--",myData);
+         }
+          
+                  
+                  // <div key={i}> {item.matchID} {item.timeM}{item.description}</div>
+               // );
        }
       
 
@@ -1181,7 +1207,19 @@ async function getData() {
 
             </div>
          </div>
-        <div className="pagination">
+         <ReactPaginate
+          previousLabel={'previous'}
+          nextLabel={'next'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+        />
+        {/* <div className="pagination">
              <ul className="pageNumbers" >
             <li>
           <button
@@ -1204,6 +1242,7 @@ async function getData() {
         </li>
         </ul>
       </div>
+       */}
       </>
       )
    }
