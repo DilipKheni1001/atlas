@@ -93,6 +93,7 @@ const Hometable = (props) => {
       setTableArr(myData);
     }
   };
+  console.log("tableArr", tableArr);
   return (
     <>
       <div className="td-main">
