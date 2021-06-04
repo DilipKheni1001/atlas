@@ -201,7 +201,7 @@ table {
   padding: 15px 20px;
   font-size: 16px;
   font-weight: 500;
-  vertical-align: middle;
+  vertical-align: text-top;
 }
 
 .tablemain .table > thead {
@@ -295,6 +295,7 @@ ul.pagination li.active {
   padding: 0px 5px;
   width: 33.33%;
   position: relative;
+  margin-bottom: 15px;  
 }
 .campa-box {
   padding: 0px 5px;
