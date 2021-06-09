@@ -1,196 +1,333 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Accordion, Card, Tabs, Tab } from "react-bootstrap";
 import EdiText from "react-editext";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import axios from "axios";
 const Home_2 = () => {
-  const [loanTerms, setLoanTerms] = useState({
-    BaseLoanAmount: "",
-    TotalLoanAmount: "",
-    LoanProduct: "",
-    LoanType: "",
-    InterestRate: "",
-    TotalLoanAmount1: "",
-    LockPeriod: "",
-    LoanPrice: "",
-    LenderCredit: "",
-  });
-  const onSelect = (v) => {
-    console.log("Value--", v);
-  };
-  const options = ["one", "two", "three"];
-  const defaultOption = options[0];
+  const [home2, setHome2] = useState();
+  const [display, setDisplay] = useState();
 
-  const [mortGage, setMortgage] = useState({
-    GovernmentFundingFee: "",
-    FinanceFundingFee: "",
-    MortgageInsuranceRate: "",
-    PremiumType: "",
-  });
-
-  const [mortgageInsuranceRate, setMortgageInsuranceRate] = useState({
-    SecondMortgageRequest: "",
-    SecondMortgageBalance: "",
-    PayoffSecondMortgage: "",
-  });
-
-  const [borrowerRequestAndProfile, setBorrowerRequestAndProfile] = useState({
-    LoanPurpose: "",
-    CashoutRefinance: "",
-    Occupancy: "",
-    CurrentLoanBalance: "",
-    CashoutRequest: "",
-    WaivesTaxEscrows: "",
-    WaivesInsuranceEscrows: "",
-    CreditScore: "",
-    CurrentLoanType: "",
-    VAEligible: "",
-    VAUsedBefore: "",
-    VADisability: "",
-  });
-
-  const [propertyDetails, setPropertyDetails] = useState({
-    Address: "",
-    County: "",
-    PropertyType: "",
-    HouseValue: "",
-    MonthlyHOA: "",
-    MonthlyPropertyTaxes: "",
-    MonthlyHOI: "",
+  const [loanScenario, setLoanScenario] = useState({
+    id: "",
+    contactId: "",
+    scenarioName: "",
+    loanPurpose: "",
+    cashoutRequest: "",
+    isPayingOffSecondMortgage: "",
+    isCashout: "",
+    propertyStreet: "",
+    propertyStreet2: "",
+    propertyCity: "",
+    propertyZip: "",
+    propertyState: "",
+    propertyCountry: "",
+    propertyType: "",
+    creditScore: "",
+    occupancy: "",
+    isVaEligible: "",
+    isVaDisability: "",
+    isVaUsedBefore: "",
+    houseValue: "",
+    baseLoanAmount: "",
+    currentLoanBalance: "",
+    secondMortgageBalance: "",
+    loanProduct: "",
+    loanType: "",
+    currentLoanType: "",
+    loanTypeSpecial: "",
+    interestRate: "",
+    lockPeriod: "",
+    loanPrice: "",
+    lenderCredit: "",
+    isFirstTimeHomeBuyer: "",
+    isTaxEscrowsWaived: "",
+    monthlyPropertyTax: "",
+    monthlyHOI: "",
+    blockAOriginationFee: "",
+    blockADiscountFee: "",
+    blockBAppraisalFee: "",
+    blockBCreditFees: "",
+    blockBFloodCertification: "",
+    blockBTaxService: "",
+    blockCTitleServices: "",
+    blockCSurvey: "",
+    blockETransferTaxes: "",
+    blockERecordingCharges: "",
+    blockHOwnersTitleInsPremium: "",
   });
 
-  const [originationCharges, setOriginationCharges] = useState({
-    DiscountFee: "",
-    OriginationFee: "",
-    ProcessingFee: "",
-    TaxService: "",
-  });
+  // const [loanScenario, setLoanScenario] = useState({
+  //   BaseLoanAmount: "",
+  //   TotalLoanAmount: "",
+  //   LoanProduct: "",
+  //   LoanType: "",
+  //   InterestRate: "",
+  //   TotalLoanAmount1: "",
+  //   LockPeriod: "",
+  //   LoanPrice: "",
+  //   LenderCredit: "",
+  // });
+  // const onSelect = (v) => {
+  //   console.log("Value--", v);
+  // };
+  // const options = ["one", "two", "three"];
+  // const defaultOption = options[0];
 
-  const [servicesYouCannotShopFor, setServicesYouCannotShopFor] = useState({
-    DiscountFee: "",
-    OriginationFee: "",
-    ProcessingFee: "",
-    TaxService: "",
-    DiscountFee1: "",
-    OriginationFee1: "",
-    ProcessingFee1: "",
-    TaxService1: "",
-  });
+  // const [loanScenario, setLoanScenario] = useState({
+  //   GovernmentFundingFee: "",
+  //   FinanceFundingFee: "",
+  //   MortgageInsuranceRate: "",
+  //   PremiumType: "",
+  // });
 
-  const [servicesYouCanShopFor, setServicesYouCanShopFor] = useState({
-    TitleServicesInsurance: "",
-    Survey: "",
-  });
+  // const [loanScenario, setLoanScenario] = useState({
+  //   SecondMortgageRequest: "",
+  //   SecondMortgageBalance: "",
+  //   PayoffSecondMortgage: "",
+  // });
 
-  const [taxesAndGovernmentFees, setTaxesAndGovernmentFees] = useState({
-    RecordingFees: "",
-    TransferTaxes: "",
-  });
+  // const [loanScenario, setLoanScenario] = useState({
+  //   LoanPurpose: "",
+  //   CashoutRefinance: "",
+  //   Occupancy: "",
+  //   CurrentLoanBalance: "",
+  //   CashoutRequest: "",
+  //   WaivesTaxEscrows: "",
+  //   WaivesInsuranceEscrows: "",
+  //   CreditScore: "",
+  //   CurrentLoanType: "",
+  //   VAEligible: "",
+  //   VAUsedBefore: "",
+  //   VADisability: "",
+  // });
 
-  const [prepaids, setPrepaids] = useState({
-    HomeownersInsurancePremium: "",
-    PrepaidInterestfor15days: "",
-    PrepaidTaxes: "",
-  });
+  // const [loanScenario, setLoanScenario] = useState({
+  //   Address: "",
+  //   County: "",
+  //   PropertyType: "",
+  //   HouseValue: "",
+  //   MonthlyHOA: "",
+  //   MonthlyPropertyTaxes: "",
+  //   MonthlyHOI: "",
+  // });
 
-  const [initialEscrowPaymentatClosing, setInitialEscrowPaymentAtClosing] =
-    useState({
-      HomeownersInsurance100permonthfor2months: "",
-      PropertyTaxes273permonthfor13months: "",
-    });
+  // const [loanScenario, setLoanScenario] = useState({
+  //   DiscountFee: "",
+  //   OriginationFee: "",
+  //   ProcessingFee: "",
+  //   TaxService: "",
+  // });
 
-  const [other, setOther] = useState({
-    HomeownersInsurancePremium: "",
-  });
+  // const [loanScenario, setLoanScenario] = useState({
+  //   DiscountFee: "",
+  //   OriginationFee: "",
+  //   ProcessingFee: "",
+  //   TaxService: "",
+  //   DiscountFee1: "",
+  //   OriginationFee1: "",
+  //   ProcessingFee1: "",
+  //   TaxService1: "",
+  // });
 
-  const handleSave = (event, val, stateName) => {
+  // const [loanScenario, setLoanScenario] = useState({
+  //   TitleServicesInsurance: "",
+  //   Survey: "",
+  // });
+
+  // const [loanScenario, setLoanScenario] = useState({
+  //   RecordingFees: "",
+  //   TransferTaxes: "",
+  // });
+
+  // const [loanscenario, setLoanScenario] = useState({
+  //   HomeownersInsurancePremium: "",
+  //   PrepaidInterestfor15days: "",
+  //   PrepaidTaxes: "",
+  // });
+
+  // const [loanScenario, setLoanScenario] =
+  //   useState({
+  //     HomeownersInsurance100permonthfor2months: "",
+  //     PropertyTaxes273permonthfor13months: "",
+  //   });
+
+  // const [loanscenario, setOther] = useState({
+  //   HomeownersInsurancePremium: "",
+  // });
+
+  // const [loanScenario, setLoanScenario] = useState({
+  //   ProjectedPayments1: "",
+  //   EstimatedEscrow: "",
+  //   TotalMonthlyPayment: "",
+  // });
+
+  // const [loanScenario, setLoanScenario] = useState({
+  //   DI: "",
+  //   Property: "",
+  // });
+
+  useEffect(() => {
+    getData();
+  }, [loanScenario.baseLoanAmount]);
+
+  async function getData() {
+    try {
+      var fromData = new FormData();
+      fromData.append("id", 1);
+      fromData.append("baseLoanAmount", loanScenario.baseLoanAmount);
+
+      const data = await axios({
+        method: "post",
+        url: "https://atlas.keystonefunding.com/api/loanscenario/update",
+        data: fromData,
+      }).then((res) => {
+        console.log("res", res);
+        console.log("res.data", res.data);
+        console.log("res.data.data", res.data.data);
+        console.log("res.config.data", res.config.data);
+        console.log("res.status", res.status);
+        if (res.status === 200) {
+          if (res.data.status === 1) {
+            setHome2(res.data);
+          }
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  console.log("home2", home2);
+  useEffect(() => {
+    getMyData();
+  }, []);
+  async function getMyData() {
+    try {
+      var result = {
+        id: 1,
+      };
+
+      const data = await axios({
+        method: "get",
+        url: "https://atlas.keystonefunding.com/api/loanscenario/details",
+        params: result,
+      }).then((res) => {
+        if (res.status === 200) {
+          setDisplay(res.data);
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  console.log("display", display);
+  console.log("home2", home2);
+  const handleSave = (event, val) => {
     console.log("event", event);
     console.log("val", val);
-    console.log("stateName", stateName);
+    // console.log("stateName", stateName);
 
-    if (stateName === "loanTerms") {
-      setLoanTerms((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    setLoanScenario({ ...loanScenario, [val]: event });
 
-    if (stateName === "mortGage") {
-      setMortgage((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
-    if (stateName === "mortgageInsuranceRate") {
-      setMortgageInsuranceRate((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "borrowerRequestAndProfile") {
-      setBorrowerRequestAndProfile((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "propertyDetails") {
-      setPropertyDetails((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "originationCharges") {
-      setOriginationCharges((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "servicesYouCannotShopFor") {
-      setServicesYouCannotShopFor((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "servicesYouCanShopFor") {
-      setServicesYouCanShopFor((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "taxesAndGovernmentFees") {
-      setTaxesAndGovernmentFees((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "prepaids") {
-      setPrepaids((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "initialEscrowPaymentatClosing") {
-      setInitialEscrowPaymentAtClosing((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanscenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
 
-    if (stateName === "other") {
-      setOther((prevState) => ({
-        ...prevState,
-        [val]: event,
-      }));
-    }
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
+
+    // if (stateName === "loanscenario") {
+    //   setOther((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
+
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
+
+    // if (stateName === "loanScenario") {
+    //   setLoanScenario((prevState) => ({
+    //     ...prevState,
+    //     [val]: event,
+    //   }));
+    // }
   };
+
+  console.log("loanScenario", loanScenario);
 
   return (
     <>
@@ -665,14 +802,14 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>Loan Terms</p>
                           </li>
+
                           <li>
                             <p>Base Loan Amount</p>
-
                             <EdiText
-                              value={loanTerms.BaseLoanAmount}
+                              value={loanScenario.baseLoanAmount}
                               tabIndex={1}
                               onSave={(pass) => {
-                                handleSave(pass, "BaseLoanAmount", "loanTerms");
+                                handleSave(pass, "baseLoanAmount");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -680,19 +817,19 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Total Loan Amount</p>
-                            <EdiText
-                              value={loanTerms.TotalLoanAmount}
+                            {/* <EdiText
+                              value={loanScenario.TotalLoanAmount}
                               tabIndex={2}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "TotalLoanAmount",
-                                  "loanTerms"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Loan Product</p>
@@ -705,10 +842,10 @@ const Home_2 = () => {
                           <li>
                             <p>Interest Rate</p>
                             <EdiText
-                              value={loanTerms.InterestRate}
+                              value={loanScenario.interestRate}
                               tabIndex={3}
                               onSave={(pass) => {
-                                handleSave(pass, "InterestRate", "loanTerms");
+                                handleSave(pass, "interestRate");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -717,23 +854,24 @@ const Home_2 = () => {
                           <li>
                             <p>Total Loan Amount</p>
 
-                            <EdiText
-                              value={loanTerms.TotalLoanAmount1}
+                            {/* <EdiText
+                              value={loanScenario.TotalLoanAmount1}
                               tabIndex={4}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "TotalLoanAmount1",
-                                  "loanTerms"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Lock Period</p>
-                            <span>100</span>
+                            {/* <span>100</span> */}
+
                             {/* 
                             <div className="dropdown-main">
                               <div id="wrap">
@@ -762,10 +900,10 @@ const Home_2 = () => {
                           <li>
                             <p>Loan Price</p>
                             <EdiText
-                              value={loanTerms.LoanPrice}
+                              value={loanScenario.loanPrice}
                               tabIndex={5}
                               onSave={(pass) => {
-                                handleSave(pass, "LoanPrice", "loanTerms");
+                                handleSave(pass, "loanPrice");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -775,10 +913,10 @@ const Home_2 = () => {
                             <p>Lender Credit</p>
 
                             <EdiText
-                              value={loanTerms.LenderCredit}
+                              value={loanScenario.lenderCredit}
                               tabIndex={6}
                               onSave={(pass) => {
-                                handleSave(pass, "LenderCredit", "loanTerms");
+                                handleSave(pass, "lenderCredit");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -786,6 +924,7 @@ const Home_2 = () => {
                           </li>
                         </ul>
                       </div>
+
                       <div className="price-text">
                         <ul>
                           <li className="head-price">
@@ -793,54 +932,54 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Government Funding Fee </p>
-                            <EdiText
-                              value={mortGage.GovernmentFundingFee}
+                            {/* <EdiText
+                              value={loanScenario.GovernmentFundingFee}
                               tabIndex={11}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "GovernmentFundingFee",
-                                  "mortGage"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Finance Funding Fee/MI</p>
-                            <span>
+                            {/* <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={mortGage.FinanceFundingFee}
+                                  checked={loanScenario.FinanceFundingFee}
                                   onChange={() =>
-                                    setMortgage((mortGage) => ({
-                                      ...mortGage,
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
                                       FinanceFundingFee:
-                                        !mortGage.FinanceFundingFee,
+                                        !loanScenario.FinanceFundingFee,
                                     }))
                                   }
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span>
+                            </span> */}
                           </li>
                           <li>
                             <p>Mortgage Insurance Rate</p>
-                            <EdiText
-                              value={mortGage.MortgageInsuranceRate}
+                            {/* <EdiText
+                              value={loanScenario.MortgageInsuranceRate}
                               tabIndex={12}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "MortgageInsuranceRate",
-                                  "mortGage"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Premium Type</p>
@@ -858,16 +997,10 @@ const Home_2 = () => {
                           <li>
                             <p>Second Mortgage Balance</p>
                             <EdiText
-                              value={
-                                mortgageInsuranceRate.SecondMortgageBalance
-                              }
+                              value={loanScenario.secondMortgageBalance}
                               tabIndex={21}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "SecondMortgageBalance",
-                                  "mortgageInsuranceRate"
-                                );
+                                handleSave(pass, "secondMortgageBalance");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -875,26 +1008,22 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Payoff Second Mortgage</p>
-                            <span>
+                            {/* <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={
-                                    mortgageInsuranceRate.PayoffSecondMortgage
-                                  }
+                                  checked={loanScenario.PayoffSecondMortgage}
                                   onChange={() =>
-                                    setMortgageInsuranceRate(
-                                      (mortgageInsuranceRate) => ({
-                                        ...mortgageInsuranceRate,
-                                        PayoffSecondMortgage:
-                                          !mortgageInsuranceRate.PayoffSecondMortgage,
-                                      })
-                                    )
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
+                                      PayoffSecondMortgage:
+                                        !loanScenario.PayoffSecondMortgage,
+                                    }))
                                   }
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span>
+                            </span> */}
                           </li>
                         </ul>
                       </div>
@@ -911,26 +1040,22 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Cashout Refinance</p>
-                            <span>
+                            {/* <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={
-                                    borrowerRequestAndProfile.CashoutRefinance
-                                  }
+                                  checked={loanScenario.CashoutRefinance}
                                   onChange={() =>
-                                    setBorrowerRequestAndProfile(
-                                      (borrowerRequestAndProfile) => ({
-                                        ...borrowerRequestAndProfile,
-                                        CashoutRefinance:
-                                          !borrowerRequestAndProfile.CashoutRefinance,
-                                      })
-                                    )
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
+                                      CashoutRefinance:
+                                        !loanScenario.CashoutRefinance,
+                                    }))
                                   }
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span>
+                            </span> */}
                           </li>
                           <li>
                             <p>Occupancy</p>
@@ -939,16 +1064,10 @@ const Home_2 = () => {
                           <li>
                             <p>Current Loan Balance</p>
                             <EdiText
-                              value={
-                                borrowerRequestAndProfile.CurrentLoanBalance
-                              }
+                              value={loanScenario.currentLoanBalance}
                               tabIndex={41}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "CurrentLoanBalance",
-                                  "borrowerRequestAndProfile"
-                                );
+                                handleSave(pass, "currentLoanBalance");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -957,14 +1076,10 @@ const Home_2 = () => {
                           <li>
                             <p>Cashout Request</p>
                             <EdiText
-                              value={borrowerRequestAndProfile.CashoutRequest}
+                              value={loanScenario.cashoutRequest}
                               tabIndex={42}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "CashoutRequest",
-                                  "borrowerRequestAndProfile"
-                                );
+                                handleSave(pass, "cashoutRequest");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -976,17 +1091,13 @@ const Home_2 = () => {
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={
-                                    borrowerRequestAndProfile.WaivesTaxEscrows
-                                  }
+                                  checked={loanScenario.isTaxEscrowsWaived}
                                   onChange={() =>
-                                    setBorrowerRequestAndProfile(
-                                      (borrowerRequestAndProfile) => ({
-                                        ...borrowerRequestAndProfile,
-                                        WaivesTaxEscrows:
-                                          !borrowerRequestAndProfile.WaivesTaxEscrows,
-                                      })
-                                    )
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
+                                      isTaxEscrowsWaived:
+                                        !loanScenario.isTaxEscrowsWaived,
+                                    }))
                                   }
                                 />
                                 <span className="checkmark"></span>
@@ -995,38 +1106,30 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Waives Insurance Escrows</p>
-                            <span>
+                            {/* <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={
-                                    borrowerRequestAndProfile.WaivesInsuranceEscrows
-                                  }
+                                  checked={loanScenario.WaivesInsuranceEscrows}
                                   onChange={() =>
-                                    setBorrowerRequestAndProfile(
-                                      (borrowerRequestAndProfile) => ({
-                                        ...borrowerRequestAndProfile,
-                                        WaivesInsuranceEscrows:
-                                          !borrowerRequestAndProfile.WaivesInsuranceEscrows,
-                                      })
-                                    )
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
+                                      WaivesInsuranceEscrows:
+                                        !loanScenario.WaivesInsuranceEscrows,
+                                    }))
                                   }
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span>
+                            </span> */}
                           </li>
                           <li>
                             <p>Credit Score</p>
                             <EdiText
-                              value={borrowerRequestAndProfile.CreditScore}
+                              value={loanScenario.creditScore}
                               tabIndex={43}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "CreditScore",
-                                  "borrowerRequestAndProfile"
-                                );
+                                handleSave(pass, "creditScore");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -1042,15 +1145,12 @@ const Home_2 = () => {
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={borrowerRequestAndProfile.VAEligible}
+                                  checked={loanScenario.isVaEligible}
                                   onChange={() =>
-                                    setBorrowerRequestAndProfile(
-                                      (borrowerRequestAndProfile) => ({
-                                        ...borrowerRequestAndProfile,
-                                        VAEligible:
-                                          !borrowerRequestAndProfile.VAEligible,
-                                      })
-                                    )
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
+                                      isVaEligible: !loanScenario.isVaEligible,
+                                    }))
                                   }
                                 />
                                 <span className="checkmark"></span>
@@ -1063,17 +1163,13 @@ const Home_2 = () => {
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={
-                                    borrowerRequestAndProfile.VAUsedBefore
-                                  }
+                                  checked={loanScenario.isVaUsedBefore}
                                   onChange={() =>
-                                    setBorrowerRequestAndProfile(
-                                      (borrowerRequestAndProfile) => ({
-                                        ...borrowerRequestAndProfile,
-                                        VAUsedBefore:
-                                          !borrowerRequestAndProfile.VAUsedBefore,
-                                      })
-                                    )
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
+                                      isVaUsedBefore:
+                                        !loanScenario.isVaUsedBefore,
+                                    }))
                                   }
                                 />
                                 <span className="checkmark"></span>
@@ -1086,17 +1182,13 @@ const Home_2 = () => {
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={
-                                    borrowerRequestAndProfile.VADisability
-                                  }
+                                  checked={loanScenario.isVaDisability}
                                   onChange={() =>
-                                    setBorrowerRequestAndProfile(
-                                      (borrowerRequestAndProfile) => ({
-                                        ...borrowerRequestAndProfile,
-                                        VADisability:
-                                          !borrowerRequestAndProfile.VADisability,
-                                      })
-                                    )
+                                    setLoanScenario((loanScenario) => ({
+                                      ...loanScenario,
+                                      isVaDisability:
+                                        !loanScenario.isVaDisability,
+                                    }))
                                   }
                                 />
                                 <span className="checkmark"></span>
@@ -1112,15 +1204,15 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Address</p>
-                            <EdiText
-                              value={propertyDetails.Address}
+                            {/* <EdiText
+                              value={loanScenario.Address}
                               tabIndex={51}
                               onSave={(pass) => {
-                                handleSave(pass, "Address", "propertyDetails");
+                                handleSave(pass, "Address", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>County</p>
@@ -1133,14 +1225,10 @@ const Home_2 = () => {
                           <li>
                             <p>House Value</p>
                             <EdiText
-                              value={propertyDetails.HouseValue}
+                              value={loanScenario.houseValue}
                               tabIndex={52}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "HouseValue",
-                                  "propertyDetails"
-                                );
+                                handleSave(pass, "houseValue");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -1148,47 +1236,39 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Monthly HOA</p>
-                            <EdiText
-                              value={propertyDetails.MonthlyHOA}
+                            {/* <EdiText
+                              value={loanScenario.MonthlyHOA}
                               tabIndex={53}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "MonthlyHOA",
-                                  "propertyDetails"
-                                );
+                                handleSave(pass, "MonthlyHOA", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Monthly Property Taxes</p>
-                            <EdiText
-                              value={propertyDetails.MonthlyPropertyTaxes}
+                            {/* <EdiText
+                              value={loanScenario.MonthlyPropertyTaxes}
                               tabIndex={54}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "MonthlyPropertyTaxes",
-                                  "propertyDetails"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Monthly HOI</p>
                             <EdiText
-                              value={propertyDetails.MonthlyHOI}
+                              value={loanScenario.monthlyHOI}
                               tabIndex={55}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "MonthlyHOI",
-                                  "propertyDetails"
-                                );
+                                handleSave(pass, "monthlyHOI");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -1203,15 +1283,51 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Projected Payments</p>
-                            <span>$ 0</span>
+                            {/* <EdiText
+                              value={loanScenario.ProjectedPayments1}
+                              tabIndex={61}
+                              onSave={(pass) => {
+                                handleSave(
+                                  pass,
+                                  "ProjectedPayments1",
+                                  "loanScenario"
+                                );
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            /> */}
                           </li>
                           <li>
                             <p>Estimated Escrow</p>
-                            <span>$ 820</span>
+                            {/* <EdiText
+                              value={loanScenario.EstimatedEscrow}
+                              tabIndex={62}
+                              onSave={(pass) => {
+                                handleSave(
+                                  pass,
+                                  "EstimatedEscrow",
+                                  "loanScenario"
+                                );
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            /> */}
                           </li>
                           <li className="Total">
                             <p>Total Monthly Payment</p>
-                            <span>$ 2,710.00</span>
+                            {/* <EdiText
+                              value={loanScenario.TotalMonthlyPayment}
+                              tabIndex={63}
+                              onSave={(pass) => {
+                                handleSave(
+                                  pass,
+                                  "TotalMonthlyPayment",
+                                  "loanScenario"
+                                );
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1231,67 +1347,59 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Discount Fee </p>
-                            <EdiText
-                              value={originationCharges.DiscountFee}
+                            {/* <EdiText
+                              value={loanScenario.DiscountFee}
                               tabIndex={101}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "DiscountFee",
-                                  "originationCharges"
-                                );
+                                handleSave(pass, "DiscountFee", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Origination Fee</p>
-                            <EdiText
-                              value={originationCharges.OriginationFee}
+                            {/* <EdiText
+                              value={loanScenario.OriginationFee}
                               tabIndex={102}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "OriginationFee",
-                                  "originationCharges"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Processing Fee</p>
-                            <EdiText
-                              value={originationCharges.ProcessingFee}
+                            {/* <EdiText
+                              value={loanScenario.ProcessingFee}
                               tabIndex={103}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "ProcessingFee",
-                                  "originationCharges"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Tax Service</p>
-                            <EdiText
-                              value={originationCharges.TaxService}
+                            {/* <EdiText
+                              value={loanScenario.TaxService}
                               tabIndex={104}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "TaxService",
-                                  "originationCharges"
-                                );
+                                handleSave(pass, "TaxService", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1302,131 +1410,119 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Discount Fee </p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.DiscountFee}
+                            {/* <EdiText
+                              value={loanScenario.DiscountFee}
                               tabIndex={105}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "DiscountFee",
-                                  "servicesYouCannotShopFor"
-                                );
+                                handleSave(pass, "DiscountFee", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Origination Fee</p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.OriginationFee}
+                            {/* <EdiText
+                              value={loanScenario.OriginationFee}
                               tabIndex={106}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "OriginationFee",
-                                  "servicesYouCannotShopFor"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Processing Fee</p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.ProcessingFee}
+                            {/* <EdiText
+                              value={loanScenario.ProcessingFee}
                               tabIndex={107}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "ProcessingFee",
-                                  "servicesYouCannotShopFor"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Tax Service</p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.TaxService}
+                            {/* <EdiText
+                              value={loanScenario.TaxService}
                               tabIndex={108}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "TaxService",
-                                  "servicesYouCannotShopFor"
-                                );
+                                handleSave(pass, "TaxService", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Discount Fee </p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.DiscountFee1}
+                            {/* <EdiText
+                              value={loanScenario.DiscountFee1}
                               tabIndex={109}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "DiscountFee1",
-                                  "servicesYouCannotShopFor"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Origination Fee</p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.OriginationFee1}
+                            {/* <EdiText
+                              value={loanScenario.OriginationFee1}
                               tabIndex={110}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "OriginationFee1",
-                                  "servicesYouCannotShopFor"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Processing Fee</p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.ProcessingFee1}
+                            {/* <EdiText
+                              value={loanScenario.ProcessingFee1}
                               tabIndex={111}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "ProcessingFee1",
-                                  "servicesYouCannotShopFor"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Tax Service</p>
-                            <EdiText
-                              value={servicesYouCannotShopFor.TaxService1}
+                            {/* <EdiText
+                              value={loanScenario.TaxService1}
                               tabIndex={112}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "TaxService1",
-                                  "servicesYouCannotShopFor"
-                                );
+                                handleSave(pass, "TaxService1", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1437,37 +1533,31 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Title Services & Insurance</p>
-                            <EdiText
-                              value={
-                                servicesYouCanShopFor.TitleServicesInsurance
-                              }
+                            {/* <EdiText
+                              value={loanScenario.TitleServicesInsurance}
                               tabIndex={113}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "TitleServicesInsurance",
-                                  "servicesYouCanShopFor"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Survey</p>
-                            <EdiText
-                              value={servicesYouCanShopFor.Survey}
+                            {/* <EdiText
+                              value={loanScenario.Survey}
                               tabIndex={114}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "Survey",
-                                  "servicesYouCanShopFor"
-                                );
+                                handleSave(pass, "Survey", "loanScenario");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1487,35 +1577,35 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Recording Fees </p>
-                            <EdiText
-                              value={taxesAndGovernmentFees.RecordingFees}
+                            {/* <EdiText
+                              value={loanScenario.RecordingFees}
                               tabIndex={115}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "RecordingFees",
-                                  "taxesAndGovernmentFees"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Transfer Taxes</p>
-                            <EdiText
-                              value={taxesAndGovernmentFees.TransferTaxes}
+                            {/* <EdiText
+                              value={loanScenario.TransferTaxes}
                               tabIndex={116}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "TransferTaxes",
-                                  "taxesAndGovernmentFees"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1526,47 +1616,51 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Homeowner’s Insurance Premium</p>
-                            <EdiText
-                              value={prepaids.HomeownersInsurancePremium}
+                            {/* <EdiText
+                              value={loanScenario.HomeownersInsurancePremium}
                               tabIndex={117}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "HomeownersInsurancePremium",
-                                  "prepaids"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Prepaid Interest for 15 days </p>
-                            <EdiText
-                              value={prepaids.PrepaidInterestfor15days}
+                            {/* <EdiText
+                              value={loanScenario.PrepaidInterestfor15days}
                               tabIndex={118}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "PrepaidInterestfor15days",
-                                  "prepaids"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>Prepaid Taxes</p>
-                            <EdiText
-                              value={prepaids.PrepaidTaxes}
+                            {/* <EdiText
+                              value={loanScenario.PrepaidTaxes}
                               tabIndex={119}
                               onSave={(pass) => {
-                                handleSave(pass, "PrepaidTaxes", "prepaids");
+                                handleSave(
+                                  pass,
+                                  "PrepaidTaxes",
+                                  "loanScenario"
+                                );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1582,21 +1676,21 @@ const Home_2 = () => {
                                 $100 per month for 2 months
                               </span>
                             </p>
-                            <EdiText
+                            {/* <EdiText
                               value={
-                                initialEscrowPaymentatClosing.HomeownersInsurance100permonthfor2months
+                                loanScenario.HomeownersInsurance100permonthfor2months
                               }
                               tabIndex={120}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "HomeownersInsurance100permonthfor2months",
-                                  "initialEscrowPaymentatClosing"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                           <li>
                             <p>
@@ -1606,21 +1700,21 @@ const Home_2 = () => {
                                 Taxes $273 per month for 13 months{" "}
                               </span>{" "}
                             </p>
-                            <EdiText
+                            {/* <EdiText
                               value={
-                                initialEscrowPaymentatClosing.PropertyTaxes273permonthfor13months
+                                loanScenario.PropertyTaxes273permonthfor13months
                               }
                               tabIndex={121}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "PropertyTaxes273permonthfor13months",
-                                  "initialEscrowPaymentatClosing"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1631,19 +1725,19 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Homeowner’s Insurance Premium</p>
-                            <EdiText
-                              value={other.HomeownersInsurancePremium}
+                            {/* <EdiText
+                              value={loanScenario.HomeownersInsurancePremium}
                               tabIndex={122}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
                                   "HomeownersInsurancePremium",
-                                  "other"
+                                  "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            />
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1658,15 +1752,30 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>J. Total Closing Costs</p>
-                            <span>$ 1,300.00</span>
                           </li>
                           <li>
                             <p>D+I</p>
-                            <span>$ 1,200.00</span>
+                            {/* <EdiText
+                              value={loanScenario.DI}
+                              tabIndex={123}
+                              onSave={(pass) => {
+                                handleSave(pass, "DI", "loanScenario");
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            /> */}
                           </li>
                           <li>
                             <p>Property </p>
-                            <span>$ 100.00</span>
+                            {/* <EdiText
+                              value={loanScenario.Property}
+                              tabIndex={124}
+                              onSave={(pass) => {
+                                handleSave(pass, "Property", "loanScenario");
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            /> */}
                           </li>
                         </ul>
                       </div>
@@ -1678,13 +1787,6 @@ const Home_2 = () => {
           </div>
         </div>
       </div>
-      {/* <Dropdown
-        options={options}
-        onChange={onSelect}
-        value={defaultOption}
-        placeholder="Select an option"
-      /> */}
-      ;
     </>
   );
 };
