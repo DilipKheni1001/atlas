@@ -57,6 +57,22 @@ const Home_2 = () => {
     blockHOwnersTitleInsPremium: "",
   });
 
+  
+  const [isEqual,setIsEqual] = useState();
+  const [selectedValue,setSelectedValue] = useState();
+    
+  const onClick = (v,dropdownValue) => {
+    setIsEqual(v);
+    setSelectedValue(dropdownValue);
+  };
+
+  const onSelect = (v) => {
+    console.log("Value--", v);
+    setSelectedValue(v.value);
+  };
+
+  const lockPeriodOptions = ["15 days", "30 days", "45 days", "60 days", "90 days"];
+
   // const [loanScenario, setLoanScenario] = useState({
   //   BaseLoanAmount: "",
   //   TotalLoanAmount: "",
@@ -226,7 +242,7 @@ const Home_2 = () => {
     console.log("event", event);
     console.log("val", val);
     // console.log("stateName", stateName);
-
+    setIsEqual("");
     setLoanScenario({ ...loanScenario, [val]: event });
 
     // if (stateName === "loanScenario") {
@@ -870,31 +886,41 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Lock Period</p>
-                            {/* <span>100</span> */}
+                            { isEqual === "lockPeriod" ? 
 
-                            {/* 
-                            <div className="dropdown-main">
-                              <div id="wrap">
-                                <Dropdown
-                                  className="cust-select"
-                                  options={options}
-                                  onChange={onSelect}
-                                  value={defaultOption}
-                                  placeholder="Select an option"
-                                />
-                                <div className="btn-div">
-                                  <button className="edit-arrow icon-btn">
-                                    &#9998;
-                                  </button>
-                                  <button className="right-arrow icon-btn">
-                                    &#10003;
-                                  </button>
-                                  <button className="cross-arrow icon-btn">
-                                    &#10005;
-                                  </button>
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={lockPeriodOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.lockPeriod}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button className="right-arrow icon-btn" onClick={() => handleSave(
+                                      selectedValue,
+                                      "lockPeriod",
+                                      "loanTerms"
+                                    )}>
+                                      &#10003;
+                                    </button>
+                                    <button className="cross-arrow icon-btn" onClick={()=> onClick("","")}>
+                                      &#10005;
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
-                            </div> */}
+                            :
+                            <div className="main-div" onClick={()=> onClick("lockPeriod",loanScenario.lockPeriod)}>
+                                <div><span>{loanScenario.lockPeriod}</span></div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                            </div>                      
+                          }
                           </li>
 
                           <li>
