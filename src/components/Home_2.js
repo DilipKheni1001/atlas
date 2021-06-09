@@ -255,17 +255,14 @@ const Home_2 = () => {
   const handleSave = (event, val) => {
     console.log("event", event);
     console.log("val", val);
-    // console.log("stateName", stateName);
-    setIsEqual("");
-    const obj = {
-      id: 1,
-      [val]: event
-    };
+    
+    var formData = new FormData();
+    formData.append("id", loanScenario.id);
+    formData.append(val, event);
 
-    console.log("obj---",obj);
-
-    axios.post(`https://atlas.keystonefunding.com/api/loanscenario/update`, obj)
+    axios.post(`https://atlas.keystonefunding.com/api/loanscenario/update`, formData)
       .then(res => {
+        setIsEqual("");
         setLoanScenario({ ...loanScenario, [val]: event });
         console.log("Update-------------------------",res);
         console.log(res.data);
