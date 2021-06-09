@@ -183,12 +183,23 @@ const Home_2 = () => {
   //   Property: "",
   // });
 
-  useEffect(() => {
-    getData();
-  }, [loanScenario.baseLoanAmount]);
+  // useEffect(() => {
+  //   getData();
+  // }, [loanScenario]);
 
-  async function getData() {
+  async function updateData() {
     try {
+
+      // const user = {
+      //   name: this.state.name
+      // };
+  
+      // axios.post(`https://atlas.keystonefunding.com/api/loanscenario/update`, { user })
+      //   .then(res => {
+      //     console.log(res);
+      //     console.log(res.data);
+      //   })
+
       var fromData = new FormData();
       fromData.append("id", 1);
       fromData.append("baseLoanAmount", loanScenario.baseLoanAmount);
@@ -214,10 +225,12 @@ const Home_2 = () => {
     }
   }
   console.log("home2", home2);
+  
   useEffect(() => {
-    getMyData();
+    getData();
   }, []);
-  async function getMyData() {
+
+  async function getData() {
     try {
       var result = {
         id: 1,
@@ -229,7 +242,7 @@ const Home_2 = () => {
         params: result,
       }).then((res) => {
         if (res.status === 200) {
-          setDisplay(res.data);
+          setLoanScenario(res.data.data[0]);
         }
       });
     } catch (e) {
@@ -238,12 +251,25 @@ const Home_2 = () => {
   }
   console.log("display", display);
   console.log("home2", home2);
+
   const handleSave = (event, val) => {
     console.log("event", event);
     console.log("val", val);
     // console.log("stateName", stateName);
     setIsEqual("");
-    setLoanScenario({ ...loanScenario, [val]: event });
+    const obj = {
+      id: 1,
+      [val]: event
+    };
+
+    console.log("obj---",obj);
+
+    axios.post(`https://atlas.keystonefunding.com/api/loanscenario/update`, obj)
+      .then(res => {
+        setLoanScenario({ ...loanScenario, [val]: event });
+        console.log("Update-------------------------",res);
+        console.log(res.data);
+      })
 
     // if (stateName === "loanScenario") {
     //   setLoanScenario((prevState) => ({
