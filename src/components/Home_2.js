@@ -57,11 +57,10 @@ const Home_2 = () => {
     blockHOwnersTitleInsPremium: "",
   });
 
-  
-  const [isEqual,setIsEqual] = useState();
-  const [selectedValue,setSelectedValue] = useState();
-    
-  const onClick = (v,dropdownValue) => {
+  const [isEqual, setIsEqual] = useState();
+  const [selectedValue, setSelectedValue] = useState();
+
+  const onClick = (v, dropdownValue) => {
     setIsEqual(v);
     setSelectedValue(dropdownValue);
   };
@@ -71,7 +70,15 @@ const Home_2 = () => {
     setSelectedValue(v.value);
   };
 
-  const lockPeriodOptions = ["15 days", "30 days", "45 days", "60 days", "90 days"];
+  const lockPeriodOptions = [
+    "15 days",
+    "30 days",
+    "45 days",
+    "60 days",
+    "90 days",
+  ];
+
+  const loanProductOptions = ["10-yr Fixed","15-yr Fixed","20-yr Fixed","25-yr Fixed","30-yr Fixed","5/1 ARM"];
 
   // const [loanScenario, setLoanScenario] = useState({
   //   BaseLoanAmount: "",
@@ -886,8 +893,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Lock Period</p>
-                            { isEqual === "lockPeriod" ? 
-
+                            {isEqual === "lockPeriod" ? (
                               <div className="dropdown-main">
                                 <div id="wrap">
                                   <Dropdown
@@ -898,29 +904,40 @@ const Home_2 = () => {
                                     placeholder="Select an option"
                                   />
                                   <div className="btn-div">
-                                    <button className="right-arrow icon-btn" onClick={() => handleSave(
-                                      selectedValue,
-                                      "lockPeriod",
-                                      "loanTerms"
-                                    )}>
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(selectedValue, "lockPeriod")
+                                      }
+                                    >
                                       &#10003;
                                     </button>
-                                    <button className="cross-arrow icon-btn" onClick={()=> onClick("","")}>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
                                       &#10005;
                                     </button>
                                   </div>
                                 </div>
                               </div>
-                            :
-                            <div className="main-div" onClick={()=> onClick("lockPeriod",loanScenario.lockPeriod)}>
-                                <div><span>{loanScenario.lockPeriod}</span></div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick("lockPeriod", loanScenario.lockPeriod)
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.lockPeriod}</span>
+                                </div>
                                 <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
                                 </div>
-                            </div>                      
-                          }
+                              </div>
+                            )}
                           </li>
 
                           <li>
