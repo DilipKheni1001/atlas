@@ -1106,8 +1106,6 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.loanProduct}</span>
-                                </div>
-                                <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
@@ -1155,8 +1153,6 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.loanType}</span>
-                                </div>
-                                <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
@@ -1232,8 +1228,6 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.lockPeriod}</span>
-                                </div>
-                                <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
@@ -1429,8 +1423,6 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.loanPurpose}</span>
-                                </div>
-                                <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
@@ -1496,8 +1488,7 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.occupancy}</span>
-                                </div>
-                                <div className="btn-div1">
+
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
@@ -1625,8 +1616,6 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.currentLoanType}</span>
-                                </div>
-                                <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
@@ -1755,8 +1744,6 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.propertyCountry}</span>
-                                </div>
-                                <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
@@ -1809,8 +1796,6 @@ const Home_2 = () => {
                               >
                                 <div>
                                   <span>{loanScenario.propertyType}</span>
-                                </div>
-                                <div className="btn-div1">
                                   <button className="edit-arrow1 icon-btn1">
                                     &#9998;
                                   </button>
