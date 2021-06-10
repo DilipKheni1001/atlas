@@ -4,10 +4,9 @@ import EdiText from "react-editext";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import axios from "axios";
-const Home_2 = () => {
-  const [home2, setHome2] = useState();
-  const [display, setDisplay] = useState();
 
+const Home_2 = () => {
+ 
   const [loanScenario, setLoanScenario] = useState({
     id: "",
     contactId: "",
@@ -61,171 +60,450 @@ const Home_2 = () => {
   const [isEqual,setIsEqual] = useState();
   const [selectedValue,setSelectedValue] = useState();
     
-  const onClick = (v,dropdownValue) => {
-    setIsEqual(v);
-    setSelectedValue(dropdownValue);
-  };
+  const lockPeriodOptions = [
+    "15 days",
+    "30 days",
+    "45 days",
+    "60 days",
+    "90 days",
+  ];
 
-  const onSelect = (v) => {
-    console.log("Value--", v);
-    setSelectedValue(v.value);
-  };
+  const loanProductOptions = [
+    "10-yr Fixed",
+    "15-yr Fixed",
+    "20-yr Fixed",
+    "25-yr Fixed",
+    "30-yr Fixed",
+    "5/1 ARM",
+    "5/5 ARM",
+    "7/1 ARM",
+    "10/1 ARM",
+  ];
 
-  const lockPeriodOptions = ["15 days", "30 days", "45 days", "60 days", "90 days"];
+  const loanTypeOptions = [
+    "Conforming",
+    "Fannie",
+    "Freddie",
+    "Non-Conforming",
+    "FHA",
+    "USDA",
+    "VA",
+  ];
 
-  // const [loanScenario, setLoanScenario] = useState({
-  //   BaseLoanAmount: "",
-  //   TotalLoanAmount: "",
-  //   LoanProduct: "",
-  //   LoanType: "",
-  //   InterestRate: "",
-  //   TotalLoanAmount1: "",
-  //   LockPeriod: "",
-  //   LoanPrice: "",
-  //   LenderCredit: "",
-  // });
-  // const onSelect = (v) => {
-  //   console.log("Value--", v);
-  // };
-  // const options = ["one", "two", "three"];
-  // const defaultOption = options[0];
+  const occupancyOptions = ["Owner-Occupied", "Second Home", "Inverstment"];
 
-  // const [loanScenario, setLoanScenario] = useState({
-  //   GovernmentFundingFee: "",
-  //   FinanceFundingFee: "",
-  //   MortgageInsuranceRate: "",
-  //   PremiumType: "",
-  // });
+  const propertyCountryOptions = [
+    "Accomack",
+    "Adams",
+    "Alachua",
+    "Alamance",
+    "Albany",
+    "Albemarle",
+    "Alexander",
+    "Alexandria City",
+    "Allegany",
+    "Alleghany",
+    "Allegheny",
+    "Amelia",
+    "Amherst",
+    "Anne Arundel",
+    "Anson",
+    "Appomattox",
+    "Arlington",
+    "Armstrong",
+    "Ashe",
+    "Atlantic",
+    "Augusta",
+    "Avery",
+    "Baker",
+    "Baltimore",
+    "Baltimore City",
+    "Bath",
+    "Bay",
+    "Beaufort",
+    "Beaver",
+    "Bedford",
+    "Bedford City",
+    "Bergen",
+    "Berks",
+    "Bertie",
+    "Bladen",
+    "Blair",
+    "Bland",
+    "Botetourt",
+    "Bradford",
+    "Brevard",
+    "Bristol City",
+    "Bronx",
+    "Broome",
+    "Broward",
+    "Brunswick",
+    "Buchanan",
+    "Buckingham",
+    "Bucks",
+    "Buena Vista City",
+    "Buncombe",
+    "Burke",
+    "Burlington",
+    "Butler",
+    "Cabarrus",
+    "Caldwell",
+    "Calhoun",
+    "Calvert",
+    "Cambria",
+    "Camden",
+    "Cameron",
+    "Campbell",
+    "Cape May",
+    "Carbon",
+    "Caroline",
+    "Carroll",
+    "Carteret",
+    "Caswell",
+    "Catawba",
+    "Cattaraugus",
+    "Cayuga",
+    "Cecil",
+    "Centre",
+    "Charles",
+    "Charles City",
+    "Charlotte",
+    "Charlottesville City",
+    "Chatham",
+    "Chautauqua",
+    "Chemung",
+    "Chenango",
+    "Cherokee",
+    "Chesapeake City",
+    "Chester",
+    "Chesterfield",
+    "Chowan",
+    "Citrus",
+    "Clarion",
+    "Clarion",
+    "Clarke",
+    "Clay",
+    "Clearfield",
+    "Cleveland",
+    "Clinton",
+    "Collier",
+    "Colonial Heights City",
+    "Columbia",
+    "Columbus",
+    "Cortland",
+    "Covington City",
+    "Craig",
+    "Craven",
+    "Crawford",
+    "Culpeper",
+    "Cumberland",
+    "Currituck",
+    "Danville City",
+    "Dare",
+    "Dauphin",
+    "Davidson",
+    "Davie",
+    "Delaware",
+    "De Soto",
+    "Dickenson",
+    "Dinwiddie",
+    "District of Columbia",
+    "Dixie",
+    "Dorchester",
+    "Duplin",
+    "Durham",
+    "Dutchess",
+    "Duval",
+    "Edgecombe",
+    "Elk",
+    "Emporia City",
+    "Erie",
+    "Escambia",
+    "Essex",
+    "Fairfax",
+    "Fairfax City",
+    "Falls Church City",
+    "Fauquier",
+    "Fayette",
+    "Flagler",
+    "Floyd",
+    "Fluvanna",
+    "Forest",
+    "Forsyth",
+    "Franklin",
+    "Franklin City",
+    "Frederick",
+    "Fredericksburg City",
+    "Fulton",
+    "Gadsden",
+    "Galax City",
+    "Garrett",
+    "Gaston",
+    "Gates",
+    "Genesee",
+    "Gilchrist",
+    "Giles",
+    "Glades",
+    "Gloucester",
+    "Goochland",
+    "Graham",
+    "Granville",
+    "Grayson",
+    "Greene",
+    "Greensville",
+    "Guilford",
+    "Gulf",
+    "Halifax",
+    "Hamilton",
+    "Hampton City",
+    "Hanover",
+    "Hardee",
+    "Harford",
+    "Harnett",
+    "Harrisonburg City",
+    "Haywood",
+    "Henderson",
+    "Hendry",
+    "Henrico",
+    "Henry",
+    "Herkimer",
+    "Hernando",
+    "Hertford",
+    "Highland",
+    "Highlands",
+    "Hillsborough",
+    "Hoke",
+    "Holmes",
+    "Hopewell City",
+    "Howard",
+    "Hudson",
+    "Hunterdon",
+    "Huntingdon",
+    "Hyde",
+    "Indiana",
+    "Indian River",
+    "Iredell",
+    "Isle of Wight",
+    "Jackson",
+    "James City",
+    "Jefferson",
+    "Johnston",
+    "Jones",
+    "Juniata",
+    "Kent",
+    "King and Queen",
+    "King George",
+    "Kings",
+    "King William",
+    "Lackawanna",
+    "Lafayette",
+    "Lake",
+    "Lancaster",
+    "Lawrence",
+    "Lebanon",
+    "Lee",
+    "Lehigh",
+    "Lenoir",
+    "Leon",
+    "Levy",
+    "Lewis",
+    "Lexington City",
+    "Liberty",
+    "Lincoln",
+    "Livingston",
+    "Loudoun",
+    "Louisa",
+    "Lunenburg",
+    "Luzerne",
+    "Lycoming",
+    "Lynchburg City",
+    "Macon",
+    "Madison",
+    "Manassas City",
+    "Manassas Park City",
+    "Manatee",
+    "Marion",
+    "Martin",
+    "Martinsville City",
+    "Mathews",
+    "Mcdowell",
+    "McKean",
+    "Mecklenburg",
+    "Mercer",
+    "Miami-Dade",
+    "Middlesex",
+    "Mifflin",
+    "Mitchell",
+    "Monmouth",
+    "Monroe",
+    "Montgomery",
+    "Montour",
+    "Moore",
+    "Morris",
+    "Nash",
+    "Nassau",
+    "Nelson",
+    "New Castle",
+    "New Hanover",
+    "New Kent",
+    "Newport News City",
+    "New York",
+    "Niagara",
+    "Norfolk City",
+    "Northampton",
+    "Northumberland",
+    "Norton City",
+    "Nottoway",
+    "Ocean",
+    "Okaloosa",
+    "Okeechobee",
+    "Oneida",
+    "Onondaga",
+    "Onslow",
+    "Ontario",
+    "Orange",
+    "Orleans",
+    "Osceola",
+    "Oswego",
+    "Otsego",
+    "Page",
+    "Palm Beach",
+    "Pamlico",
+    "Pasco",
+    "Pasquotank",
+    "Passaic",
+    "Patrick",
+    "Pender",
+    "Perquimans",
+    "Perry",
+    "Person",
+    "Petersburg City",
+    "Philadelphia",
+    "Pike",
+    "Pinellas",
+    "Pitt",
+    "Pittsylvania",
+    "Polk",
+    "Poquoson City",
+    "Portsmouth City",
+    "Potter",
+    "Powhatan",
+    "Prince Edward",
+    "Prince George",
+    "Prince Georges",
+    "Prince William",
+    "Pulaski",
+    "Putnam",
+    "Queen Annes",
+    "Queens",
+    "Radford",
+    "Randolph",
+    "Rappahannock",
+    "Rensselaer",
+    "Richmond",
+    "Richmond City",
+    "Roanoke",
+    "Roanoke City",
+    "Robeson",
+    "Rockbridge",
+    "Rockingham",
+    "Rockland",
+    "Rowan",
+    "Russell",
+    "Rutherford",
+    "Salem",
+    "Salem City",
+    "Sampson",
+    "Santa Rosa",
+    "Sarasota",
+    "Saratoga",
+    "Schenectady",
+    "Schoharie",
+    "Schuyler",
+    "Schuylkill",
+    "Scotland",
+    "Scott",
+    "Seminole",
+    "Seneca",
+    "Shenandoah",
+    "Smyth",
+    "Snyder",
+    "Somerset",
+    "Southampton",
+    "Spotsylvania",
+    "Saint Johns",
+    "St. Lawrence",
+    "Saint Lucie",
+    "Saint Marys",
+    "Stafford",
+    "Stanly",
+    "Staunton City",
+    "Steuben",
+    "Stokes",
+    "Suffolk",
+    "Suffolk City",
+    "Sullivan",
+    "Sumter",
+    "Surry",
+    "Susquehanna",
+    "Sussex",
+    "Suwannee",
+    "Swain",
+    "Talbot",
+    "Taylor",
+    "Tazewell",
+    "Tioga",
+    "Tompkins",
+    "Transylvania",
+    "Tyrrell",
+    "Ulster",
+    "Union",
+    "Vance",
+    "Venango",
+    "Virginia Beach City",
+    "Volusia",
+    "Wake",
+    "Wakulla",
+    "Walton",
+    "Warren",
+    "Washington",
+    "Watauga",
+    "Wayne",
+    "Waynesboro City",
+    "Westchester",
+    "Westmoreland",
+    "Wicomico",
+    "Wilkes",
+    "Williamsburg City",
+    "Wilson",
+    "Winchester City",
+    "Wise",
+    "Worcester",
+    "Wyoming",
+    "Wythe",
+    "Yadkin",
+    "Yancey",
+    "Yates",
+    "York",
+  ];
 
-  // const [loanScenario, setLoanScenario] = useState({
-  //   SecondMortgageRequest: "",
-  //   SecondMortgageBalance: "",
-  //   PayoffSecondMortgage: "",
-  // });
+  const propertyTypeOptions = [
+    "Single Family",
+    "Single Family- PUD",
+    "Condo",
+    "Condo 5+",
+    "Condotel",
+    "Co-op",
+    "Duplex",
+    "Triplex",
+    "Fourplex",
+    "Manufactured",
+  ];
 
-  // const [loanScenario, setLoanScenario] = useState({
-  //   LoanPurpose: "",
-  //   CashoutRefinance: "",
-  //   Occupancy: "",
-  //   CurrentLoanBalance: "",
-  //   CashoutRequest: "",
-  //   WaivesTaxEscrows: "",
-  //   WaivesInsuranceEscrows: "",
-  //   CreditScore: "",
-  //   CurrentLoanType: "",
-  //   VAEligible: "",
-  //   VAUsedBefore: "",
-  //   VADisability: "",
-  // });
+  const loanPurposeOptions = ["Purchase", "Refinance"];
 
-  // const [loanScenario, setLoanScenario] = useState({
-  //   Address: "",
-  //   County: "",
-  //   PropertyType: "",
-  //   HouseValue: "",
-  //   MonthlyHOA: "",
-  //   MonthlyPropertyTaxes: "",
-  //   MonthlyHOI: "",
-  // });
+  const currentLoanTypeOptions=["Conventional","FHA","USDA","VA","Other"];
 
-  // const [loanScenario, setLoanScenario] = useState({
-  //   DiscountFee: "",
-  //   OriginationFee: "",
-  //   ProcessingFee: "",
-  //   TaxService: "",
-  // });
-
-  // const [loanScenario, setLoanScenario] = useState({
-  //   DiscountFee: "",
-  //   OriginationFee: "",
-  //   ProcessingFee: "",
-  //   TaxService: "",
-  //   DiscountFee1: "",
-  //   OriginationFee1: "",
-  //   ProcessingFee1: "",
-  //   TaxService1: "",
-  // });
-
-  // const [loanScenario, setLoanScenario] = useState({
-  //   TitleServicesInsurance: "",
-  //   Survey: "",
-  // });
-
-  // const [loanScenario, setLoanScenario] = useState({
-  //   RecordingFees: "",
-  //   TransferTaxes: "",
-  // });
-
-  // const [loanscenario, setLoanScenario] = useState({
-  //   HomeownersInsurancePremium: "",
-  //   PrepaidInterestfor15days: "",
-  //   PrepaidTaxes: "",
-  // });
-
-  // const [loanScenario, setLoanScenario] =
-  //   useState({
-  //     HomeownersInsurance100permonthfor2months: "",
-  //     PropertyTaxes273permonthfor13months: "",
-  //   });
-
-  // const [loanscenario, setOther] = useState({
-  //   HomeownersInsurancePremium: "",
-  // });
-
-  // const [loanScenario, setLoanScenario] = useState({
-  //   ProjectedPayments1: "",
-  //   EstimatedEscrow: "",
-  //   TotalMonthlyPayment: "",
-  // });
-
-  // const [loanScenario, setLoanScenario] = useState({
-  //   DI: "",
-  //   Property: "",
-  // });
-
-  // useEffect(() => {
-  //   getData();
-  // }, [loanScenario]);
-
-  async function updateData() {
-    try {
-
-      // const user = {
-      //   name: this.state.name
-      // };
-  
-      // axios.post(`https://atlas.keystonefunding.com/api/loanscenario/update`, { user })
-      //   .then(res => {
-      //     console.log(res);
-      //     console.log(res.data);
-      //   })
-
-      var fromData = new FormData();
-      fromData.append("id", 1);
-      fromData.append("baseLoanAmount", loanScenario.baseLoanAmount);
-
-      const data = await axios({
-        method: "post",
-        url: "https://atlas.keystonefunding.com/api/loanscenario/update",
-        data: fromData,
-      }).then((res) => {
-        console.log("res", res);
-        console.log("res.data", res.data);
-        console.log("res.data.data", res.data.data);
-        console.log("res.config.data", res.config.data);
-        console.log("res.status", res.status);
-        if (res.status === 200) {
-          if (res.data.status === 1) {
-            setHome2(res.data);
-          }
-        }
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  console.log("home2", home2);
-  
   useEffect(() => {
     getData();
   }, []);
@@ -249,8 +527,16 @@ const Home_2 = () => {
       console.log(e);
     }
   }
-  console.log("display", display);
-  console.log("home2", home2);
+  
+  const onClick = (v,dropdownValue) => {
+    setIsEqual(v);
+    setSelectedValue(dropdownValue);
+  };
+
+  const onSelect = (v) => {
+    console.log("Value--", v);
+    setSelectedValue(v.value);
+  };
 
   const handleSave = (event, val) => {
     console.log("event", event);
@@ -266,104 +552,9 @@ const Home_2 = () => {
         setLoanScenario({ ...loanScenario, [val]: event });
         console.log("Update-------------------------",res);
         console.log(res.data);
+      }).catch(e => {
+        console.log(e);
       })
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanscenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanscenario") {
-    //   setOther((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
-
-    // if (stateName === "loanScenario") {
-    //   setLoanScenario((prevState) => ({
-    //     ...prevState,
-    //     [val]: event,
-    //   }));
-    // }
   };
 
   console.log("loanScenario", loanScenario);
@@ -872,11 +1063,103 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Loan Product</p>
-                            <span>30-yr Fixed</span>
+                            {isEqual === "loanProduct" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={loanProductOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.loanProduct}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(selectedValue, "loanProduct")
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick(
+                                    "loanProduct",
+                                    loanScenario.loanProduct
+                                  )
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.loanProduct}</span>
+                                </div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
+
                           <li>
                             <p>Loan Type</p>
-                            <span>Conforming</span>
+                            {isEqual === "loanType" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={loanTypeOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.loanType}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(selectedValue, "loanType")
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick("loanType", loanScenario.loanType)
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.loanType}</span>
+                                </div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
                           <li>
                             <p>Interest Rate</p>
@@ -1057,22 +1340,23 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Payoff Second Mortgage</p>
-                            {/* <span>
+                            <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={loanScenario.PayoffSecondMortgage}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      PayoffSecondMortgage:
-                                        !loanScenario.PayoffSecondMortgage,
-                                    }))
+                                  checked={loanScenario.isPayingOffSecondMortgage}
+                                  onChange={(pass) => {
+                                      if(pass.target.checked){
+                                        handleSave(1, "isPayingOffSecondMortgage");
+                                      }else{
+                                        handleSave(0, "isPayingOffSecondMortgage");
+                                      }
+                                    }
                                   }
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span> */}
+                            </span>
                           </li>
                         </ul>
                       </div>
@@ -1085,31 +1369,125 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Loan Purpose</p>
-                            <span>Refinance</span>
+                            {isEqual === "loanPurpose" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={loanPurposeOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.loanPurpose}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(selectedValue, "loanPurpose")
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick(
+                                    "loanPurpose",
+                                    loanScenario.loanPurpose
+                                  )
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.loanPurpose}</span>
+                                </div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
                           <li>
                             <p>Cashout Refinance</p>
-                            {/* <span>
+                            <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={loanScenario.CashoutRefinance}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      CashoutRefinance:
-                                        !loanScenario.CashoutRefinance,
-                                    }))
+                                  checked={loanScenario.isCashout}
+                                  onChange={(pass) => {
+                                    if(pass.target.checked){
+                                      handleSave(1, "isCashout");
+                                    }else{
+                                      handleSave(0, "isCashout");
+                                    }
                                   }
+                                }
+                           
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span> */}
+                            </span>
                           </li>
                           <li>
                             <p>Occupancy</p>
-                            <span>Owner-Occupied</span>
+                            {isEqual === "occupancy" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={occupancyOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.occupancy}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(selectedValue, "occupancy")
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick("occupancy", loanScenario.occupancy)
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.occupancy}</span>
+                                </div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
+                        
                           <li>
                             <p>Current Loan Balance</p>
                             <EdiText
@@ -1141,13 +1519,14 @@ const Home_2 = () => {
                                 <input
                                   type="checkbox"
                                   checked={loanScenario.isTaxEscrowsWaived}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      isTaxEscrowsWaived:
-                                        !loanScenario.isTaxEscrowsWaived,
-                                    }))
+                                  onChange={(pass) => {
+                                    if(pass.target.checked){
+                                      handleSave(1, "isTaxEscrowsWaived");
+                                    }else{
+                                      handleSave(0, "isTaxEscrowsWaived");
+                                    }
                                   }
+                                }
                                 />
                                 <span className="checkmark"></span>
                               </label>
@@ -1186,7 +1565,52 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Current Loan Type</p>
-                            <span>Conventional</span>
+                            {isEqual === "currentLoanType" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={currentLoanTypeOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.currentLoanType}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(selectedValue, "currentLoanType")
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick("currentLoanType", loanScenario.currentLoanType)
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.currentLoanType}</span>
+                                </div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+
                           </li>
                           <li>
                             <p>VA Eligible?</p>
@@ -1195,12 +1619,13 @@ const Home_2 = () => {
                                 <input
                                   type="checkbox"
                                   checked={loanScenario.isVaEligible}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      isVaEligible: !loanScenario.isVaEligible,
-                                    }))
-                                  }
+                                  onChange={(pass) => {
+                                    if(pass.target.checked){
+                                      handleSave(1, "isVaEligible");
+                                    }else{
+                                      handleSave(0, "isVaEligible");
+                                    }
+                                  }}
                                 />
                                 <span className="checkmark"></span>
                               </label>
@@ -1213,13 +1638,14 @@ const Home_2 = () => {
                                 <input
                                   type="checkbox"
                                   checked={loanScenario.isVaUsedBefore}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      isVaUsedBefore:
-                                        !loanScenario.isVaUsedBefore,
-                                    }))
+                                  onChange={(pass) => {
+                                    if(pass.target.checked){
+                                      handleSave(1, "isVaUsedBefore");
+                                    }else{
+                                      handleSave(0, "isVaUsedBefore");
+                                    }
                                   }
+                                }
                                 />
                                 <span className="checkmark"></span>
                               </label>
@@ -1232,12 +1658,13 @@ const Home_2 = () => {
                                 <input
                                   type="checkbox"
                                   checked={loanScenario.isVaDisability}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      isVaDisability:
-                                        !loanScenario.isVaDisability,
-                                    }))
+                                  onChange={(pass) => {
+                                      if(pass.target.checked){
+                                        handleSave(1, "isVaDisability");
+                                      }else{
+                                        handleSave(0, "isVaDisability");
+                                      }
+                                    }
                                   }
                                 />
                                 <span className="checkmark"></span>
@@ -1265,11 +1692,111 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>County</p>
-                            <span>Montgomery</span>
+                            {isEqual === "propertyCountry" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={propertyCountryOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.propertyCountry}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(
+                                          selectedValue,
+                                          "propertyCountry"
+                                        )
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick(
+                                    "propertyCountry",
+                                    loanScenario.propertyCountry
+                                  )
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.propertyCountry}</span>
+                                </div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
                           <li>
                             <p>Property Type</p>
-                            <span>Single Family</span>
+                            {isEqual === "propertyType" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={propertyTypeOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.propertyType}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(
+                                          selectedValue,
+                                          "propertyType"
+                                        )
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick(
+                                    "propertyType",
+                                    loanScenario.propertyType
+                                  )
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.propertyType}</span>
+                                </div>
+                                <div className="btn-div1">
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
                           <li>
                             <p>House Value</p>
@@ -1297,19 +1824,18 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Monthly Property Taxes</p>
-                            {/* <EdiText
-                              value={loanScenario.MonthlyPropertyTaxes}
+                            <EdiText
+                              value={loanScenario.monthlyPropertyTax}
                               tabIndex={54}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "MonthlyPropertyTaxes",
-                                  "loanScenario"
+                                  "monthlyPropertyTax"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Monthly HOI</p>
@@ -1396,31 +1922,30 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Discount Fee </p>
-                            {/* <EdiText
-                              value={loanScenario.DiscountFee}
+                            <EdiText
+                              value={loanScenario.blockADiscountFee}
                               tabIndex={101}
                               onSave={(pass) => {
-                                handleSave(pass, "DiscountFee", "loanScenario");
+                                handleSave(pass, "blockADiscountFee");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Origination Fee</p>
-                            {/* <EdiText
-                              value={loanScenario.OriginationFee}
+                            <EdiText
+                              value={loanScenario.blockAOriginationFee}
                               tabIndex={102}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "OriginationFee",
-                                  "loanScenario"
+                                  "blockAOriginationFee"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Processing Fee</p>
@@ -1503,15 +2028,15 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Tax Service</p>
-                            {/* <EdiText
-                              value={loanScenario.TaxService}
+                            <EdiText
+                              value={loanScenario.blockBTaxService}
                               tabIndex={108}
                               onSave={(pass) => {
-                                handleSave(pass, "TaxService", "loanScenario");
+                                handleSave(pass, "blockBTaxService");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Discount Fee </p>
@@ -1582,31 +2107,30 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Title Services & Insurance</p>
-                            {/* <EdiText
-                              value={loanScenario.TitleServicesInsurance}
+                            <EdiText
+                              value={loanScenario.blockCTitleServices}
                               tabIndex={113}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "TitleServicesInsurance",
-                                  "loanScenario"
+                                  "blockCTitleServices"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Survey</p>
-                            {/* <EdiText
-                              value={loanScenario.Survey}
+                            <EdiText
+                              value={loanScenario.blockCSurvey}
                               tabIndex={114}
                               onSave={(pass) => {
-                                handleSave(pass, "Survey", "loanScenario");
+                                handleSave(pass, "blockCSurvey");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                         </ul>
                       </div>
@@ -1626,35 +2150,33 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Recording Fees </p>
-                            {/* <EdiText
-                              value={loanScenario.RecordingFees}
+                            <EdiText
+                              value={loanScenario.blockERecordingCharges}
                               tabIndex={115}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "RecordingFees",
-                                  "loanScenario"
+                                  "blockERecordingCharges"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Transfer Taxes</p>
-                            {/* <EdiText
-                              value={loanScenario.TransferTaxes}
+                            <EdiText
+                              value={loanScenario.blockETransferTaxes}
                               tabIndex={116}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "TransferTaxes",
-                                  "loanScenario"
+                                  "blockETransferTaxes"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                         </ul>
                       </div>
@@ -1774,19 +2296,18 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Homeowner’s Insurance Premium</p>
-                            {/* <EdiText
-                              value={loanScenario.HomeownersInsurancePremium}
+                            <EdiText
+                              value={loanScenario.blockHOwnersTitleInsPremium}
                               tabIndex={122}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "HomeownersInsurancePremium",
-                                  "loanScenario"
+                                  "blockHOwnersTitleInsPremium"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                         </ul>
                       </div>
