@@ -706,27 +706,46 @@ tr.head-td th:after {
   top: 50%;
   transform: translateY(-50%);
 }
-
+/* 
 .two-btn button {
   padding: 0;
   border: none;
   background-color: #fff;
   padding: 0px 20px;
-}
+} */
 
 .two-btn button svg {
   margin-right: 10px;
 }
-
+/* 
 .two-btn button {
-  padding: 0;
-  border: none;
-  background-color: #fff;
-  padding: 0px 20px;
   font-size: 14px;
-  color: #6d8291;
+  border: 1px solid #ccc !important;
+  background-color: #ddd !important;
+  padding: 0px 7px !important;
+  color: unset !important;
+  line-height: 36px;
+} */
+.two-btn button{
+  border-radius: 50px !important;
+  height: 20px;
+  line-height: 20px;
+  padding: 0px !important;
+  min-width: 20px !important;
 }
-
+.styles-module_Editext__save_button__1Dlwo {
+  color:#fff !important;
+  background-color: darkgreen !important;
+  font-size: 10px !important;
+}
+/* button[editext=save-button]{
+    border-radius: 50px !important;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    padding: 0px !important;
+    width: 20px !important;
+} */
 .two-btn button.active-1 {
   background: #f1f9ff;
   color: #244961;
@@ -757,8 +776,9 @@ tr.head-td th:after {
   font-size: 14px;
   margin-top: 15px;
   display: flex;
-  justify-content: space-between;
   line-height: normal;
+  align-items: center;
+  justify-content: space-between;
 }
 li.head-price {
   padding-bottom: 6px !important;
@@ -792,6 +812,7 @@ li.head-price {
 }
 .price-text ul li p {
   margin-bottom: 0px;
+  padding-right: 10px;
 }
 .lab-check {
   display: block;
@@ -882,7 +903,7 @@ li.head-price {
 }
 
 #wrap {
-  width: 200px;
+  width: 172px;
 }
 select {
     width: 100%;
@@ -900,7 +921,7 @@ select::-ms-expand {
 }
 .icon-btn{
 	position: absolute;
-    top: 0px;
+    top:8px;
     border-radius: 1px;
     outline: none;
     padding: 0.6em;
@@ -912,14 +933,14 @@ select::-ms-expand {
     line-height: 15px;
 }
 .cross-arrow {
-    right: 10px;
+    right: 0px;
     color: red !important;
 }
 .edit-arrow{
 	right: 80px;
 }
 .right-arrow {
-    right: 40px;
+    right: 18px;
     margin-right: 5px;
     color: darkgreen !important;
 }
@@ -935,7 +956,7 @@ select::-ms-expand {
 
 .dropdown-main{
   position: relative;
-  width: 275px;
+  width: 46%;
 }
 
 .two-btn button.icon-btn {
@@ -947,12 +968,49 @@ select::-ms-expand {
 
 .Dropdown-root {
   position: relative;
-  margin-right: 5px;
 }
 
 .price-text ul li span {
   width: auto !important;
   text-align: right;
+}
+
+button[editext=edit-button] {
+  background-color: #fff !important;
+  border: 0 !important;
+  font-size: 16px;
+}
+button.edit-arrow1.icon-btn1 {
+  border: 0px !important;
+  background-color: transparent !important;
+  font-size: 16px !important;
+  padding-left: 8px !important;
+  position: relative;
+  top: 2px;
+  right: 3px;
+}
+.styles-module_Editext__cancel_button__26sqr {
+  color: #fff !important;
+  background-color: crimson !important;
+  font-size: 10px !important;
+}
+button.right-arrow.icon-btn {
+  border-radius: 50px !important;
+  min-width: 20px !important;
+  padding: 0px !important;
+  background-color: darkgreen !important;
+  color: #fff !important;
+  font-size: 10px;
+  line-height: 0px;
+}
+button.cross-arrow.icon-btn{
+  border-radius: 50px !important;
+  min-width: 20px !important;
+  padding: 0px !important;
+  background-color: crimson !important;
+  color: #fff !important;
+  font-size: 10px;
+  line-height: 0px;
 }
 
 @media (max-width: 1350px) {
