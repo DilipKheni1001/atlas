@@ -7,67 +7,73 @@ import axios from "axios";
 
 const Home_2 = () => {
   const [loanScenario, setLoanScenario] = useState({
-    id: "",
-    contactId: "",
-    scenarioName: "",
-    loanPurpose: "",
-    cashoutRequest: "",
-    isPayingOffSecondMortgage: "",
-    isCashout: "",
-    propertyStreet: "",
-    propertyStreet2: "",
-    propertyCity: "",
-    propertyZip: "",
-    propertyState: "",
-    propertyCountry: "",
-    propertyType: "",
-    creditScore: "",
-    occupancy: "",
-    isVaEligible: "",
-    isVaDisability: "",
-    isVaUsedBefore: "",
-    houseValue: "",
-    baseLoanAmount: "",
-    currentLoanBalance: "",
-    secondMortgageBalance: "",
-    loanProduct: "",
-    loanType: "",
-    currentLoanType: "",
-    loanTypeSpecial: "",
-    interestRate: "",
-    lockPeriod: "",
-    loanPrice: "",
-    lenderCredit: "",
-    isFirstTimeHomeBuyer: "",
-    isTaxEscrowsWaived: "",
-    monthlyPropertyTax: "",
-    monthlyHOI: "",
-    blockAOriginationFee: "",
-    blockADiscountFee: "",
-    blockBAppraisalFee: "",
-    blockBCreditFees: "",
-    blockBFloodCertification: "",
-    blockBTaxService: "",
-    blockCTitleServices: "",
-    blockCSurvey: "",
-    blockETransferTaxes: "",
-    blockERecordingCharges: "",
-    blockHOwnersTitleInsPremium: "",
-    governmentFundingFeePercent: "",
-    isFinancedFundingFeeMI: "",
-    annualMortgageInsuranceRate: "",
-    mortgageInsurancePremiumType: "",
-    secondMortgageRequest: "",
-    monthlyHOA: "",
-    blockBtaxReturnVerificationFee: "",
-    blockBverificationEmployment: "",
-    blockBhoaQuestionnaire: "",
-    blockBcondoProjectApproval: "",
-    blockBsinglePremiumMI: "",
-    blockAprocessingFee: "",
-    blockFdaysPrepaidInterest: "",
-    blockFnumMonthsPrepaidHOI: "",
-  });
+    "id": 0,
+    "contactId": 0,
+    "scenarioName": "",
+    "loanPurpose": "",
+    "cashoutRequest": 0,
+    "isPayingOffSecondMortgage": 0,
+    "isCashout": 0,
+    "propertyStreet": null,
+    "propertyStreet2": null,
+    "propertyCity": null,
+    "propertyZip": null,
+    "propertyState": null,
+    "propertyCountry": "",
+    "propertyType": "",
+    "creditScore": "",
+    "occupancy": "",
+    "isVaEligible": 0,
+    "isVaDisability": 0,
+    "isVaUsedBefore": 0,
+    "houseValue": 0,
+    "baseLoanAmount": 0,
+    "currentLoanBalance": 0,
+    "secondMortgageBalance": 0,
+    "loanProduct": "",
+    "loanType": "",
+    "currentLoanType": "",
+    "loanTypeSpecial": null,
+    "interestRate": 0,
+    "lockPeriod": "",
+    "loanPrice": 0,
+    "lenderCredit": 0,
+    "isFirstTimeHomeBuyer": 0,
+    "isTaxEscrowsWaived": 0,
+    "monthlyPropertyTax": 0,
+    "monthlyHOI": 0,
+    "blockAOriginationFee": 0,
+    "blockADiscountFee": 0,
+    "blockBAppraisalFee": 0,
+    "blockBCreditFees": 0,
+    "blockBFloodCertification": 0,
+    "blockATaxService": 0,
+    "blockCTitleServices": 0,
+    "blockCSurvey": 0,
+    "blockETransferTaxes": 0,
+    "blockERecordingCharges": 0,
+    "blockHOwnersTitleInsPremium": 0,
+    "created_at": "",
+    "updated_at": "",
+    "deleted_at": null,
+    "governmentFundingFeePercent": null,
+    "isFinancedFundingFeeMI": 0,
+    "annualMortgageInsuranceRate": null,
+    "mortgageInsurancePremiumType": null,
+    "secondMortgageRequest": "",
+    "monthlyHOA":0,
+    "blockAprocessingFee": 0,
+    "blockBtaxReturnVerificationFee": 0,
+    "blockBverificationEmployment": 0,
+    "blockBhoaQuestionnaire": 0,
+    "blockBcondoProjectApproval": 0,
+    "blockBsinglePremiumMI": 0,
+    "blockFdaysPrepaidInterest": 0,
+    "blockFnumMonthsPrepaidHOI": 0,
+    "blockGnumMonthsTaxReserves": null,
+    "sellerCredit": null,
+    "otherCredits": null
+});
 
   const [isEqual, setIsEqual] = useState();
   const [selectedValue, setSelectedValue] = useState();
@@ -523,6 +529,82 @@ const Home_2 = () => {
     "Re-subordinate existing 2nd mortgage",
     "New 2nd mortgage",
   ];
+
+  const monthsOptions = [1,2,3,4,5,6,7,8,9,10,11,12];
+
+  const [blockA , setBlockA] = useState(0);
+  const [blockB , setBlockB] = useState(0);
+  const [blockC , setBlockC] = useState(0);
+  const [blockD , setBlockD] = useState(0);
+  const [blockE , setBlockE] = useState(0);
+  const [blockF , setBlockF] = useState(0);
+  const [blockG , setBlockG] = useState(0);
+  const [blockH , setBlockH] = useState(0);
+  const [blockI , setBlockI] = useState(0);
+  const [blockJ , setBlockJ] = useState(0);
+
+  useEffect(() => {
+    
+    setBlockA(Number(loanScenario.blockADiscountFee) +
+    Number(loanScenario.blockAOriginationFee) +
+    Number(loanScenario.blockAprocessingFee) +
+    Number(loanScenario.blockATaxService));
+
+
+    setBlockB(
+      Number(loanScenario.blockBAppraisalFee) +
+      Number(loanScenario.blockBCreditFees) +
+      Number(loanScenario.blockBFloodCertification) +
+      Number(loanScenario.blockBtaxReturnVerificationFee) +
+      Number(loanScenario.blockBverificationEmployment) +
+      Number(loanScenario.blockBhoaQuestionnaire) +
+      Number(loanScenario.blockBcondoProjectApproval) +
+      Number(loanScenario.blockBsinglePremiumMI));
+    
+    setBlockC(
+      Number(loanScenario.blockCTitleServices) +
+      Number(loanScenario.blockCSurvey));
+    
+      setBlockD(
+        Number(loanScenario.blockADiscountFee) +
+        Number(loanScenario.blockAOriginationFee) +
+        Number(loanScenario.blockAprocessingFee) +
+        Number(loanScenario.blockATaxService) +
+        Number(loanScenario.blockBAppraisalFee) +
+        Number(loanScenario.blockBCreditFees) +
+        Number(loanScenario.blockBFloodCertification) +
+        Number(loanScenario.blockBtaxReturnVerificationFee) +
+        Number(loanScenario.blockBverificationEmployment) +
+        Number(loanScenario.blockBhoaQuestionnaire) +
+        Number(loanScenario.blockBcondoProjectApproval) +
+        Number(loanScenario.blockBsinglePremiumMI) + 
+        Number(loanScenario.blockCTitleServices) +
+        Number(loanScenario.blockCSurvey));
+
+    setBlockE(Number(loanScenario.blockERecordingCharges) +
+    Number(loanScenario.blockETransferTaxes));
+    
+    setBlockF( Number(loanScenario.blockFdaysPrepaidInterest) +
+    Number(loanScenario.blockFnumMonthsPrepaidHOI));
+
+    setBlockG(Number(loanScenario.blockGnumMonthsTaxReserves));
+    
+    setBlockH(Number(loanScenario.blockHOwnersTitleInsPremium));
+
+    setBlockI(
+        Number(loanScenario.blockERecordingCharges) +
+        Number(loanScenario.blockETransferTaxes) +
+
+        Number(loanScenario.blockFdaysPrepaidInterest) +
+        Number(loanScenario.blockFnumMonthsPrepaidHOI) +
+        
+        Number(loanScenario.blockGnumMonthsTaxReserves) +
+
+        Number(loanScenario.blockHOwnersTitleInsPremium));
+    
+    // setBlockJ();
+
+  }, [loanScenario]);
 
   useEffect(() => {
     getData();
@@ -1283,8 +1365,7 @@ const Home_2 = () => {
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "governmentFundingFeePercent",
-                                  "loanScenario"
+                                  "governmentFundingFeePercent"
                                 );
                               }}
                               submitOnUnfocus
@@ -1298,13 +1379,19 @@ const Home_2 = () => {
                                 <input
                                   type="checkbox"
                                   checked={loanScenario.isFinancedFundingFeeMI}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      isFinancedFundingFeeMI:
-                                        !loanScenario.isFinancedFundingFeeMI,
-                                    }))
-                                  }
+                                  onChange={(pass) => {
+                                    if (pass.target.checked) {
+                                      handleSave(
+                                        1,
+                                        "isFinancedFundingFeeMI"
+                                      );
+                                    } else {
+                                      handleSave(
+                                        0,
+                                        "isFinancedFundingFeeMI"
+                                      );
+                                    }
+                                  }}
                                 />
                                 <span className="checkmark"></span>
                               </label>
@@ -1318,8 +1405,7 @@ const Home_2 = () => {
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "annualMortgageInsuranceRate",
-                                  "loanScenario"
+                                  "annualMortgageInsuranceRate"
                                 );
                               }}
                               submitOnUnfocus
@@ -1654,22 +1740,22 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Waives Insurance Escrows</p>
-                            {/* <span>
+                            <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={loanScenario.WaivesInsuranceEscrows}
-                                  onChange={() =>
-                                    setLoanScenario((loanScenario) => ({
-                                      ...loanScenario,
-                                      WaivesInsuranceEscrows:
-                                        !loanScenario.WaivesInsuranceEscrows,
-                                    }))
-                                  }
+                                  checked={loanScenario.isInsuranceEscrowsWaived}
+                                  onChange={(pass) => {
+                                    if (pass.target.checked) {
+                                      handleSave(1, "isInsuranceEscrowsWaived");
+                                    } else {
+                                      handleSave(0, "isInsuranceEscrowsWaived");
+                                    }
+                                  }}
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span> */}
+                            </span>
                           </li>
                           <li>
                             <p>Credit Score</p>
@@ -2034,9 +2120,7 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>A. Origination Charges </p>
                             <span>
-                              {Number(loanScenario.blockADiscountFee) +
-                                Number(loanScenario.blockAOriginationFee) +
-                                Number(loanScenario.blockAprocessingFee)}
+                              ${blockA}
                             </span>
                           </li>
                           <li>
@@ -2077,15 +2161,15 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Tax Service</p>
-                            {/* <EdiText
-                              value={loanScenario.TaxService}
+                            <EdiText
+                              value={loanScenario.blockATaxService}
                               tabIndex={104}
                               onSave={(pass) => {
-                                handleSave(pass, "TaxService", "loanScenario");
+                                handleSave(pass, "blockATaxService");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                         </ul>
                       </div>
@@ -2094,20 +2178,7 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>B. Services You Cannot Shop For</p>
                             <span>
-                              {Number(loanScenario.blockBAppraisalFee) +
-                                Number(loanScenario.blockBCreditFees) +
-                                Number(loanScenario.blockBFloodCertification) +
-                                Number(
-                                  loanScenario.blockBtaxReturnVerificationFee
-                                ) +
-                                Number(
-                                  loanScenario.blockBverificationEmployment
-                                ) +
-                                Number(loanScenario.blockBhoaQuestionnaire) +
-                                Number(
-                                  loanScenario.blockBcondoProjectApproval
-                                ) +
-                                Number(loanScenario.blockBsinglePremiumMI)}
+                              ${blockB}
                             </span>
                           </li>
                           <li>
@@ -2164,7 +2235,7 @@ const Home_2 = () => {
                             />
                           </li>
                           <li>
-                            <p>verification of Employment </p>
+                            <p>Verification of Employment </p>
                             <EdiText
                               value={loanScenario.blockBverificationEmployment}
                               tabIndex={110}
@@ -2214,6 +2285,18 @@ const Home_2 = () => {
                               startEditingOnFocus
                             />
                           </li>
+                          <li>
+                            <p>FHA, USDA, VA Funding Fee</p>
+                            {/* <EdiText
+                              value={loanScenario.blockBsinglePremiumMI}
+                              tabIndex={113}
+                              onSave={(pass) => {
+                                handleSave(pass, "blockBsinglePremiumMI");
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            /> */}
+                          </li>
                         </ul>
                       </div>
                       <div className="price-text">
@@ -2221,8 +2304,7 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>C. Services You Can Shop For</p>
                             <span>
-                              {Number(loanScenario.blockCTitleServices) +
-                                Number(loanScenario.blockCSurvey)}
+                              ${blockC}
                             </span>
                           </li>
                           <li>
@@ -2256,25 +2338,7 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>D. Total Loan Costs (A + B + C)</p>
                             <span>
-                              {Number(loanScenario.blockADiscountFee) +
-                                Number(loanScenario.blockAOriginationFee) +
-                                Number(loanScenario.blockAprocessingFee) +
-                                Number(loanScenario.blockBAppraisalFee) +
-                                Number(loanScenario.blockBCreditFees) +
-                                Number(loanScenario.blockBFloodCertification) +
-                                Number(
-                                  loanScenario.blockBtaxReturnVerificationFee
-                                ) +
-                                Number(
-                                  loanScenario.blockBverificationEmployment
-                                ) +
-                                Number(loanScenario.blockBhoaQuestionnaire) +
-                                Number(
-                                  loanScenario.blockBcondoProjectApproval
-                                ) +
-                                Number(loanScenario.blockBsinglePremiumMI) +
-                                Number(loanScenario.blockCTitleServices) +
-                                Number(loanScenario.blockCSurvey)}
+                              ${blockD}
                             </span>
                           </li>
                         </ul>
@@ -2286,8 +2350,7 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>E. Taxes & Government Fees</p>
                             <span>
-                              {Number(loanScenario.blockERecordingCharges) +
-                                Number(loanScenario.blockETransferTaxes)}
+                              ${blockE}
                             </span>
                           </li>
                           <li>
@@ -2320,27 +2383,24 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>F. Prepaids</p>
+                            <span>${blockF}</span>
                           </li>
 
                           <li>
                             <p>Homeowner’s Insurance Premium</p>
-                            {/* <EdiText
-                              value={loanScenario.HomeownersInsurancePremium}
-                              tabIndex={117}
+                            {"("} <EdiText
+                              value={loanScenario.blockFnumMonthsPrepaidHOI}
+                              tabIndex={119}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "HomeownersInsurancePremium",
-                                  "loanScenario"
-                                );
+                                handleSave(pass, "blockFnumMonthsPrepaidHOI");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            /> { "months)" }
                           </li>
                           <li>
-                            <p>Prepaid Interest for 15 days </p>
-                            {/* <EdiText
+                            <p>Prepaid Interest for </p>
+                            <EdiText
                               value={loanScenario.blockFdaysPrepaidInterest}
                               tabIndex={118}
                               onSave={(pass) => {
@@ -2348,7 +2408,7 @@ const Home_2 = () => {
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            /> { "days" }
                           </li>
                           <li>
                             <p>Prepaid Taxes</p>
@@ -2368,13 +2428,62 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>G. Initial Escrow Payment at Closing</p>
+                            <span>${blockG}</span>
                           </li>
                           <li>
                             <p>
                               Homeowner’s Insurance
                               <span className="light-text">
-                                $100 per month for 2 months
-                              </span>
+                                { "$100 per month for" } 
+                                </span>
+                                {isEqual === "blockGHOI" ? (
+                                    <div className="dropdown-main">
+                                      <div id="wrap">
+                                        <Dropdown
+                                          className="cust-select"
+                                          options={monthsOptions}
+                                          onChange={onSelect}
+                                          value={loanScenario.blockGHOI}
+                                          placeholder="Select an option"
+                                        />
+                                        <div className="btn-div">
+                                          <button
+                                            className="right-arrow icon-btn"
+                                            onClick={() =>
+                                              handleSave(selectedValue, "blockGHOI")
+                                            }
+                                          >
+                                            &#10003;
+                                          </button>
+                                          <button
+                                            className="cross-arrow icon-btn"
+                                            onClick={() => onClick("", "")}
+                                          >
+                                            &#10005;
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div
+                                      className="main-div"
+                                      onClick={() =>
+                                        onClick(
+                                          "blockGHOI",
+                                          loanScenario.blockGHOI
+                                        )
+                                      }
+                                    >
+                                    <div>
+                                    <span className="light-text">{loanScenario.blockGHOI}</span>
+                                      <button className="edit-arrow1 icon-btn1">
+                                        &#9998;
+                                      </button>
+                                    </div>
+                                  </div>
+                                )} 
+                                <span className="light-text">{"months"}</span>
+                              
                             </p>
                             {/* <EdiText
                               value={
@@ -2396,9 +2505,56 @@ const Home_2 = () => {
                             <p>
                               Property{" "}
                               <span className="light-text">
-                                {" "}
-                                Taxes $273 per month for 13 months{" "}
-                              </span>{" "}
+                                {"Taxes $273 per month for"}
+                              </span>
+                              {isEqual === "blockGnumMonthsTaxReserves" ? (
+                                    <div className="dropdown-main">
+                                      <div id="wrap">
+                                        <Dropdown
+                                          className="cust-select"
+                                          options={monthsOptions}
+                                          onChange={onSelect}
+                                          value={loanScenario.blockGnumMonthsTaxReserves}
+                                          placeholder="Select an option"
+                                        />
+                                        <div className="btn-div">
+                                          <button
+                                            className="right-arrow icon-btn"
+                                            onClick={() =>
+                                              handleSave(selectedValue, "blockGnumMonthsTaxReserves")
+                                            }
+                                          >
+                                            &#10003;
+                                          </button>
+                                          <button
+                                            className="cross-arrow icon-btn"
+                                            onClick={() => onClick("", "")}
+                                          >
+                                            &#10005;
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div
+                                      className="main-div"
+                                      onClick={() =>
+                                        onClick(
+                                          "blockGnumMonthsTaxReserves",
+                                          loanScenario.blockGnumMonthsTaxReserves
+                                        )
+                                      }
+                                    >
+                                    <div>
+                                    <span className="light-text">{loanScenario.blockGnumMonthsTaxReserves}</span>
+                                      <button className="edit-arrow1 icon-btn1">
+                                        &#9998;
+                                      </button>
+                                    </div>
+                                  </div>
+                                )} 
+                                <span className="light-text">{"months"}</span>
+                              
                             </p>
                             {/* <EdiText
                               value={
@@ -2423,11 +2579,11 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>H. Other</p>
                             <span>
-                              {Number(loanScenario.blockHOwnersTitleInsPremium)}
+                              ${blockH}
                             </span>
                           </li>
                           <li>
-                            <p>Owners Title Ins Premium</p>
+                            <p>Owner's Title Insurance</p>
                             <EdiText
                               value={loanScenario.blockHOwnersTitleInsPremium}
                               tabIndex={122}
@@ -2444,7 +2600,11 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>I. Total Other Costs (E + F + G + H)</p>
+                            <span>
+                               ${blockI}
+                            </span>
                           </li>
+
                         </ul>
                       </div>
                       <div className="price-text">
@@ -2454,6 +2614,9 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>D+I</p>
+                            <span>
+                               {blockD + blockI}
+                            </span>
                             {/* <EdiText
                               value={loanScenario.DI}
                               tabIndex={123}
@@ -2465,7 +2628,10 @@ const Home_2 = () => {
                             /> */}
                           </li>
                           <li>
-                            <p>Property </p>
+                            <p>Lender Credit </p>
+                            <span>
+                              {loanScenario.lenderCredit}
+                            </span>
                             {/* <EdiText
                               value={loanScenario.Property}
                               tabIndex={124}
