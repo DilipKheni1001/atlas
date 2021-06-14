@@ -53,6 +53,20 @@ const Home_2 = () => {
     blockETransferTaxes: "",
     blockERecordingCharges: "",
     blockHOwnersTitleInsPremium: "",
+    governmentFundingFeePercent: "",
+    isFinancedFundingFeeMI: "",
+    annualMortgageInsuranceRate: "",
+    mortgageInsurancePremiumType: "",
+    secondMortgageRequest: "",
+    monthlyHOA: "",
+    blockBtaxReturnVerificationFee: "",
+    blockBverificationEmployment: "",
+    blockBhoaQuestionnaire: "",
+    blockBcondoProjectApproval: "",
+    blockBsinglePremiumMI: "",
+    blockAprocessingFee: "",
+    blockFdaysPrepaidInterest: "",
+    blockFnumMonthsPrepaidHOI: "",
   });
 
   const [isEqual, setIsEqual] = useState();
@@ -88,7 +102,7 @@ const Home_2 = () => {
     "VA",
   ];
 
-  const occupancyOptions = ["Owner-Occupied", "Second Home", "Inverstment"];
+  const occupancyOptions = ["Owner-Occupied", "Second Home", "Investment"];
 
   const propertyCountryOptions = [
     "Accomack",
@@ -501,6 +515,14 @@ const Home_2 = () => {
   const loanPurposeOptions = ["Purchase", "Refinance"];
 
   const currentLoanTypeOptions = ["Conventional", "FHA", "USDA", "VA", "Other"];
+
+  const mortgageInsurancePremiumTypeOptions = ["Monthly", "Single Premium"];
+
+  const secondMortgageRequestOptions = [
+    "Payoff existing 2nd mortgage",
+    "Re-subordinate existing 2nd mortgage",
+    "New 2nd mortgage",
+  ];
 
   useEffect(() => {
     getData();
@@ -1172,23 +1194,7 @@ const Home_2 = () => {
                               startEditingOnFocus
                             />
                           </li>
-                          <li>
-                            <p>Total Loan Amount</p>
 
-                            {/* <EdiText
-                              value={loanScenario.TotalLoanAmount1}
-                              tabIndex={4}
-                              onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "TotalLoanAmount1",
-                                  "loanScenario"
-                                );
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
-                          </li>
                           <li>
                             <p>Lock Period</p>
                             {isEqual === "lockPeriod" ? (
@@ -1240,7 +1246,7 @@ const Home_2 = () => {
                             <p>Loan Price</p>
                             <EdiText
                               value={loanScenario.loanPrice}
-                              tabIndex={5}
+                              tabIndex={4}
                               onSave={(pass) => {
                                 handleSave(pass, "loanPrice");
                               }}
@@ -1253,7 +1259,7 @@ const Home_2 = () => {
 
                             <EdiText
                               value={loanScenario.lenderCredit}
-                              tabIndex={6}
+                              tabIndex={5}
                               onSave={(pass) => {
                                 handleSave(pass, "lenderCredit");
                               }}
@@ -1271,57 +1277,112 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Government Funding Fee </p>
-                            {/* <EdiText
-                              value={loanScenario.GovernmentFundingFee}
-                              tabIndex={11}
+                            <EdiText
+                              value={loanScenario.governmentFundingFeePercent}
+                              tabIndex={6}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "GovernmentFundingFee",
+                                  "governmentFundingFeePercent",
                                   "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Finance Funding Fee/MI</p>
-                            {/* <span>
+                            <span>
                               <label className="lab-check">
                                 <input
                                   type="checkbox"
-                                  checked={loanScenario.FinanceFundingFee}
+                                  checked={loanScenario.isFinancedFundingFeeMI}
                                   onChange={() =>
                                     setLoanScenario((loanScenario) => ({
                                       ...loanScenario,
-                                      FinanceFundingFee:
-                                        !loanScenario.FinanceFundingFee,
+                                      isFinancedFundingFeeMI:
+                                        !loanScenario.isFinancedFundingFeeMI,
                                     }))
                                   }
                                 />
                                 <span className="checkmark"></span>
                               </label>
-                            </span> */}
+                            </span>
                           </li>
                           <li>
                             <p>Mortgage Insurance Rate</p>
-                            {/* <EdiText
-                              value={loanScenario.MortgageInsuranceRate}
-                              tabIndex={12}
+                            <EdiText
+                              value={loanScenario.annualMortgageInsuranceRate}
+                              tabIndex={7}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "MortgageInsuranceRate",
+                                  "annualMortgageInsuranceRate",
                                   "loanScenario"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Premium Type</p>
+                            {isEqual === "mortgageInsurancePremiumType" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={
+                                      mortgageInsurancePremiumTypeOptions
+                                    }
+                                    onChange={onSelect}
+                                    value={
+                                      loanScenario.mortgageInsurancePremiumType
+                                    }
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(
+                                          selectedValue,
+                                          "mortgageInsurancePremiumType"
+                                        )
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick(
+                                    "mortgageInsurancePremiumType",
+                                    loanScenario.mortgageInsurancePremiumType
+                                  )
+                                }
+                              >
+                                <div>
+                                  <span>
+                                    {loanScenario.mortgageInsurancePremiumType}
+                                  </span>
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
                         </ul>
                       </div>
@@ -1332,12 +1393,63 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Second Mortgage Request</p>
+                            {isEqual === "secondMortgageRequest" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={secondMortgageRequestOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.secondMortgageRequest}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(
+                                          selectedValue,
+                                          "secondMortgageRequest"
+                                        )
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick(
+                                    "secondMortgageRequest",
+                                    loanScenario.secondMortgageRequest
+                                  )
+                                }
+                              >
+                                <div>
+                                  <span>
+                                    {loanScenario.secondMortgageRequest}
+                                  </span>
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </li>
                           <li>
                             <p>Second Mortgage Balance</p>
                             <EdiText
                               value={loanScenario.secondMortgageBalance}
-                              tabIndex={21}
+                              tabIndex={8}
                               onSave={(pass) => {
                                 handleSave(pass, "secondMortgageBalance");
                               }}
@@ -1501,7 +1613,7 @@ const Home_2 = () => {
                             <p>Current Loan Balance</p>
                             <EdiText
                               value={loanScenario.currentLoanBalance}
-                              tabIndex={41}
+                              tabIndex={9}
                               onSave={(pass) => {
                                 handleSave(pass, "currentLoanBalance");
                               }}
@@ -1513,7 +1625,7 @@ const Home_2 = () => {
                             <p>Cashout Request</p>
                             <EdiText
                               value={loanScenario.cashoutRequest}
-                              tabIndex={42}
+                              tabIndex={10}
                               onSave={(pass) => {
                                 handleSave(pass, "cashoutRequest");
                               }}
@@ -1563,7 +1675,7 @@ const Home_2 = () => {
                             <p>Credit Score</p>
                             <EdiText
                               value={loanScenario.creditScore}
-                              tabIndex={43}
+                              tabIndex={11}
                               onSave={(pass) => {
                                 handleSave(pass, "creditScore");
                               }}
@@ -1807,7 +1919,7 @@ const Home_2 = () => {
                             <p>House Value</p>
                             <EdiText
                               value={loanScenario.houseValue}
-                              tabIndex={52}
+                              tabIndex={13}
                               onSave={(pass) => {
                                 handleSave(pass, "houseValue");
                               }}
@@ -1817,21 +1929,21 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Monthly HOA</p>
-                            {/* <EdiText
-                              value={loanScenario.MonthlyHOA}
-                              tabIndex={53}
+                            <EdiText
+                              value={loanScenario.monthlyHOA}
+                              tabIndex={14}
                               onSave={(pass) => {
-                                handleSave(pass, "MonthlyHOA", "loanScenario");
+                                handleSave(pass, "monthlyHOA");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Monthly Property Taxes</p>
                             <EdiText
                               value={loanScenario.monthlyPropertyTax}
-                              tabIndex={54}
+                              tabIndex={15}
                               onSave={(pass) => {
                                 handleSave(pass, "monthlyPropertyTax");
                               }}
@@ -1843,7 +1955,7 @@ const Home_2 = () => {
                             <p>Monthly HOI</p>
                             <EdiText
                               value={loanScenario.monthlyHOI}
-                              tabIndex={55}
+                              tabIndex={16}
                               onSave={(pass) => {
                                 handleSave(pass, "monthlyHOI");
                               }}
@@ -1921,6 +2033,11 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>A. Origination Charges </p>
+                            <span>
+                              {Number(loanScenario.blockADiscountFee) +
+                                Number(loanScenario.blockAOriginationFee) +
+                                Number(loanScenario.blockAprocessingFee)}
+                            </span>
                           </li>
                           <li>
                             <p>Discount Fee </p>
@@ -1948,19 +2065,15 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Processing Fee</p>
-                            {/* <EdiText
-                              value={loanScenario.ProcessingFee}
+                            <EdiText
+                              value={loanScenario.blockAprocessingFee}
                               tabIndex={103}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "ProcessingFee",
-                                  "loanScenario"
-                                );
+                                handleSave(pass, "blockAprocessingFee");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
                             <p>Tax Service</p>
@@ -1980,122 +2093,126 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>B. Services You Cannot Shop For</p>
+                            <span>
+                              {Number(loanScenario.blockBAppraisalFee) +
+                                Number(loanScenario.blockBCreditFees) +
+                                Number(loanScenario.blockBFloodCertification) +
+                                Number(
+                                  loanScenario.blockBtaxReturnVerificationFee
+                                ) +
+                                Number(
+                                  loanScenario.blockBverificationEmployment
+                                ) +
+                                Number(loanScenario.blockBhoaQuestionnaire) +
+                                Number(
+                                  loanScenario.blockBcondoProjectApproval
+                                ) +
+                                Number(loanScenario.blockBsinglePremiumMI)}
+                            </span>
                           </li>
                           <li>
-                            <p>Discount Fee </p>
-                            {/* <EdiText
-                              value={loanScenario.DiscountFee}
-                              tabIndex={105}
-                              onSave={(pass) => {
-                                handleSave(pass, "DiscountFee", "loanScenario");
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
-                          </li>
-                          <li>
-                            <p>Origination Fee</p>
-                            {/* <EdiText
-                              value={loanScenario.OriginationFee}
+                            <p>Appraisal Fee</p>
+                            <EdiText
+                              value={loanScenario.blockBAppraisalFee}
                               tabIndex={106}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "OriginationFee",
-                                  "loanScenario"
-                                );
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
-                          </li>
-                          <li>
-                            <p>Processing Fee</p>
-                            {/* <EdiText
-                              value={loanScenario.ProcessingFee}
-                              tabIndex={107}
-                              onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "ProcessingFee",
-                                  "loanScenario"
-                                );
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
-                          </li>
-                          <li>
-                            <p>Tax Service</p>
-                            <EdiText
-                              value={loanScenario.blockBTaxService}
-                              tabIndex={108}
-                              onSave={(pass) => {
-                                handleSave(pass, "blockBTaxService");
+                                handleSave(pass, "blockBAppraisalFee");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
                             />
                           </li>
                           <li>
-                            <p>Discount Fee </p>
-                            {/* <EdiText
-                              value={loanScenario.DiscountFee1}
+                            <p>Credit Report Fees</p>
+                            <EdiText
+                              value={loanScenario.blockBCreditFees}
+                              tabIndex={107}
+                              onSave={(pass) => {
+                                handleSave(pass, "blockBCreditFees");
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            />
+                          </li>
+                          <li>
+                            <p>Flood Certification Fee</p>
+                            <EdiText
+                              value={loanScenario.blockBFloodCertification}
+                              tabIndex={108}
+                              onSave={(pass) => {
+                                handleSave(pass, "blockBFloodCertification");
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            />
+                          </li>
+                          <li>
+                            <p>Tax Return Verification Fee</p>
+                            <EdiText
+                              value={
+                                loanScenario.blockBtaxReturnVerificationFee
+                              }
                               tabIndex={109}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "DiscountFee1",
-                                  "loanScenario"
+                                  "blockBtaxReturnVerificationFee"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
-                            <p>Origination Fee</p>
-                            {/* <EdiText
-                              value={loanScenario.OriginationFee1}
+                            <p>verification of Employment </p>
+                            <EdiText
+                              value={loanScenario.blockBverificationEmployment}
                               tabIndex={110}
                               onSave={(pass) => {
                                 handleSave(
                                   pass,
-                                  "OriginationFee1",
-                                  "loanScenario"
+                                  "blockBverificationEmployment"
                                 );
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
-                            <p>Processing Fee</p>
-                            {/* <EdiText
-                              value={loanScenario.ProcessingFee1}
+                            <p>HOA Questionnaire</p>
+                            <EdiText
+                              value={loanScenario.blockBhoaQuestionnaire}
                               tabIndex={111}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "ProcessingFee1",
-                                  "loanScenario"
-                                );
+                                handleSave(pass, "blockBhoaQuestionnaire");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
                           </li>
                           <li>
-                            <p>Tax Service</p>
-                            {/* <EdiText
-                              value={loanScenario.TaxService1}
+                            <p>Condo Project Approval</p>
+                            <EdiText
+                              value={loanScenario.blockBcondoProjectApproval}
                               tabIndex={112}
                               onSave={(pass) => {
-                                handleSave(pass, "TaxService1", "loanScenario");
+                                handleSave(pass, "blockBcondoProjectApproval");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
+                          </li>
+                          <li>
+                            <p>Single Premium MI</p>
+                            <EdiText
+                              value={loanScenario.blockBsinglePremiumMI}
+                              tabIndex={113}
+                              onSave={(pass) => {
+                                handleSave(pass, "blockBsinglePremiumMI");
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            />
                           </li>
                         </ul>
                       </div>
@@ -2103,6 +2220,10 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>C. Services You Can Shop For</p>
+                            <span>
+                              {Number(loanScenario.blockCTitleServices) +
+                                Number(loanScenario.blockCSurvey)}
+                            </span>
                           </li>
                           <li>
                             <p>Title Services & Insurance</p>
@@ -2134,6 +2255,27 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>D. Total Loan Costs (A + B + C)</p>
+                            <span>
+                              {Number(loanScenario.blockADiscountFee) +
+                                Number(loanScenario.blockAOriginationFee) +
+                                Number(loanScenario.blockAprocessingFee) +
+                                Number(loanScenario.blockBAppraisalFee) +
+                                Number(loanScenario.blockBCreditFees) +
+                                Number(loanScenario.blockBFloodCertification) +
+                                Number(
+                                  loanScenario.blockBtaxReturnVerificationFee
+                                ) +
+                                Number(
+                                  loanScenario.blockBverificationEmployment
+                                ) +
+                                Number(loanScenario.blockBhoaQuestionnaire) +
+                                Number(
+                                  loanScenario.blockBcondoProjectApproval
+                                ) +
+                                Number(loanScenario.blockBsinglePremiumMI) +
+                                Number(loanScenario.blockCTitleServices) +
+                                Number(loanScenario.blockCSurvey)}
+                            </span>
                           </li>
                         </ul>
                       </div>
@@ -2143,6 +2285,10 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>E. Taxes & Government Fees</p>
+                            <span>
+                              {Number(loanScenario.blockERecordingCharges) +
+                                Number(loanScenario.blockETransferTaxes)}
+                            </span>
                           </li>
                           <li>
                             <p>Recording Fees </p>
@@ -2175,6 +2321,7 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>F. Prepaids</p>
                           </li>
+
                           <li>
                             <p>Homeowner’s Insurance Premium</p>
                             {/* <EdiText
@@ -2194,14 +2341,10 @@ const Home_2 = () => {
                           <li>
                             <p>Prepaid Interest for 15 days </p>
                             {/* <EdiText
-                              value={loanScenario.PrepaidInterestfor15days}
+                              value={loanScenario.blockFdaysPrepaidInterest}
                               tabIndex={118}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "PrepaidInterestfor15days",
-                                  "loanScenario"
-                                );
+                                handleSave(pass, "blockFdaysPrepaidInterest");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -2210,14 +2353,10 @@ const Home_2 = () => {
                           <li>
                             <p>Prepaid Taxes</p>
                             {/* <EdiText
-                              value={loanScenario.PrepaidTaxes}
+                              value={loanScenario.blockFnumMonthsPrepaidHOI}
                               tabIndex={119}
                               onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "PrepaidTaxes",
-                                  "loanScenario"
-                                );
+                                handleSave(pass, "blockFnumMonthsPrepaidHOI");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
@@ -2283,9 +2422,12 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>H. Other</p>
+                            <span>
+                              {Number(loanScenario.blockHOwnersTitleInsPremium)}
+                            </span>
                           </li>
                           <li>
-                            <p>Homeowner’s Insurance Premium</p>
+                            <p>Owners Title Ins Premium</p>
                             <EdiText
                               value={loanScenario.blockHOwnersTitleInsPremium}
                               tabIndex={122}
