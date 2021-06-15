@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button, Accordion, Card, Tabs, Tab } from "react-bootstrap";
+import { Button, Accordion, Card, Tabs, Tab, ModalTitle, ModalBody, ModalFooter } from "react-bootstrap";
 import EdiText from "react-editext";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import axios from "axios";
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
 
 const Home_2 = () => {
   const [loanScenario, setLoanScenario] = useState({
@@ -73,10 +75,21 @@ const Home_2 = () => {
     "blockGnumMonthsTaxReserves": null,
     "sellerCredit": null,
     "otherCredits": null
-});
+  });
 
+  const [address, setAddress] = useState({ 
+    "propertyStreet": null,
+    "propertyCity": null,
+    "propertyZip": null,
+    "propertyState": null,
+  });
+
+  const [open, setOpen] = useState(false);
+  
   const [isEqual, setIsEqual] = useState();
   const [selectedValue, setSelectedValue] = useState();
+
+  const propertyStateOptions = ["DC", "DE", "FL", "MD", "NJ", "PA", "VA"];
 
   const lockPeriodOptions = [
     "15 days",
@@ -640,13 +653,13 @@ const Home_2 = () => {
     setSelectedValue(v.value);
   };
 
-  const handleSave = (event, val) => {
-    console.log("event", event);
-    console.log("val", val);
+  const handleSave = (val, field) => {
+    console.log("event", val);
+    console.log("val", field);
 
     var formData = new FormData();
     formData.append("id", loanScenario.id);
-    formData.append(val, event);
+    formData.append(field, val);
 
     axios
       .post(
@@ -655,7 +668,7 @@ const Home_2 = () => {
       )
       .then((res) => {
         setIsEqual("");
-        setLoanScenario({ ...loanScenario, [val]: event });
+        setLoanScenario({ ...loanScenario, [field]: val });
         console.log("Update-------------------------", res);
         console.log(res.data);
       })
@@ -664,6 +677,62 @@ const Home_2 = () => {
       });
   };
 
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setAddress({...address, [name]: value });
+  };
+
+  const onOpenModal = () => {
+    
+     setAddress({  
+      propertyStreet : loanScenario.propertyStreet,
+      propertyCity : loanScenario.propertyCity,
+      propertyState : loanScenario.propertyState,
+      propertyZip : loanScenario.propertyZip
+    });
+    setOpen(true);
+  }
+
+  const onCloseModal = () => setOpen(false);
+
+  const handleSubmit = () => {
+
+    var formData = new FormData();
+    formData.append("id", loanScenario.id);
+    formData.append("propertyStreet", address.propertyStreet);
+    formData.append("propertyCity", address.propertyCity);
+    formData.append("propertyZip", address.propertyZip);
+    formData.append("propertyState", address.propertyState);
+    
+    axios
+      .post(
+        `https://atlas.keystonefunding.com/api/loanscenario/update`,
+        formData
+      )
+      .then((res) => {
+        setOpen(false);
+        setIsEqual("");
+        setLoanScenario({ ...loanScenario, 
+          propertyStreet : address.propertyStreet,
+          propertyCity : address.propertyCity,
+          propertyState : address.propertyState,
+          propertyZip : address.propertyZip
+        });
+        setAddress({ 
+          "propertyStreet": null,
+          "propertyCity": null,
+          "propertyZip": null,
+          "propertyState": null,
+        });
+        console.log("Update-------------------------", res);
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  
   console.log("loanScenario", loanScenario);
 
   return (
@@ -1887,15 +1956,57 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Address</p>
-                            {/* <EdiText
-                              value={loanScenario.Address}
-                              tabIndex={51}
-                              onSave={(pass) => {
-                                handleSave(pass, "Address", "loanScenario");
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
+                             <button
+                              onClick={onOpenModal}
+                              className="edit-arrow1 icon-btn1"
+                            >
+                              {" "}
+                              &#9998;
+                            </button>
+                            <Modal open={open} onClose={onCloseModal}>
+                              <ModalTitle> Edit Addresses</ModalTitle>
+                              <ModalBody>
+                                  <input
+                                    type="text"
+                                    name="propertyStreet"
+                                    placeholder="propertyStreet"
+                                    onChange={handleChange}
+                                    value={address.propertyStreet}
+                                  />
+                                  <input
+                                    type="text"
+                                    name="propertyCity"
+                                    placeholder="propertyCity"
+                                    onChange={handleChange}
+                                    value={address.propertyCity}
+                                  />
+                                  <Dropdown
+                                        className="cust-select"
+                                        options={propertyStateOptions}
+                                        onChange={(e)=>setAddress({...address,propertyState:e.value})}
+                                        value={address.propertyState}
+                                        placeholder="Select State"
+                                      />
+                                  <input
+                                    type="text"
+                                    name="propertyZip"
+                                    placeholder="propertyZip"
+                                    onChange={handleChange}
+                                    value={address.propertyZip}
+                                  />
+                                  
+                              </ModalBody>
+                              <ModalFooter>
+                                  <button onClick={onCloseModal}>
+                                    Cancel
+                                  </button>
+                                  
+                                  <button onClick={handleSubmit}>
+                                    Save Addresses
+                                  </button>
+                              </ModalFooter>
+                              
+                            </Modal>
                           </li>
                           <li>
                             <p>County</p>
@@ -2611,6 +2722,9 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>J. Total Closing Costs</p>
+                            <span>
+                               ${blockD + blockI + loanScenario.lenderCredit}
+                            </span>
                           </li>
                           <li>
                             <p>D+I</p>
