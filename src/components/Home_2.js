@@ -16,11 +16,11 @@ const Home_2 = () => {
     "cashoutRequest": 0,
     "isPayingOffSecondMortgage": 0,
     "isCashout": 0,
-    "propertyStreet": null,
-    "propertyStreet2": null,
-    "propertyCity": null,
-    "propertyZip": null,
-    "propertyState": null,
+    "propertyStreet": "",
+    "propertyStreet2": "",
+    "propertyCity": "",
+    "propertyZip": "",
+    "propertyState": "",
     "propertyCountry": "",
     "propertyType": "",
     "creditScore": "",
@@ -35,7 +35,7 @@ const Home_2 = () => {
     "loanProduct": "",
     "loanType": "",
     "currentLoanType": "",
-    "loanTypeSpecial": null,
+    "loanTypeSpecial": "",
     "interestRate": 0,
     "lockPeriod": "",
     "loanPrice": 0,
@@ -78,10 +78,10 @@ const Home_2 = () => {
   });
 
   const [address, setAddress] = useState({ 
-    "propertyStreet": null,
-    "propertyCity": null,
-    "propertyZip": null,
-    "propertyState": null,
+    "propertyStreet": "",
+    "propertyCity": "",
+    "propertyZip": "",
+    "propertyState": "",
   });
 
   const [open, setOpen] = useState(false);
@@ -533,6 +533,8 @@ const Home_2 = () => {
 
   const loanPurposeOptions = ["Purchase", "Refinance"];
 
+  const loanTypeSpecialOptions = ["Home Possible","HomeReady","HomeReady/Possible","CRA","203k","HomeStyle","IRRRL","Streamine","HomePath","HomeSteps"];
+
   const currentLoanTypeOptions = ["Conventional", "FHA", "USDA", "VA", "Other"];
 
   const mortgageInsurancePremiumTypeOptions = ["Monthly", "Single Premium"];
@@ -692,6 +694,7 @@ const Home_2 = () => {
       propertyZip : loanScenario.propertyZip
     });
     setOpen(true);
+    console.log("open Modal");
   }
 
   const onCloseModal = () => setOpen(false);
@@ -720,10 +723,10 @@ const Home_2 = () => {
           propertyZip : address.propertyZip
         });
         setAddress({ 
-          "propertyStreet": null,
-          "propertyCity": null,
-          "propertyZip": null,
-          "propertyState": null,
+          "propertyStreet": "",
+          "propertyCity": "",
+          "propertyZip": "",
+          "propertyState": "",
         });
         console.log("Update-------------------------", res);
         console.log(res.data);
@@ -732,7 +735,7 @@ const Home_2 = () => {
         console.log(e);
       });
   };
-  
+
   console.log("loanScenario", loanScenario);
 
   return (
@@ -1222,20 +1225,12 @@ const Home_2 = () => {
                             />
                           </li>
                           <li>
+                            <p>LTV/CLTV</p>
+                            <span>{loanScenario.LTV_CLTV}</span>
+                          </li>
+                          <li>
                             <p>Total Loan Amount</p>
-                            {/* <EdiText
-                              value={loanScenario.TotalLoanAmount}
-                              tabIndex={2}
-                              onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "TotalLoanAmount",
-                                  "loanScenario"
-                                );
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
+                            <span>{loanScenario.totalLoanAmount}</span>
                           </li>
                           <li>
                             <p>Loan Product</p>
@@ -1333,6 +1328,53 @@ const Home_2 = () => {
                               </div>
                             )}
                           </li>
+                          <li>
+                            <p>Special Program</p>
+                            {isEqual === "loanTypeSpecial" ? (
+                              <div className="dropdown-main">
+                                <div id="wrap">
+                                  <Dropdown
+                                    className="cust-select"
+                                    options={loanTypeSpecialOptions}
+                                    onChange={onSelect}
+                                    value={loanScenario.loanTypeSpecial}
+                                    placeholder="Select an option"
+                                  />
+                                  <div className="btn-div">
+                                    <button
+                                      className="right-arrow icon-btn"
+                                      onClick={() =>
+                                        handleSave(selectedValue, "loanTypeSpecial")
+                                      }
+                                    >
+                                      &#10003;
+                                    </button>
+                                    <button
+                                      className="cross-arrow icon-btn"
+                                      onClick={() => onClick("", "")}
+                                    >
+                                      &#10005;
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div
+                                className="main-div"
+                                onClick={() =>
+                                  onClick("loanTypeSpecial", loanScenario.loanTypeSpecial)
+                                }
+                              >
+                                <div>
+                                  <span>{loanScenario.loanTypeSpecial}</span>
+                                  <button className="edit-arrow1 icon-btn1">
+                                    &#9998;
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </li>
+                        
                           <li>
                             <p>Interest Rate</p>
                             <EdiText
