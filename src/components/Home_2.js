@@ -584,7 +584,6 @@ const Home_2 = () => {
   const [FHA_USDA_VA_FundingFee, setFHA_USDA_VA_FundingFee] = useState(0);
   const [totalLoanAmount, setTotalLoanAmount] = useState(0);
   const [LTV_CLTV, setLTV_CLTV] = useState(0);
-  
 
   useEffect(() => {
     setBlockA(
@@ -654,30 +653,51 @@ const Home_2 = () => {
         Number(loanScenario.blockHOwnersTitleInsPremium)
     );
 
-    var FUVFundingFee = loanScenario.baseLoanAmount * loanScenario.governmentFundingFeePercent;
+    var FUVFundingFee =
+      loanScenario.baseLoanAmount * loanScenario.governmentFundingFeePercent;
     setFHA_USDA_VA_FundingFee(FUVFundingFee);
 
-    if(loanScenario.isFinancedFundingFeeMI === 1){
-        var annualMortgageInsuranceRate = 0;
-        if(loanScenario.mortgageInsurancePremiumType === "Single Premium"){
-          annualMortgageInsuranceRate = loanScenario.annualMortgageInsuranceRate;
-        }
-        var totalLoanAmount = loanScenario.baseLoanAmount * (1+loanScenario.governmentFundingFeePercent + annualMortgageInsuranceRate)  
-        setTotalLoanAmount(totalLoanAmount);  
-    }else{
+    if (loanScenario.isFinancedFundingFeeMI === 1) {
+      var annualMortgageInsuranceRate = 0;
+      if (loanScenario.mortgageInsurancePremiumType === "Single Premium") {
+        annualMortgageInsuranceRate = loanScenario.annualMortgageInsuranceRate;
+      }
+      var totalLoanAmount =
+        loanScenario.baseLoanAmount *
+        (1 +
+          loanScenario.governmentFundingFeePercent +
+          annualMortgageInsuranceRate);
+      setTotalLoanAmount(totalLoanAmount);
+    } else {
       setTotalLoanAmount(loanScenario.baseLoanAmount);
     }
 
     var LTV_CLTV = "";
-    if(!loanScenario.secondMortgageBalance){
-      LTV_CLTV = Math.round(100 * loanScenario.baseLoanAmount / loanScenario.houseValue) + "%";
-    }else{
-        if(loanScenario.isPayingOffSecondMortgage === 0){
-            var v = Math.round(100*(loanScenario.baseLoanAmount+loanScenario.secondMortgageBalance)/loanScenario.houseValue);
-            LTV_CLTV = Math.round(100 * loanScenario.baseLoanAmount / loanScenario.houseValue) + "% / " + v
-        }else{
-            LTV_CLTV = Math.round(100 * loanScenario.baseLoanAmount / loanScenario.houseValue) + "%";
-        }
+    if (!loanScenario.secondMortgageBalance) {
+      LTV_CLTV =
+        Math.round(
+          (100 * loanScenario.baseLoanAmount) / loanScenario.houseValue
+        ) + "%";
+    } else {
+      if (loanScenario.isPayingOffSecondMortgage === 0) {
+        var v = Math.round(
+          (100 *
+            (loanScenario.baseLoanAmount +
+              loanScenario.secondMortgageBalance)) /
+            loanScenario.houseValue
+        );
+        LTV_CLTV =
+          Math.round(
+            (100 * loanScenario.baseLoanAmount) / loanScenario.houseValue
+          ) +
+          "% / " +
+          v;
+      } else {
+        LTV_CLTV =
+          Math.round(
+            (100 * loanScenario.baseLoanAmount) / loanScenario.houseValue
+          ) + "%";
+      }
     }
     setLTV_CLTV(LTV_CLTV);
 
@@ -1277,18 +1297,7 @@ const Home_2 = () => {
                           <li>
                             <p>Base Loan Amount</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.baseLoanAmount}
                               tabIndex={1}
                               onSave={(pass) => {
@@ -1298,7 +1307,7 @@ const Home_2 = () => {
                               startEditingOnFocus
                             />
                           </li>
-                         <li>
+                          <li>
                             <p>LTV/CLTV</p>
                             <span>{LTV_CLTV}</span>
                           </li>
@@ -1458,18 +1467,7 @@ const Home_2 = () => {
                           <li>
                             <p>Interest Rate</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.interestRate}
                               tabIndex={3}
                               onSave={(pass) => {
@@ -1530,18 +1528,7 @@ const Home_2 = () => {
                           <li>
                             <p>Loan Price</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.loanPrice}
                               tabIndex={4}
                               onSave={(pass) => {
@@ -1555,18 +1542,7 @@ const Home_2 = () => {
                             <p>Lender Credit</p>
 
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.lenderCredit}
                               tabIndex={5}
                               onSave={(pass) => {
@@ -1587,18 +1563,7 @@ const Home_2 = () => {
                           <li>
                             <p>Government Funding Fee </p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.governmentFundingFeePercent}
                               tabIndex={6}
                               onSave={(pass) => {
@@ -1630,18 +1595,7 @@ const Home_2 = () => {
                           <li>
                             <p>Mortgage Insurance Rate</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.annualMortgageInsuranceRate}
                               tabIndex={7}
                               onSave={(pass) => {
@@ -1773,18 +1727,7 @@ const Home_2 = () => {
                           <li>
                             <p>Second Mortgage Balance</p>
                             <EdiText
-                              // validationMessage=" "
-                              // validation={(val) => {
-                              //   if (
-                              //     (!isNaN(val) && val.toString().length > 0) ===
-                              //     false
-                              //   ) {
-                              //     toast.error(
-                              //       "Please type at only for numeric value."
-                              //     );
-                              //   }
-                              //   return true;
-                              // }}
+                              type="number"
                               value={loanScenario.secondMortgageBalance}
                               tabIndex={8}
                               onSave={(pass) => {
@@ -1949,18 +1892,7 @@ const Home_2 = () => {
                           <li>
                             <p>Current Loan Balance</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.currentLoanBalance}
                               tabIndex={9}
                               onSave={(pass) => {
@@ -1973,18 +1905,7 @@ const Home_2 = () => {
                           <li>
                             <p>Cashout Request</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.cashoutRequest}
                               tabIndex={10}
                               onSave={(pass) => {
@@ -2037,18 +1958,7 @@ const Home_2 = () => {
                           <li>
                             <p>Credit Score</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.creditScore}
                               tabIndex={11}
                               onSave={(pass) => {
@@ -2357,18 +2267,7 @@ const Home_2 = () => {
                           <li>
                             <p>House Value</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.houseValue}
                               tabIndex={13}
                               onSave={(pass) => {
@@ -2381,18 +2280,7 @@ const Home_2 = () => {
                           <li>
                             <p>Monthly HOA</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.monthlyHOA}
                               tabIndex={14}
                               onSave={(pass) => {
@@ -2405,18 +2293,7 @@ const Home_2 = () => {
                           <li>
                             <p>Monthly Property Taxes</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.monthlyPropertyTax}
                               tabIndex={15}
                               onSave={(pass) => {
@@ -2429,18 +2306,7 @@ const Home_2 = () => {
                           <li>
                             <p>Monthly HOI</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.monthlyHOI}
                               tabIndex={16}
                               onSave={(pass) => {
@@ -2525,18 +2391,7 @@ const Home_2 = () => {
                           <li>
                             <p>Discount Fee </p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockADiscountFee}
                               tabIndex={101}
                               onSave={(pass) => {
@@ -2549,18 +2404,7 @@ const Home_2 = () => {
                           <li>
                             <p>Origination Fee</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockAOriginationFee}
                               tabIndex={102}
                               onSave={(pass) => {
@@ -2573,18 +2417,7 @@ const Home_2 = () => {
                           <li>
                             <p>Processing Fee</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockAprocessingFee}
                               tabIndex={103}
                               onSave={(pass) => {
@@ -2597,18 +2430,7 @@ const Home_2 = () => {
                           <li>
                             <p>Tax Service</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockATaxService}
                               tabIndex={104}
                               onSave={(pass) => {
@@ -2629,18 +2451,7 @@ const Home_2 = () => {
                           <li>
                             <p>Appraisal Fee</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockBAppraisalFee}
                               tabIndex={106}
                               onSave={(pass) => {
@@ -2653,18 +2464,7 @@ const Home_2 = () => {
                           <li>
                             <p>Credit Report Fees</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockBCreditFees}
                               tabIndex={107}
                               onSave={(pass) => {
@@ -2677,18 +2477,7 @@ const Home_2 = () => {
                           <li>
                             <p>Flood Certification Fee</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockBFloodCertification}
                               tabIndex={108}
                               onSave={(pass) => {
@@ -2701,18 +2490,7 @@ const Home_2 = () => {
                           <li>
                             <p>Tax Return Verification Fee</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={
                                 loanScenario.blockBtaxReturnVerificationFee
                               }
@@ -2730,18 +2508,7 @@ const Home_2 = () => {
                           <li>
                             <p>Verification of Employment </p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockBverificationEmployment}
                               tabIndex={110}
                               onSave={(pass) => {
@@ -2757,18 +2524,7 @@ const Home_2 = () => {
                           <li>
                             <p>HOA Questionnaire</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockBhoaQuestionnaire}
                               tabIndex={111}
                               onSave={(pass) => {
@@ -2781,18 +2537,7 @@ const Home_2 = () => {
                           <li>
                             <p>Condo Project Approval</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockBcondoProjectApproval}
                               tabIndex={112}
                               onSave={(pass) => {
@@ -2805,18 +2550,7 @@ const Home_2 = () => {
                           <li>
                             <p>Single Premium MI</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockBsinglePremiumMI}
                               tabIndex={113}
                               onSave={(pass) => {
@@ -2828,7 +2562,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>FHA, USDA, VA Funding Fee</p>
-                             <span>{Math.round(FHA_USDA_VA_FundingFee)}</span>
+                            <span>{Math.round(FHA_USDA_VA_FundingFee)}</span>
                           </li>
                         </ul>
                       </div>
@@ -2841,18 +2575,7 @@ const Home_2 = () => {
                           <li>
                             <p>Title Services & Insurance</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockCTitleServices}
                               tabIndex={113}
                               onSave={(pass) => {
@@ -2865,18 +2588,7 @@ const Home_2 = () => {
                           <li>
                             <p>Survey</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockCSurvey}
                               tabIndex={114}
                               onSave={(pass) => {
@@ -2907,18 +2619,7 @@ const Home_2 = () => {
                           <li>
                             <p>Recording Fees </p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockERecordingCharges}
                               tabIndex={115}
                               onSave={(pass) => {
@@ -2931,18 +2632,7 @@ const Home_2 = () => {
                           <li>
                             <p>Transfer Taxes</p>
                             <EdiText
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockETransferTaxes}
                               tabIndex={116}
                               onSave={(pass) => {
@@ -2970,12 +2660,12 @@ const Home_2 = () => {
                               validationMessage=" "
                               validation={(val) => {
                                 if (
-                                  (!isNaN(val) &&
-                                    val.toString().length > 0 &&
-                                    val.toString().length <= 2) === false
+                                  (val.toString().length > 0 &&
+                                    val.toString().length <= 2 &&
+                                    val.toString() > 0) === false
                                 ) {
                                   toast.error(
-                                    "Please type at max 2 characters only for numeric value."
+                                    "Please type at max 2 characters only for zero,positive value."
                                   );
                                 }
                                 return true;
@@ -2997,12 +2687,12 @@ const Home_2 = () => {
                               validationMessage=" "
                               validation={(val) => {
                                 if (
-                                  (!isNaN(val) &&
-                                    val.toString().length > 0 &&
-                                    val.toString().length <= 3) === false
+                                  (val.toString().length > 0 &&
+                                    val.toString().length <= 3 &&
+                                    val.toString() > 0) === false
                                 ) {
                                   toast.error(
-                                    "Please type at max 3 characters only for numeric value."
+                                    "Please type at max 3 characters only for zero,positive value."
                                   );
                                 }
                                 return true;
@@ -3036,7 +2726,7 @@ const Home_2 = () => {
                             <span>${blockG}</span>
                           </li>
                           <li>
-                             <p>Homeowner’s Insurance $100 per month for</p>
+                            <p>Homeowner’s Insurance $100 per month for</p>
                             {isEqual === "blockGnumMonthsInsReserves" ? (
                               <div className="dropdown-main">
                                 <div id="wrap">
@@ -3160,19 +2850,7 @@ const Home_2 = () => {
                           <li>
                             <p>Owner's Title Insurance</p>
                             <EdiText
-                            
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (!isNaN(val) && val.toString().length > 0) ===
-                                  false
-                                ) {
-                                  toast.error(
-                                    "Please type at only for numeric value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              type="number"
                               value={loanScenario.blockHOwnersTitleInsPremium}
                               tabIndex={122}
                               onSave={(pass) => {
