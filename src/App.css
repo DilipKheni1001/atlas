@@ -321,7 +321,9 @@ ul.pagination li.active {
   align-items: center;
   justify-content: unset;
 }
-
+.price-text-test ul li:last-child {
+  padding-bottom: 20px;
+}
 .loan-td .box-l {
   width: 90px;
   height: 70px;
