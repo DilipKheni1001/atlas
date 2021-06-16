@@ -667,7 +667,7 @@ const Home_2 = () => {
         (1 +
           loanScenario.governmentFundingFeePercent +
           annualMortgageInsuranceRate);
-      setTotalLoanAmount(totalLoanAmount);
+      setTotalLoanAmount(Math.round(totalLoanAmount));
     } else {
       setTotalLoanAmount(loanScenario.baseLoanAmount);
     }
