@@ -83,11 +83,14 @@ const Home_2 = () => {
     blockBsinglePremiumMI: 0,
     blockFdaysPrepaidInterest: 0,
     blockFnumMonthsPrepaidHOI: 0,
-    blockGnumMonthsTaxReserves: null,
+    blockGnumMonthsTaxReserves: 0,
     sellerCredit: null,
     otherCredits: null,
     isInsuranceEscrowsWaived: 0,
-    blockGnumMonthsInsReserves: null,
+    blockGnumMonthsInsReserves: 0,
+    blockFnumMonthsPrepaidTaxes: 0,
+    governmentFundingFee: 0,
+    totalLoanAmount: null
   });
 
   const [address, setAddress] = useState({
@@ -584,77 +587,16 @@ const Home_2 = () => {
   const [FHA_USDA_VA_FundingFee, setFHA_USDA_VA_FundingFee] = useState(0);
   const [totalLoanAmount, setTotalLoanAmount] = useState(0);
   const [LTV_CLTV, setLTV_CLTV] = useState(0);
+  const [totalHOIPremium, setTotalHOIPremium] = useState(0);
+  const [totalPrepaidInterest, setTotalPrepaidInterest] = useState(0);
+  const [totalPrepaidTaxes, setTotalPrepaidTaxes] = useState(0);
+  const [totalHOI, setTotalHOI] = useState(0);
+  const [totalPropertyTaxes, setTotalPropertyTaxes] = useState(0);
 
   useEffect(() => {
-    setBlockA(
-      Number(loanScenario.blockADiscountFee) +
-        Number(loanScenario.blockAOriginationFee) +
-        Number(loanScenario.blockAprocessingFee) +
-        Number(loanScenario.blockATaxService)
-    );
-
-    setBlockB(
-      Number(loanScenario.blockBAppraisalFee) +
-        Number(loanScenario.blockBCreditFees) +
-        Number(loanScenario.blockBFloodCertification) +
-        Number(loanScenario.blockBtaxReturnVerificationFee) +
-        Number(loanScenario.blockBverificationEmployment) +
-        Number(loanScenario.blockBhoaQuestionnaire) +
-        Number(loanScenario.blockBcondoProjectApproval) +
-        Number(loanScenario.blockBsinglePremiumMI)
-    );
-
-    setBlockC(
-      Number(loanScenario.blockCTitleServices) +
-        Number(loanScenario.blockCSurvey)
-    );
-
-    setBlockD(
-      Number(loanScenario.blockADiscountFee) +
-        Number(loanScenario.blockAOriginationFee) +
-        Number(loanScenario.blockAprocessingFee) +
-        Number(loanScenario.blockATaxService) +
-        Number(loanScenario.blockBAppraisalFee) +
-        Number(loanScenario.blockBCreditFees) +
-        Number(loanScenario.blockBFloodCertification) +
-        Number(loanScenario.blockBtaxReturnVerificationFee) +
-        Number(loanScenario.blockBverificationEmployment) +
-        Number(loanScenario.blockBhoaQuestionnaire) +
-        Number(loanScenario.blockBcondoProjectApproval) +
-        Number(loanScenario.blockBsinglePremiumMI) +
-        Number(loanScenario.blockCTitleServices) +
-        Number(loanScenario.blockCSurvey)
-    );
-
-    setBlockE(
-      Number(loanScenario.blockERecordingCharges) +
-        Number(loanScenario.blockETransferTaxes)
-    );
-
-    setBlockF(
-      Number(loanScenario.blockFdaysPrepaidInterest) +
-        Number(loanScenario.blockFnumMonthsPrepaidHOI)
-    );
-
-    setBlockG(
-      Number(loanScenario.blockGnumMonthsTaxReserves) +
-        Number(loanScenario.blockGnumMonthsInsReserves)
-    );
-
-    setBlockH(Number(loanScenario.blockHOwnersTitleInsPremium));
-
-    setBlockI(
-      Number(loanScenario.blockERecordingCharges) +
-        Number(loanScenario.blockETransferTaxes) +
-        Number(loanScenario.blockFdaysPrepaidInterest) +
-        Number(loanScenario.blockFnumMonthsPrepaidHOI) +
-        Number(loanScenario.blockGnumMonthsTaxReserves) +
-        Number(loanScenario.blockGnumMonthsInsReserves) +
-        Number(loanScenario.blockHOwnersTitleInsPremium)
-    );
-
+    
     var FUVFundingFee =
-      loanScenario.baseLoanAmount * loanScenario.governmentFundingFeePercent;
+      (loanScenario.baseLoanAmount * loanScenario.governmentFundingFeePercent).toFixed(2);
     setFHA_USDA_VA_FundingFee(FUVFundingFee);
 
     if (loanScenario.isFinancedFundingFeeMI === 1) {
@@ -663,11 +605,11 @@ const Home_2 = () => {
         annualMortgageInsuranceRate = loanScenario.annualMortgageInsuranceRate;
       }
       var totalLoanAmount =
-        loanScenario.baseLoanAmount *
+        (loanScenario.baseLoanAmount *
         (1 +
           loanScenario.governmentFundingFeePercent +
-          annualMortgageInsuranceRate);
-      setTotalLoanAmount(Math.round(totalLoanAmount));
+          annualMortgageInsuranceRate)).toFixed(2);
+      setTotalLoanAmount(totalLoanAmount);
     } else {
       setTotalLoanAmount(loanScenario.baseLoanAmount);
     }
@@ -701,7 +643,85 @@ const Home_2 = () => {
     }
     setLTV_CLTV(LTV_CLTV);
 
-    // setBlockJ();
+    var HOIPremium = (loanScenario.blockFnumMonthsPrepaidHOI * loanScenario.monthlyHOI).toFixed(2);
+    setTotalHOIPremium(HOIPremium);
+
+    var prepaidInterest = (loanScenario.blockFdaysPrepaidInterest * totalLoanAmount * loanScenario.interestRate/36000).toFixed(2);
+    setTotalPrepaidInterest(prepaidInterest);
+
+    var prepaidTaxes = (loanScenario.blockFnumMonthsPrepaidTaxes * loanScenario.monthlyPropertyTax).toFixed(2);
+    setTotalPrepaidTaxes(prepaidTaxes);
+
+    var HOI = (loanScenario.blockGnumMonthsInsReserves * loanScenario.monthlyHOI).toFixed(2);
+    setTotalHOI(HOI);
+
+    var propertyTaxes = (loanScenario.blockGnumMonthsTaxReserves * loanScenario.monthlyPropertyTax).toFixed(2);
+    setTotalPropertyTaxes(propertyTaxes);
+
+    setBlockA(
+      Number(loanScenario.blockADiscountFee) +
+        Number(loanScenario.blockAOriginationFee) +
+        Number(loanScenario.blockAprocessingFee) +
+        Number(loanScenario.blockATaxService)
+    );
+
+    setBlockB(
+      Number(loanScenario.blockBAppraisalFee) +
+        Number(loanScenario.blockBCreditFees) +
+        Number(loanScenario.blockBFloodCertification) +
+        Number(loanScenario.blockBtaxReturnVerificationFee) +
+        Number(loanScenario.blockBverificationEmployment) +
+        Number(loanScenario.blockBhoaQuestionnaire) +
+        Number(loanScenario.blockBcondoProjectApproval) +
+        Number(loanScenario.blockBsinglePremiumMI) +
+        Number(FUVFundingFee)
+    );
+
+    setBlockC(
+      Number(loanScenario.blockCTitleServices) +
+        Number(loanScenario.blockCSurvey)
+    );
+
+    setBlockD(
+      Number(loanScenario.blockADiscountFee) +
+        Number(loanScenario.blockAOriginationFee) +
+        Number(loanScenario.blockAprocessingFee) +
+        Number(loanScenario.blockATaxService) +
+        Number(loanScenario.blockBAppraisalFee) +
+        Number(loanScenario.blockBCreditFees) +
+        Number(loanScenario.blockBFloodCertification) +
+        Number(loanScenario.blockBtaxReturnVerificationFee) +
+        Number(loanScenario.blockBverificationEmployment) +
+        Number(loanScenario.blockBhoaQuestionnaire) +
+        Number(loanScenario.blockBcondoProjectApproval) +
+        Number(loanScenario.blockBsinglePremiumMI) +
+        Number(FUVFundingFee) +
+        Number(loanScenario.blockCTitleServices) +
+        Number(loanScenario.blockCSurvey)
+    );
+
+    setBlockE(
+      Number(loanScenario.blockERecordingCharges) +
+        Number(loanScenario.blockETransferTaxes)
+    );
+
+    setBlockF(
+      Number(HOIPremium) + Number(prepaidInterest) + Number(prepaidTaxes)
+    );
+
+    setBlockG(
+      Number(HOI) + Number(propertyTaxes)
+    );
+
+    setBlockH(Number(loanScenario.blockHOwnersTitleInsPremium));
+
+    setBlockI(
+        Number(loanScenario.blockERecordingCharges) + Number(loanScenario.blockETransferTaxes) +
+        Number(HOIPremium) + Number(prepaidInterest) + Number(prepaidTaxes) +
+        Number(HOI) + Number(propertyTaxes) +
+        Number(loanScenario.blockHOwnersTitleInsPremium)
+    );
+
   }, [loanScenario]);
 
   useEffect(() => {
@@ -2652,51 +2672,57 @@ const Home_2 = () => {
                           </li>
 
                           <li>
-                            <p>Homeowner’s Insurance Premium (</p>
-                            <EdiText
-                              value={loanScenario.blockFnumMonthsPrepaidHOI}
-                              tabIndex={119}
-                              type="number"
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (val.toString().length > 0 &&
-                                    val.toString().length <= 2 &&
-                                    val.toString() > 0) === false
-                                ) {
-                                  toast.error(
-                                    "Please type at max 2 characters only for zero,positive value."
-                                  );
-                                }
-                                return true;
-                              }}
-                              onSave={(pass) => {
-                                handleSave(pass, "blockFnumMonthsPrepaidHOI");
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            />
-                            months)
+                            <div className="left-div"> 
+                                <p>Homeowner’s Insurance Premium (</p>
+                                <EdiText
+                                  value={loanScenario.blockFnumMonthsPrepaidHOI}
+                                  tabIndex={119}
+                                  type="number"
+                                  // validationMessage=" "
+                                  // validation={(val) => {
+                                  //   if (
+                                  //     (val.toString().length > 0 &&
+                                  //       val.toString().length <= 2 &&
+                                  //       val.toString() > 0) === false
+                                  //   ) {
+                                  //     toast.error(
+                                  //       "Please type at max 2 characters only for zero,positive value."
+                                  //     );
+                                  //   }
+                                  //   return true;
+                                  // }}
+                                  onSave={(pass) => {
+                                    handleSave(pass, "blockFnumMonthsPrepaidHOI");
+                                  }}
+                                  submitOnUnfocus
+                                  startEditingOnFocus
+                                />
+                                months)
+                            </div>
+                            <div className="right-div">
+                                <p>{totalHOIPremium}</p>
+                            </div>
                           </li>
                           <li>
+                          <div className="left-div"> 
                             <p>Prepaid Interest for </p>
                             <EdiText
                               value={loanScenario.blockFdaysPrepaidInterest}
                               tabIndex={118}
                               type="number"
-                              validationMessage=" "
-                              validation={(val) => {
-                                if (
-                                  (val.toString().length > 0 &&
-                                    val.toString().length <= 3 &&
-                                    val.toString() > 0) === false
-                                ) {
-                                  toast.error(
-                                    "Please type at max 3 characters only for zero,positive value."
-                                  );
-                                }
-                                return true;
-                              }}
+                              // validationMessage=" "
+                              // validation={(val) => {
+                              //   if (
+                              //     (val.toString().length > 0 &&
+                              //       val.toString().length <= 3 &&
+                              //       val.toString() > 0) === false
+                              //   ) {
+                              //     toast.error(
+                              //       "Please type at max 3 characters only for zero,positive value."
+                              //     );
+                              //   }
+                              //   return true;
+                              // }}
                               onSave={(pass) => {
                                 handleSave(pass, "blockFdaysPrepaidInterest");
                               }}
@@ -2704,18 +2730,42 @@ const Home_2 = () => {
                               startEditingOnFocus
                             />
                             days
+                            </div>
+                            <div className="right-div">
+                                <p>{totalPrepaidInterest}</p>
+                            </div>
                           </li>
                           <li>
-                            <p>Prepaid Taxes</p>
-                            {/* <EdiText
-                              value={loanScenario.blockFnumMonthsPrepaidHOI}
+                          <div className="left-div"> 
+                            <p>Prepaid Taxes (</p>
+                            <EdiText
+                              value={loanScenario.blockFnumMonthsPrepaidTaxes}
                               tabIndex={119}
+                              type="number"
+                              // validationMessage=" "
+                              // validation={(val) => {
+                              //   if (
+                              //     (val.toString().length > 0 &&
+                              //       val.toString().length <= 2 &&
+                              //       val.toString() > 0) === false
+                              //   ) {
+                              //     toast.error(
+                              //       "Please type at max 2 characters only for zero,positive value."
+                              //     );
+                              //   }
+                              //   return true;
+                              // }}
                               onSave={(pass) => {
-                                handleSave(pass, "blockFnumMonthsPrepaidHOI");
+                                handleSave(pass, "blockFnumMonthsPrepaidTaxes");
                               }}
                               submitOnUnfocus
                               startEditingOnFocus
-                            /> */}
+                            />
+                            months)
+                            </div>
+                            <div className="right-div">
+                                <p>{totalPrepaidTaxes}</p>
+                            </div>
                           </li>
                         </ul>
                       </div>
@@ -2726,7 +2776,9 @@ const Home_2 = () => {
                             <span>${blockG}</span>
                           </li>
                           <li>
-                            <p>Homeowner’s Insurance $100 per month for</p>
+                          <div className="left-div"> 
+                            <p>Homeowner’s Insurance </p>
+                            <p>${loanScenario.monthlyHOI} per month for</p>
                             {isEqual === "blockGnumMonthsInsReserves" ? (
                               <div className="dropdown-main">
                                 <div id="wrap">
@@ -2781,9 +2833,15 @@ const Home_2 = () => {
                               </div>
                             )}
                             months
+                            </div>
+                            <div className="right-div">
+                                <p>{totalHOI}</p>
+                            </div>
                           </li>
                           <li>
-                            <p>Property Taxes $273 per month for</p>
+                          <div className="left-div"> 
+                            <p>Property Taxes</p>
+                            <p>${loanScenario.monthlyPropertyTax} per month for</p>
                             {isEqual === "blockGnumMonthsTaxReserves" ? (
                               <div className="dropdown-main">
                                 <div id="wrap">
@@ -2838,6 +2896,10 @@ const Home_2 = () => {
                               </div>
                             )}
                             months
+                            </div>
+                            <div className="right-div">
+                                <p>{totalPropertyTaxes}</p>
+                            </div>
                           </li>
                         </ul>
                       </div>
