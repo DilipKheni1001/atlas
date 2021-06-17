@@ -799,6 +799,12 @@ tr.head-td th:after {
   background-color: darkgreen !important;
   font-size: 10px !important;
 }
+.styles-module_Editext__main_container__2azCD{
+  padding-left: 5px;
+}
+.main-div {
+  padding-left: 5px;
+}
 /* button[editext=save-button]{
     border-radius: 50px !important;
     height: 20px;
