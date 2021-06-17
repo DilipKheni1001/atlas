@@ -289,7 +289,6 @@ ul.pagination li.active {
 
 .price-text-test ul li p {
   margin-bottom: 0px;
-  padding-right: 10px;
 }
 
 .price-text-test ul li span {
@@ -323,6 +322,21 @@ ul.pagination li.active {
 }
 .price-text-test ul li:last-child {
   padding-bottom: 20px;
+}
+.left-div {
+  width: 85%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.right-div {
+  width: 15%;
+  text-align: right;
+}
+.left-div.multi-line {
+  display: block;
+}
+.left-child {
+  display: flex;
 }
 .loan-td .box-l {
   width: 90px;

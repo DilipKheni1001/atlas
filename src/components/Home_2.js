@@ -583,9 +583,7 @@ const Home_2 = () => {
   const [blockG, setBlockG] = useState(0);
   const [blockH, setBlockH] = useState(0);
   const [blockI, setBlockI] = useState(0);
-  const [blockJ, setBlockJ] = useState(0);
   const [FHA_USDA_VA_FundingFee, setFHA_USDA_VA_FundingFee] = useState(0);
-  const [totalLoanAmount, setTotalLoanAmount] = useState(0);
   const [LTV_CLTV, setLTV_CLTV] = useState(0);
   const [totalHOIPremium, setTotalHOIPremium] = useState(0);
   const [totalPrepaidInterest, setTotalPrepaidInterest] = useState(0);
@@ -596,23 +594,8 @@ const Home_2 = () => {
   useEffect(() => {
     
     var FUVFundingFee =
-      (loanScenario.baseLoanAmount * loanScenario.governmentFundingFeePercent).toFixed(2);
+      (loanScenario.baseLoanAmount * loanScenario.governmentFundingFee).toFixed(2);
     setFHA_USDA_VA_FundingFee(FUVFundingFee);
-
-    if (loanScenario.isFinancedFundingFeeMI === 1) {
-      var annualMortgageInsuranceRate = 0;
-      if (loanScenario.mortgageInsurancePremiumType === "Single Premium") {
-        annualMortgageInsuranceRate = loanScenario.annualMortgageInsuranceRate;
-      }
-      var totalLoanAmount =
-        (loanScenario.baseLoanAmount *
-        (1 +
-          loanScenario.governmentFundingFeePercent +
-          annualMortgageInsuranceRate)).toFixed(2);
-      setTotalLoanAmount(totalLoanAmount);
-    } else {
-      setTotalLoanAmount(loanScenario.baseLoanAmount);
-    }
 
     var LTV_CLTV = "";
     if (!loanScenario.secondMortgageBalance) {
@@ -646,7 +629,7 @@ const Home_2 = () => {
     var HOIPremium = (loanScenario.blockFnumMonthsPrepaidHOI * loanScenario.monthlyHOI).toFixed(2);
     setTotalHOIPremium(HOIPremium);
 
-    var prepaidInterest = (loanScenario.blockFdaysPrepaidInterest * totalLoanAmount * loanScenario.interestRate/36000).toFixed(2);
+    var prepaidInterest = (loanScenario.blockFdaysPrepaidInterest * loanScenario.totalLoanAmount * loanScenario.interestRate/36000).toFixed(2);
     setTotalPrepaidInterest(prepaidInterest);
 
     var prepaidTaxes = (loanScenario.blockFnumMonthsPrepaidTaxes * loanScenario.monthlyPropertyTax).toFixed(2);
@@ -1333,7 +1316,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Total Loan Amount</p>
-                            <span>{totalLoanAmount}</span>
+                            <span>{loanScenario.totalLoanAmount}</span>
                           </li>
                           <li>
                             <p>Loan Product</p>
@@ -2776,126 +2759,130 @@ const Home_2 = () => {
                             <span>${blockG}</span>
                           </li>
                           <li>
-                          <div className="left-div"> 
+                          <div className="left-div multi-line"> 
                             <p>Homeowner’s Insurance </p>
-                            <p>${loanScenario.monthlyHOI} per month for</p>
-                            {isEqual === "blockGnumMonthsInsReserves" ? (
-                              <div className="dropdown-main">
-                                <div id="wrap">
-                                  <Dropdown
-                                    className="cust-select"
-                                    options={monthsOptions}
-                                    onChange={onSelect}
-                                    value={
-                                      loanScenario.blockGnumMonthsInsReserves
-                                    }
-                                    placeholder="Select an option"
-                                  />
-                                  <div className="btn-div">
-                                    <button
-                                      className="right-arrow icon-btn"
-                                      onClick={() =>
-                                        handleSave(
-                                          selectedValue,
-                                          "blockGnumMonthsInsReserves"
-                                        )
-                                      }
-                                    >
-                                      &#10003;
-                                    </button>
-                                    <button
-                                      className="cross-arrow icon-btn"
-                                      onClick={() => onClick("", "")}
-                                    >
-                                      &#10005;
-                                    </button>
+                            <div className="left-child">
+                                <p>${loanScenario.monthlyHOI} per month for</p>
+                                {isEqual === "blockGnumMonthsInsReserves" ? (
+                                  <div className="dropdown-main">
+                                    <div id="wrap">
+                                      <Dropdown
+                                        className="cust-select"
+                                        options={monthsOptions}
+                                        onChange={onSelect}
+                                        value={
+                                          loanScenario.blockGnumMonthsInsReserves
+                                        }
+                                        placeholder="Select an option"
+                                      />
+                                      <div className="btn-div">
+                                        <button
+                                          className="right-arrow icon-btn"
+                                          onClick={() =>
+                                            handleSave(
+                                              selectedValue,
+                                              "blockGnumMonthsInsReserves"
+                                            )
+                                          }
+                                        >
+                                          &#10003;
+                                        </button>
+                                        <button
+                                          className="cross-arrow icon-btn"
+                                          onClick={() => onClick("", "")}
+                                        >
+                                          &#10005;
+                                        </button>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            ) : (
-                              <div
-                                className="main-div"
-                                onClick={() =>
-                                  onClick(
-                                    "blockGnumMonthsInsReserves",
-                                    loanScenario.blockGnumMonthsInsReserves
-                                  )
-                                }
-                              >
-                                <div>
-                                  <span>
-                                    {loanScenario.blockGnumMonthsInsReserves}
-                                  </span>
-                                  <button className="edit-arrow1 icon-btn1">
-                                    &#9998;
-                                  </button>
-                                </div>
-                              </div>
-                            )}
-                            months
+                                ) : (
+                                  <div
+                                    className="main-div"
+                                    onClick={() =>
+                                      onClick(
+                                        "blockGnumMonthsInsReserves",
+                                        loanScenario.blockGnumMonthsInsReserves
+                                      )
+                                    }
+                                  >
+                                    <div>
+                                      <span>
+                                        {loanScenario.blockGnumMonthsInsReserves}
+                                      </span>
+                                      <button className="edit-arrow1 icon-btn1">
+                                        &#9998;
+                                      </button>
+                                    </div>
+                                  </div>
+                                )}
+                                months
+                            </div>
                             </div>
                             <div className="right-div">
                                 <p>{totalHOI}</p>
                             </div>
                           </li>
                           <li>
-                          <div className="left-div"> 
+                          <div className="left-div multi-line"> 
                             <p>Property Taxes</p>
-                            <p>${loanScenario.monthlyPropertyTax} per month for</p>
-                            {isEqual === "blockGnumMonthsTaxReserves" ? (
-                              <div className="dropdown-main">
-                                <div id="wrap">
-                                  <Dropdown
-                                    className="cust-select"
-                                    options={monthsOptions}
-                                    onChange={onSelect}
-                                    value={
-                                      loanScenario.blockGnumMonthsTaxReserves
-                                    }
-                                    placeholder="Select an option"
-                                  />
-                                  <div className="btn-div">
-                                    <button
-                                      className="right-arrow icon-btn"
-                                      onClick={() =>
-                                        handleSave(
-                                          selectedValue,
-                                          "blockGnumMonthsTaxReserves"
-                                        )
-                                      }
-                                    >
-                                      &#10003;
-                                    </button>
-                                    <button
-                                      className="cross-arrow icon-btn"
-                                      onClick={() => onClick("", "")}
-                                    >
-                                      &#10005;
-                                    </button>
-                                  </div>
+                            <div className="left-child">
+                                <p>${loanScenario.monthlyPropertyTax} per month for</p>
+                                    {isEqual === "blockGnumMonthsTaxReserves" ? (
+                                      <div className="dropdown-main">
+                                        <div id="wrap">
+                                          <Dropdown
+                                            className="cust-select"
+                                            options={monthsOptions}
+                                            onChange={onSelect}
+                                            value={
+                                              loanScenario.blockGnumMonthsTaxReserves
+                                            }
+                                            placeholder="Select an option"
+                                          />
+                                          <div className="btn-div">
+                                            <button
+                                              className="right-arrow icon-btn"
+                                              onClick={() =>
+                                                handleSave(
+                                                  selectedValue,
+                                                  "blockGnumMonthsTaxReserves"
+                                                )
+                                              }
+                                            >
+                                              &#10003;
+                                            </button>
+                                            <button
+                                              className="cross-arrow icon-btn"
+                                              onClick={() => onClick("", "")}
+                                            >
+                                              &#10005;
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      <div
+                                        className="main-div"
+                                        onClick={() =>
+                                          onClick(
+                                            "blockGnumMonthsTaxReserves",
+                                            loanScenario.blockGnumMonthsTaxReserves
+                                          )
+                                        }
+                                      >
+                                        <div>
+                                          <span>
+                                            {loanScenario.blockGnumMonthsTaxReserves}
+                                          </span>
+                                          <button className="edit-arrow1 icon-btn1">
+                                            &#9998;
+                                          </button>
+                                        </div>
+                                      </div>
+                                    )}
+                                    months
                                 </div>
-                              </div>
-                            ) : (
-                              <div
-                                className="main-div"
-                                onClick={() =>
-                                  onClick(
-                                    "blockGnumMonthsTaxReserves",
-                                    loanScenario.blockGnumMonthsTaxReserves
-                                  )
-                                }
-                              >
-                                <div>
-                                  <span>
-                                    {loanScenario.blockGnumMonthsTaxReserves}
-                                  </span>
-                                  <button className="edit-arrow1 icon-btn1">
-                                    &#9998;
-                                  </button>
-                                </div>
-                              </div>
-                            )}
-                            months
                             </div>
                             <div className="right-div">
                                 <p>{totalPropertyTaxes}</p>
