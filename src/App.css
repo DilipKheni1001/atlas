@@ -805,6 +805,22 @@ tr.head-td th:after {
 .main-div {
   padding-left: 5px;
 }
+.rate-sec {
+  border-bottom: 1px solid #DEE2E6;
+}
+.stone-btn {
+  justify-content: space-around;
+  padding-top: 25px;
+}
+.dropdown-main {
+  width: 70%;
+}
+#wrap {
+width: auto;
+}
+.Dropdown-root.cust-select {
+  width: 70%;
+}
 /* button[editext=save-button]{
     border-radius: 50px !important;
     height: 20px;
