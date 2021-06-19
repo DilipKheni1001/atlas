@@ -590,11 +590,12 @@ const Home_2 = () => {
   const [totalPrepaidTaxes, setTotalPrepaidTaxes] = useState(0);
   const [totalHOI, setTotalHOI] = useState(0);
   const [totalPropertyTaxes, setTotalPropertyTaxes] = useState(0);
+  const [estimatedEscrow, setEstimatedEscrow] = useState(0);
+  const [principalInterest, setPrincipalInterest] = useState(0);
 
   useEffect(() => {
     
-    var FUVFundingFee =
-      (loanScenario.baseLoanAmount * loanScenario.governmentFundingFee).toFixed(2);
+    var FUVFundingFee = Math.round(loanScenario.baseLoanAmount * loanScenario.governmentFundingFee);
     setFHA_USDA_VA_FundingFee(FUVFundingFee);
 
     var LTV_CLTV = "";
@@ -626,19 +627,19 @@ const Home_2 = () => {
     }
     setLTV_CLTV(LTV_CLTV);
 
-    var HOIPremium = (loanScenario.blockFnumMonthsPrepaidHOI * loanScenario.monthlyHOI).toFixed(2);
+    var HOIPremium = Math.round(loanScenario.blockFnumMonthsPrepaidHOI * loanScenario.monthlyHOI);
     setTotalHOIPremium(HOIPremium);
 
-    var prepaidInterest = (loanScenario.blockFdaysPrepaidInterest * loanScenario.totalLoanAmount * loanScenario.interestRate/36000).toFixed(2);
+    var prepaidInterest = Math.round(loanScenario.blockFdaysPrepaidInterest * loanScenario.totalLoanAmount * loanScenario.interestRate/36000);
     setTotalPrepaidInterest(prepaidInterest);
 
-    var prepaidTaxes = (loanScenario.blockFnumMonthsPrepaidTaxes * loanScenario.monthlyPropertyTax).toFixed(2);
+    var prepaidTaxes = Math.round(loanScenario.blockFnumMonthsPrepaidTaxes * loanScenario.monthlyPropertyTax);
     setTotalPrepaidTaxes(prepaidTaxes);
 
-    var HOI = (loanScenario.blockGnumMonthsInsReserves * loanScenario.monthlyHOI).toFixed(2);
+    var HOI = Math.round(loanScenario.blockGnumMonthsInsReserves * loanScenario.monthlyHOI);
     setTotalHOI(HOI);
 
-    var propertyTaxes = (loanScenario.blockGnumMonthsTaxReserves * loanScenario.monthlyPropertyTax).toFixed(2);
+    var propertyTaxes = Math.round(loanScenario.blockGnumMonthsTaxReserves * loanScenario.monthlyPropertyTax);
     setTotalPropertyTaxes(propertyTaxes);
 
     setBlockA(
@@ -704,6 +705,16 @@ const Home_2 = () => {
         Number(HOI) + Number(propertyTaxes) +
         Number(loanScenario.blockHOwnersTitleInsPremium)
     );
+
+    var estimatedEscrowVal = loanScenario.monthlyPropertyTax + loanScenario.monthlyHOI;
+    setEstimatedEscrow(estimatedEscrowVal);
+
+    var loanTerm = loanScenario.loanProduct.includes("ARM") ? 360 : 12 * Number(loanScenario.loanProduct.substring(0,2));
+    
+    var principalInterestVal = loanScenario.totalLoanAmount * (loanScenario.interestRate/1200) * ((1+(loanScenario.interestRate/1200)) ^ loanTerm) /
+    (((1+ (loanScenario.interestRate/1200)) ^ loanTerm) - 1);
+
+    setPrincipalInterest(principalInterestVal);
 
   }, [loanScenario]);
 
@@ -819,6 +830,10 @@ const Home_2 = () => {
         console.log(e);
       });
   };
+
+  const numberWithCommas = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 
   console.log("loanScenario", loanScenario);
 
@@ -1117,7 +1132,7 @@ const Home_2 = () => {
                       </svg>
                     </p>
                     <h1>
-                      2.750
+                      {loanScenario.interestRate}
                       <svg
                         width="14"
                         height="13"
@@ -1224,7 +1239,7 @@ const Home_2 = () => {
                         </defs>
                       </svg>
                     </p>
-                    <h1>1,234</h1>
+                      <h1>{numberWithCommas(Math.round(principalInterest))}</h1>
                   </div>
                 </div>
                 <div className="rate-box">
@@ -1316,7 +1331,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Total Loan Amount</p>
-                            <span>{loanScenario.totalLoanAmount}</span>
+                            <span>{numberWithCommas(loanScenario.totalLoanAmount)}</span>
                           </li>
                           <li>
                             <p>Loan Product</p>
@@ -2089,13 +2104,19 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Address</p>
-                            <button
-                              onClick={onOpenModal}
-                              className="edit-arrow1 icon-btn1"
-                            >
-                              {" "}
-                              &#9998;
-                            </button>
+                            <div className="main-div">
+                                <div>
+                                    <span>{'"' + loanScenario.propertyStreet + ", " + loanScenario.propertyCity + ", "
+                                    + loanScenario.propertyState + ", " + loanScenario.propertyZip + '"'}</span>
+                                    <button
+                                      onClick={onOpenModal}
+                                      className="edit-arrow1 icon-btn1"
+                                    >
+                                      {" "}
+                                      &#9998;
+                                    </button>
+                                  </div>
+                            </div>
 
                             <Modal open={open} onClose={onCloseModal}>
                               <div className="edit-Address">
@@ -2324,55 +2345,19 @@ const Home_2 = () => {
                       <div className="price-text">
                         <ul>
                           <li className="head-price">
-                            <p>Projected Payments</p>
+                            <p>Projected Monthly Payment</p>
                           </li>
                           <li>
-                            <p>Projected Payments</p>
-                            {/* <EdiText
-                              value={loanScenario.ProjectedPayments1}
-                              tabIndex={61}
-                              onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "ProjectedPayments1",
-                                  "loanScenario"
-                                );
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
+                            <p>Principal & Interest</p>
+                            <span>{principalInterest.toFixed(2)}</span>
                           </li>
                           <li>
                             <p>Estimated Escrow</p>
-                            {/* <EdiText
-                              value={loanScenario.EstimatedEscrow}
-                              tabIndex={62}
-                              onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "EstimatedEscrow",
-                                  "loanScenario"
-                                );
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
+                            <span>{estimatedEscrow}</span>
                           </li>
                           <li className="Total">
                             <p>Total Monthly Payment</p>
-                            {/* <EdiText
-                              value={loanScenario.TotalMonthlyPayment}
-                              tabIndex={63}
-                              onSave={(pass) => {
-                                handleSave(
-                                  pass,
-                                  "TotalMonthlyPayment",
-                                  "loanScenario"
-                                );
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
+                            <span>{Math.round(principalInterest + estimatedEscrow)}</span>
                           </li>
                         </ul>
                       </div>
@@ -2389,7 +2374,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>A. Origination Charges </p>
-                            <span>${blockA}</span>
+                            <span>${numberWithCommas(blockA)}</span>
                           </li>
                           <li>
                             <p>Discount Fee </p>
@@ -2449,7 +2434,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>B. Services You Cannot Shop For</p>
-                            <span>${blockB}</span>
+                            <span>${numberWithCommas(blockB)}</span>
                           </li>
                           <li>
                             <p>Appraisal Fee</p>
@@ -2565,7 +2550,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>FHA, USDA, VA Funding Fee</p>
-                            <span>{Math.round(FHA_USDA_VA_FundingFee)}</span>
+                            <span>{numberWithCommas(Math.round(FHA_USDA_VA_FundingFee))}</span>
                           </li>
                         </ul>
                       </div>
@@ -2573,7 +2558,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>C. Services You Can Shop For</p>
-                            <span>${blockC}</span>
+                            <span>${numberWithCommas(blockC)}</span>
                           </li>
                           <li>
                             <p>Title Services & Insurance</p>
@@ -2607,7 +2592,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>D. Total Loan Costs (A + B + C)</p>
-                            <span>${blockD}</span>
+                            <span>${numberWithCommas(blockD)}</span>
                           </li>
                         </ul>
                       </div>
@@ -2617,7 +2602,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>E. Taxes & Government Fees</p>
-                            <span>${blockE}</span>
+                            <span>${numberWithCommas(blockE)}</span>
                           </li>
                           <li>
                             <p>Recording Fees </p>
@@ -2651,7 +2636,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>F. Prepaids</p>
-                            <span>${blockF}</span>
+                            <span>${numberWithCommas(blockF)}</span>
                           </li>
 
                           <li>
@@ -2683,7 +2668,7 @@ const Home_2 = () => {
                                 months)
                             </div>
                             <div className="right-div">
-                                <p>{totalHOIPremium}</p>
+                                <p>{numberWithCommas(totalHOIPremium)}</p>
                             </div>
                           </li>
                           <li>
@@ -2715,7 +2700,7 @@ const Home_2 = () => {
                             days
                             </div>
                             <div className="right-div">
-                                <p>{totalPrepaidInterest}</p>
+                                <p>{numberWithCommas(totalPrepaidInterest)}</p>
                             </div>
                           </li>
                           <li>
@@ -2747,7 +2732,7 @@ const Home_2 = () => {
                             months)
                             </div>
                             <div className="right-div">
-                                <p>{totalPrepaidTaxes}</p>
+                                <p>{numberWithCommas(totalPrepaidTaxes)}</p>
                             </div>
                           </li>
                         </ul>
@@ -2756,7 +2741,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>G. Initial Escrow Payment at Closing</p>
-                            <span>${blockG}</span>
+                            <span>${numberWithCommas(blockG)}</span>
                           </li>
                           <li>
                           <div className="left-div multi-line"> 
@@ -2820,7 +2805,7 @@ const Home_2 = () => {
                             </div>
                             </div>
                             <div className="right-div">
-                                <p>{totalHOI}</p>
+                                <p>{numberWithCommas(totalHOI)}</p>
                             </div>
                           </li>
                           <li>
@@ -2885,7 +2870,7 @@ const Home_2 = () => {
                                 </div>
                             </div>
                             <div className="right-div">
-                                <p>{totalPropertyTaxes}</p>
+                                <p>{numberWithCommas(totalPropertyTaxes)}</p>
                             </div>
                           </li>
                         </ul>
@@ -2894,7 +2879,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>H. Other</p>
-                            <span>${blockH}</span>
+                            <span>${numberWithCommas(blockH)}</span>
                           </li>
                           <li>
                             <p>Owner's Title Insurance</p>
@@ -2915,7 +2900,7 @@ const Home_2 = () => {
                         <ul>
                           <li className="head-price">
                             <p>I. Total Other Costs (E + F + G + H)</p>
-                            <span>${blockI}</span>
+                            <span>${numberWithCommas(blockI)}</span>
                           </li>
                         </ul>
                       </div>
@@ -2924,34 +2909,16 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>J. Total Closing Costs</p>
                             <span>
-                              ${blockD + blockI + loanScenario.lenderCredit}
+                              ${numberWithCommas(Math.round(blockD + blockI + loanScenario.lenderCredit))}
                             </span>
                           </li>
                           <li>
                             <p>D+I</p>
-                            <span>{blockD + blockI}</span>
-                            {/* <EdiText
-                              value={loanScenario.DI}
-                              tabIndex={123}
-                              onSave={(pass) => {
-                                handleSave(pass, "DI", "loanScenario");
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
+                            <span>{numberWithCommas(blockD + blockI)}</span>
                           </li>
                           <li>
                             <p>Lender Credit </p>
                             <span>{loanScenario.lenderCredit}</span>
-                            {/* <EdiText
-                              value={loanScenario.Property}
-                              tabIndex={124}
-                              onSave={(pass) => {
-                                handleSave(pass, "Property", "loanScenario");
-                              }}
-                              submitOnUnfocus
-                              startEditingOnFocus
-                            /> */}
                           </li>
                         </ul>
                       </div>
