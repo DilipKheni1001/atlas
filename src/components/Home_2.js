@@ -72,7 +72,7 @@ const Home_2 = () => {
     governmentFundingFeePercent: 0,
     isFinancedFundingFeeMI: 0,
     annualMortgageInsuranceRate: null,
-    mortgageInsurancePremiumType: null,
+    mortgageInsurancePremiumType: "",
     secondMortgageRequest: "",
     monthlyHOA: 0,
     blockAprocessingFee: 0,
@@ -90,7 +90,7 @@ const Home_2 = () => {
     blockGnumMonthsInsReserves: 0,
     blockFnumMonthsPrepaidTaxes: 0,
     governmentFundingFee: 0,
-    totalLoanAmount: null
+    totalLoanAmount: 0
   });
 
   const [address, setAddress] = useState({
