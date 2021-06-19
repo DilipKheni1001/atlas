@@ -1331,7 +1331,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Total Loan Amount</p>
-                            <span>{numberWithCommas(loanScenario.totalLoanAmount)}</span>
+                            <span>{numberWithCommas(Math.round(loanScenario.totalLoanAmount))}</span>
                           </li>
                           <li>
                             <p>Loan Product</p>
