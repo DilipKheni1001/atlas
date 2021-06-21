@@ -84,8 +84,8 @@ const Home_2 = () => {
     blockFdaysPrepaidInterest: 0,
     blockFnumMonthsPrepaidHOI: 0,
     blockGnumMonthsTaxReserves: 0,
-    sellerCredit: null,
-    otherCredits: null,
+    sellerCredit: 0,
+    otherCredits: 0,
     isInsuranceEscrowsWaived: 0,
     blockGnumMonthsInsReserves: 0,
     blockFnumMonthsPrepaidTaxes: 0,
@@ -583,6 +583,7 @@ const Home_2 = () => {
   const [blockG, setBlockG] = useState(0);
   const [blockH, setBlockH] = useState(0);
   const [blockI, setBlockI] = useState(0);
+  const [blockJ, setBlockJ] = useState(0);
   const [FHA_USDA_VA_FundingFee, setFHA_USDA_VA_FundingFee] = useState(0);
   const [LTV_CLTV, setLTV_CLTV] = useState(0);
   const [totalHOIPremium, setTotalHOIPremium] = useState(0);
@@ -669,23 +670,23 @@ const Home_2 = () => {
         Number(loanScenario.blockCSurvey)
     );
 
-    setBlockD(
-      Number(loanScenario.blockADiscountFee) +
-        Number(loanScenario.blockAOriginationFee) +
-        Number(loanScenario.blockAprocessingFee) +
-        Number(loanScenario.blockATaxService) +
-        Number(loanScenario.blockBAppraisalFee) +
-        Number(loanScenario.blockBCreditFees) +
-        Number(loanScenario.blockBFloodCertification) +
-        Number(loanScenario.blockBtaxReturnVerificationFee) +
-        Number(loanScenario.blockBverificationEmployment) +
-        Number(loanScenario.blockBhoaQuestionnaire) +
-        Number(loanScenario.blockBcondoProjectApproval) +
-        Number(loanScenario.blockBsinglePremiumMI) +
-        Number(FUVFundingFee) +
-        Number(loanScenario.blockCTitleServices) +
-        Number(loanScenario.blockCSurvey)
-    );
+    var dBlock =  Number(loanScenario.blockADiscountFee) +
+                  Number(loanScenario.blockAOriginationFee) +
+                  Number(loanScenario.blockAprocessingFee) +
+                  Number(loanScenario.blockATaxService) +
+                  Number(loanScenario.blockBAppraisalFee) +
+                  Number(loanScenario.blockBCreditFees) +
+                  Number(loanScenario.blockBFloodCertification) +
+                  Number(loanScenario.blockBtaxReturnVerificationFee) +
+                  Number(loanScenario.blockBverificationEmployment) +
+                  Number(loanScenario.blockBhoaQuestionnaire) +
+                  Number(loanScenario.blockBcondoProjectApproval) +
+                  Number(loanScenario.blockBsinglePremiumMI) +
+                  Number(FUVFundingFee) +
+                  Number(loanScenario.blockCTitleServices) +
+                  Number(loanScenario.blockCSurvey);
+
+    setBlockD(dBlock);
 
     setBlockE(
       Number(loanScenario.blockERecordingCharges) +
@@ -702,12 +703,16 @@ const Home_2 = () => {
 
     setBlockH(Number(loanScenario.blockHOwnersTitleInsPremium));
 
-    setBlockI(
-        Number(loanScenario.blockERecordingCharges) + Number(loanScenario.blockETransferTaxes) +
-        Number(HOIPremium) + Number(prepaidInterest) + Number(prepaidTaxes) +
-        Number(HOI) + Number(propertyTaxes) +
-        Number(loanScenario.blockHOwnersTitleInsPremium)
-    );
+    var iBlock = Number(loanScenario.blockERecordingCharges) + Number(loanScenario.blockETransferTaxes) +
+                  Number(HOIPremium) + Number(prepaidInterest) + Number(prepaidTaxes) +
+                  Number(HOI) + Number(propertyTaxes) +
+                  Number(loanScenario.blockHOwnersTitleInsPremium);
+    
+    setBlockI(iBlock);
+
+    var jBlock = dBlock + iBlock + loanScenario.lenderCredit;
+
+    setBlockJ(jBlock);
 
     var estimatedEscrowVal = loanScenario.monthlyPropertyTax + loanScenario.monthlyHOI;
     setEstimatedEscrow(estimatedEscrowVal);
@@ -728,21 +733,18 @@ const Home_2 = () => {
     }
     setSale_Price_OR_Payoffs(salePriceOrPayoffs);
 
-    var secondM = 0;
-    loanScenario.secondMortgageRequest === "New 2nd mortgage" ? secondM = loanScenario.secondMortgageBalance : secondM = 0;
+    var secondM = loanScenario.secondMortgageRequest === "New 2nd mortgage" ?  loanScenario.secondMortgageBalance :  0;
     setSecondMortgage(secondM);
 
-    var sellerC = loanScenario.loanPurpose === "Purchase" ? loanScenario.sellerCredit : 0;
-    var jblock = blockD + blockI + loanScenario.lenderCredit;
-
+    var sellerC =  loanScenario.loanPurpose === "Purchase" ? loanScenario.sellerCredit : 0;
+  
     var estimatedCashToCloseVal = 0;
     estimatedCashToCloseVal = salePriceOrPayoffs 
-     + jblock
+     + jBlock
      - loanScenario.totalLoanAmount
      - secondM
      - sellerC
      + loanScenario.otherCredits;
-
 
     setEstimatedCashToClose(estimatedCashToCloseVal); 
 
@@ -2939,7 +2941,7 @@ const Home_2 = () => {
                           <li className="head-price">
                             <p>J. Total Closing Costs</p>
                             <span>
-                              ${numberWithCommas(Math.round(blockD + blockI + loanScenario.lenderCredit))}
+                              ${numberWithCommas(Math.round(blockJ))}
                             </span>
                           </li>
                           <li>
@@ -2965,7 +2967,7 @@ const Home_2 = () => {
                             <p className="text-p">Total Closing Costs (J) </p>
                             <p className="text-icon">+</p>
                             <span className="text-val">
-                              {numberWithCommas(Math.round(blockD + blockI + loanScenario.lenderCredit))}
+                            {numberWithCommas(Math.round(blockJ))}
                             </span>
                           </li>
                           <li>
