@@ -733,10 +733,11 @@ const Home_2 = () => {
     setSecondMortgage(secondM);
 
     var sellerC = loanScenario.loanPurpose === "Purchase" ? loanScenario.sellerCredit : 0;
+    var jblock = blockD + blockI + loanScenario.lenderCredit;
 
     var estimatedCashToCloseVal = 0;
     estimatedCashToCloseVal = salePriceOrPayoffs 
-     + (blockD + blockI + loanScenario.lenderCredit)
+     + jblock
      - loanScenario.totalLoanAmount
      - secondM
      - sellerC
