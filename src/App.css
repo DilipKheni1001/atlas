@@ -812,14 +812,20 @@ tr.head-td th:after {
   justify-content: space-around;
   padding-top: 25px;
 }
-.dropdown-main {
-  width: 70%;
-}
-#wrap {
-width: auto;
-}
 .Dropdown-root.cust-select {
-  width: 70%;
+  width: 60%;
+}
+.text-p {
+  width: 100%;
+  max-width: 220px;
+  flex: 220px;
+}
+.text-val{
+  flex: 100px;
+  max-width: 100px;
+}
+.text-val>div{
+justify-content: flex-end;
 }
 /* button[editext=save-button]{
     border-radius: 50px !important;
@@ -984,10 +990,10 @@ li.head-price {
   transform: translateY(-50%);
   border-radius: 8px;
 }
-
+/* 
 #wrap {
   width: 172px;
-}
+} */
 select {
   width: 100%;
   height: 30px;
@@ -1039,7 +1045,7 @@ select::-ms-expand {
 
 .dropdown-main {
   position: relative;
-  width: 46%;
+  width: 70%;
 }
 
 .two-btn button.icon-btn {
@@ -1067,7 +1073,7 @@ select::-ms-expand {
   display: flex;
 }
 #wrap {
-  width: 172px;
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;

@@ -592,6 +592,9 @@ const Home_2 = () => {
   const [totalPropertyTaxes, setTotalPropertyTaxes] = useState(0);
   const [estimatedEscrow, setEstimatedEscrow] = useState(0);
   const [principalInterest, setPrincipalInterest] = useState(0);
+  const [sale_Price_OR_Payoffs,setSale_Price_OR_Payoffs] = useState(0);
+  const [secondMortgage,setSecondMortgage] = useState(0);
+  const [estimatedCashToClose,setEstimatedCashToClose] = useState(0);
 
   useEffect(() => {
     
@@ -715,6 +718,32 @@ const Home_2 = () => {
     (((1+ (loanScenario.interestRate/1200)) ^ loanTerm) - 1);
 
     setPrincipalInterest(principalInterestVal);
+
+    var salePriceOrPayoffs = 0;
+    if(loanScenario.loanPurpose === "Purchase"){
+        salePriceOrPayoffs = loanScenario.houseValue;
+    }
+    if(loanScenario.loanPurpose === "Refinance"){
+        salePriceOrPayoffs = loanScenario.currentLoanBalance;
+    }
+    setSale_Price_OR_Payoffs(salePriceOrPayoffs);
+
+    var secondM = 0;
+    loanScenario.secondMortgageRequest === "New 2nd mortgage" ? secondM = loanScenario.secondMortgageBalance : secondM = 0;
+    setSecondMortgage(secondM);
+
+    var sellerC = loanScenario.loanPurpose === "Purchase" ? loanScenario.sellerCredit : 0;
+
+    var estimatedCashToCloseVal = 0;
+    estimatedCashToCloseVal = salePriceOrPayoffs 
+     + (blockD + blockI + loanScenario.lenderCredit)
+     - loanScenario.totalLoanAmount
+     - secondM
+     - sellerC
+     + loanScenario.otherCredits;
+
+
+    setEstimatedCashToClose(estimatedCashToCloseVal); 
 
   }, [loanScenario]);
 
@@ -1198,7 +1227,7 @@ const Home_2 = () => {
                           fill="#2CC14E"
                         />
                       </svg>
-                      1,234
+                      {numberWithCommas(blockA)}
                     </h1>
                   </div>
                 </div>
@@ -1279,7 +1308,7 @@ const Home_2 = () => {
                         </defs>
                       </svg>
                     </p>
-                    <h1>($101,234)</h1>
+                    <h1>(${numberWithCommas(Math.round(estimatedCashToClose))})</h1>
                   </div>
                 </div>
               </div>
@@ -2920,6 +2949,76 @@ const Home_2 = () => {
                             <p>Lender Credit </p>
                             <span>{loanScenario.lenderCredit}</span>
                           </li>
+                        </ul>
+                      </div>
+                      <div className="price-text">
+                        <ul>
+                          <li className="head-price">
+                            <p>Estimated Cash to Close</p>
+                          </li>
+                          <li>
+                            <p className="text-p">Sale Price/Payoffs</p>
+                            <span className="text-val">{numberWithCommas(Math.round(sale_Price_OR_Payoffs))}</span>
+                          </li>
+                          <li>
+                            <p className="text-p">Total Closing Costs (J) </p>
+                            <p className="text-icon">+</p>
+                            <span className="text-val">
+                              {numberWithCommas(Math.round(blockD + blockI + loanScenario.lenderCredit))}
+                            </span>
+                          </li>
+                          <li>
+                            <p className="text-p">Total Loan Amount </p>
+                            <p className="text-icon">-</p>
+                            <span className="text-val">{numberWithCommas(Math.round(loanScenario.totalLoanAmount))}</span>
+                          </li>
+                          {
+                            secondMortgage !== 0 ?
+                            <li>
+                              <p className="text-p">Second Mortgage</p>
+                              <p className="text-icon">-</p>
+                              <span className="text-val">{numberWithCommas(Math.round(secondMortgage))}</span>
+                            </li>
+                            : null
+                          }
+                          {
+                            loanScenario.loanPurpose === "Purchase" ?
+                              <li>
+                                <p className="text-p">Seller Credit</p>
+                                <p className="text-icon">-</p>
+                                <EdiText
+                                 className="text-val"
+                                    type="number"
+                                    value={loanScenario.sellerCredit}
+                                    tabIndex={123}
+                                    onSave={(pass) => {
+                                      handleSave(pass, "sellerCredit");
+                                    }}
+                                    submitOnUnfocus
+                                    startEditingOnFocus
+                                  />
+                              </li>
+                            : null
+                          }
+                           <li>
+                              <p className="text-p">Other Credits and Adjustments</p>
+                              <p className="text-icon">+</p>
+                              <EdiText
+                               className="text-val"
+                                  type="number"
+                                  value={loanScenario.otherCredits}
+                                  tabIndex={123}
+                                  onSave={(pass) => {
+                                    handleSave(pass, "otherCredits");
+                                  }}
+                                  submitOnUnfocus
+                                  startEditingOnFocus
+                                />
+                            </li>
+                            <li className="Total">
+                              <p><b>Estimated Cash to Close</b></p>
+                              <span  className="text-val"><b>{numberWithCommas(Math.round(estimatedCashToClose))}</b></span>
+                            </li>
                         </ul>
                       </div>
                     </div>
