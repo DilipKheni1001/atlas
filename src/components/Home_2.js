@@ -599,51 +599,51 @@ const Home_2 = () => {
 
   useEffect(() => {
     
-    var FUVFundingFee = Math.round(loanScenario.baseLoanAmount * loanScenario.governmentFundingFee);
+    var FUVFundingFee = Math.round(Number(loanScenario.baseLoanAmount) * Number(loanScenario.governmentFundingFee));
     setFHA_USDA_VA_FundingFee(FUVFundingFee);
 
     var LTV_CLTV = "";
     if (!loanScenario.secondMortgageBalance) {
       LTV_CLTV =
         Math.round(
-          (100 * loanScenario.baseLoanAmount) / loanScenario.houseValue
+          (100 * Number(loanScenario.baseLoanAmount)) / Number(loanScenario.houseValue)
         ) + "%";
     } else {
-      if (loanScenario.isPayingOffSecondMortgage === 0) {
+      if (Number(loanScenario.isPayingOffSecondMortgage) === 0) {
         var v = Math.round(
           (100 *
-            (loanScenario.baseLoanAmount +
-              loanScenario.secondMortgageBalance)) /
-            loanScenario.houseValue
+            (Number(loanScenario.baseLoanAmount) +
+              Number(loanScenario.secondMortgageBalance))) /
+              Number(loanScenario.houseValue)
         );
         LTV_CLTV =
           Math.round(
-            (100 * loanScenario.baseLoanAmount) / loanScenario.houseValue
+            (100 * Number(loanScenario.baseLoanAmount)) / Number(loanScenario.houseValue)
           ) +
           "% / " +
           v;
       } else {
         LTV_CLTV =
           Math.round(
-            (100 * loanScenario.baseLoanAmount) / loanScenario.houseValue
+            (100 * Number(loanScenario.baseLoanAmount)) / Number(loanScenario.houseValue)
           ) + "%";
       }
     }
     setLTV_CLTV(LTV_CLTV);
 
-    var HOIPremium = Math.round(loanScenario.blockFnumMonthsPrepaidHOI * loanScenario.monthlyHOI);
+    var HOIPremium = Math.round(Number(loanScenario.blockFnumMonthsPrepaidHOI) * Number(loanScenario.monthlyHOI));
     setTotalHOIPremium(HOIPremium);
 
-    var prepaidInterest = Math.round(loanScenario.blockFdaysPrepaidInterest * loanScenario.totalLoanAmount * loanScenario.interestRate/36000);
+    var prepaidInterest = Math.round(Number(loanScenario.blockFdaysPrepaidInterest) * Number(loanScenario.totalLoanAmount) * Number(loanScenario.interestRate)/36000);
     setTotalPrepaidInterest(prepaidInterest);
 
-    var prepaidTaxes = Math.round(loanScenario.blockFnumMonthsPrepaidTaxes * loanScenario.monthlyPropertyTax);
+    var prepaidTaxes = Math.round(Number(loanScenario.blockFnumMonthsPrepaidTaxes) * Number(loanScenario.monthlyPropertyTax));
     setTotalPrepaidTaxes(prepaidTaxes);
 
-    var HOI = Math.round(loanScenario.blockGnumMonthsInsReserves * loanScenario.monthlyHOI);
+    var HOI = Math.round(Number(loanScenario.blockGnumMonthsInsReserves) * Number(loanScenario.monthlyHOI));
     setTotalHOI(HOI);
 
-    var propertyTaxes = Math.round(loanScenario.blockGnumMonthsTaxReserves * loanScenario.monthlyPropertyTax);
+    var propertyTaxes = Math.round(Number(loanScenario.blockGnumMonthsTaxReserves) * Number(loanScenario.monthlyPropertyTax));
     setTotalPropertyTaxes(propertyTaxes);
 
     setBlockA(
@@ -710,41 +710,41 @@ const Home_2 = () => {
     
     setBlockI(iBlock);
 
-    var jBlock = dBlock + iBlock + loanScenario.lenderCredit;
+    var jBlock = dBlock + iBlock + Number(loanScenario.lenderCredit);
 
     setBlockJ(jBlock);
 
-    var estimatedEscrowVal = loanScenario.monthlyPropertyTax + loanScenario.monthlyHOI;
+    var estimatedEscrowVal = Number(loanScenario.monthlyPropertyTax) + Number(loanScenario.monthlyHOI);
     setEstimatedEscrow(estimatedEscrowVal);
 
     var loanTerm = loanScenario.loanProduct.includes("ARM") ? 360 : 12 * Number(loanScenario.loanProduct.substring(0,2));
     
-    var principalInterestVal = loanScenario.totalLoanAmount * (loanScenario.interestRate/1200) * ((1+(loanScenario.interestRate/1200)) ^ loanTerm) /
-    (((1+ (loanScenario.interestRate/1200)) ^ loanTerm) - 1);
+    var principalInterestVal = Number(loanScenario.totalLoanAmount) * (Number(loanScenario.interestRate)/1200) * ((1+(Number(loanScenario.interestRate)/1200)) ^ loanTerm) /
+    (((1+ (Number(loanScenario.interestRate)/1200)) ^ loanTerm) - 1);
 
     setPrincipalInterest(principalInterestVal);
 
     var salePriceOrPayoffs = 0;
     if(loanScenario.loanPurpose === "Purchase"){
-        salePriceOrPayoffs = loanScenario.houseValue;
+        salePriceOrPayoffs = Number(loanScenario.houseValue);
     }
     if(loanScenario.loanPurpose === "Refinance"){
-        salePriceOrPayoffs = loanScenario.currentLoanBalance;
+        salePriceOrPayoffs = Number(loanScenario.currentLoanBalance);
     }
     setSale_Price_OR_Payoffs(salePriceOrPayoffs);
 
-    var secondM = loanScenario.secondMortgageRequest === "New 2nd mortgage" ?  loanScenario.secondMortgageBalance :  0;
+    var secondM = loanScenario.secondMortgageRequest === "New 2nd mortgage" ?  Number(loanScenario.secondMortgageBalance) :  0;
     setSecondMortgage(secondM);
 
-    var sellerC =  loanScenario.loanPurpose === "Purchase" ? loanScenario.sellerCredit : 0;
+    var sellerC =  loanScenario.loanPurpose === "Purchase" ? Number(loanScenario.sellerCredit) : 0;
   
     var estimatedCashToCloseVal = 0;
     estimatedCashToCloseVal = salePriceOrPayoffs 
      + jBlock
-     - loanScenario.totalLoanAmount
+     - Number(loanScenario.totalLoanAmount)
      - secondM
      - sellerC
-     + loanScenario.otherCredits;
+     + Number(loanScenario.otherCredits);
 
     setEstimatedCashToClose(estimatedCashToCloseVal); 
 
