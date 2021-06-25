@@ -66,12 +66,12 @@ const Home_2 = () => {
     blockETransferTaxes: 0,
     blockERecordingCharges: 0,
     blockHOwnersTitleInsPremium: 0,
-    created_at: "",
-    updated_at: "",
-    deleted_at: null,
+    dateCreated: "",
+    dateUpdated: "",
+    dateDeleted: null,
     governmentFundingFeePercent: 0,
     isFinancedFundingFeeMI: 0,
-    annualMortgageInsuranceRate: null,
+    annualMortgageInsuranceRate: 0,
     mortgageInsurancePremiumType: "",
     secondMortgageRequest: "",
     monthlyHOA: 0,
@@ -584,7 +584,9 @@ const Home_2 = () => {
   const [blockH, setBlockH] = useState(0);
   const [blockI, setBlockI] = useState(0);
   const [blockJ, setBlockJ] = useState(0);
-  const [FHA_USDA_VA_FundingFee, setFHA_USDA_VA_FundingFee] = useState(0);
+  const [totalLoanAmount, setTotalLoanAmount] = useState(0);
+  const [governmentFundingFee, setGovernmentFundingFee ] = useState(0);
+  // const [FHA_USDA_VA_FundingFee, setFHA_USDA_VA_FundingFee] = useState(0);
   const [LTV_CLTV, setLTV_CLTV] = useState(0);
   const [totalHOIPremium, setTotalHOIPremium] = useState(0);
   const [totalPrepaidInterest, setTotalPrepaidInterest] = useState(0);
@@ -599,8 +601,27 @@ const Home_2 = () => {
 
   useEffect(() => {
     
-    var FUVFundingFee = Math.round(Number(loanScenario.baseLoanAmount) * Number(loanScenario.governmentFundingFee));
-    setFHA_USDA_VA_FundingFee(FUVFundingFee);
+    let governmentFundingFeeVal = Number(loanScenario.baseLoanAmount) * Number(loanScenario.governmentFundingFeePercent) / 100;
+    setGovernmentFundingFee(governmentFundingFeeVal);
+
+    let totalLoanAmountVal = 0;
+    if(loanScenario.isFinancedFundingFeeMI === 0){
+      
+      totalLoanAmountVal = Number(loanScenario.baseLoanAmount);
+
+    }else if(loanScenario.mortgageInsurancePremiumType === "Single Premium"){
+      
+      totalLoanAmountVal = Number(loanScenario.baseLoanAmount) + Number(loanScenario.annualMortgageInsuranceRate) * Number(loanScenario.baseLoanAmount) / 100;
+    
+    }else{
+    
+      totalLoanAmountVal = Number(loanScenario.baseLoanAmount) + Number(governmentFundingFeeVal);
+    
+    }
+    setTotalLoanAmount(totalLoanAmountVal); 
+
+    // var FUVFundingFee = Math.round(Number(loanScenario.baseLoanAmount) * Number(loanScenario.governmentFundingFee));
+    // setFHA_USDA_VA_FundingFee(FUVFundingFee);
 
     var LTV_CLTV = "";
     if (!loanScenario.secondMortgageBalance) {
@@ -634,7 +655,7 @@ const Home_2 = () => {
     var HOIPremium = Math.round(Number(loanScenario.blockFnumMonthsPrepaidHOI) * Number(loanScenario.monthlyHOI));
     setTotalHOIPremium(HOIPremium);
 
-    var prepaidInterest = Math.round(Number(loanScenario.blockFdaysPrepaidInterest) * Number(loanScenario.totalLoanAmount) * Number(loanScenario.interestRate)/36000);
+    var prepaidInterest = Math.round(Number(loanScenario.blockFdaysPrepaidInterest) * totalLoanAmountVal * Number(loanScenario.interestRate)/36000);
     setTotalPrepaidInterest(prepaidInterest);
 
     var prepaidTaxes = Math.round(Number(loanScenario.blockFnumMonthsPrepaidTaxes) * Number(loanScenario.monthlyPropertyTax));
@@ -662,7 +683,7 @@ const Home_2 = () => {
         Number(loanScenario.blockBhoaQuestionnaire) +
         Number(loanScenario.blockBcondoProjectApproval) +
         Number(loanScenario.blockBsinglePremiumMI) +
-        Number(FUVFundingFee)
+        Number(governmentFundingFeeVal)
     );
 
     setBlockC(
@@ -682,7 +703,7 @@ const Home_2 = () => {
                   Number(loanScenario.blockBhoaQuestionnaire) +
                   Number(loanScenario.blockBcondoProjectApproval) +
                   Number(loanScenario.blockBsinglePremiumMI) +
-                  Number(FUVFundingFee) +
+                  Number(governmentFundingFeeVal) +
                   Number(loanScenario.blockCTitleServices) +
                   Number(loanScenario.blockCSurvey);
 
@@ -719,7 +740,7 @@ const Home_2 = () => {
 
     var loanTerm = loanScenario.loanProduct.includes("ARM") ? 360 : 12 * Number(loanScenario.loanProduct.substring(0,2));
     
-    var principalInterestVal = Number(loanScenario.totalLoanAmount) * (Number(loanScenario.interestRate)/1200) * ((1+(Number(loanScenario.interestRate)/1200)) ^ loanTerm) /
+    var principalInterestVal = totalLoanAmountVal * (Number(loanScenario.interestRate)/1200) * ((1+(Number(loanScenario.interestRate)/1200)) ^ loanTerm) /
     (((1+ (Number(loanScenario.interestRate)/1200)) ^ loanTerm) - 1);
 
     setPrincipalInterest(principalInterestVal);
@@ -741,7 +762,7 @@ const Home_2 = () => {
     var estimatedCashToCloseVal = 0;
     estimatedCashToCloseVal = salePriceOrPayoffs 
      + jBlock
-     - Number(loanScenario.totalLoanAmount)
+     - totalLoanAmountVal
      - secondM
      - sellerC
      + Number(loanScenario.otherCredits);
@@ -1122,7 +1143,7 @@ const Home_2 = () => {
                 <span>
                   Last Updated
                   <br />
-                  04/27/2021
+                  {new Date(loanScenario.dateUpdated).toLocaleDateString("en-US")}
                 </span>
               </div>
               <div className="rate-sec">
@@ -1311,7 +1332,7 @@ const Home_2 = () => {
                         </defs>
                       </svg>
                     </p>
-                    <h1>(${numberWithCommas(Math.round(estimatedCashToClose))})</h1>
+                    <h1>${numberWithCommas(Math.round(estimatedCashToClose))}</h1>
                   </div>
                 </div>
               </div>
@@ -1363,7 +1384,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Total Loan Amount</p>
-                            <span>{numberWithCommas(Math.round(loanScenario.totalLoanAmount))}</span>
+                            <span>{numberWithCommas(Math.round(totalLoanAmount))}</span>
                           </li>
                           <li>
                             <p>Loan Product</p>
@@ -2138,8 +2159,8 @@ const Home_2 = () => {
                             <p>Address</p>
                             <div className="main-div">
                                 <div>
-                                    <span>{'"' + loanScenario.propertyStreet + ", " + loanScenario.propertyCity + ", "
-                                    + loanScenario.propertyState + ", " + loanScenario.propertyZip + '"'}</span>
+                                    <span>{loanScenario.propertyStreet + ", " + loanScenario.propertyCity + ", "
+                                    + loanScenario.propertyState + ", " + loanScenario.propertyZip}</span>
                                     <button
                                       onClick={onOpenModal}
                                       className="edit-arrow1 icon-btn1"
@@ -2582,7 +2603,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>FHA, USDA, VA Funding Fee</p>
-                            <span>{numberWithCommas(Math.round(FHA_USDA_VA_FundingFee))}</span>
+                            <span>{numberWithCommas(Math.round(governmentFundingFee))}</span>
                           </li>
                         </ul>
                       </div>
@@ -2973,7 +2994,7 @@ const Home_2 = () => {
                           <li>
                             <p className="text-p">Total Loan Amount </p>
                             <p className="text-icon">-</p>
-                            <span className="text-val">{numberWithCommas(Math.round(loanScenario.totalLoanAmount))}</span>
+                            <span className="text-val">{numberWithCommas(Math.round(totalLoanAmount))}</span>
                           </li>
                           {
                             secondMortgage !== 0 ?
@@ -3020,7 +3041,15 @@ const Home_2 = () => {
                             </li>
                             <li className="Total">
                               <p><b>Estimated Cash to Close</b></p>
-                              <span  className="text-val"><b>{numberWithCommas(Math.round(estimatedCashToClose))}</b></span>
+                              <span  className="text-val">
+                              { 
+                                Math.sign(estimatedCashToClose) === -1 ?
+                                  <b>({numberWithCommas(Math.round(estimatedCashToClose))})</b>
+                                :
+                                  <b>{numberWithCommas(Math.round(estimatedCashToClose))}</b>
+                              }
+                               
+                              </span>
                             </li>
                         </ul>
                       </div>
