@@ -1185,6 +1185,18 @@ button.cross-arrow.icon-btn {
   line-height: 0px;
 }
 
+.react-responsive-modal-modal {
+  max-width: 1090px !important;
+}
+
+.iframe-modal {
+  width: 1050px;
+}
+
+.iframe-modal .modal-body {
+  padding-top: 1.6rem !important;
+}
+
 @media (max-width: 1350px) {
   .rate-text h1 {
     font-size: 30px;

@@ -19,6 +19,26 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Home_2 = () => {
+  const [contactDetails,setContactDetails] = useState({
+    "id": 0,
+    "userId": 0,
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "salesSystemId": 0,
+    "stage": "",
+    "commentsFromLead": "",
+    "createdDate": "",
+    "createdTime": "",
+    "dateTimeCreated": "",
+    "dateUpdated": "",
+    "dateDeleted": null,
+    "pictureURL": null,
+    "leadSource": null,
+    "loanScenarios": [],
+    "rateCampaings": [],
+    "scenarioCompare": []
+  });
   const [loanScenario, setLoanScenario] = useState({
     id: 0,
     contactId: 0,
@@ -586,7 +606,7 @@ const Home_2 = () => {
   const [blockJ, setBlockJ] = useState(0);
   const [totalLoanAmount, setTotalLoanAmount] = useState(0);
   const [governmentFundingFee, setGovernmentFundingFee ] = useState(0);
-  // const [FHA_USDA_VA_FundingFee, setFHA_USDA_VA_FundingFee] = useState(0);
+  const [leftSideLoanPurpose, setLeftSideLoanPurpose] = useState("");
   const [LTV_CLTV, setLTV_CLTV] = useState(0);
   const [totalHOIPremium, setTotalHOIPremium] = useState(0);
   const [totalPrepaidInterest, setTotalPrepaidInterest] = useState(0);
@@ -598,6 +618,8 @@ const Home_2 = () => {
   const [sale_Price_OR_Payoffs,setSale_Price_OR_Payoffs] = useState(0);
   const [secondMortgage,setSecondMortgage] = useState(0);
   const [estimatedCashToClose,setEstimatedCashToClose] = useState(0);
+  const [openRepriceModal,setOpenRepriceModal] = useState(false);
+  const [link,setLink] = useState("");
 
   useEffect(() => {
     
@@ -769,6 +791,19 @@ const Home_2 = () => {
 
     setEstimatedCashToClose(estimatedCashToCloseVal); 
 
+    if(loanScenario.loanPurpose === "Purchase" && loanScenario.isFirstTimeHomeBuyer === 1){
+        setLeftSideLoanPurpose("Purchase - FTHB");
+    } 
+    if(loanScenario.loanPurpose === "Purchase" && loanScenario.isFirstTimeHomeBuyer === 0){
+        setLeftSideLoanPurpose("Purchase");
+    } 
+    if(loanScenario.loanPurpose === "Refinance" && loanScenario.isCashout === 1){
+        setLeftSideLoanPurpose("Cashout Refinance");
+    } 
+    if(loanScenario.loanPurpose === "Refinance" && loanScenario.isCashout === 0){
+        setLeftSideLoanPurpose("Rate/Term Refinance");
+    } 
+
   }, [loanScenario]);
 
   useEffect(() => {
@@ -781,14 +816,28 @@ const Home_2 = () => {
         id: 1,
       };
 
-      const data = await axios({
+      await axios({
         method: "get",
         url: "https://atlas.keystonefunding.com/api/loanscenario/details",
         params: result,
       }).then((res) => {
         if (res.status === 200) {
+
           setLoanScenario(res.data.data[0]);
+          
+          var contactId = {
+            id: res.data.data[0].contactId
+          }
+
+          return axios({
+            method: "get",
+            url: "https://atlas.keystonefunding.com/api/contact/details",
+            params: contactId,
+          })
         }
+      }).then((res)=>{
+        setContactDetails(res.data.data);
+        console.log("result-----",res);
       });
     } catch (e) {
       console.log(e);
@@ -847,6 +896,13 @@ const Home_2 = () => {
 
   const onCloseModal = () => setOpen(false);
 
+  const onOpenRepriceModal = () => {
+    setLink("https://argos.keystonefunding.com/intelliquote/index-atlas.php?loanOfficerEmail=rsargent@keystonefunding.com&eDocType=Full_Doc&target=100&eLoanPurpose=Refinance_Cashout&creditScore=740&loanAmount=460000&secondLoanAmount=&propertyValue=750000&ePropertyType=SFR&eOccupancy=OwnerOccupied&lockDays=45&propertyLocationState=NJ&county=Morris&eLoanPrograms=Conv&specialFeature=&upfrontMiFinanced=false&eImpounds=Both&eVeteranUseType=FirstTime&eLoanProducts=Fixed_30Yr&scenarioID=a0c0y00000QDPFL");
+    setOpenRepriceModal(true);
+  }
+
+  const onCloseRepriceModal = () => setOpenRepriceModal(false);
+
   const handleSubmit = () => {
     var formData = new FormData();
     formData.append("id", loanScenario.id);
@@ -900,35 +956,31 @@ const Home_2 = () => {
               <div className="profile">
                 <div className="protb-img"></div>
                 <div className="text-pro">
-                  <p>John Christensen</p>
-                  <h5>Loan stage</h5>
+                  <p>{contactDetails.firstName + " " + contactDetails.lastName}</p>
+                  <h5>{contactDetails.stage + " stage"}</h5>
                 </div>
               </div>
               <div className="pro-main">
                 <div className="pro-detail">
                   <div className="pro-detail-text">
-                    <p>Stage</p>
-                    <h3>Pre-Approved</h3>
-                  </div>
-                  <div className="pro-detail-text">
                     <p>Loan Purpose</p>
-                    <h3>Purchase-FTHB</h3>
+                    <h3>{leftSideLoanPurpose}</h3>
                   </div>
                   <div className="pro-detail-text">
                     <p>Location</p>
-                    <h3>Prince William County, VA</h3>
+                    <h3>{loanScenario.propertyCountry + " County, " + loanScenario.propertyState}</h3>
                   </div>
                   <div className="pro-detail-text">
                     <p>Occupancy</p>
-                    <h3>Owner-Occupied</h3>
+                    <h3>{loanScenario.occupancy}</h3>
                   </div>
                   <div className="pro-detail-text">
                     <p>Credit Score</p>
-                    <h3>742</h3>
+                    <h3>{loanScenario.creditScore}</h3>
                   </div>
                   <div className="pro-detail-text">
-                    <p>Source</p>
-                    <h3>Bankrate</h3>
+                    <p>Comments from Lead</p>
+                    <h3>{contactDetails.commentsFromLead}</h3>
                   </div>
                 </div>
               </div>
@@ -1338,7 +1390,14 @@ const Home_2 = () => {
               </div>
               <div className="stone-btn">
                 <div className="st-btn">
-                  <button>Reprice</button>
+                  <button onClick={onOpenRepriceModal}>Reprice</button>
+                  <Modal open={openRepriceModal} onClose={onCloseRepriceModal}>
+                      <div className="iframe-modal">
+                          <ModalBody>
+                              <iframe src={link} style={{width:'100%',height:'610px'}}/>
+                          </ModalBody>
+                      </div>
+                  </Modal>  
                 </div>
                 <div className="st-btn">
                   <button>Clone</button>
@@ -2092,6 +2151,25 @@ const Home_2 = () => {
                             )}
                           </li>
                           <li>
+                            <p>First Time Home Buyer</p>
+                            <span>
+                              <label className="lab-check">
+                                <input
+                                  type="checkbox"
+                                  checked={loanScenario.isFirstTimeHomeBuyer}
+                                  onChange={(pass) => {
+                                    if (pass.target.checked) {
+                                      handleSave(1, "isFirstTimeHomeBuyer");
+                                    } else {
+                                      handleSave(0, "isFirstTimeHomeBuyer");
+                                    }
+                                  }}
+                                />
+                                <span className="checkmark"></span>
+                              </label>
+                            </span>
+                          </li>
+                          <li>
                             <p>VA Eligible?</p>
                             <span>
                               <label className="lab-check">
@@ -2236,6 +2314,7 @@ const Home_2 = () => {
                                 </ModalFooter>
                               </div>
                             </Modal>
+                          
                           </li>
                           <li>
                             <p>County</p>
@@ -3044,7 +3123,7 @@ const Home_2 = () => {
                               <span  className="text-val">
                               { 
                                 Math.sign(estimatedCashToClose) === -1 ?
-                                  <b>({numberWithCommas(Math.round(estimatedCashToClose))})</b>
+                                  <b>({numberWithCommas(Math.abs(Math.round(estimatedCashToClose)))})</b>
                                 :
                                   <b>{numberWithCommas(Math.round(estimatedCashToClose))}</b>
                               }
