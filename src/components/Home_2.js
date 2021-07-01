@@ -17,8 +17,80 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import jsPDF from "jspdf";
+import { renderToString,renderToStaticMarkup } from 'react-dom/server'
+import Home2_PDF from './Home2_PDF';
+import html2canvas from 'html2canvas';
 
+const PDFComponent = ({name}) => {
+return (<div><p>Hello {name}!!</p></div>);
+}
 const Home_2 = () => {
+  
+  const container = React.useRef(null);
+  const exportPDFWithMethod = () => {
+    // let element = container.current || document.body;
+    
+    // savePDF(element, {
+    //   paperSize: "auto",
+    //   margin: 40,
+    //   fileName: `Report for ${new Date().getFullYear()}`,
+
+    // },(res)=>{
+    //   console.log("res--->",res);
+    // });
+    // console.log("-****************-",renderToString(<div><h1>Hello Jay !!</h1></div>))
+      // var doc = new jsPDF('p','pt','a4');
+      // doc.html(renderToString(<Home2_PDF/>)).then(()=>{
+      //   doc.setProperties({
+      //     title: 'Atlas Loan Scenario',
+      //     subject: 'This is the subject',
+      //     author: 'Author Name',
+      //     keywords: 'generated, javascript, web 2.0, ajax',
+      //     creator: 'Creator Name'
+      //    });
+      //    doc.output("dataurlnewwindow");
+      // });
+
+      var doc = new jsPDF('p','pt','a4');
+      doc.html(renderToString(<Home2_PDF principalInterest={principalInterest} 
+        totalLoanAmount={totalLoanAmount}
+        Atlas_Loan_Scenario={loanScenario} />), {
+        callback: function (doc) {
+          doc.setProperties({
+            title: 'Atlas Loan Scenario',
+            subject: 'This is the subject',
+            author: 'Author Name',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'Creator Name'
+            });
+          doc.output("dataurlnewwindow");
+        },
+        margin: ["auto", "auto", "auto", "auto"],
+        x: 32,
+        y: 32,
+      });
+      // var iframe=document.createElement('iframe');
+      // document.body.appendChild(iframe);
+      // var iframedoc=iframe.contentDocument||iframe.contentWindow.document;
+      // iframedoc.body.innerHTML=renderToString(<Home2_PDF/>);
+
+      // html2canvas(iframedoc.body)
+      //   .then((canvas) => {
+      //       const imgData = canvas.toDataURL('image/png');
+      //       const pdf = new jsPDF();
+      //       pdf.addImage(imgData, 'PNG', 0, 0);
+      //       document.body.removeChild(iframe);
+      //       pdf.output('dataurlnewwindow');
+      //   })
+
+      // doc.text(20, 20, 'This PDF has a title, subject, author, keywords and a creator.');
+
+      // Optional - set properties on the document
+      
+  };
+
   const [contactDetails,setContactDetails] = useState({
     "id": 0,
     "userId": 0,
@@ -949,6 +1021,9 @@ const Home_2 = () => {
   return (
     <>
       <ToastContainer />
+      {/* <div style={{"display":"none"}} ref={container} id="pdf-div">
+        <h1>Hello</h1>
+      </div> */}
       <div className="maindiv">
         <div className="pro-class">
           <div className="profile-sec">
@@ -1403,7 +1478,7 @@ const Home_2 = () => {
                   <button>Clone</button>
                 </div>
                 <div className="st-btn">
-                  <button>Create PDF</button>
+                  <button onClick={exportPDFWithMethod}>Create PDF</button>
                 </div>
                 <div className="st-btn">
                   <button>Email</button>

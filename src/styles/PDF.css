@@ -1,0 +1,216 @@
+            @page {
+    size: A5 letter;
+    margin: 10mm;
+    margin-top: 12mm;
+    
+    @bottom-right {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        color: #949496;
+        content: "Page " counter(page) " of " counter(pages);
+        white-space: pre-line noWrap;
+    }
+    @bottom-left {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        color: #949496;
+        content: "Visit www.consumerfinance.gov/mortgage-estimate for general information and tools\AKeystone Funding, Inc. NMLS ID: 144760";
+        white-space: pre-line;
+    }
+
+}
+
+.page-break {
+    display: block;
+    page-break-after: always;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+table {
+    border-collapse: collapse;
+    width: 500px;
+    /* table-layout: fixed; */
+    /* margin: 0px 50px; */
+}
+td.border-left {
+    border-left: 1px solid #000000;
+}
+td.border-right {
+    border-right: 1px solid #000000;
+}
+td.border-top {
+    border-top: 1px solid #000000;
+}
+td.border-bottom {
+    border-bottom: 1px solid #000000;
+}
+tr.border-bottom td {
+    border-bottom: 1px solid #000000;
+}
+tr.border-top td {
+    border-top: 1px solid #000000;
+}
+tr.blueRow td{
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-left: 1px solid #000000;
+    padding-left: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-weight: bold;
+    width: 700px;
+    clear: both;
+    background-color: #000066;
+    color: #ffffff;
+}
+td.leftCol {
+    padding-left: 6px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 250px;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+td.rightCol {
+    padding-right: 3px;
+    padding-left: 6px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 450px;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+td.leftCol2 {
+    padding-left: 5px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 600px;
+    border-left: 1px solid #000000;
+}
+
+td.rightCol2 {
+    padding-left: 3px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 100px;
+    border-right: 1px solid #000000;
+    text-align: right;
+}
+td.leftCol3 {
+    padding-left: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 350px;
+    border-left: 1px solid #000000;
+}
+
+td.rightCol3 {
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 350px;
+    border-right: 1px solid #000000;
+}
+td.leftCol4 {
+    padding-left: 8px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    width: 150px;
+    border-left: 1px solid #000000;
+}
+
+td.rightCol4 {
+    padding-left: 3px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    width: 550px;
+    border-right: 1px solid #000000;
+}
+td.leftCol5 {
+    padding-left: 6px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 250px;
+    border-left: 1px solid #000000;
+}
+td.middleCol5 {
+    padding-left: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 70px;
+    border-left: 1px solid #000000;
+}
+
+td.rightCol5 {
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 380px;
+    border-right: 1px solid #000000;
+}
+td.leftCol6 {
+    padding-left: 6px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 270px;
+}
+td.middleColA6 {
+    padding-left: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 73px;
+}
+td.middleColB6 {
+    padding-left: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 14px;
+}
+
+td.rightCol6 {
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 343px;
+}
+td.oneCol {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    width: 700px;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+.operatorPadding {
+    padding-right: 8px;
+}
+.top-bottom-padding {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.strong {
+    font-weight: bold;
+}
+.italic-gray {
+    font-style: italic !important;
+}
+.italic-bold-underline {
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
