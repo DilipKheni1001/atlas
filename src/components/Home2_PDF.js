@@ -1,6 +1,29 @@
 import "../styles/PDF.css"
 
-const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) => {
+const Home2_PDF = ({
+    totalHOIPremium,
+    totalPrepaidInterest,
+    totalPrepaidTaxes,
+    totalHOI,
+    totalPropertyTaxes,
+    sale_Price_OR_Payoffs,
+    secondMortgage,
+    estimatedEscrow,
+    Atlas_Loan_Scenario, 
+    totalLoanAmount, 
+    principalInterest,
+     estimatedCashToClose,
+     governmentFundingFee,
+        blockA,
+        blockB,
+        blockC,
+        blockD,
+        blockE,
+        blockF,
+        blockG,
+        blockH,
+        blockI,
+        blockJ}) => {
     const numberWithCommas = (num) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       }
@@ -35,7 +58,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             <table>
                 <tbody>
                     <tr className="blueRow">
-                        <td colSpan="2">ASSUMPTIONS</td>
+                        <td  className="td-heading" colSpan="2">ASSUMPTIONS</td>
                     </tr>
                     <tr className="border-top">
                         <td className="leftCol">Loan Purpose:</td>
@@ -81,7 +104,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             <table>
                 <tbody>
                     <tr className="blueRow">
-                        <td colSpan="2">PROPOSED TERMS</td>
+                        <td  className="td-heading" colSpan="2">PROPOSED TERMS</td>
                     </tr>
                     <tr className="border-bottom border-top">
                         <td className="leftCol">Loan Program:</td>
@@ -124,7 +147,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             <table>
                 <tbody>
                     <tr className="blueRow">
-                        <td colSpan="2">PROJECTED PAYMENTS</td>
+                        <td className="td-heading"  colSpan="2">PROJECTED PAYMENTS</td>
                     </tr>
                     <tr className="border-bottom border-top">
                         <td className="leftCol">Principal &amp; Interest:</td>
@@ -178,7 +201,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             <table>
                 <tbody>
                     <tr className="blueRow">
-                        <td colSpan="3">COSTS AT CLOSING</td>
+                        <td className="td-heading"  colSpan="3">COSTS AT CLOSING</td>
                     </tr>
                     <tr className="border-bottom border-top">
                         <td className="leftCol5"><strong>Estimated Closing Costs:</strong></td>
@@ -202,17 +225,17 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                         {/* </apex:variable> */}
                         {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.summary_estimatedCashToClose__c <= 0}"> */}
                         {/* <apex:variable value="{!0}" var="zero"/> */}
-                            <td className="middleCol5">
+                            {/* <td className="middleCol5"> */}
                                 {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
                                     <apex:param value="{!zero}"/>
                                 </apex:outputText> */}
-                            </td>
-                            <td className="rightCol5">You will receive 
+                            {/* </td> */}
+                            {/* <td className="rightCol5">You will receive  */}
                                 {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
                                     <apex:param value="{!ABS(Atlas_Loan_Scenario.summary_estimatedCashToClose__c)}"/>
                                 </apex:outputText> */}
-                                cash at closing
-                            </td>
+                                {/* cash at closing
+                            </td> */}
                         {/* </apex:variable> */}
                     </tr>
                 </tbody>
@@ -221,33 +244,23 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
         {/* <apex:outputPanel rendered="{!Atlas_Loan_Scenario.summary_hoaDues__c == 0}">
             <br/><br/>
         </apex:outputPanel> */}
-        
-            <br/><br/>
-        
-        
-            <br/><br/>
-        
-        <br/><br/>
-        <br/><br/>
         <br/>
         <div>
-            <h3>
+            <h3 className="heading-h3">
                 Closing Cost Details
             </h3>
-            <table> 
-                <tbody>
-                    <tr>
-                        <td width="49%" style={{"verticalAlign": "top"}}>
-                            <table>
+            <table className="table-closing" style={{"display":"block"}}> 
+                <tbody style={{border:0}}>
+                    <tr style={{border:0}}>
+                        <td style={{"verticalAlign": "top"}}>
+                            <table className="table-child1">
                                 <tr className="blueRow">
-                                    <td colSpan="2">Estimated Loan Costs</td>
+                                    <td colSpan="2"  className="td-heading"  style={{fontSize:"12px"}}>Estimated Loan Costs</td>
                                 </tr>
                                 <tr className="border-top">
                                     <td className="leftCol2"><strong>A. Origination Charges</strong></td>
                                     <td className="rightCol2">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockA_totalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockA))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockADiscountFee != 0 ? 
@@ -288,9 +301,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                 <tr className="border-top">
                                     <td className="leftCol2"><strong>B. Services You Cannot Shop For</strong></td>
                                     <td className="rightCol2">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockB_TotalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockB))}</strong>
                                     </td>
                                 </tr>
                                     {Atlas_Loan_Scenario.blockBAppraisalFee != 0 ? 
@@ -351,124 +362,108 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                     </tr>
                                 : null}
                                 <tr className="border-bottom">
-                                    {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockB_govFundingFee__c != 0}"> */}
-                                        <td className="leftCol2">FHA, VA, or USDA Funding Fee</td>
-                                        <td className="rightCol2">
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockB_govFundingFee__c}"/>
-                                            </apex:outputText> */}
-                                        </td>
-                                    {/* </apex:variable> */}
+                                    {governmentFundingFee != 0 ? 
+                                        <>
+                                            <td className="leftCol2">FHA, VA, or USDA Funding Fee</td>
+                                            <td className="rightCol2">
+                                                ${numberWithCommas(Math.round(governmentFundingFee))}
+                                            </td>
+                                        </>
+                                    :null}
                                 </tr>
                                 <tr className="border-top">
                                     <td className="leftCol2"><strong>C. Services You Can Shop For</strong></td>
                                     <td className="rightCol2">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockC_TotalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockC))}</strong>
                                     </td>
                                 </tr>
-                                {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockC_titleServices__c != 0}"> */}
+                                {Atlas_Loan_Scenario.blockCTitleServices != 0 ? 
                                     <tr>
                                         <td className="leftCol2">Title Services &amp; Insurance</td>
                                         <td className="rightCol2">
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockC_titleServices__c}"/>
-                                            </apex:outputText> */}
+                                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockCTitleServices))}
                                         </td>
                                     </tr>
-                                {/* </apex:variable>
-                                <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockC_survey__c != 0}"> */}
+                                : null}
+                                {Atlas_Loan_Scenario.blockCSurvey != 0 ? 
+                                
                                     <tr className="border-bottom">
                                         <td className="leftCol2">Survey (if required)</td>
                                         <td className="rightCol2">
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockC_survey__c}"/>
-                                            </apex:outputText> */}
+                                        ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockCSurvey))}
                                         </td>
                                     </tr>
-                                {/* </apex:variable> */}
-                                
+                                : null}
                                 <tr className="border-bottom border-top">
                                     <td className="leftCol2" height="20px">
                                         <strong>D. Total Loan Costs (A&#43;B&#43;C)</strong></td>
                                     <td className="rightCol2" height="20px">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockA_totalFees__c + Atlas_Loan_Scenario.blockB_TotalFees__c + Atlas_Loan_Scenario.blockC_TotalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockD))}</strong>
                                     </td>
                                 </tr>
                             </table>
                         </td>
-                        <td width="2%">
-                        </td>
-                        <td width="49%" style={{"verticalAlign": "top"}}>
-                            <table>
+                        <td style={{"verticalAlign": "top"}}>
+                            <table className="table-child2">
                                 <tr className="blueRow">
-                                    <td colSpan="2">Other Costs</td>
+                                    <td className="td-heading"  colSpan="2">Other Costs</td>
                                 </tr>
                                 <tr className="border-top">
                                     <td className="leftCol2"><strong>E. Taxes &amp; Other Government Fees</strong></td>
                                     <td className="rightCol2">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockE_totalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockE))}</strong>
                                     </td>
                                 </tr>
-                                {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockE_recordingCharges__c != 0}"> */}
+                                {Atlas_Loan_Scenario.blockERecordingCharges != 0 ? 
                                     <tr>
                                         <td className="leftCol2">Recording Fees &amp; Other Taxes</td>
                                         <td className="rightCol2">
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockE_recordingCharges__c}"/>
-                                            </apex:outputText> */}
+                                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockERecordingCharges))}
                                         </td>
                                     </tr>
-                                {/* </apex:variable>
-                                <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockE_transferTaxes__c != 0}"> */}
+                                : null}
+                                {Atlas_Loan_Scenario.blockETransferTaxes != 0 ? 
+                                
                                     <tr className="border-bottom">
                                         <td className="leftCol2">Transfer Taxes (if required)</td>
                                         <td className="rightCol2">
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockE_transferTaxes__c}"/>
-                                            </apex:outputText> */}
+                                        ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockETransferTaxes))}
                                         </td>
                                     </tr>
-                                {/* </apex:variable> */}
+                                : null}
                                 <tr className="border-top">
                                     <td className="leftCol2"><strong>F. Estimated Prepaids</strong></td>
                                     <td className="rightCol2">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockF_totalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockF))}</strong>
                                     </td>
                                 </tr>
-                                {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockF_prepaidInterest__c != 0}"> */}
+                                {Atlas_Loan_Scenario.blockETransferTaxes != 0 ? 
+                                <>
                                     <tr>
-                                        <td className="leftCol2">Prepaid Interest</td>
-                                        <td className="rightCol2">
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockF_prepaidInterest__c}"/>
-                                            </apex:outputText> */}
+                                            <td className="leftCol2">Prepaid Interest</td>
+                                            <td className="rightCol2">
+                                                {/* <apex:outputText value="{0, number, $###,###,##0}">
+                                                    <apex:param value="{!Atlas_Loan_Scenario.blockF_prepaidInterest__c}"/>
+                                                </apex:outputText> */}
+                                            </td>
+                                        </tr>
+                                    
+                                    <tr>
+                                        <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i>
+                                                {/* <apex:outputText value="{0, number, $###,###,##0.00}">
+                                                    <apex:param value="{!Atlas_Loan_Scenario.blockF_interestperDay__c}"/>
+                                                </apex:outputText> */}
+                                                ${numberWithCommas(Math.round(Atlas_Loan_Scenario.interestRate))}
+                                                per day for      
+                                                {numberWithCommas(Math.round(Atlas_Loan_Scenario.blockFdaysPrepaidInterest))}
+                                                days
+                                            </i>
                                         </td>
+                                        <td className="rightCol2"></td>
                                     </tr>
-                                
-                                <tr>
-                                    <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <i>
-                                            {/* <apex:outputText value="{0, number, $###,###,##0.00}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockF_interestperDay__c}"/>
-                                            </apex:outputText> */}
-                                             per day for      
-                                            {/* <apex:outputText value="{0, number, ###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockF_daysPrepaidInterest__c}"/>
-                                            </apex:outputText> */}
-                                             days
-                                        </i>
-                                    </td>
-                                    <td className="rightCol2"></td>
-                                </tr>
-                                {/* </apex:variable> */}
+                                </>
+                                :null}
                                 {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockF_prepaidHOI__c != 0}"> */}
                                     <tr>
                                         <td className="leftCol2">Prepaid Homeowner&#39;s Insurance</td>
@@ -482,13 +477,9 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                 <tr>
                                     <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <i>
-                                            {/* <apex:outputText value="{0, number, ###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockF_numMonthsPrepaidHOI__c}"/>
-                                            </apex:outputText> */}
+                                            {numberWithCommas(Math.round(Atlas_Loan_Scenario.blockFnumMonthsPrepaidHOI))}
                                              months at    
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.monthlyHOI__c}"/>
-                                            </apex:outputText> */}
+                                                ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyHOI))}
                                              per month
                                         </i>
                                     </td>
@@ -503,9 +494,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                 <tr className="border-top">
                                     <td className="leftCol2"><strong>G. Estimated Escrow Payment</strong></td>
                                     <td className="rightCol2">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockG_totalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockG))}</strong>
                                     </td>
                                 </tr>
                                 {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockG_totalInsuranceEscrows__c != 0}"> */}
@@ -521,13 +510,9 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                 <tr>
                                     <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;
                                         <i>
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.monthlyHOI__c}"/>
-                                            </apex:outputText> */}
+                                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyHOI))}
                                              per month for    
-                                            {/* <apex:outputText value="{0, number, ###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockG_numMonthsInsuranceReserves__c}"/>
-                                            </apex:outputText> */}
+                                             {numberWithCommas(Math.round(Atlas_Loan_Scenario.blockGnumMonthsInsReserves))}
                                              months
                                         </i>
                                     </td>
@@ -547,13 +532,9 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                 <tr className="border-bottom">
                                     <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;
                                         <i>
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.monthlyPropertyTax__c}"/>
-                                            </apex:outputText> */}
+                                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyPropertyTax))}
                                              per month for    
-                                            {/* <apex:outputText value="{0, number, ###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockG_numMonthsTaxReserves__c}"/>
-                                            </apex:outputText> */}
+                                            {numberWithCommas(Math.round(Atlas_Loan_Scenario.blockGnumMonthsTaxReserves))}
                                              months
                                         </i>
                                     </td>
@@ -563,22 +544,18 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                 <tr>
                                     <td className="leftCol2"><strong>H. Other</strong></td>
                                     <td className="rightCol2">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                            <apex:param value="{!Atlas_Loan_Scenario.blockH_totalFees__c}"/>
-                                        </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockH))}</strong>
                                     </td>
                                 </tr>
                                 
-                                {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.blockH_ownersTitleInsPremium__c != 0}"> */}
+                                {Atlas_Loan_Scenario.blockHOwnersTitleInsPremium != 0 ? 
                                     <tr >
                                         <td className="leftCol2">Owner&#39;s Title Insurance</td>
                                         <td className="rightCol2">
-                                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                                <apex:param value="{!Atlas_Loan_Scenario.blockH_ownersTitleInsPremium__c}"/>
-                                            </apex:outputText> */}
+                                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockHOwnersTitleInsPremium))}
                                         </td>
                                     </tr>
-                                {/* </apex:variable> */}
+                                :null}
                                 <tr className="border-bottom">
                                     <td className="leftCol2">&nbsp;</td>
                                     <td className="rightCol2">&nbsp;</td>
@@ -586,12 +563,10 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                                 
                                 <tr className="border-bottom">
                                     <td className="leftCol2" height="20px">
-                                        <strong>I. Total Other Costs (E&#43;F&#43;G&#43;H)</strong></td>
-                                        {/* <apex:variable value="{!Atlas_Loan_Scenario.blockE_totalFees__c + Atlas_Loan_Scenario.blockF_totalFees__c + Atlas_Loan_Scenario.blockG_totalFees__c + Atlas_Loan_Scenario.blockH_totalFees__c}" var="totalOtherCost"/> */}
+                                        <strong>I. Total Other Costs (E&#43;F&#43;G&#43;H)</strong>
+                                    </td>                                        
                                     <td className="rightCol2" height="20px">
-                                        {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}"> */}
-                                            {/* <apex:param value="{!totalOtherCost}"/> */}
-                                        {/* </apex:outputText> */}
+                                        <strong>${numberWithCommas(Math.round(blockI))}</strong>
                                     </td>
                                 </tr>
                             </table>
@@ -601,19 +576,16 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             </table>
         </div>
         <br/>
-        <br/>
         <div>
             <table>
-                <tbody>
+                <tbody style={{border:0}}>
                     <tr className="blueRow">
-                        <td align="center" colSpan="4">Total Closing Costs</td>
+                        <td className="td-heading" align="center" colSpan="4">Total Closing Costs</td>
                     </tr>
                     <tr className="border-top" style={{"padding":"5px 0"}}>
                         <td className="leftCol6">&nbsp;</td>
                         <td className="middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.summary_totalCostsBeforeCredit__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(blockD+blockI))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Loan Costs + Other Costs (D+I)</td>
@@ -621,9 +593,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                     <tr>
                         <td className="operatorPadding leftCol6" align="right">&#8211;</td>
                         <td className="middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.lenderCredit__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.lenderCredit))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Lender Credits</td>
@@ -631,9 +601,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                     <tr>
                         <td className="operatorPadding leftCol6" width="290px" align="right">&#61;</td>
                         <td className="border-top middleColA6" width="53px" align="right">
-                            {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.summary_totalClosingCosts__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(blockJ))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6"><strong>Total Closing Costs (J)</strong></td>
@@ -643,16 +611,14 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
         </div>
         <div>
             <table>
-                <tbody>
+                <tbody style={{border:0}}>
                     <tr className="blueRow">
-                        <td align="center" colSpan="4">Estimated Cash to Close</td>
+                        <td className="td-heading" align="center" colSpan="4">Estimated Cash to Close</td>
                     </tr>
                     <tr className="border-top">
                         <td className="leftCol6">&nbsp;</td>
                         <td className="middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.summary_salePriceORpayoff__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(sale_Price_OR_Payoffs))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Sale Price/Payoffs</td>
@@ -660,9 +626,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                     <tr>
                         <td className="operatorPadding leftCol6" width="290px" align="right">&#43;</td>
                         <td className="middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.summary_totalClosingCosts__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(blockJ))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Total Closing Costs (J)</td>
@@ -670,9 +634,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                     <tr>
                         <td className="operatorPadding leftCol6" align="right">&#8211;</td>
                         <td className="middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.totalLoanAmount__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(totalLoanAmount))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Total Loan Amount</td>
@@ -680,9 +642,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                     <tr>
                         <td className="operatorPadding leftCol6" align="right">&#8211;</td>
                         <td className="middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.summary_newSecondMortgage__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(secondMortgage))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Second Mortgage</td>
@@ -690,9 +650,7 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                     <tr>
                         <td className="operatorPadding leftCol6" align="right">&#8211;</td>
                         <td className="middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                                <apex:param value="{!Atlas_Loan_Scenario.summary_sellerCredit__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.sellerCredit))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Seller Credit</td>
@@ -702,29 +660,21 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
                             &#8211;
                         </td>
                         <td className="border-bottom middleColA6" align="right">
-                            {/* <apex:outputText value="{0, number, $###,###,##0}">
-                            <apex:param value="{!Atlas_Loan_Scenario.summary_otherCreditsAdjustments__c}"/>
-                            </apex:outputText> */}
+                            ${numberWithCommas(Math.round(Atlas_Loan_Scenario.otherCredits))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Other Credits and Adjustments</td>
                     </tr>
                     <tr>
                         <td className="operatorPadding leftCol6" align="right">&#61;</td>
-                        {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.summary_estimatedCashToClose__c >= 0}"> */}
                             <td className="middleColA6" align="right">
-                                {/* <apex:outputText styleClass="strong" value="{0, number, $###,###,##0}">
-                                    <apex:param value="{!Atlas_Loan_Scenario.summary_estimatedCashToClose__c}"/>
-                                </apex:outputText> */}
+                                { 
+                                    Math.sign(estimatedCashToClose) === -1 ?
+                                    <b>(${numberWithCommas(Math.abs(Math.round(estimatedCashToClose)))})</b>
+                                    :
+                                    <b>${numberWithCommas(Math.round(estimatedCashToClose))}</b>
+                                }
                             </td>
-                        {/* </apex:variable> */}
-                        {/* <apex:variable value="" var="" rendered="{!Atlas_Loan_Scenario.summary_estimatedCashToClose__c < 0}"> */}
-                            <td className="middleColA6" align="right">
-                                {/* <apex:outputText styleClass="strong" value="{0, number, ($###,###,##0)}">
-                                    <apex:param value="{!ABS(Atlas_Loan_Scenario.summary_estimatedCashToClose__c)}"/>
-                                </apex:outputText> */}
-                            </td>
-                        {/* </apex:variable> */}
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6"><strong>Estimated Cash to Close From (To) Borrower</strong></td>
                     </tr>
@@ -732,11 +682,11 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             </table>
         </div>
         <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <td width="700px" align="center">
-                            <h4>Please Review Your Options on the Bottom of Page 3</h4>
+            <table style={{border:0}}>
+                <tbody style={{border:0}}>
+                    <tr style={{border:0}}>
+                        <td align="center" style={{border:0}}>
+                            <h4 className="heading-h4">Please Review Your Options on the Bottom of Page 3</h4>
                         </td>
                     </tr>
                 </tbody>
@@ -748,47 +698,51 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             <table>
                 <tbody>
                     <tr className="blueRow">
-                        <td colSpan="2">Other Considerations</td>
+                        <td  className="td-heading" colSpan="2">Other Considerations</td>
                     </tr>
                     <tr>
                         <td className="leftCol4"><strong>Rate Changes</strong></td>
-                        <td className="rightCol4">Rates change multiple times daily until rate is locked. Factors affecting rate include property state, lock period, loan-to-value, credit, and debt-to-income ratio</td>
+                        <td className="rightCol4 lineheight">Rates change multiple times daily until rate is locked. Factors affecting rate include property state, lock period, loan-to-value, credit, and debt-to-income ratio</td>
                     </tr>
                     <tr>
                         <td className="leftCol4"><strong>Escrow Account</strong></td>
-                        <td className="rightCol4">If this is a refinance transaction, 
-                            <span className="italic-bold-underline">funds held in escrow by your current loan servicer will be returned to you in approximately 30
-                                                days following settlement.
-                            </span>
+                        <td className="rightCol4 lineheight">If this is a refinance transaction,<span>&nbsp;</span> 
+                       
+                               <span className="border-bottom text-bold">funds held in escrow by your current loan servicer</span> 
+                               <span className="border-bottom text-bold"> will be returned to you in approximately 30
+                                                days following settlement.</span>
                         </td>
                     </tr>
                     <tr>
                         <td className="leftCol4"><strong>First Payment</strong></td>
-                        <td className="rightCol4">Your payment of a partial month’s interest at settlement (a prepaid charge) constitutes the first payment on your new loan and 
-                            <span className="italic-bold-underline">you will not have to make a mortgage payment until the beginning of the second month after settlement, </span>e.g., close in November, your first scheduled payment will be January.
+                        <td className="rightCol4 lineheight">Your payment of a partial month’s interest at settlement (a prepaid charge) constitutes the first payment on your new loan and 
+                        
+                        <span>&nbsp;</span> <span className="border-bottom text-bold">you will not have to make a mortgage </span> 
+                               <span className="border-bottom text-bold">payment until the beginning of the second month after settlement, </span>e.g., close in November, your first scheduled payment will be January.
                             
                         </td>
                     </tr>
                     <tr>
                         <td className="leftCol4"><strong>Home Owner’s Insurance</strong></td>
-                        <td className="rightCol4">This loan requires a homeowner's insurance on the property or, in the case of condominiums, an HO-6 insurance policy. You may obtain
+                        <td className="rightCol4 lineheight">This loan requires a homeowner's insurance on the property or, in the case of condominiums, an HO-6 insurance policy. You may obtain
                             this insurance policy from a company of your choice.
                         </td>
                     </tr>
                     <tr>
                         <td className="leftCol4"><strong>Origination Fee</strong></td>
-                        <td className="rightCol4">The Origination Fee represents the total fees we pay outside parties for their services - the processing, underwriting, a pre-fund
+                        <td className="rightCol4 lineheight">The Origination Fee represents the total fees we pay outside parties for their services - the processing, underwriting, a pre-fund
                                                 audit, and warehouse bank draw fee.
                         </td>
                     </tr>
                     <tr>
                         <td className="leftCol4"><strong>New Escrow Account &amp; Prepaid</strong></td>
-                        <td className="rightCol4">Based on the estimated escrow information, we have conservatively set aside 6 months of property taxes and 4 months of 
+                        <td className="rightCol4 lineheight">
+                            Based on the estimated escrow information, we have conservatively set aside 6 months of property taxes and 4 months of 
                                             hazard insurance premiums for payment at settlement to populate your new escrow account. Additionally, we estimated the 
-                                            prepaid interest at 15 days. 
-                            <span className="italic-bold-underline">Both the prepaid interest and the amount required for the escrow account will be adjusted to match 
-                                                                your specific requirements once the loan is locked; a settlement date is finalized; and escrow amount are verified.
-                            </span>
+                                            prepaid interest at 15 days.<span>&nbsp;</span>  
+                               <span className="border-bottom text-bold">Both the prepaid interest and the amount required for the escrow account</span> 
+                               <span className="border-bottom text-bold"> will be adjusted to match your specific requirements once the loan is locked; a</span> 
+                               <span className="border-bottom text-bold"> settlement date is finalized; and escrow amount are verified.</span>
                         </td>
                     </tr>
                 </tbody>
@@ -798,20 +752,20 @@ const Home2_PDF = ({Atlas_Loan_Scenario, totalLoanAmount, principalInterest}) =>
             <table>
                 <tbody>
                     <tr className="blueRow">
-                        <td>Options</td>
+                        <td className="td-heading" >Options</td>
                     </tr>
                     <tr>
                         <td className="oneCol"><strong>You have options available to you either based on your Loan-to-Value (LTV) or the interest rate you choose:</strong></td>
                     </tr>
                     <tr>
-                        <td className="oneCol"><u>If this is a refinance transaction</u>, you might be able to increase the loan amount to reduce the amount needed at settlement; 
+                        <td className="oneCol"><span className="border-bottom">If this is a refinance transaction</span>, you might be able to increase the loan amount to reduce the amount needed at settlement; 
                                                 you may also select a lower interest rate to save money in interest over the life of the loan, or, on the other hand, you may 
                                                 select a higher interest rate and the resultant premium provided by the lender can be used to lower your costs at closing/settlement.  
                                                 Discuss the available options with your Mortgage Consultant.
                         </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="oneCol"><u>If this is a purchase transaction</u>, you may select a lower interest rate to save money in interest over the life of the loan, 
+                        <td className="oneCol"><span  className="border-bottom">If this is a purchase transaction</span>, you may select a lower interest rate to save money in interest over the life of the loan, 
                                                 or, on the other hand, you may select a higher interest rate and the resultant premium provided by the lender can be used to lower 
                                                 your costs at closing/settlement.  Discuss the available options with your Mortgage Consultant.
                         </td>

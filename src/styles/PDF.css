@@ -34,9 +34,21 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 500px;
+    width: 530px;
     /* table-layout: fixed; */
     /* margin: 0px 50px; */
+}
+
+table.table-closing{
+    border: 0 !important;
+}
+.table-child1{
+    width: 262px !important;
+    float: left !important;
+}
+.table-child2{
+    width: 262px !important;
+    float: right !important;
 }
 td.border-left {
     border-left: 1px solid #000000;
@@ -213,4 +225,42 @@ td.oneCol {
     font-style: italic;
     font-weight: bold;
     text-decoration: underline;
+}
+td{
+    font-size: 10px !important;
+    line-height: 10px !important;
+    color: #000000 !important;
+}
+.td-heading {
+    color: #ffffff !important;
+}
+.heading-h4{
+    font-size: 10px !important;
+    line-height: 14px !important;
+    border: 0px !important;
+    margin-top: 10px !important;
+    margin-bottom: 150px !important;
+    font-weight: 800 !important;
+}
+.heading-h3{
+    font-size: 12px !important;
+    width: 530px !important;
+    display: block !important;
+    line-height: 14px !important;
+    font-weight: 800 !important;
+    margin-top: 230px !important;
+}
+.border-bottom{
+    border-bottom: 1px solid #000 !important;
+}
+.oneCol{
+    line-height: 14px !important;
+}
+.text-bold{
+    font-weight: 700 !important; 
+    font-style: italic;
+    letter-spacing: 0;
+}
+.lineheight{
+    line-height: 14px !important;
 }

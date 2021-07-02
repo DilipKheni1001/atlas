@@ -54,9 +54,31 @@ const Home_2 = () => {
       // });
 
       var doc = new jsPDF('p','pt','a4');
-      doc.html(renderToString(<Home2_PDF principalInterest={principalInterest} 
+      doc.html(renderToString(<Home2_PDF 
+        totalHOIPremium={totalHOIPremium}
+        totalPrepaidInterest={totalPrepaidInterest}
+        totalPrepaidTaxes={totalPrepaidTaxes}
+        totalHOI={totalHOI}
+        totalPropertyTaxes={totalPropertyTaxes}
+        sale_Price_OR_Payoffs={sale_Price_OR_Payoffs}
+        secondMortgage={secondMortgage}
+        estimatedEscrow={estimatedEscrow}
+        principalInterest={principalInterest} 
         totalLoanAmount={totalLoanAmount}
-        Atlas_Loan_Scenario={loanScenario} />), {
+        Atlas_Loan_Scenario={loanScenario}
+        estimatedCashToClose={estimatedCashToClose} 
+        governmentFundingFee={governmentFundingFee}
+        blockA={blockA}
+        blockB={blockB}
+        blockC={blockC}
+        blockD={blockD}
+        blockE={blockE}
+        blockF={blockF}
+        blockG={blockG}
+        blockH={blockH}
+        blockI={blockI}
+        blockJ={blockJ}
+        />), {
         callback: function (doc) {
           doc.setProperties({
             title: 'Atlas Loan Scenario',
@@ -67,7 +89,7 @@ const Home_2 = () => {
             });
           doc.output("dataurlnewwindow");
         },
-        margin: ["auto", "auto", "auto", "auto"],
+        margin: [60, 40, 60, 40],
         x: 32,
         y: 32,
       });
