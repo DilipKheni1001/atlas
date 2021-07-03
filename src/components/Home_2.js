@@ -28,7 +28,7 @@ return (<div><p>Hello {name}!!</p></div>);
 }
 const Home_2 = () => {
   
-  const container = React.useRef(null);
+  // const container = React.useRef(null);
   const exportPDFWithMethod = () => {
     // let element = container.current || document.body;
     
@@ -68,6 +68,7 @@ const Home_2 = () => {
         Atlas_Loan_Scenario={loanScenario}
         estimatedCashToClose={estimatedCashToClose} 
         governmentFundingFee={governmentFundingFee}
+        contactDetails={contactDetails}
         blockA={blockA}
         blockB={blockB}
         blockC={blockC}
