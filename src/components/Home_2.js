@@ -79,6 +79,7 @@ const Home_2 = () => {
         blockH={blockH}
         blockI={blockI}
         blockJ={blockJ}
+        user={user}
         />), {
         callback: function (doc) {
           doc.setProperties({
@@ -113,6 +114,8 @@ const Home_2 = () => {
       // Optional - set properties on the document
       
   };
+
+  const [user,setUser] = useState({});
 
   const [contactDetails,setContactDetails] = useState({
     "id": 0,
@@ -848,7 +851,7 @@ const Home_2 = () => {
     
     setBlockI(iBlock);
 
-    var jBlock = dBlock + iBlock + Number(loanScenario.lenderCredit);
+    var jBlock = dBlock + iBlock - Number(loanScenario.lenderCredit);
 
     setBlockJ(jBlock);
 
@@ -882,7 +885,7 @@ const Home_2 = () => {
      - totalLoanAmountVal
      - secondM
      - sellerC
-     + Number(loanScenario.otherCredits);
+     - Number(loanScenario.otherCredits);
 
     setEstimatedCashToClose(estimatedCashToCloseVal); 
 
@@ -933,7 +936,22 @@ const Home_2 = () => {
       }).then((res)=>{
         setContactDetails(res.data.data);
         console.log("result-----",res);
+
+        var userId = {
+          id: res.data.data.userId
+        }
+
+        return axios({
+          method: "get",
+          url: "https://atlas.keystonefunding.com/api/user/details",
+          params: userId,
+        })
+
+      }).then(res => {
+        setUser(res.data.data);
+        console.log("User-----",res);
       });
+
     } catch (e) {
       console.log(e);
     }
@@ -3203,7 +3221,7 @@ const Home_2 = () => {
                           }
                            <li>
                               <p className="text-p">Other Credits and Adjustments</p>
-                              <p className="text-icon">+</p>
+                              <p className="text-icon">-</p>
                               <EdiText
                                className="text-val"
                                   type="number"

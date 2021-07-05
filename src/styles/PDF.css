@@ -33,21 +33,34 @@ body {
 }
 
 table {
-    border-collapse: collapse;
+    border-collapse: collapse !important;
     width: 530px;
+    
     /* table-layout: fixed; */
     /* margin: 0px 50px; */
+}
+.border-left-0{
+    border-left: 0px !important;
+}
+.border-top-1{
+    border-top: 1px !important;
+}
+table tr.border-bottom-1{
+    border-bottom: 1px !important;
+}
+.border-right-0{
+    border-right: 0px !important;
 }
 
 table.table-closing{
     border: 0 !important;
 }
 .table-child1{
-    width: 262px !important;
+    width: 264px !important;
     float: left !important;
 }
 .table-child2{
-    width: 262px !important;
+    width: 264px !important;
     float: right !important;
 }
 td.border-left {
@@ -248,7 +261,7 @@ td{
     display: block !important;
     line-height: 14px !important;
     font-weight: 800 !important;
-    margin-top: 230px !important;
+    margin-top: 210px !important;
 }
 .border-bottom{
     border-bottom: 1px solid #000 !important;
