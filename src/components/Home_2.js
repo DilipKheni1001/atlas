@@ -82,6 +82,7 @@ const Home_2 = () => {
         user={user}
         />), {
         callback: function (doc) {
+          console.log("Page size",doc.internal.pageSize);
           doc.setProperties({
             title: 'Atlas Loan Scenario',
             subject: 'This is the subject',
@@ -89,6 +90,16 @@ const Home_2 = () => {
             keywords: 'generated, javascript, web 2.0, ajax',
             creator: 'Creator Name'
             });
+             // Footer
+            // var str = "Page " + 1;
+
+            // doc.setFontSize(10);
+
+            // var pageSize = doc.internal.pageSize;
+            // var pageHeight = pageSize.height
+            //   ? pageSize.height
+            //   : pageSize.getHeight();
+            // doc.text(str, 10, pageHeight - 10);
           doc.output("dataurlnewwindow");
         },
         margin: [60, 40, 60, 40],

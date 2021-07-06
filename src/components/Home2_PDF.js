@@ -66,8 +66,8 @@ const Home2_PDF = ({
                     <tr className="blueRow">
                         <td  className="td-heading" colSpan="2">ASSUMPTIONS</td>
                     </tr>
-                    <tr className="border-top">
-                        <td className="leftCol">Loan Purpose:</td>
+                    <tr>
+                        <td className="leftCol border-right-0">Loan Purpose:</td>
                         <td className="rightCol">
                             {
                               Atlas_Loan_Scenario.loanPurpose === "Refinance" ?
@@ -79,25 +79,25 @@ const Home2_PDF = ({
                         </td>
                     </tr>
                     <tr>
-                        <td className="leftCol">Location:</td>
+                        <td className="leftCol border-right-0">Location:</td>
                         <td className="rightCol">
                             {Atlas_Loan_Scenario.propertyCountry + " County, " + Atlas_Loan_Scenario.propertyState}
                         </td>
                     </tr>
                     <tr>
-                        <td className="leftCol">Est. Value/ Sale Price:</td>
+                        <td className="leftCol border-right-0">Est. Value/ Sale Price:</td>
                         <td className="rightCol">
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.houseValue))}
                         </td>
                     </tr>
                     <tr>
-                        <td className="leftCol">Lock Period:</td>
+                        <td className="leftCol border-right-0">Lock Period:</td>
                         <td className="rightCol">
                             {Atlas_Loan_Scenario.lockPeriod}
                             </td>
                     </tr>
-                    <tr className="border-bottom">
-                        <td className="leftCol">Credit Score:</td>
+                    <tr>
+                        <td className="leftCol border-right-0">Credit Score:</td>
                         <td className="rightCol">
                             {Atlas_Loan_Scenario.creditScore}
                             </td>
@@ -112,37 +112,37 @@ const Home2_PDF = ({
                     <tr className="blueRow">
                         <td  className="td-heading" colSpan="2">PROPOSED TERMS</td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Loan Program:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Loan Program:</td>
                         <td className="rightCol">
                             {Atlas_Loan_Scenario.loanTypeSpecial} {Atlas_Loan_Scenario.loanProduct}
                             </td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Loan Amount:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Loan Amount:</td>
                         <td className="rightCol">
                             ${numberWithCommas(Math.round(totalLoanAmount))}
                         </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol">Interest Rate:</td>
+                        <td className="leftCol border-right-0">Interest Rate:</td>
                         <td className="rightCol">
                             {Atlas_Loan_Scenario.interestRate}%
                             </td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Monthly Principal &amp; Interest:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Monthly Principal &amp; Interest:</td>
                         <td className="rightCol">
                             ${numberWithCommas(Math.round(principalInterest))}
                             <i style={{"fontSize": "8px"}}> <span>(See below for your Estimated Total Monthly Payment)</span></i>
                         </td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Prepayment Penalty:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Prepayment Penalty:</td>
                         <td className="rightCol">NO</td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Balloon Payment:</td>
+                    <tr>
+                        <td className="leftCol border-right-0">Balloon Payment:</td>
                         <td className="rightCol">NO</td>
                     </tr>
                 </tbody>
@@ -155,40 +155,40 @@ const Home2_PDF = ({
                     <tr className="blueRow">
                         <td className="td-heading"  colSpan="2">PROJECTED PAYMENTS</td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Principal &amp; Interest:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Principal &amp; Interest:</td>
                         <td className="rightCol">
                             ${numberWithCommas(Math.round(principalInterest))}
                         </td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Mortgage Insurance:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Mortgage Insurance:</td>
                         <td className="rightCol">
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.annualMortgageInsuranceRate * totalLoanAmount/1200))}
                         </td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Estimated Taxes:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Estimated Taxes:</td>
                         <td className="rightCol">
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyPropertyTax))}
                         </td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol">Estimated Homeowners Insurance:</td>
+                    <tr className="border-bottom">
+                        <td className="leftCol border-right-0">Estimated Homeowners Insurance:</td>
                         <td className="rightCol">
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyHOI))}
                         </td>
                     </tr>
                     { Atlas_Loan_Scenario.monthlyHOA !=0 ?
-                        <tr className="border-bottom border-top">
-                            <td className="leftCol">HOA Dues:</td>
+                        <tr className="border-bottom">
+                            <td className="leftCol border-right-0">HOA Dues:</td>
                             <td className="rightCol">
                                 ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyHOA))}
                             </td>
                         </tr>
                     : null}
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol"><strong>Estimated Total Monthly Payment:</strong></td>
+                    <tr>
+                        <td className="leftCol border-right-0"><strong>Estimated Total Monthly Payment:</strong></td>
                         <td className="rightCol">
                         <strong>
                             ${
@@ -213,16 +213,16 @@ const Home2_PDF = ({
                     <tr className="blueRow">
                         <td className="td-heading"  colSpan="3">COSTS AT CLOSING</td>
                     </tr>
-                    <tr className="border-bottom border-top">
-                        <td className="leftCol5"><strong>Estimated Closing Costs:</strong></td>
+                    <tr className="border-bottom">
+                        <td className="leftCol5 border-right-0"><strong>Estimated Closing Costs:</strong></td>
                         <td className="middleCol5">
                             <strong>${numberWithCommas(Math.round(blockJ))}</strong>
                         </td>
                         <td className="rightCol5">Includes lender fees and third-party fees (ie title fees, taxes, recording, etc)</td>
                     </tr>
-                    <tr className="border-bottom border-top">
+                    <tr>
                         
-                        <td className="leftCol5"><strong>Estimated Cash to Close:</strong></td>
+                        <td className="leftCol5 border-right-0"><strong>Estimated Cash to Close:</strong></td>
                         {estimatedCashToClose > 0 ? 
                             <>
                                 <td className="middleCol5">
@@ -261,7 +261,7 @@ const Home2_PDF = ({
                                 <tr className="blueRow">
                                     <td colSpan="2"  className="td-heading"  style={{fontSize:"12px"}}>Estimated Loan Costs</td>
                                 </tr>
-                                <tr className="border-top">
+                                <tr>
                                     <td className="leftCol2"><strong>A. Origination Charges</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockA))}</strong>
@@ -302,7 +302,7 @@ const Home2_PDF = ({
                                         </>
                                     : null}
                                 </tr>
-                                <tr className="border-top">
+                                <tr>
                                     <td className="leftCol2"><strong>B. Services You Cannot Shop For</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockB))}</strong>
@@ -383,7 +383,7 @@ const Home2_PDF = ({
                                         </>
                                     :null}
                                 </tr>
-                                <tr className="border-top">
+                                <tr>
                                     <td className="leftCol2"><strong>C. Services You Can Shop For</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockC))}</strong>
@@ -406,7 +406,7 @@ const Home2_PDF = ({
                                         </td>
                                     </tr>
                                 : null}
-                                <tr className="border-bottom border-top">
+                                <tr>
                                     <td className="leftCol2" height="20px">
                                         <strong>D. Total Loan Costs (A&#43;B&#43;C)</strong></td>
                                     <td className="rightCol2" height="20px">
@@ -418,9 +418,9 @@ const Home2_PDF = ({
                         <td style={{"verticalAlign": "top"}}>
                             <table className="table-child2">
                                 <tr className="blueRow">
-                                    <td className="td-heading"  colSpan="2">Other Costs</td>
+                                    <td className="td-heading" colSpan="2">Other Costs</td>
                                 </tr>
-                                <tr className="border-top">
+                                <tr>
                                     <td className="leftCol2"><strong>E. Taxes &amp; Other Government Fees</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockE))}</strong>
@@ -443,7 +443,7 @@ const Home2_PDF = ({
                                         </td>
                                     </tr>
                                 : null}
-                                <tr className="border-top">
+                                <tr>
                                     <td className="leftCol2"><strong>F. Estimated Prepaids</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockF))}</strong>
@@ -584,7 +584,7 @@ const Home2_PDF = ({
                                     </tr>
                                 :null}
                                 
-                                <tr className="border-bottom">
+                                <tr className="border-top">
                                     <td className="leftCol2" height="20px">
                                         <strong>I. Total Other Costs (E&#43;F&#43;G&#43;H)</strong>
                                     </td>                                        
@@ -605,7 +605,7 @@ const Home2_PDF = ({
                     <tr className="blueRow">
                         <td className="td-heading" align="center" colSpan="4">Total Closing Costs</td>
                     </tr>
-                    <tr className="border-top" style={{"padding":"5px 0"}}>
+                    <tr style={{"padding":"5px 0"}}>
                         <td className="leftCol6">&nbsp;</td>
                         <td className="middleColA6" align="right">
                             ${numberWithCommas(Math.round(blockD+blockI))}
@@ -615,7 +615,7 @@ const Home2_PDF = ({
                     </tr>
                     <tr>
                         <td className="operatorPadding leftCol6" align="right">&#8211;</td>
-                        <td className="middleColA6" align="right">
+                        <td className="border-bottom middleColA6" align="right">
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.lenderCredit))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
@@ -623,7 +623,7 @@ const Home2_PDF = ({
                     </tr>
                     <tr>
                         <td className="operatorPadding leftCol6" width="290px" align="right">&#61;</td>
-                        <td className="border-top middleColA6" width="53px" align="right">
+                        <td className="middleColA6" width="53px" align="right">
                             ${numberWithCommas(Math.round(blockJ))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
@@ -633,12 +633,12 @@ const Home2_PDF = ({
             </table>
         </div>
         <div>
-            <table>
+            <table style={{marginTop:"16px"}}>
                 <tbody style={{border:0}}>
                     <tr className="blueRow">
                         <td className="td-heading" align="center" colSpan="4">Estimated Cash to Close</td>
                     </tr>
-                    <tr className="border-top">
+                    <tr>
                         <td className="leftCol6">&nbsp;</td>
                         <td className="middleColA6" align="right">
                             ${numberWithCommas(Math.round(sale_Price_OR_Payoffs))}
