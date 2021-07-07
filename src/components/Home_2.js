@@ -30,29 +30,7 @@ const Home_2 = () => {
   
   // const container = React.useRef(null);
   const exportPDFWithMethod = () => {
-    // let element = container.current || document.body;
     
-    // savePDF(element, {
-    //   paperSize: "auto",
-    //   margin: 40,
-    //   fileName: `Report for ${new Date().getFullYear()}`,
-
-    // },(res)=>{
-    //   console.log("res--->",res);
-    // });
-    // console.log("-****************-",renderToString(<div><h1>Hello Jay !!</h1></div>))
-      // var doc = new jsPDF('p','pt','a4');
-      // doc.html(renderToString(<Home2_PDF/>)).then(()=>{
-      //   doc.setProperties({
-      //     title: 'Atlas Loan Scenario',
-      //     subject: 'This is the subject',
-      //     author: 'Author Name',
-      //     keywords: 'generated, javascript, web 2.0, ajax',
-      //     creator: 'Creator Name'
-      //    });
-      //    doc.output("dataurlnewwindow");
-      // });
-
       var doc = new jsPDF('p','pt','a4');
       doc.html(renderToString(<Home2_PDF 
         totalHOIPremium={totalHOIPremium}
@@ -82,7 +60,7 @@ const Home_2 = () => {
         user={user}
         />), {
         callback: function (doc) {
-          console.log("Page size",doc.internal.pageSize);
+          
           doc.setProperties({
             title: 'Atlas Loan Scenario',
             subject: 'This is the subject',
@@ -90,40 +68,37 @@ const Home_2 = () => {
             keywords: 'generated, javascript, web 2.0, ajax',
             creator: 'Creator Name'
             });
-             // Footer
-            // var str = "Page " + 1;
 
-            // doc.setFontSize(10);
+            var pageSize = doc.internal.pageSize
+            var pdf_pages = doc.internal.pages;
+            var pageHeight = pageSize.height
+              ? pageSize.height
+              : pageSize.getHeight();
+              
+            doc.setFont('helvetica',"normal")
+            doc.setTextColor(128,128,128);
+            doc.setFontSize(8)
 
-            // var pageSize = doc.internal.pageSize;
-            // var pageHeight = pageSize.height
-            //   ? pageSize.height
-            //   : pageSize.getHeight();
-            // doc.text(str, 10, pageHeight - 10);
-          doc.output("dataurlnewwindow");
+            var line1 = "Visit www.consumerfinance.gov/mortgage-estimate for general information and tools";
+            var line2 = "Keystone Funding, Inc. NMLS ID: "+ user.nmlsId;
+
+            for (var i = 1; i < pdf_pages.length; i++) {
+                // We are telling our pdfObject that we are now working on this page
+                doc.setPage(i)
+                // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
+                doc.text(line1, 35, pageHeight - 20)
+                doc.text(line2, 35, pageHeight - 10)
+                doc.setFontSize(9)
+                doc.text('Page ' + String(i) + ' of ' + String(pdf_pages.length-1), pageSize.width - 50 , pageHeight - 10, {
+                  align: 'center'
+                })
+            }
+            window.open(doc.output('bloburl'), '_blank');
         },
         margin: [60, 40, 60, 40],
         x: 32,
         y: 32,
       });
-      // var iframe=document.createElement('iframe');
-      // document.body.appendChild(iframe);
-      // var iframedoc=iframe.contentDocument||iframe.contentWindow.document;
-      // iframedoc.body.innerHTML=renderToString(<Home2_PDF/>);
-
-      // html2canvas(iframedoc.body)
-      //   .then((canvas) => {
-      //       const imgData = canvas.toDataURL('image/png');
-      //       const pdf = new jsPDF();
-      //       pdf.addImage(imgData, 'PNG', 0, 0);
-      //       document.body.removeChild(iframe);
-      //       pdf.output('dataurlnewwindow');
-      //   })
-
-      // doc.text(20, 20, 'This PDF has a title, subject, author, keywords and a creator.');
-
-      // Optional - set properties on the document
-      
   };
 
   const [user,setUser] = useState({});
