@@ -43,17 +43,17 @@ const Home2_PDF = ({
                             <td className="leftCol border-left-0">
                                 <img src={logo_img} style={{"padding":"5px 5px 5px 0px"}} />
                             </td>
-                            <td className="rightCol border-left-0" style={{"lineHeight": "18px"}}>
-                                Prepared For: {contactDetails.firstName + " " + contactDetails.lastName}<br/>
-                                Prepared By: {user.firstName + " " + user.lastName}, NMLS #{user.nmlsId}<br/>
-                                Phone: {user.phone}<br/>
-                                Preparation Date: {dateFormat(Atlas_Loan_Scenario.dateUpdated,"mmmm d, yyyy")}
-                                <br/>
+                            <td className="rightCol border-left-0" style={{"lineHeight": "20px"}}>
+                            <span className="line-height"> Prepared For: {contactDetails.firstName + " " + contactDetails.lastName}<br/></span>
+                            <span className="line-height"> Prepared By: {user.firstName + " " + user.lastName}, NMLS #{user.nmlsId}<br/></span>
+                            <span className="line-height"> Phone: {user.phone}<br/></span>
+                            <span className="line-height"> Preparation Date: {dateFormat(Atlas_Loan_Scenario.dateUpdated,"mmmm d, yyyy")}
+                                <br/></span>
                             </td>
                         </tr>
                         <tr>
                             <td colSpan="2" className="border-right-0" style={{"padding":"5px"}}>
-                                <span>The fees listed below are estimates, and your rate varies with market conditions until locked. Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before choosing a loan.</span>
+                                <span className="line-height">The fees listed below are estimates, and your rate varies with market conditions until locked. Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before choosing a loan.</span>
                             </td>
                         </tr>
                     </tbody>
@@ -250,9 +250,8 @@ const Home2_PDF = ({
         : null}
         <br/>
         <div>
-            <h3 className="heading-h3">
-                Closing Cost Details
-            </h3>
+            <p className="heading-h3"><b>Closing Cost Details</b></p>
+            
             <table className="table-closing" style={{"display":"block"}}> 
                 <tbody style={{border:0}}>
                     <tr style={{border:0}}>
@@ -716,7 +715,7 @@ const Home2_PDF = ({
                 <tbody style={{border:0}}>
                     <tr style={{border:0}}>
                         <td align="center" style={{border:0}}>
-                            <h4 className="heading-h4">Please Review Your Options on the Bottom of Page 3</h4>
+                            <p className="heading-h4"><b>Please Review Your Options on the Bottom of Page 3</b></p>
                         </td>
                     </tr>
                 </tbody>
@@ -747,8 +746,8 @@ const Home2_PDF = ({
                         <td className="leftCol4"><strong>First Payment</strong></td>
                         <td className="rightCol4 lineheight">Your payment of a partial month’s interest at settlement (a prepaid charge) constitutes the first payment on your new loan and 
                         
-                        <span>&nbsp;</span> <span className="border-bottom text-bold">you will not have to make a mortgage </span> 
-                               <span className="border-bottom text-bold">payment until the beginning of the second month after settlement, </span>e.g., close in November, your first scheduled payment will be January.
+                        <span>&nbsp;</span> <span className="border-bottom text-bold">you will not have to make a mortgage payment </span> 
+                               <span className="border-bottom text-bold">until the beginning of the second month after settlement, </span>e.g., close in November, your first scheduled payment will be January.
                             
                         </td>
                     </tr>
@@ -767,12 +766,13 @@ const Home2_PDF = ({
                     <tr>
                         <td className="leftCol4"><strong>New Escrow Account &amp; Prepaid</strong></td>
                         <td className="rightCol4 lineheight">
-                            Based on the estimated escrow information, we have conservatively set aside 6 months of property taxes and 4 months of 
-                                            hazard insurance premiums for payment at settlement to populate your new escrow account. Additionally, we estimated the 
-                                            prepaid interest at 15 days.<span>&nbsp;</span>  
-                               <span className="border-bottom text-bold">Both the prepaid interest and the amount required for the escrow account</span> 
-                               <span className="border-bottom text-bold"> will be adjusted to match your specific requirements once the loan is locked; a</span> 
-                               <span className="border-bottom text-bold"> settlement date is finalized; and escrow amount are verified.</span>
+                            Based on the estimated escrow information, we have conservatively set aside {Atlas_Loan_Scenario.blockGnumMonthsTaxReserves} months of property taxes 
+                            and {Atlas_Loan_Scenario.blockGnumMonthsInsReserves} months of hazard insurance premiums for payment at settlement to populate your new escrow account.
+                             Additionally, we estimated the prepaid interest at {Atlas_Loan_Scenario.blockFdaysPrepaidInterest} days.<span>&nbsp;</span>  
+                             
+                               <span className="border-bottom text-bold">Both the prepaid interest and the amount required for the escrow </span> 
+                               <span className="border-bottom text-bold">account will be adjusted to match your specific requirements once the loan is </span> 
+                               <span className="border-bottom text-bold">locked; a settlement date is finalized; and escrow amount are verified.</span>
                         </td>
                     </tr>
                 </tbody>

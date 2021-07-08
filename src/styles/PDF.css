@@ -246,6 +246,13 @@ td{
 }
 .td-heading {
     color: #ffffff !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    /* padding: 5px 0px; */
+    line-height: 16px !important;
+}
+.line-height{
+    line-height: 14px;
 }
 .heading-h4{
     font-size: 10px !important;
@@ -253,15 +260,15 @@ td{
     border: 0px !important;
     margin-top: 10px !important;
     margin-bottom: 150px !important;
-    font-weight: 800 !important;
+    color: black !important;
 }
 .heading-h3{
     font-size: 12px !important;
-    width: 530px !important;
-    display: block !important;
+    width: 150px !important;
     line-height: 14px !important;
-    font-weight: 800 !important;
-    margin-top: 200px !important;
+    margin-top: 150px !important;
+    margin-bottom: 10px !important;
+    color: black !important;
 }
 .border-bottom{
     border-bottom: 1px solid #000 !important;
