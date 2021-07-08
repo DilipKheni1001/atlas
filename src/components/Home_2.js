@@ -93,7 +93,6 @@ const Home_2 = () => {
                   align: 'center'
                 })
             }
-            doc.autoPrint()
             window.open(doc.output('bloburl'), '_blank');
         },
         margin: [60, 40, 60, 40],
