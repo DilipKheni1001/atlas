@@ -1504,7 +1504,7 @@ const Home_2 = () => {
                   <button>Clone</button>
                 </div>
                 <div className="st-btn">
-                    <button className="btn-create-pdf" onClick={exportPDFWithMethod} style={{display:"flex"}}>
+                    <button className="btn-create-pdf" disabled={isLoading} onClick={exportPDFWithMethod} style={{display:"flex"}}>
                         <span>Create PDF</span>
                         {
                           isLoading === true ? 
