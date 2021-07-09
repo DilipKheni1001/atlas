@@ -288,3 +288,16 @@ td{
 .lineheight{
     line-height: 14px !important;
 }
+
+.btn-create-pdf span {
+    color: #fff;
+}
+
+.btn-create-pdf svg {
+    padding-left: 10px;
+}
+.btn-create-pdf {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

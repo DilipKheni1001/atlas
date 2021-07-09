@@ -21,16 +21,13 @@ import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 import jsPDF from "jspdf";
 import { renderToString,renderToStaticMarkup } from 'react-dom/server'
 import Home2_PDF from './Home2_PDF';
-import html2canvas from 'html2canvas';
+import Loader from 'react-loader-spinner';
 
-const PDFComponent = ({name}) => {
-return (<div><p>Hello {name}!!</p></div>);
-}
 const Home_2 = () => {
   
   // const container = React.useRef(null);
   const exportPDFWithMethod = () => {
-    
+      setIsLoading(true);
       var doc = new jsPDF('p','pt','a4');
       doc.html(renderToString(<Home2_PDF 
         totalHOIPremium={totalHOIPremium}
@@ -93,6 +90,7 @@ const Home_2 = () => {
                   align: 'center'
                 })
             }
+            setIsLoading(false);
             window.open(doc.output('bloburl'), '_blank');
         },
         margin: [60, 40, 60, 40],
@@ -704,7 +702,8 @@ const Home_2 = () => {
   const [estimatedCashToClose,setEstimatedCashToClose] = useState(0);
   const [openRepriceModal,setOpenRepriceModal] = useState(false);
   const [link,setLink] = useState("");
-
+  const [isLoading,setIsLoading] = useState(false);
+  
   useEffect(() => {
     
     let governmentFundingFeeVal = Number(loanScenario.baseLoanAmount) * Number(loanScenario.governmentFundingFeePercent) / 100;
@@ -1505,7 +1504,15 @@ const Home_2 = () => {
                   <button>Clone</button>
                 </div>
                 <div className="st-btn">
-                  <button onClick={exportPDFWithMethod}>Create PDF</button>
+                    <button className="btn-create-pdf" onClick={exportPDFWithMethod} style={{display:"flex"}}>
+                        <span>Create PDF</span>
+                        {
+                          isLoading === true ? 
+                          <Loader type="Grid" color="#FFFFFF" height="25" width="25" />  
+                          : null
+                        }
+                        
+                    </button>
                 </div>
                 <div className="st-btn">
                   <button>Email</button>
