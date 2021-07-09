@@ -119,7 +119,7 @@ td.leftCol2 {
     padding-bottom: 5px;
     padding-top: 5px;
     width: 600px;
-    border-left: 1px solid #000000;
+    /* border-left: 1px solid #000000; */
 }
 
 td.rightCol2 {
@@ -128,7 +128,7 @@ td.rightCol2 {
     padding-bottom: 5px;
     padding-top: 5px;
     width: 100px;
-    border-right: 1px solid #000000;
+    /* border-right: 1px solid #000000; */
     text-align: right;
 }
 td.leftCol3 {
@@ -152,7 +152,7 @@ td.leftCol4 {
     padding-bottom: 8px;
     padding-top: 8px;
     width: 150px;
-    border-left: 1px solid #000000;
+    /* border-left: 1px solid #000000; */
 }
 
 td.rightCol4 {
@@ -161,14 +161,14 @@ td.rightCol4 {
     padding-bottom: 8px;
     padding-top: 8px;
     width: 550px;
-    border-right: 1px solid #000000;
+    /* border-right: 1px solid #000000; */
 }
 td.leftCol5 {
     padding-left: 6px;
     padding-bottom: 5px;
     padding-top: 5px;
     width: 250px;
-    border-left: 1px solid #000000;
+    /* border-left: 1px solid #000000; */
 }
 td.middleCol5 {
     padding-left: 3px;
@@ -184,7 +184,7 @@ td.rightCol5 {
     padding-bottom: 5px;
     padding-top: 5px;
     width: 380px;
-    border-right: 1px solid #000000;
+    /* border-right: 1px solid #000000; */
 }
 td.leftCol6 {
     padding-left: 6px;
@@ -197,12 +197,14 @@ td.middleColA6 {
     padding-bottom: 5px;
     padding-top: 5px;
     width: 73px;
+    border: 0px !important;
 }
 td.middleColB6 {
     padding-left: 3px;
     padding-bottom: 5px;
     padding-top: 5px;
     width: 14px;
+    border: 0px !important;
 }
 
 td.rightCol6 {
@@ -211,6 +213,7 @@ td.rightCol6 {
     padding-bottom: 5px;
     padding-top: 5px;
     width: 343px;
+    border: 0px !important;
 }
 td.oneCol {
     padding-left: 8px;
@@ -218,8 +221,8 @@ td.oneCol {
     padding-bottom: 8px;
     padding-top: 8px;
     width: 700px;
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000;
+    /* border-left: 1px solid #000000;
+    border-right: 1px solid #000000; */
 }
 .operatorPadding {
     padding-right: 8px;
@@ -243,6 +246,7 @@ td{
     font-size: 10px !important;
     line-height: 10px !important;
     color: #000000 !important;
+    /* border: 0px !important; */
 }
 .td-heading {
     color: #ffffff !important;

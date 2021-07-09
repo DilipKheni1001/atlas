@@ -256,19 +256,19 @@ const Home2_PDF = ({
                 <tbody style={{border:0}}>
                     <tr style={{border:0}}>
                         <td style={{"verticalAlign": "top"}}>
-                            <table className="table-child1">
+                            <table className="table-child1" style={{border:0}}>
                                 <tr className="blueRow">
                                     <td colSpan="2"  className="td-heading"  style={{fontSize:"12px"}}>Estimated Loan Costs</td>
                                 </tr>
                                 <tr>
-                                    <td className="leftCol2"><strong>A. Origination Charges</strong></td>
+                                    <td className="leftCol2 border-right-0"><strong>A. Origination Charges</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockA))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockADiscountFee != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Loan Discount Fee (Points)</td>
+                                        <td className="leftCol2 border-right-0">Loan Discount Fee (Points)</td>
                                         <td className="rightCol2">
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockADiscountFee))}
                                         </td>
@@ -276,7 +276,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockAprocessingFee != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Loan Processing Fee</td>
+                                        <td className="leftCol2 border-right-0">Loan Processing Fee</td>
                                         <td className="rightCol2">
                                                 ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockAprocessingFee))}
                                         </td>
@@ -284,7 +284,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockATaxService != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Tax Service Fee</td>
+                                        <td className="leftCol2 border-right-0">Tax Service Fee</td>
                                         <td className="rightCol2">
                                              ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockATaxService))}
                                         </td>
@@ -294,7 +294,7 @@ const Home2_PDF = ({
                                 <tr className="border-bottom">
                                     {Atlas_Loan_Scenario.blockAOriginationFee != 0 ? 
                                         <>
-                                            <td className="leftCol2">Loan Origination Fees</td>
+                                            <td className="leftCol2 border-right-0">Loan Origination Fees</td>
                                             <td className="rightCol2">
                                                 ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockAOriginationFee))}
                                             </td>
@@ -302,14 +302,14 @@ const Home2_PDF = ({
                                     : null}
                                 </tr>
                                 <tr>
-                                    <td className="leftCol2"><strong>B. Services You Cannot Shop For</strong></td>
+                                    <td className="leftCol2 border-right-0"><strong>B. Services You Cannot Shop For</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockB))}</strong>
                                     </td>
                                 </tr>
                                     {Atlas_Loan_Scenario.blockBAppraisalFee != 0 ? 
                                         <tr>
-                                            <td className="leftCol2">Appraisal</td>
+                                            <td className="leftCol2 border-right-0">Appraisal</td>
                                             <td className="rightCol2">
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBAppraisalFee))}
                                             </td>
@@ -317,7 +317,7 @@ const Home2_PDF = ({
                                     : null}
                                 {Atlas_Loan_Scenario.blockBCreditFees != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Credit Report</td>
+                                        <td className="leftCol2 border-right-0">Credit Report</td>
                                         <td className="rightCol2">
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBCreditFees))}
                                         </td>
@@ -325,7 +325,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockBFloodCertification != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Flood Certification</td>
+                                        <td className="leftCol2 border-right-0">Flood Certification</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBFloodCertification))}
                                   
@@ -334,7 +334,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockBhoaQuestionnaire != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Condo Questionnaire</td>
+                                        <td className="leftCol2 border-right-0">Condo Questionnaire</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBhoaQuestionnaire))}
                                         </td>
@@ -342,7 +342,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockBcondoProjectApproval != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Condo Project Approval</td>
+                                        <td className="leftCol2 border-right-0">Condo Project Approval</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBcondoProjectApproval))}
                                         </td>
@@ -350,7 +350,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockBsinglePremiumMI != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Upfront Mortgage Insurance Premium</td>
+                                        <td className="leftCol2 border-right-0">Upfront Mortgage Insurance Premium</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBsinglePremiumMI))}
                                         </td>
@@ -358,7 +358,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockBtaxReturnVerificationFee != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Tax Return Verification Fee</td>
+                                        <td className="leftCol2 border-right-0">Tax Return Verification Fee</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBtaxReturnVerificationFee))}
                                         </td>
@@ -366,7 +366,7 @@ const Home2_PDF = ({
                                 : null}
                                 {Atlas_Loan_Scenario.blockBverificationEmployment != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Verification of Employment</td>
+                                        <td className="leftCol2 border-right-0">Verification of Employment</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBverificationEmployment))}
                                         </td>
@@ -375,7 +375,7 @@ const Home2_PDF = ({
                                 <tr className="border-bottom">
                                     {governmentFundingFee != 0 ? 
                                         <>
-                                            <td className="leftCol2">FHA, VA, or USDA Funding Fee</td>
+                                            <td className="leftCol2 border-right-0">FHA, VA, or USDA Funding Fee</td>
                                             <td className="rightCol2">
                                                 ${numberWithCommas(Math.round(governmentFundingFee))}
                                             </td>
@@ -383,14 +383,14 @@ const Home2_PDF = ({
                                     :null}
                                 </tr>
                                 <tr>
-                                    <td className="leftCol2"><strong>C. Services You Can Shop For</strong></td>
+                                    <td className="leftCol2 border-right-0"><strong>C. Services You Can Shop For</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockC))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockCTitleServices != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Title Services &amp; Insurance</td>
+                                        <td className="leftCol2 border-right-0">Title Services &amp; Insurance</td>
                                         <td className="rightCol2">
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockCTitleServices))}
                                         </td>
@@ -399,14 +399,14 @@ const Home2_PDF = ({
                                 {Atlas_Loan_Scenario.blockCSurvey != 0 ? 
                                 
                                     <tr className="border-bottom">
-                                        <td className="leftCol2">Survey (if required)</td>
+                                        <td className="leftCol2 border-right-0">Survey (if required)</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockCSurvey))}
                                         </td>
                                     </tr>
                                 : null}
                                 <tr>
-                                    <td className="leftCol2" height="20px">
+                                    <td className="leftCol2 border-right-0" height="20px">
                                         <strong>D. Total Loan Costs (A&#43;B&#43;C)</strong></td>
                                     <td className="rightCol2" height="20px">
                                         <strong>${numberWithCommas(Math.round(blockD))}</strong>
@@ -420,14 +420,14 @@ const Home2_PDF = ({
                                     <td className="td-heading" colSpan="2">Other Costs</td>
                                 </tr>
                                 <tr>
-                                    <td className="leftCol2"><strong>E. Taxes &amp; Other Government Fees</strong></td>
+                                    <td className="leftCol2 border-right-0"><strong>E. Taxes &amp; Other Government Fees</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockE))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockERecordingCharges != 0 ? 
                                     <tr>
-                                        <td className="leftCol2">Recording Fees &amp; Other Taxes</td>
+                                        <td className="leftCol2 border-right-0">Recording Fees &amp; Other Taxes</td>
                                         <td className="rightCol2">
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockERecordingCharges))}
                                         </td>
@@ -436,14 +436,14 @@ const Home2_PDF = ({
                                 {Atlas_Loan_Scenario.blockETransferTaxes != 0 ? 
                                 
                                     <tr className="border-bottom">
-                                        <td className="leftCol2">Transfer Taxes (if required)</td>
+                                        <td className="leftCol2 border-right-0">Transfer Taxes (if required)</td>
                                         <td className="rightCol2">
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockETransferTaxes))}
                                         </td>
                                     </tr>
                                 : null}
                                 <tr>
-                                    <td className="leftCol2"><strong>F. Estimated Prepaids</strong></td>
+                                    <td className="leftCol2 border-right-0"><strong>F. Estimated Prepaids</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockF))}</strong>
                                     </td>
@@ -451,7 +451,7 @@ const Home2_PDF = ({
                                 {totalHOIPremium != 0 ? 
                                 <>
                                     <tr>
-                                            <td className="leftCol2">Homeowner’s Insurance Premium</td>
+                                            <td className="leftCol2 border-right-0">Homeowner’s Insurance Premium</td>
                                             <td className="rightCol2">
                                             
                                             ${numberWithCommas(Math.round(totalHOIPremium))}
@@ -459,7 +459,7 @@ const Home2_PDF = ({
                                         </tr>
                                     
                                     <tr>
-                                        <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 {numberWithCommas(Atlas_Loan_Scenario.blockFnumMonthsPrepaidHOI)}{" "}
                                                 months at    
@@ -474,7 +474,7 @@ const Home2_PDF = ({
                                  {totalPrepaidInterest != 0 ? 
                                 <>
                                     <tr>
-                                            <td className="leftCol2">Prepaid Interest</td>
+                                            <td className="leftCol2 border-right-0">Prepaid Interest</td>
                                             <td className="rightCol2">
                                             
                                             ${numberWithCommas(Math.round(totalPrepaidInterest))}
@@ -482,7 +482,7 @@ const Home2_PDF = ({
                                         </tr>
                                     
                                     <tr>
-                                        <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 ${numberWithCommas((totalLoanAmount *(Atlas_Loan_Scenario.interestRate/100)/360).toFixed(2)) }{" "}
                                                 per day for      {" "}
@@ -497,14 +497,14 @@ const Home2_PDF = ({
                                 {totalPrepaidTaxes != 0 ? 
                                    <>
                                     <tr>
-                                            <td className="leftCol2">Prepaid Homeowner&#39;s Insurance</td>
+                                            <td className="leftCol2 border-right-0">Prepaid Homeowner&#39;s Insurance</td>
                                             <td className="rightCol2">
                                                 ${numberWithCommas(Math.round(totalPrepaidTaxes))}
                                             </td>
                                         </tr>
                                     
                                     <tr>
-                                        <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 {numberWithCommas((Atlas_Loan_Scenario.blockFnumMonthsPrepaidTaxes).toFixed(2))}{" "}
                                                 months at    
@@ -518,7 +518,7 @@ const Home2_PDF = ({
                                 :null}
                                 
                                 <tr className="border-top">
-                                    <td className="leftCol2"><strong>G. Estimated Escrow Payment</strong></td>
+                                    <td className="leftCol2 border-right-0"><strong>G. Estimated Escrow Payment</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockG))}</strong>
                                     </td>
@@ -526,14 +526,14 @@ const Home2_PDF = ({
                                 {totalHOI != 0 ?
                                        <>
                                             <tr>
-                                                    <td className="leftCol2">Homeowners Insurance</td>
+                                                    <td className="leftCol2 border-right-0">Homeowners Insurance</td>
                                                     <td className="rightCol2">
                                                         ${numberWithCommas(Math.round(totalHOI))}
                                                     </td>
                                                 </tr>
                                             
                                             <tr>
-                                                <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <i>
                                                         ${numberWithCommas(Atlas_Loan_Scenario.monthlyHOI)}{" "}
                                                         per month for    {" "}
@@ -548,14 +548,14 @@ const Home2_PDF = ({
                                 {totalPropertyTaxes != 0 ? 
                                     <>
                                         <tr>
-                                            <td className="leftCol2">Property taxes</td>
+                                            <td className="leftCol2 border-right-0">Property taxes</td>
                                             <td className="rightCol2">
                                             ${numberWithCommas(Math.round(totalPropertyTaxes))}
                                             </td>
                                         </tr>
                                     
                                     <tr className="border-bottom">
-                                        <td className="leftCol2">&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 ${numberWithCommas(Atlas_Loan_Scenario.monthlyPropertyTax)}{" "}
                                                 per month for {" "}   
@@ -568,7 +568,7 @@ const Home2_PDF = ({
                                     </>
                                 :null}
                                 <tr>
-                                    <td className="leftCol2"><strong>H. Other</strong></td>
+                                    <td className="leftCol2 border-right-0"><strong>H. Other</strong></td>
                                     <td className="rightCol2">
                                         <strong>${numberWithCommas(Math.round(blockH))}</strong>
                                     </td>
@@ -576,7 +576,7 @@ const Home2_PDF = ({
                                 
                                 {Atlas_Loan_Scenario.blockHOwnersTitleInsPremium != 0 ? 
                                     <tr >
-                                        <td className="leftCol2">Owner&#39;s Title Insurance</td>
+                                        <td className="leftCol2 border-right-0">Owner&#39;s Title Insurance</td>
                                         <td className="rightCol2">
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockHOwnersTitleInsPremium))}
                                         </td>
@@ -584,7 +584,7 @@ const Home2_PDF = ({
                                 :null}
                                 
                                 <tr className="border-top">
-                                    <td className="leftCol2" height="20px">
+                                    <td className="leftCol2 border-right-0" height="20px">
                                         <strong>I. Total Other Costs (E&#43;F&#43;G&#43;H)</strong>
                                     </td>                                        
                                     <td className="rightCol2" height="20px">
@@ -730,11 +730,11 @@ const Home2_PDF = ({
                         <td  className="td-heading" colSpan="2">Other Considerations</td>
                     </tr>
                     <tr>
-                        <td className="leftCol4"><strong>Rate Changes</strong></td>
+                        <td className="leftCol4 border-right-0"><strong>Rate Changes</strong></td>
                         <td className="rightCol4 lineheight">Rates change multiple times daily until rate is locked. Factors affecting rate include property state, lock period, loan-to-value, credit, and debt-to-income ratio</td>
                     </tr>
                     <tr>
-                        <td className="leftCol4"><strong>Escrow Account</strong></td>
+                        <td className="leftCol4 border-right-0"><strong>Escrow Account</strong></td>
                         <td className="rightCol4 lineheight">If this is a refinance transaction,<span>&nbsp;</span> 
                        
                                <span className="border-bottom text-bold">funds held in escrow by your current loan servicer</span> 
@@ -743,7 +743,7 @@ const Home2_PDF = ({
                         </td>
                     </tr>
                     <tr>
-                        <td className="leftCol4"><strong>First Payment</strong></td>
+                        <td className="leftCol4 border-right-0"><strong>First Payment</strong></td>
                         <td className="rightCol4 lineheight">Your payment of a partial month’s interest at settlement (a prepaid charge) constitutes the first payment on your new loan and 
                         
                         <span>&nbsp;</span> <span className="border-bottom text-bold">you will not have to make a mortgage payment </span> 
@@ -752,19 +752,19 @@ const Home2_PDF = ({
                         </td>
                     </tr>
                     <tr>
-                        <td className="leftCol4"><strong>Home Owner’s Insurance</strong></td>
+                        <td className="leftCol4 border-right-0"><strong>Home Owner’s Insurance</strong></td>
                         <td className="rightCol4 lineheight">This loan requires a homeowner's insurance on the property or, in the case of condominiums, an HO-6 insurance policy. You may obtain
                             this insurance policy from a company of your choice.
                         </td>
                     </tr>
                     <tr>
-                        <td className="leftCol4"><strong>Origination Fee</strong></td>
+                        <td className="leftCol4 border-right-0"><strong>Origination Fee</strong></td>
                         <td className="rightCol4 lineheight">The Origination Fee represents the total fees we pay outside parties for their services - the processing, underwriting, a pre-fund
                                                 audit, and warehouse bank draw fee.
                         </td>
                     </tr>
                     <tr>
-                        <td className="leftCol4"><strong>New Escrow Account &amp; Prepaid</strong></td>
+                        <td className="leftCol4 border-right-0"><strong>New Escrow Account &amp; Prepaid</strong></td>
                         <td className="rightCol4 lineheight">
                             Based on the estimated escrow information, we have conservatively set aside {Atlas_Loan_Scenario.blockGnumMonthsTaxReserves} months of property taxes 
                             and {Atlas_Loan_Scenario.blockGnumMonthsInsReserves} months of hazard insurance premiums for payment at settlement to populate your new escrow account.

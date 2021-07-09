@@ -80,16 +80,16 @@ const Home_2 = () => {
             doc.setFontSize(8)
 
             var line1 = "Visit www.consumerfinance.gov/mortgage-estimate for general information and tools";
-            var line2 = "Keystone Funding, Inc. NMLS ID: "+ user.nmlsId;
+            var line2 = "Keystone Funding, Inc. NMLS ID: 144760";
 
             for (var i = 1; i < pdf_pages.length; i++) {
                 // We are telling our pdfObject that we are now working on this page
                 doc.setPage(i)
                 // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
-                doc.text(line1, 35, pageHeight - 20)
-                doc.text(line2, 35, pageHeight - 10)
+                doc.text(line1, 35, pageHeight - 40)
+                doc.text(line2, 35, pageHeight - 30)
                 doc.setFontSize(9)
-                doc.text('Page ' + String(i) + ' of ' + String(pdf_pages.length-1), pageSize.width - 50 , pageHeight - 10, {
+                doc.text('Page ' + String(i) + ' of ' + String(pdf_pages.length-1), pageSize.width - 50 , pageHeight - 30, {
                   align: 'center'
                 })
             }
