@@ -197,14 +197,14 @@ td.middleColA6 {
     padding-bottom: 5px;
     padding-top: 5px;
     width: 73px;
-    border: 0px !important;
+    
 }
 td.middleColB6 {
     padding-left: 3px;
     padding-bottom: 5px;
     padding-top: 5px;
     width: 14px;
-    border: 0px !important;
+    
 }
 
 td.rightCol6 {
@@ -213,7 +213,7 @@ td.rightCol6 {
     padding-bottom: 5px;
     padding-top: 5px;
     width: 343px;
-    border: 0px !important;
+    
 }
 td.oneCol {
     padding-left: 8px;
