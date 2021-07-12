@@ -22,6 +22,8 @@ import jsPDF from "jspdf";
 import { renderToString,renderToStaticMarkup } from 'react-dom/server'
 import Home2_PDF from './Home2_PDF';
 import Loader from 'react-loader-spinner';
+import PreQualPDF from "./PreQualPDF";
+import logo_img from "../images/logo.png";
 
 const Home_2 = () => {
   
@@ -98,6 +100,54 @@ const Home_2 = () => {
         y: 32,
       });
   };
+
+  const exportPreQualPDF = () => {
+    setIsLoadingPreQualPDF(true);
+    var doc = new jsPDF('p','pt','a4');
+    doc.html(renderToString(<PreQualPDF 
+      totalLoanAmount={totalLoanAmount}
+      Atlas_Loan_Scenario={loanScenario}
+      contactDetails={contactDetails}
+      user={user}
+      />), {
+      callback: function (doc) {
+        
+        doc.setProperties({
+          title: 'Atlas Loan Scenario',
+          subject: 'This is the subject',
+          author: 'Author Name',
+          keywords: 'generated, javascript, web 2.0, ajax',
+          creator: 'Creator Name'
+          });
+
+          var pageSize = doc.internal.pageSize
+          var pdf_pages = doc.internal.pages;
+          var pageHeight = pageSize.height
+            ? pageSize.height
+            : pageSize.getHeight();
+            
+          doc.setFont('helvetica',"normal")
+          doc.setTextColor(128,128,128);
+          doc.setFontSize(10)
+
+          var footer_content = "KEYSTONE FUNDING |  CORPORATE NMLS ID: 144760  |  950 N WASHINGTON ST  |  ALEXANDRIA, VA 22314";
+          
+          for (var i = 1; i < pdf_pages.length; i++) {
+              // We are telling our pdfObject that we are now working on this page
+              doc.setPage(i)
+              // doc.addImage(logo_img, 'png', 200, 30, 200, 100)
+              // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
+              doc.text(footer_content, 35, pageHeight - 30)
+              
+          }
+          setIsLoadingPreQualPDF(false);
+          window.open(doc.output('bloburl'), '_blank');
+      },
+      margin: [60, 40, 60, 40],
+      x: 32,
+      y: 32,
+    });
+};
 
   const [user,setUser] = useState({});
 
@@ -703,7 +753,8 @@ const Home_2 = () => {
   const [openRepriceModal,setOpenRepriceModal] = useState(false);
   const [link,setLink] = useState("");
   const [isLoading,setIsLoading] = useState(false);
-  
+  const [isLoadingPreQualPDF,setIsLoadingPreQualPDF] = useState(false);
+
   useEffect(() => {
     
     let governmentFundingFeeVal = Number(loanScenario.baseLoanAmount) * Number(loanScenario.governmentFundingFeePercent) / 100;
@@ -1505,7 +1556,7 @@ const Home_2 = () => {
                 </div>
                 <div className="st-btn">
                     <button className="btn-create-pdf" disabled={isLoading} onClick={exportPDFWithMethod} style={{display:"flex"}}>
-                        <span>Create PDF</span>
+                        <span>Scenario PDF</span>
                         {
                           isLoading === true ? 
                           <Loader type="Grid" color="#FFFFFF" height="25" width="25" />  
@@ -1515,7 +1566,15 @@ const Home_2 = () => {
                     </button>
                 </div>
                 <div className="st-btn">
-                  <button>Email</button>
+                <button className="btn-create-pdf" disabled={isLoadingPreQualPDF} onClick={exportPreQualPDF} style={{display:"flex"}}>
+                        <span>Pre-Qual PDF</span>
+                        {
+                          isLoadingPreQualPDF === true ? 
+                          <Loader type="Grid" color="#FFFFFF" height="25" width="25" />  
+                          : null
+                        }
+                        
+                    </button>
                 </div>
               </div>
             </div>
