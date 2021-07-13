@@ -305,7 +305,7 @@ td{
 
 .main-content{
     width: 530px;
-    font-size: 11px;
+    font-size: 13px;
 }
 .mail-heading{
     margin-bottom: 10px;
@@ -326,12 +326,50 @@ margin-bottom: 15px;
 .mail-body h1{
     display: flex;
     justify-content: center;
-    font-size: 15px;
+    font-size: 16px;
     text-transform: uppercase;
 }
 
-.mail-body table tbody{
-    font-size: 11px;
-    line-height: 10px;
-    border: 1px solid #000;
+.mail-body table{
+    margin: 15px 0px;
+}
+.mail-body table td{
+    padding:3px 5px 6px 5px!important;
+    font-size: 13px !important;
+    /* line-height: 16px !important; */
+}
+.mail-body table td:nth-child(odd){
+    border-right: 1px solid #000;
+    width: 200px;
+}
+
+.mail-body table tr{
+    border-bottom: 1px solid #000;
+}
+.mail-body table tr:last-child{
+    border-bottom:0px !important;
+}
+.mail-body p{
+font-size: 13px;
+margin-bottom: 15px;
+line-height: 16px;
+}
+
+.mail-body h1{
+    font-size: 16px;
+    margin: 15px 0px;
+    line-height: 18px;
+}
+.mail-info{
+display: flex;
+justify-content: space-between;
+}
+.mail-info p{
+margin-bottom: 0px;
+}
+.sign-info{
+    margin-bottom: 15px;
+}
+.sign-info p{
+    margin-bottom: 5px;
 }

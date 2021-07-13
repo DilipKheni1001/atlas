@@ -17,7 +17,7 @@ const PreQualPDF = ({
         <body>
             <div className="main-content">
                 <div className="mail-heading">
-                        <img src={logo_img} style={{"padding":"5px 5px 5px 0px",width:"200px",height:"60px"}} />
+                        <img src={logo_img} style={{"padding":"5px 5px 5px 0px",width:"310px",height:"72px"}} />
                         <h1>YOUR HOME PURCHASE PREQUALIFICATION</h1>
                 </div>
                 <div className="mail-body">
@@ -72,10 +72,12 @@ const PreQualPDF = ({
                     I look forward to having the opportunity to provide you with the best homebuying experience in the market.
                     If you have any questions or concerns, please don't hesitate to call the number below.
                     </p>
+                    <div className="sign-info">
                     <p>
                     Sincerely,
                     </p>
-                    <img src={user.signatureImage} />
+                        <img src={user.signatureImage} style={{"padding":"5px 5px 5px 0px",width:"80px",height:"60px"}}/>
+                    </div>
                 </div>
                 <div className="mail-info">
                     <div>
@@ -85,7 +87,7 @@ const PreQualPDF = ({
                         <p>O: {user.phone} E: {user.email}</p>
                     </div>
                     <div>
-                    <img src={equal_housing_logo_img} style={{"padding":"5px 5px 5px 0px",width:"80px",height:"50px"}} />
+                    <img src={equal_housing_logo_img} style={{"padding":"5px 5px 5px 0px",width:"80px",height:"60px"}} />
                     </div>
                 </div>
             </div>
