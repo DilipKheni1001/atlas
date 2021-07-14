@@ -770,9 +770,9 @@ const Home2_PDF = ({
                             and {Atlas_Loan_Scenario.blockGnumMonthsInsReserves} months of hazard insurance premiums for payment at settlement to populate your new escrow account.
                              Additionally, we estimated the prepaid interest at {Atlas_Loan_Scenario.blockFdaysPrepaidInterest} days.<span>&nbsp;</span>  
                              
-                               <span className="border-bottom text-bold">Both the prepaid interest and the amount required for the escrow </span> 
-                               <span className="border-bottom text-bold">account will be adjusted to match your specific requirements once the loan is </span> 
-                               <span className="border-bottom text-bold">locked; a settlement date is finalized; and escrow amount are verified.</span>
+                               <span className="border-bottom text-bold">Both the prepaid interest and the amount required for the escrow account </span> 
+                               <span className="border-bottom text-bold">will be adjusted to match your specific requirements once the loan is locked; a </span> 
+                               <span className="border-bottom text-bold">settlement date is finalized; and escrow amount are verified.</span>
                         </td>
                     </tr>
                 </tbody>
