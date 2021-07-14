@@ -40,7 +40,7 @@ const Home2_PDF = ({
                 <table>
                     <tbody>
                         <tr className="border-bottom">
-                            <td className="leftCol border-left-0">
+                            <td className="leftCol border-left-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px"}}>
                                 <img src={logo_img} style={{"padding":"5px 5px 5px 0px"}} />
                             </td>
                             <td className="rightCol border-left-0" style={{"lineHeight": "20px"}}>
@@ -66,9 +66,9 @@ const Home2_PDF = ({
                     <tr className="blueRow">
                         <td  className="td-heading" colSpan="2">ASSUMPTIONS</td>
                     </tr>
-                    <tr>
-                        <td className="leftCol border-right-0">Loan Purpose:</td>
-                        <td className="rightCol">
+                    <tr style={{borderBottom:"0px",borderTop:"0px"}}>
+                        <td className="leftCol border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px"}}>Loan Purpose:</td>
+                        <td className="rightCol" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px"}}>
                             {
                               Atlas_Loan_Scenario.loanPurpose === "Refinance" ?
                                 Atlas_Loan_Scenario.isCashout === 1 ? "Refinance- Cash Out" : "Refinance- Rate/Term"
@@ -78,27 +78,27 @@ const Home2_PDF = ({
                             }
                         </td>
                     </tr>
-                    <tr>
-                        <td className="leftCol border-right-0">Location:</td>
-                        <td className="rightCol">
+                    <tr style={{borderBottom:"0px",borderTop:"0px"}}>
+                        <td className="leftCol border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px"}}>Location:</td>
+                        <td className="rightCol" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px"}}>
                             {Atlas_Loan_Scenario.propertyCountry + " County, " + Atlas_Loan_Scenario.propertyState}
                         </td>
                     </tr>
-                    <tr>
-                        <td className="leftCol border-right-0">Est. Value/ Sale Price:</td>
-                        <td className="rightCol">
+                    <tr style={{borderBottom:"0px",borderTop:"0px"}}>
+                        <td className="leftCol border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px"}}>Est. Value/ Sale Price:</td>
+                        <td className="rightCol" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px"}}>
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.houseValue))}
                         </td>
                     </tr>
-                    <tr>
-                        <td className="leftCol border-right-0">Lock Period:</td>
-                        <td className="rightCol">
+                    <tr style={{borderBottom:"0px",borderTop:"0px"}}>
+                        <td className="leftCol border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px"}}>Lock Period:</td>
+                        <td className="rightCol" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px"}}>
                             {Atlas_Loan_Scenario.lockPeriod}
                             </td>
                     </tr>
-                    <tr>
-                        <td className="leftCol border-right-0">Credit Score:</td>
-                        <td className="rightCol">
+                    <tr style={{borderBottom:"0px",borderTop:"0px"}}>
+                        <td className="leftCol border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px"}}>Credit Score:</td>
+                        <td className="rightCol" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px"}}>
                             {Atlas_Loan_Scenario.creditScore}
                             </td>
                     </tr>
@@ -215,27 +215,27 @@ const Home2_PDF = ({
                     </tr>
                     <tr className="border-bottom">
                         <td className="leftCol5 border-right-0"><strong>Estimated Closing Costs:</strong></td>
-                        <td className="middleCol5">
+                        <td className="middleCol5" style={{borderRight:"0px"}}>
                             <strong>${numberWithCommas(Math.round(blockJ))}</strong>
                         </td>
-                        <td className="rightCol5">Includes lender fees and third-party fees (ie title fees, taxes, recording, etc)</td>
+                        <td className="rightCol5" style={{borderLeft:"0px"}}>Includes lender fees and third-party fees (ie title fees, taxes, recording, etc)</td>
                     </tr>
                     <tr>
                         
                         <td className="leftCol5 border-right-0"><strong>Estimated Cash to Close:</strong></td>
                         {estimatedCashToClose > 0 ? 
                             <>
-                                <td className="middleCol5">
+                                <td className="middleCol5" style={{borderRight:"0px"}}>
                                     <strong>${numberWithCommas(Math.round(estimatedCashToClose))}</strong> 
                                 </td>
-                                <td className="rightCol5">Includes escrows and prepaids</td>
+                                <td className="rightCol5" style={{borderLeft:"0px"}}>Includes escrows and prepaids</td>
                             </>
                         :
                             <>
-                                <td className="middleCol5">
+                                <td className="middleCol5" style={{borderRight:"0px"}}>
                                     <strong>$0</strong> 
                                 </td>
-                                <td className="rightCol5">You will receive {" "}
+                                <td className="rightCol5" style={{borderLeft:"0px"}}>You will receive {" "}
                                     <strong>${numberWithCommas(Math.abs(Math.round(estimatedCashToClose)))}</strong> {" "}
                                     cash at closing
                                 </td>
@@ -255,211 +255,211 @@ const Home2_PDF = ({
             <table className="table-closing" style={{"display":"block"}}> 
                 <tbody style={{border:0}}>
                     <tr style={{border:0}}>
-                        <td style={{"verticalAlign": "top"}}>
-                            <table className="table-child1" style={{border:0}}>
+                        <td style={{"verticalAlign": "top"}} style={{border:"0px"}}>
+                            <table className="table-child1" style={{border:"0px"}}>
                                 <tr className="blueRow">
                                     <td colSpan="2"  className="td-heading"  style={{fontSize:"12px"}}>Estimated Loan Costs</td>
                                 </tr>
-                                <tr>
-                                    <td className="leftCol2 border-right-0"><strong>A. Origination Charges</strong></td>
-                                    <td className="rightCol2">
+                                <tr  style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>A. Origination Charges</strong></td>
+                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockA))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockADiscountFee != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Loan Discount Fee (Points)</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Loan Discount Fee (Points)</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockADiscountFee))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockAprocessingFee != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Loan Processing Fee</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Loan Processing Fee</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                                 ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockAprocessingFee))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockATaxService != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Tax Service Fee</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Tax Service Fee</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                              ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockATaxService))}
                                         </td>
                                     </tr>
                                 : null}
                                 
-                                <tr className="border-bottom">
+                                <tr className="border-bottom" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                     {Atlas_Loan_Scenario.blockAOriginationFee != 0 ? 
                                         <>
-                                            <td className="leftCol2 border-right-0">Loan Origination Fees</td>
-                                            <td className="rightCol2">
+                                            <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Loan Origination Fees</td>
+                                            <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                                 ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockAOriginationFee))}
                                             </td>
                                         </>
                                     : null}
                                 </tr>
-                                <tr>
-                                    <td className="leftCol2 border-right-0"><strong>B. Services You Cannot Shop For</strong></td>
-                                    <td className="rightCol2">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>B. Services You Cannot Shop For</strong></td>
+                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockB))}</strong>
                                     </td>
                                 </tr>
                                     {Atlas_Loan_Scenario.blockBAppraisalFee != 0 ? 
-                                        <tr>
-                                            <td className="leftCol2 border-right-0">Appraisal</td>
-                                            <td className="rightCol2">
+                                        <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                            <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Appraisal</td>
+                                            <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBAppraisalFee))}
                                             </td>
                                         </tr>
                                     : null}
                                 {Atlas_Loan_Scenario.blockBCreditFees != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Credit Report</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Credit Report</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBCreditFees))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockBFloodCertification != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Flood Certification</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Flood Certification</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBFloodCertification))}
                                   
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockBhoaQuestionnaire != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Condo Questionnaire</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Condo Questionnaire</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBhoaQuestionnaire))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockBcondoProjectApproval != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Condo Project Approval</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Condo Project Approval</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBcondoProjectApproval))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockBsinglePremiumMI != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Upfront Mortgage Insurance Premium</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Upfront Mortgage Insurance Premium</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBsinglePremiumMI))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockBtaxReturnVerificationFee != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Tax Return Verification Fee</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Tax Return Verification Fee</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBtaxReturnVerificationFee))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockBverificationEmployment != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Verification of Employment</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Verification of Employment</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockBverificationEmployment))}
                                         </td>
                                     </tr>
                                 : null}
-                                <tr className="border-bottom">
+                                <tr className="border-bottom" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                     {governmentFundingFee != 0 ? 
                                         <>
-                                            <td className="leftCol2 border-right-0">FHA, VA, or USDA Funding Fee</td>
-                                            <td className="rightCol2">
+                                            <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>FHA, VA, or USDA Funding Fee</td>
+                                            <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                                 ${numberWithCommas(Math.round(governmentFundingFee))}
                                             </td>
                                         </>
                                     :null}
                                 </tr>
-                                <tr>
-                                    <td className="leftCol2 border-right-0"><strong>C. Services You Can Shop For</strong></td>
-                                    <td className="rightCol2">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>C. Services You Can Shop For</strong></td>
+                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockC))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockCTitleServices != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Title Services &amp; Insurance</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Title Services &amp; Insurance</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockCTitleServices))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockCSurvey != 0 ? 
                                 
-                                    <tr className="border-bottom">
-                                        <td className="leftCol2 border-right-0">Survey (if required)</td>
-                                        <td className="rightCol2">
+                                    <tr className="border-bottom" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Survey (if required)</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockCSurvey))}
                                         </td>
                                     </tr>
                                 : null}
-                                <tr>
-                                    <td className="leftCol2 border-right-0" height="20px">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>D. Total Loan Costs (A&#43;B&#43;C)</strong></td>
-                                    <td className="rightCol2" height="20px">
+                                    <td className="rightCol2" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockD))}</strong>
                                     </td>
                                 </tr>
                             </table>
                         </td>
-                        <td style={{"verticalAlign": "top"}}>
+                        <td style={{"verticalAlign": "top",borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                             <table className="table-child2">
                                 <tr className="blueRow">
                                     <td className="td-heading" colSpan="2">Other Costs</td>
                                 </tr>
-                                <tr>
-                                    <td className="leftCol2 border-right-0"><strong>E. Taxes &amp; Other Government Fees</strong></td>
-                                    <td className="rightCol2">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>E. Taxes &amp; Other Government Fees</strong></td>
+                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockE))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockERecordingCharges != 0 ? 
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">Recording Fees &amp; Other Taxes</td>
-                                        <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Recording Fees &amp; Other Taxes</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockERecordingCharges))}
                                         </td>
                                     </tr>
                                 : null}
                                 {Atlas_Loan_Scenario.blockETransferTaxes != 0 ? 
                                 
-                                    <tr className="border-bottom">
-                                        <td className="leftCol2 border-right-0">Transfer Taxes (if required)</td>
-                                        <td className="rightCol2">
+                                    <tr className="border-bottom" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Transfer Taxes (if required)</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockETransferTaxes))}
                                         </td>
                                     </tr>
                                 : null}
-                                <tr>
-                                    <td className="leftCol2 border-right-0"><strong>F. Estimated Prepaids</strong></td>
-                                    <td className="rightCol2">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>F. Estimated Prepaids</strong></td>
+                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockF))}</strong>
                                     </td>
                                 </tr>
                                 {totalHOIPremium != 0 ? 
                                 <>
-                                    <tr>
-                                            <td className="leftCol2 border-right-0">Homeowner’s Insurance Premium</td>
-                                            <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                            <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Homeowner’s Insurance Premium</td>
+                                            <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             
                                             ${numberWithCommas(Math.round(totalHOIPremium))}
                                             </td>
                                         </tr>
                                     
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 {numberWithCommas(Atlas_Loan_Scenario.blockFnumMonthsPrepaidHOI)}{" "}
                                                 months at    
@@ -467,22 +467,22 @@ const Home2_PDF = ({
                                                 per month
                                             </i>
                                         </td>
-                                        <td className="rightCol2"></td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}></td>
                                     </tr>
                                 </>
                                 :null}
                                  {totalPrepaidInterest != 0 ? 
                                 <>
-                                    <tr>
-                                            <td className="leftCol2 border-right-0">Prepaid Interest</td>
-                                            <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                            <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Prepaid Interest</td>
+                                            <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             
                                             ${numberWithCommas(Math.round(totalPrepaidInterest))}
                                             </td>
                                         </tr>
                                     
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 ${numberWithCommas((totalLoanAmount *(Atlas_Loan_Scenario.interestRate/100)/360).toFixed(2)) }{" "}
                                                 per day for      {" "}
@@ -490,21 +490,21 @@ const Home2_PDF = ({
                                                 days
                                             </i>
                                         </td>
-                                        <td className="rightCol2"></td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}></td>
                                     </tr>
                                 </>
                                 :null}
                                 {totalPrepaidTaxes != 0 ? 
                                    <>
-                                    <tr>
-                                            <td className="leftCol2 border-right-0">Prepaid Homeowner&#39;s Insurance</td>
-                                            <td className="rightCol2">
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                            <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Prepaid Homeowner&#39;s Insurance</td>
+                                            <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                                 ${numberWithCommas(Math.round(totalPrepaidTaxes))}
                                             </td>
                                         </tr>
                                     
-                                    <tr>
-                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}} className="border-bottom" >
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 {numberWithCommas((Atlas_Loan_Scenario.blockFnumMonthsPrepaidTaxes).toFixed(2))}{" "}
                                                 months at    
@@ -512,28 +512,28 @@ const Home2_PDF = ({
                                                 per month
                                             </i>
                                         </td>
-                                        <td className="rightCol2"></td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}></td>
                                     </tr>
                                     </>
                                 :null}
                                 
-                                <tr className="border-top">
-                                    <td className="leftCol2 border-right-0"><strong>G. Estimated Escrow Payment</strong></td>
-                                    <td className="rightCol2">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>G. Estimated Escrow Payment</strong></td>
+                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockG))}</strong>
                                     </td>
                                 </tr>
                                 {totalHOI != 0 ?
                                        <>
-                                            <tr>
-                                                    <td className="leftCol2 border-right-0">Homeowners Insurance</td>
-                                                    <td className="rightCol2">
+                                            <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Homeowners Insurance</td>
+                                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                                         ${numberWithCommas(Math.round(totalHOI))}
                                                     </td>
                                                 </tr>
                                             
-                                            <tr>
-                                                <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                                <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <i>
                                                         ${numberWithCommas(Atlas_Loan_Scenario.monthlyHOI)}{" "}
                                                         per month for    {" "}
@@ -541,21 +541,21 @@ const Home2_PDF = ({
                                                         months
                                                     </i>
                                                 </td>
-                                                <td className="rightCol2"></td>
+                                                <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}></td>
                                             </tr>
                                         </>
                                 :null}
                                 {totalPropertyTaxes != 0 ? 
                                     <>
-                                        <tr>
-                                            <td className="leftCol2 border-right-0">Property taxes</td>
-                                            <td className="rightCol2">
+                                        <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                            <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Property taxes</td>
+                                            <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             ${numberWithCommas(Math.round(totalPropertyTaxes))}
                                             </td>
                                         </tr>
                                     
-                                    <tr className="border-bottom">
-                                        <td className="leftCol2 border-right-0">&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <tr className="border-bottom" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i>
                                                 ${numberWithCommas(Atlas_Loan_Scenario.monthlyPropertyTax)}{" "}
                                                 per month for {" "}   
@@ -563,31 +563,31 @@ const Home2_PDF = ({
                                                 months
                                             </i>
                                         </td>
-                                        <td className="rightCol2"></td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}></td>
                                     </tr>
                                     </>
                                 :null}
-                                <tr>
-                                    <td className="leftCol2 border-right-0"><strong>H. Other</strong></td>
-                                    <td className="rightCol2">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>H. Other</strong></td>
+                                    <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockH))}</strong>
                                     </td>
                                 </tr>
                                 
                                 {Atlas_Loan_Scenario.blockHOwnersTitleInsPremium != 0 ? 
-                                    <tr >
-                                        <td className="leftCol2 border-right-0">Owner&#39;s Title Insurance</td>
-                                        <td className="rightCol2">
+                                    <tr  style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}  className="border-bottom" >
+                                        <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>Owner&#39;s Title Insurance</td>
+                                        <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.blockHOwnersTitleInsPremium))}
                                         </td>
                                     </tr>
                                 :null}
                                 
-                                <tr className="border-top">
-                                    <td className="leftCol2 border-right-0" height="20px">
+                                <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
+                                    <td className="leftCol2 border-right-0" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>I. Total Other Costs (E&#43;F&#43;G&#43;H)</strong>
                                     </td>                                        
-                                    <td className="rightCol2" height="20px">
+                                    <td className="rightCol2" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                         <strong>${numberWithCommas(Math.round(blockI))}</strong>
                                     </td>
                                 </tr>
@@ -599,12 +599,12 @@ const Home2_PDF = ({
         </div>
         <br/>
         <div>
-            <table>
-                <tbody style={{border:0}}>
+            <table  className="noBorderTable">
+                <tbody style={{border:"0px"}}>
                     <tr className="blueRow">
                         <td className="td-heading" align="center" colSpan="4">Total Closing Costs</td>
                     </tr>
-                    <tr style={{"padding":"5px 0"}}>
+                    <tr style={{"padding":"5px 0"}} style={{border:"0px"}}>
                         <td className="leftCol6">&nbsp;</td>
                         <td className="middleColA6" align="right">
                             ${numberWithCommas(Math.round(blockD+blockI))}
@@ -612,15 +612,15 @@ const Home2_PDF = ({
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Loan Costs + Other Costs (D+I)</td>
                     </tr>
-                    <tr>
+                    <tr style={{border:"0px"}} >
                         <td className="operatorPadding leftCol6" align="right">&#8211;</td>
-                        <td className="border-bottom middleColA6" align="right">
+                        <td className="border-bottom middleColA6" align="right" style={{borderBottom:"1px"}}>
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.lenderCredit))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Lender Credits</td>
                     </tr>
-                    <tr>
+                    <tr style={{border:"0px"}}>
                         <td className="operatorPadding leftCol6" width="290px" align="right">&#61;</td>
                         <td className="middleColA6" width="53px" align="right">
                             ${numberWithCommas(Math.round(blockJ))}
@@ -632,12 +632,12 @@ const Home2_PDF = ({
             </table>
         </div>
         <div>
-            <table style={{marginTop:"16px"}}>
+            <table style={{marginTop:"16px"}} className="noBorderTable">
                 <tbody style={{border:0}}>
                     <tr className="blueRow">
                         <td className="td-heading" align="center" colSpan="4">Estimated Cash to Close</td>
                     </tr>
-                    <tr>
+                    <tr style={{border:"0px"}}>
                         <td className="leftCol6">&nbsp;</td>
                         <td className="middleColA6" align="right">
                             ${numberWithCommas(Math.round(sale_Price_OR_Payoffs))}
@@ -645,7 +645,7 @@ const Home2_PDF = ({
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Sale Price/Payoffs</td>
                     </tr>
-                    <tr>
+                    <tr style={{border:"0px"}}>
                         <td className="operatorPadding leftCol6" width="290px" align="right">&#43;</td>
                         <td className="middleColA6" align="right">
                             ${numberWithCommas(Math.round(blockJ))}
@@ -653,7 +653,7 @@ const Home2_PDF = ({
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Total Closing Costs (J)</td>
                     </tr>
-                    <tr>
+                    <tr style={{border:"0px"}}>
                         <td className="operatorPadding leftCol6" align="right">&#8211;</td>
                         <td className="middleColA6" align="right">
                             ${numberWithCommas(Math.round(totalLoanAmount))}
@@ -663,7 +663,7 @@ const Home2_PDF = ({
                     </tr>
                     {
                         secondMortgage !== 0 ?
-                            <tr>
+                            <tr style={{border:"0px"}}>
                                 <td className="operatorPadding leftCol6" align="right">&#8211;</td>
                                 <td className="middleColA6" align="right">
                                     ${numberWithCommas(Math.round(secondMortgage))}
@@ -675,7 +675,7 @@ const Home2_PDF = ({
                     }
                     {
                       Atlas_Loan_Scenario.loanPurpose === "Purchase" ?
-                        <tr>
+                        <tr style={{border:"0px"}}>
                             <td className="operatorPadding leftCol6" align="right">&#8211;</td>
                             <td className="middleColA6" align="right">
                                 ${numberWithCommas(Math.round(Atlas_Loan_Scenario.sellerCredit))}
@@ -684,17 +684,17 @@ const Home2_PDF = ({
                             <td className="rightCol6">Seller Credit</td>
                         </tr>
                     :null}
-                    <tr>
+                    <tr style={{border:"0px"}}>
                         <td className="operatorPadding leftCol6" align="right">
                         &#8211;
                         </td>
-                        <td className="border-bottom middleColA6" align="right">
+                        <td className="border-bottom middleColA6" align="right"  style={{borderBottom:"1px"}}>
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.otherCredits))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
                         <td className="rightCol6">Other Credits and Adjustments</td>
                     </tr>
-                    <tr>
+                    <tr style={{border:"0px"}}>
                         <td className="operatorPadding leftCol6" align="right">&#61;</td>
                             <td className="middleColA6" align="right">
                                 { 
@@ -724,46 +724,46 @@ const Home2_PDF = ({
         
         <div style={{"pageBreakAfter": "always"}}></div>
         <div>
-            <table>
+            <table className="ConsiderationsTable">
                 <tbody>
                     <tr className="blueRow">
                         <td  className="td-heading" colSpan="2">Other Considerations</td>
                     </tr>
-                    <tr>
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
                         <td className="leftCol4 border-right-0"><strong>Rate Changes</strong></td>
-                        <td className="rightCol4 lineheight">Rates change multiple times daily until rate is locked. Factors affecting rate include property state, lock period, loan-to-value, credit, and debt-to-income ratio</td>
+                        <td className="rightCol4 lineheight" style={{borderLeft:"0px"}}>Rates change multiple times daily until rate is locked. Factors affecting rate include property state, lock period, loan-to-value, credit, and debt-to-income ratio</td>
                     </tr>
-                    <tr>
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
                         <td className="leftCol4 border-right-0"><strong>Escrow Account</strong></td>
-                        <td className="rightCol4 lineheight">If this is a refinance transaction,<span>&nbsp;</span> 
+                        <td className="rightCol4 lineheight" style={{borderLeft:"0px"}}>If this is a refinance transaction,<span>&nbsp;</span> 
                        
                                <span className="border-bottom text-bold">funds held in escrow by your current loan servicer</span> 
                                <span className="border-bottom text-bold"> will be returned to you in approximately 30
                                                 days following settlement.</span>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
                         <td className="leftCol4 border-right-0"><strong>First Payment</strong></td>
-                        <td className="rightCol4 lineheight">Your payment of a partial month’s interest at settlement (a prepaid charge) constitutes the first payment on your new loan and 
+                        <td className="rightCol4 lineheight" style={{borderLeft:"0px"}}>Your payment of a partial month’s interest at settlement (a prepaid charge) constitutes the first payment on your new loan and 
                         
                         <span>&nbsp;</span> <span className="border-bottom text-bold">you will not have to make a mortgage payment </span> 
                                <span className="border-bottom text-bold">until the beginning of the second month after settlement, </span>e.g., close in November, your first scheduled payment will be January.
                             
                         </td>
                     </tr>
-                    <tr>
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
                         <td className="leftCol4 border-right-0"><strong>Home Owner’s Insurance</strong></td>
                         <td className="rightCol4 lineheight">This loan requires a homeowner's insurance on the property or, in the case of condominiums, an HO-6 insurance policy. You may obtain
                             this insurance policy from a company of your choice.
                         </td>
                     </tr>
-                    <tr>
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
                         <td className="leftCol4 border-right-0"><strong>Origination Fee</strong></td>
                         <td className="rightCol4 lineheight">The Origination Fee represents the total fees we pay outside parties for their services - the processing, underwriting, a pre-fund
                                                 audit, and warehouse bank draw fee.
                         </td>
                     </tr>
-                    <tr>
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
                         <td className="leftCol4 border-right-0"><strong>New Escrow Account &amp; Prepaid</strong></td>
                         <td className="rightCol4 lineheight">
                             Based on the estimated escrow information, we have conservatively set aside {Atlas_Loan_Scenario.blockGnumMonthsTaxReserves} months of property taxes 
@@ -784,18 +784,18 @@ const Home2_PDF = ({
                     <tr className="blueRow">
                         <td className="td-heading" >Options</td>
                     </tr>
-                    <tr>
-                        <td className="oneCol"><strong>You have options available to you either based on your Loan-to-Value (LTV) or the interest rate you choose:</strong></td>
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
+                        <td className="oneCol"  style={{borderTop:"0px",borderBottom:"0px"}}><strong>You have options available to you either based on your Loan-to-Value (LTV) or the interest rate you choose:</strong></td>
                     </tr>
-                    <tr>
-                        <td className="oneCol"><span className="border-bottom">If this is a refinance transaction</span>, you might be able to increase the loan amount to reduce the amount needed at settlement; 
+                    <tr style={{borderTop:"0px",borderBottom:"0px"}}>
+                        <td className="oneCol"  style={{borderTop:"0px",borderBottom:"0px"}}><span className="border-bottom">If this is a refinance transaction</span>, you might be able to increase the loan amount to reduce the amount needed at settlement; 
                                                 you may also select a lower interest rate to save money in interest over the life of the loan, or, on the other hand, you may 
                                                 select a higher interest rate and the resultant premium provided by the lender can be used to lower your costs at closing/settlement.  
                                                 Discuss the available options with your Mortgage Consultant.
                         </td>
                     </tr>
-                    <tr className="border-bottom">
-                        <td className="oneCol"><span  className="border-bottom">If this is a purchase transaction</span>, you may select a lower interest rate to save money in interest over the life of the loan, 
+                    <tr className="border-bottom" style={{borderTop:"0px",borderBottom:"0px"}}>
+                        <td className="oneCol"  style={{borderTop:"0px",borderBottom:"0px"}}><span  className="border-bottom">If this is a purchase transaction</span>, you may select a lower interest rate to save money in interest over the life of the loan, 
                                                 or, on the other hand, you may select a higher interest rate and the resultant premium provided by the lender can be used to lower 
                                                 your costs at closing/settlement.  Discuss the available options with your Mortgage Consultant.
                         </td>

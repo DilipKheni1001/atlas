@@ -58,6 +58,7 @@ table.table-closing{
 .table-child1{
     width: 264px !important;
     float: left !important;
+    margin-top: -40px;
 }
 .table-child2{
     width: 264px !important;
@@ -270,7 +271,7 @@ td{
     font-size: 12px !important;
     width: 150px !important;
     line-height: 14px !important;
-    margin-top: 150px !important;
+    margin-top: 180px !important;
     margin-bottom: 10px !important;
     color: black !important;
 }
@@ -303,6 +304,28 @@ td{
 }
 
 
+.ConsiderationsTable td{
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.ConsiderationsTable .rightCol4{
+    border-left: 0px;
+}
+
+.noBorderTable tr td{
+    border: 0px;
+}
+
+.noBorderTable .blueRow td{
+    border: 1px solid #000 !important;
+}
+
+.table-child1 td tr{
+    border: 0px !important;
+}
+
+/* PreDualPDF */
 .main-content{
     width: 530px;
     font-size: 13px;
