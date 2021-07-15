@@ -188,9 +188,9 @@ const Home2_PDF = ({
                         </tr>
                     : null}
                     <tr>
-                        <td className="leftCol border-right-0"><strong>Estimated Total Monthly Payment:</strong></td>
+                        <td className="leftCol border-right-0"><strong  className="bold-500">Estimated Total Monthly Payment:</strong></td>
                         <td className="rightCol">
-                        <strong>
+                        <strong  className="bold-500">
                             ${
                                 numberWithCommas(Math.round(
                                     principalInterest
@@ -214,29 +214,29 @@ const Home2_PDF = ({
                         <td className="td-heading"  colSpan="3">COSTS AT CLOSING</td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol5 border-right-0"><strong>Estimated Closing Costs:</strong></td>
+                        <td className="leftCol5 border-right-0"><strong  className="bold-500">Estimated Closing Costs:</strong></td>
                         <td className="middleCol5" style={{borderRight:"0px"}}>
-                            <strong>${numberWithCommas(Math.round(blockJ))}</strong>
+                            <strong  className="bold-500">${numberWithCommas(Math.round(blockJ))}</strong>
                         </td>
                         <td className="rightCol5" style={{borderLeft:"0px"}}>Includes lender fees and third-party fees (ie title fees, taxes, recording, etc)</td>
                     </tr>
                     <tr>
                         
-                        <td className="leftCol5 border-right-0"><strong>Estimated Cash to Close:</strong></td>
+                        <td className="leftCol5 border-right-0"><strong  className="bold-500">Estimated Cash to Close:</strong></td>
                         {estimatedCashToClose > 0 ? 
                             <>
                                 <td className="middleCol5" style={{borderRight:"0px"}}>
-                                    <strong>${numberWithCommas(Math.round(estimatedCashToClose))}</strong> 
+                                    <strong  className="bold-500">${numberWithCommas(Math.round(estimatedCashToClose))}</strong> 
                                 </td>
                                 <td className="rightCol5" style={{borderLeft:"0px"}}>Includes escrows and prepaids</td>
                             </>
                         :
                             <>
                                 <td className="middleCol5" style={{borderRight:"0px"}}>
-                                    <strong>$0</strong> 
+                                    <strong  className="bold-500">$0</strong> 
                                 </td>
                                 <td className="rightCol5" style={{borderLeft:"0px"}}>You will receive {" "}
-                                    <strong>${numberWithCommas(Math.abs(Math.round(estimatedCashToClose)))}</strong> {" "}
+                                    <strong  className="bold-500">${numberWithCommas(Math.abs(Math.round(estimatedCashToClose)))}</strong> {" "}
                                     cash at closing
                                 </td>
                             </>
@@ -261,9 +261,9 @@ const Home2_PDF = ({
                                     <td colSpan="2"  className="td-heading"  style={{fontSize:"12px"}}>Estimated Loan Costs</td>
                                 </tr>
                                 <tr  style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>A. Origination Charges</strong></td>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong  className="bold-500">A. Origination Charges</strong></td>
                                     <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockA))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockA))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockADiscountFee != 0 ? 
@@ -302,9 +302,9 @@ const Home2_PDF = ({
                                     : null}
                                 </tr>
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>B. Services You Cannot Shop For</strong></td>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong  className="bold-500">B. Services You Cannot Shop For</strong></td>
                                     <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockB))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockB))}</strong>
                                     </td>
                                 </tr>
                                     {Atlas_Loan_Scenario.blockBAppraisalFee != 0 ? 
@@ -383,9 +383,9 @@ const Home2_PDF = ({
                                     :null}
                                 </tr>
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>C. Services You Can Shop For</strong></td>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong  className="bold-500">C. Services You Can Shop For</strong></td>
                                     <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockC))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockC))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockCTitleServices != 0 ? 
@@ -407,9 +407,9 @@ const Home2_PDF = ({
                                 : null}
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                     <td className="leftCol2 border-right-0" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>D. Total Loan Costs (A&#43;B&#43;C)</strong></td>
+                                        <strong  className="bold-500">D. Total Loan Costs (A&#43;B&#43;C)</strong></td>
                                     <td className="rightCol2" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockD))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockD))}</strong>
                                     </td>
                                 </tr>
                             </table>
@@ -420,9 +420,9 @@ const Home2_PDF = ({
                                     <td className="td-heading" colSpan="2">Other Costs</td>
                                 </tr>
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>E. Taxes &amp; Other Government Fees</strong></td>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong  className="bold-500">E. Taxes &amp; Other Government Fees</strong></td>
                                     <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockE))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockE))}</strong>
                                     </td>
                                 </tr>
                                 {Atlas_Loan_Scenario.blockERecordingCharges != 0 ? 
@@ -443,9 +443,9 @@ const Home2_PDF = ({
                                     </tr>
                                 : null}
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>F. Estimated Prepaids</strong></td>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong  className="bold-500">F. Estimated Prepaids</strong></td>
                                     <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockF))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockF))}</strong>
                                     </td>
                                 </tr>
                                 {totalHOIPremium != 0 ? 
@@ -518,9 +518,9 @@ const Home2_PDF = ({
                                 :null}
                                 
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>G. Estimated Escrow Payment</strong></td>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong  className="bold-500">G. Estimated Escrow Payment</strong></td>
                                     <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockG))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockG))}</strong>
                                     </td>
                                 </tr>
                                 {totalHOI != 0 ?
@@ -568,9 +568,9 @@ const Home2_PDF = ({
                                     </>
                                 :null}
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong>H. Other</strong></td>
+                                    <td className="leftCol2 border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}><strong  className="bold-500">H. Other</strong></td>
                                     <td className="rightCol2" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockH))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockH))}</strong>
                                     </td>
                                 </tr>
                                 
@@ -585,10 +585,10 @@ const Home2_PDF = ({
                                 
                                 <tr style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
                                     <td className="leftCol2 border-right-0" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>I. Total Other Costs (E&#43;F&#43;G&#43;H)</strong>
+                                        <strong  className="bold-500">I. Total Other Costs (E&#43;F&#43;G&#43;H)</strong>
                                     </td>                                        
                                     <td className="rightCol2" height="20px" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
-                                        <strong>${numberWithCommas(Math.round(blockI))}</strong>
+                                        <strong  className="bold-500">${numberWithCommas(Math.round(blockI))}</strong>
                                     </td>
                                 </tr>
                             </table>
@@ -626,7 +626,7 @@ const Home2_PDF = ({
                             ${numberWithCommas(Math.round(blockJ))}
                         </td>
                         <td className="middleColB6">&nbsp;</td>
-                        <td className="rightCol6"><strong>Total Closing Costs (J)</strong></td>
+                        <td className="rightCol6"><strong  className="bold-500">Total Closing Costs (J)</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -705,7 +705,7 @@ const Home2_PDF = ({
                                 }
                             </td>
                         <td className="middleColB6">&nbsp;</td>
-                        <td className="rightCol6"><strong>Estimated Cash to Close From (To) Borrower</strong></td>
+                        <td className="rightCol6"><strong  className="bold-500">Estimated Cash to Close From (To) Borrower</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -730,49 +730,51 @@ const Home2_PDF = ({
                         <td  className="td-heading" colSpan="2">Other Considerations</td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
-                        <td className="leftCol4 border-right-0"><strong>Rate Changes</strong></td>
+                        <td className="leftCol4 border-right-0"><strong  className="bold-500">Rate Changes</strong></td>
                         <td className="rightCol4 lineheight" style={{borderLeft:"0px"}}>Rates change multiple times daily until rate is locked. Factors affecting rate include property state, lock period, loan-to-value, credit, and debt-to-income ratio</td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
-                        <td className="leftCol4 border-right-0"><strong>Escrow Account</strong></td>
+                        <td className="leftCol4 border-right-0"><strong  className="bold-500">Escrow Account</strong></td>
                         <td className="rightCol4 lineheight" style={{borderLeft:"0px"}}>If this is a refinance transaction,<span>&nbsp;</span> 
                        
-                               <span className="border-bottom text-bold">funds held in escrow by your current loan servicer</span> 
-                               <span className="border-bottom text-bold"> will be returned to you in approximately 30
-                                                days following settlement.</span>
+                               <span className="border-bottom text-bold">funds held in escrow by your current loan</span> 
+                               <span className="border-bottom text-bold"> servicer will be returned to you in approximately 30 days following </span>
+                                                <span className="border-bottom text-bold">settlement.</span>
                         </td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
-                        <td className="leftCol4 border-right-0"><strong>First Payment</strong></td>
+                        <td className="leftCol4 border-right-0"><strong  className="bold-500">First Payment</strong></td>
                         <td className="rightCol4 lineheight" style={{borderLeft:"0px"}}>Your payment of a partial month’s interest at settlement (a prepaid charge) constitutes the first payment on your new loan and 
                         
-                        <span>&nbsp;</span> <span className="border-bottom text-bold">you will not have to make a mortgage payment </span> 
-                               <span className="border-bottom text-bold">until the beginning of the second month after settlement, </span>e.g., close in November, your first scheduled payment will be January.
+                        <span>&nbsp;</span> <span className="border-bottom text-bold">you will not have to make a </span> 
+                               <span className="border-bottom text-bold">mortgage payment until the beginning of the second month after </span>
+                               <span className="border-bottom text-bold">settlement, </span>e.g., close in November, your first scheduled payment will be January.
                             
                         </td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
-                        <td className="leftCol4 border-right-0"><strong>Home Owner’s Insurance</strong></td>
+                        <td className="leftCol4 border-right-0"><strong  className="bold-500">Home Owner’s Insurance</strong></td>
                         <td className="rightCol4 lineheight">This loan requires a homeowner's insurance on the property or, in the case of condominiums, an HO-6 insurance policy. You may obtain
                             this insurance policy from a company of your choice.
                         </td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
-                        <td className="leftCol4 border-right-0"><strong>Origination Fee</strong></td>
+                        <td className="leftCol4 border-right-0"><strong  className="bold-500">Origination Fee</strong></td>
                         <td className="rightCol4 lineheight">The Origination Fee represents the total fees we pay outside parties for their services - the processing, underwriting, a pre-fund
                                                 audit, and warehouse bank draw fee.
                         </td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
-                        <td className="leftCol4 border-right-0"><strong>New Escrow Account &amp; Prepaid</strong></td>
+                        <td className="leftCol4 border-right-0"><strong  className="bold-500">New Escrow Account &amp; Prepaid</strong></td>
                         <td className="rightCol4 lineheight">
                             Based on the estimated escrow information, we have conservatively set aside {Atlas_Loan_Scenario.blockGnumMonthsTaxReserves} months of property taxes 
                             and {Atlas_Loan_Scenario.blockGnumMonthsInsReserves} months of hazard insurance premiums for payment at settlement to populate your new escrow account.
                              Additionally, we estimated the prepaid interest at {Atlas_Loan_Scenario.blockFdaysPrepaidInterest} days.<span>&nbsp;</span>  
                              
-                               <span className="border-bottom text-bold">Both the prepaid interest and the amount required for the escrow account </span> 
-                               <span className="border-bottom text-bold">will be adjusted to match your specific requirements once the loan is locked; a </span> 
-                               <span className="border-bottom text-bold">settlement date is finalized; and escrow amount are verified.</span>
+                               <span className="border-bottom text-bold">Both the prepaid interest and the </span> 
+                               <span className="border-bottom text-bold">amount required for the escrow account will be adjusted to match your </span> 
+                               <span className="border-bottom text-bold">specific requirements once the loan is locked; a settlement date is </span> 
+                               <span className="border-bottom text-bold">finalized; and escrow amount are verified.</span>
                         </td>
                     </tr>
                 </tbody>
@@ -785,7 +787,7 @@ const Home2_PDF = ({
                         <td className="td-heading" >Options</td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
-                        <td className="oneCol"  style={{borderTop:"0px",borderBottom:"0px"}}><strong>You have options available to you either based on your Loan-to-Value (LTV) or the interest rate you choose:</strong></td>
+                        <td className="oneCol"  style={{borderTop:"0px",borderBottom:"0px"}}><strong  className="bold-500">You have options available to you either based on your Loan-to-Value (LTV) or the interest rate you choose:</strong></td>
                     </tr>
                     <tr style={{borderTop:"0px",borderBottom:"0px"}}>
                         <td className="oneCol"  style={{borderTop:"0px",borderBottom:"0px"}}><span className="border-bottom">If this is a refinance transaction</span>, you might be able to increase the loan amount to reduce the amount needed at settlement; 

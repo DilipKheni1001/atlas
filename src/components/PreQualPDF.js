@@ -58,7 +58,7 @@ const PreQualPDF = ({
                             </tr>
                             <tr>
                                 <td>Annual Income</td>
-                                {/* <td>{numberWithCommas(Atlas_Loan_Scenario.annualIncome)}</td> */}
+                                <td>{numberWithCommas(Atlas_Loan_Scenario.annualIncome)}</td>
                             </tr>
                             
                         </tbody>

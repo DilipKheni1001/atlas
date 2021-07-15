@@ -241,6 +241,7 @@ const Home_2 = () => {
     isInsuranceEscrowsWaived: 0,
     blockGnumMonthsInsReserves: 0,
     blockFnumMonthsPrepaidTaxes: 0,
+    annualIncome:0,
     governmentFundingFee: 0,
     totalLoanAmount: 0
   });
@@ -2279,6 +2280,20 @@ const Home_2 = () => {
                               startEditingOnFocus
                             />
                           </li>
+                          <li>
+                            <p>Annual Income</p>
+                            <EdiText
+                              type="number"
+                              value={loanScenario.annualIncome}
+                              tabIndex={11}
+                              onSave={(pass) => {
+                                handleSave(pass, "annualIncome");
+                              }}
+                              submitOnUnfocus
+                              startEditingOnFocus
+                            />
+                          </li>
+                         
                           <li>
                             <p>Current Loan Type</p>
                             {isEqual === "currentLoanType" ? (
