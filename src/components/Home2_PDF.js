@@ -773,8 +773,8 @@ const Home2_PDF = ({
                              
                                <span className="border-bottom text-bold">Both the prepaid interest and the </span> 
                                <span className="border-bottom text-bold">amount required for the escrow account will be adjusted to match your </span> 
-                               <span className="border-bottom text-bold">specific requirements once the loan is locked; a settlement date is </span> 
-                               <span className="border-bottom text-bold">finalized; and escrow amount are verified.</span>
+                               <span className="border-bottom text-bold">specific requirements once the loan is locked; a settlement date is finalized;</span> 
+                               <span className="border-bottom text-bold"> and escrow amount are verified.</span>
                         </td>
                     </tr>
                 </tbody>
