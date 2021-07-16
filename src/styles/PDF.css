@@ -31,10 +31,15 @@ body {
     font-weight: normal;
     font-style: normal;
 }
-
+.odd-td-width{
+    width: 50%;
+}
+.even-td-width{
+    width: 50%;
+}
 table {
     border-collapse: collapse !important;
-    width: 532px;
+    width: 534px;
     
     /* table-layout: fixed; */
     /* margin: 0px 50px; */
@@ -56,12 +61,12 @@ table.table-closing{
     border: 0 !important;
 }
 .table-child1{
-    width: 264px !important;
+    width: 262px !important;
     float: left !important;
-    margin-top: -56px;
+    margin-top: -45px;
 }
 .table-child2{
-    width: 264px !important;
+    width: 268px !important;
     float: right !important;
 }
 td.border-left {
@@ -303,6 +308,9 @@ td{
     align-items: center;
 }
 
+.ConsiderationsTable{
+    margin-top: 140px;
+}
 
 .ConsiderationsTable td{
     border-top: 0px;
