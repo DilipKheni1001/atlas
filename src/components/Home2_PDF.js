@@ -40,10 +40,10 @@ const Home2_PDF = ({
                 <table>
                     <tbody>
                         <tr className="border-bottom">
-                            <td className="leftCol border-left-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"150px"}}>
+                            <td className="leftCol border-left-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"200px"}}>
                                 <img src={logo_img} style={{"padding":"5px 5px 5px 0px"}} />
                             </td>
-                            <td className="rightCol border-left-0" style={{"lineHeight": "20px",width:"250px",borderBottom:"0px"}}>
+                            <td className="rightCol border-left-0" style={{"lineHeight": "20px",width:"334px",borderBottom:"0px"}}>
                             <span className="line-height"> Prepared For: {contactDetails.firstName + " " + contactDetails.lastName}<br/></span>
                             <span className="line-height"> Prepared By: {user.firstName + " " + user.lastName}, NMLS #{user.nmlsId}<br/></span>
                             <span className="line-height"> Phone: {user.phone}<br/></span>
@@ -67,8 +67,8 @@ const Home2_PDF = ({
                         <td  className="td-heading" colSpan="2">ASSUMPTIONS</td>
                     </tr>
                     <tr style={{borderBottom:"0px",borderTop:"0px"}}>
-                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"150px"}}>Loan Purpose:</td>
-                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"250px"}}>
+                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"200px"}}>Loan Purpose:</td>
+                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"334px"}}>
                             {
                               Atlas_Loan_Scenario.loanPurpose === "Refinance" ?
                                 Atlas_Loan_Scenario.isCashout === 1 ? "Refinance- Cash Out" : "Refinance- Rate/Term"
@@ -79,26 +79,26 @@ const Home2_PDF = ({
                         </td>
                     </tr>
                     <tr style={{borderBottom:"0px",borderTop:"0px"}}>
-                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"150px"}}>Location:</td>
-                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"250px"}}>
+                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"200px"}}>Location:</td>
+                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"334px"}}>
                             {Atlas_Loan_Scenario.propertyCountry + " County, " + Atlas_Loan_Scenario.propertyState}
                         </td>
                     </tr>
                     <tr style={{borderBottom:"0px",borderTop:"0px"}}>
-                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"150px"}}>Est. Value/ Sale Price:</td>
-                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"250px"}}>
+                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"200px"}}>Est. Value/ Sale Price:</td>
+                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"334px"}}>
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.houseValue))}
                         </td>
                     </tr>
                     <tr style={{borderBottom:"0px",borderTop:"0px"}}>
-                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"150px"}}>Lock Period:</td>
-                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"250px"}}>
+                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"200px"}}>Lock Period:</td>
+                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"334px"}}>
                             {Atlas_Loan_Scenario.lockPeriod}
                             </td>
                     </tr>
                     <tr style={{borderBottom:"0px",borderTop:"0px"}}>
-                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"150px"}}>Credit Score:</td>
-                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"250px"}}>
+                        <td className="leftCol odd-td-width border-right-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"200px"}}>Credit Score:</td>
+                        <td className="rightCol even-td-width" style={{borderBottom:"0px",borderTop:"0px",borderRight:"0px",width:"334px"}}>
                             {Atlas_Loan_Scenario.creditScore}
                             </td>
                     </tr>
@@ -113,37 +113,37 @@ const Home2_PDF = ({
                         <td  className="td-heading" colSpan="2">PROPOSED TERMS</td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0" style={{width:"150px"}}>Loan Program:</td>
-                        <td className="rightCol" style={{width:"250px"}}>
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Loan Program:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             {Atlas_Loan_Scenario.loanTypeSpecial} {Atlas_Loan_Scenario.loanProduct}
                             </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0" style={{width:"150px"}}>Loan Amount:</td>
-                        <td className="rightCol" style={{width:"250px"}}>
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Loan Amount:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             ${numberWithCommas(Math.round(totalLoanAmount))}
                         </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0" style={{width:"150px"}}>Interest Rate:</td>
-                        <td className="rightCol" style={{width:"250px"}}>
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Interest Rate:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             {Atlas_Loan_Scenario.interestRate}%
                             </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0" style={{width:"150px"}}>Monthly Principal &amp; Interest:</td>
-                        <td className="rightCol" style={{width:"250px"}}>
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Monthly Principal &amp; Interest:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             ${numberWithCommas(Math.round(principalInterest))}
                             <i style={{"fontSize": "8px"}}> <span>(See below for your Estimated Total Monthly Payment)</span></i>
                         </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0" style={{width:"150px"}}>Prepayment Penalty:</td>
-                        <td className="rightCol" style={{width:"250px"}}>NO</td>
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Prepayment Penalty:</td>
+                        <td className="rightCol" style={{width:"334px"}}>NO</td>
                     </tr>
                     <tr>
-                        <td className="leftCol border-right-0" style={{width:"150px"}}>Balloon Payment:</td>
-                        <td className="rightCol" style={{width:"250px"}}>NO</td>
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Balloon Payment:</td>
+                        <td className="rightCol" style={{width:"334px"}}>NO</td>
                     </tr>
                 </tbody>
             </table>
@@ -156,33 +156,33 @@ const Home2_PDF = ({
                         <td className="td-heading"  colSpan="2">PROJECTED PAYMENTS</td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0">Principal &amp; Interest:</td>
-                        <td className="rightCol">
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Principal &amp; Interest:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             ${numberWithCommas(Math.round(principalInterest))}
                         </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0">Mortgage Insurance:</td>
-                        <td className="rightCol">
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Mortgage Insurance:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.annualMortgageInsuranceRate * totalLoanAmount/1200))}
                         </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0">Estimated Taxes:</td>
-                        <td className="rightCol">
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Estimated Taxes:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyPropertyTax))}
                         </td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol border-right-0">Estimated Homeowners Insurance:</td>
-                        <td className="rightCol">
+                        <td className="leftCol border-right-0" style={{width:"200px"}}>Estimated Homeowners Insurance:</td>
+                        <td className="rightCol" style={{width:"334px"}}>
                             ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyHOI))}
                         </td>
                     </tr>
                     { Atlas_Loan_Scenario.monthlyHOA !=0 ?
                         <tr className="border-bottom">
-                            <td className="leftCol border-right-0">HOA Dues:</td>
-                            <td className="rightCol">
+                            <td className="leftCol border-right-0" style={{width:"200px"}}>HOA Dues:</td>
+                            <td className="rightCol" style={{width:"334px"}}>
                                 ${numberWithCommas(Math.round(Atlas_Loan_Scenario.monthlyHOA))}
                             </td>
                         </tr>
@@ -214,28 +214,28 @@ const Home2_PDF = ({
                         <td className="td-heading"  colSpan="3">COSTS AT CLOSING</td>
                     </tr>
                     <tr className="border-bottom">
-                        <td className="leftCol5 border-right-0" style={{width:"150px"}}><strong  className="bold-500">Estimated Closing Costs:</strong></td>
+                        <td className="leftCol5 border-right-0" style={{width:"200px"}}><strong  className="bold-500">Estimated Closing Costs:</strong></td>
                         <td className="middleCol5" style={{borderRight:"0px",width:"50px"}}>
                             <strong  className="bold-500">${numberWithCommas(Math.round(blockJ))}</strong>
                         </td>
-                        <td className="rightCol5" style={{borderLeft:"0px",width:"200px"}}>Includes lender fees and third-party fees (ie title fees, taxes, recording, etc)</td>
+                        <td className="rightCol5" style={{borderLeft:"0px",width:"284px"}}>Includes lender fees and third-party fees (ie title fees, taxes, recording, etc)</td>
                     </tr>
                     <tr>
                         
-                        <td className="leftCol5 border-right-0" style={{width:"150px"}}><strong  className="bold-500">Estimated Cash to Close:</strong></td>
+                        <td className="leftCol5 border-right-0" style={{width:"200px"}}><strong  className="bold-500">Estimated Cash to Close:</strong></td>
                         {estimatedCashToClose > 0 ? 
                             <>
                                 <td className="middleCol5" style={{borderRight:"0px",width:"50px"}}>
                                     <strong  className="bold-500">${numberWithCommas(Math.round(estimatedCashToClose))}</strong> 
                                 </td>
-                                <td className="rightCol5" style={{borderLeft:"0px",width:"200px"}}>Includes escrows and prepaids</td>
+                                <td className="rightCol5" style={{borderLeft:"0px",width:"284px"}}>Includes escrows and prepaids</td>
                             </>
                         :
                             <>
                                 <td className="middleCol5" style={{borderRight:"0px",width:"50px"}}>
                                     <strong  className="bold-500">$0</strong> 
                                 </td>
-                                <td className="rightCol5" style={{borderLeft:"0px",width:"200px"}}>You will receive {" "}
+                                <td className="rightCol5" style={{borderLeft:"0px",width:"284px"}}>You will receive {" "}
                                     <strong  className="bold-500">${numberWithCommas(Math.abs(Math.round(estimatedCashToClose)))}</strong> {" "}
                                     cash at closing
                                 </td>
@@ -774,8 +774,7 @@ const Home2_PDF = ({
                                <span className="border-bottom text-bold">Both the prepaid interest and the </span> 
                                <span className="border-bottom text-bold">amount required for the escrow account will be adjusted to match your </span> 
                                <span className="border-bottom text-bold">specific requirements once the loan is locked; a settlement date is finalized;</span> 
-                               <span className="border-bottom text-bold"> and escrow amount are verified.</span>
-                        </td>
+                               <span className="border-bottom text-bold"> and escrow amount are verified.</span></td>
                     </tr>
                 </tbody>
             </table>
