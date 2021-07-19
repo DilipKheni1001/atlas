@@ -799,7 +799,7 @@ const Home_2 = () => {
             (100 * Number(loanScenario.baseLoanAmount)) / Number(loanScenario.houseValue)
           ) +
           "% / " +
-          v;
+          v + "%";
       } else {
         LTV_CLTV =
           Math.round(
@@ -1345,7 +1345,7 @@ const Home_2 = () => {
             <div className="stone-sec">
               <div className="stone-text">
                 <h1>Stone HP 30 100k Cashout</h1>
-                <span>
+                <span className="updated-date">
                   Last Updated
                   <br />
                   {new Date(loanScenario.dateUpdated).toLocaleDateString("en-US")}
@@ -1356,45 +1356,13 @@ const Home_2 = () => {
                   <div className="rate-text">
                     <p>
                       Rate
-                      <svg
-                        width="13"
-                        height="14"
-                        viewBox="0 0 13 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clipPath="url(#clip0)">
-                          <path
-                            d="M6.54458 0.90033C5.38393 0.90033 4.24936 1.2445 3.28432 1.88932C2.31928 2.53413 1.56713 3.45064 1.12297 4.52293C0.678812 5.59522 0.5626 6.77514 0.78903 7.91348C1.01546 9.05182 1.57436 10.0975 2.39506 10.9182C3.21576 11.7388 4.26139 12.2977 5.39973 12.5242C6.53807 12.7506 7.71799 12.6344 8.79028 12.1902C9.86257 11.7461 10.7791 10.9939 11.4239 10.0289C12.0687 9.06385 12.4129 7.92927 12.4129 6.76863C12.411 5.21283 11.7922 3.72127 10.6921 2.62114C9.59194 1.52102 8.10038 0.902165 6.54458 0.90033ZM6.54458 11.57C5.59496 11.57 4.66667 11.2884 3.87709 10.7608C3.08752 10.2332 2.47212 9.48336 2.10872 8.60603C1.74531 7.7287 1.65023 6.76331 1.83549 5.83194C2.02075 4.90057 2.47804 4.04505 3.14952 3.37357C3.821 2.70209 4.67651 2.24481 5.60788 2.05955C6.53925 1.87429 7.50464 1.96937 8.38197 2.33277C9.2593 2.69618 10.0092 3.31158 10.5367 4.10115C11.0643 4.89073 11.3459 5.81902 11.3459 6.76863C11.3444 8.04155 10.838 9.26189 9.93792 10.162C9.03783 11.0621 7.81749 11.5684 6.54458 11.57Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 5.16815C6.40329 5.16815 6.2676 5.22436 6.16755 5.32441C6.0675 5.42445 6.01129 5.56015 6.01129 5.70163V9.43601C6.01129 9.5775 6.0675 9.71319 6.16755 9.81324C6.2676 9.91329 6.40329 9.96949 6.54478 9.96949C6.68627 9.96949 6.82196 9.91329 6.92201 9.81324C7.02206 9.71319 7.07827 9.5775 7.07827 9.43601V5.70163C7.07827 5.56015 7.02206 5.42445 6.92201 5.32441C6.82196 5.22436 6.68627 5.16815 6.54478 5.16815Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 4.63465C6.83942 4.63465 7.07827 4.3958 7.07827 4.10117C7.07827 3.80654 6.83942 3.56769 6.54478 3.56769C6.25014 3.56769 6.01129 3.80654 6.01129 4.10117C6.01129 4.3958 6.25014 4.63465 6.54478 4.63465Z"
-                            fill="#70C3FF"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0">
-                            <rect
-                              width="12.8036"
-                              height="12.8036"
-                              fill="white"
-                              transform="translate(0.142883 0.366821)"
-                            />
-                          </clipPath>
-                        </defs>
-                      </svg>
                     </p>
                     <h1>
                       {loanScenario.interestRate}
                       <svg
-                        width="14"
-                        height="13"
-                        viewBox="0 0 14 13"
+                        width="40"
+                        height="34"
+                        viewBox="0 0 16 16"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -1409,45 +1377,13 @@ const Home_2 = () => {
                 <div className="rate-box">
                   <div className="rate-text">
                     <p>
-                      Upfront costs
-                      <svg
-                        width="13"
-                        height="14"
-                        viewBox="0 0 13 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clipPath="url(#clip0)">
-                          <path
-                            d="M6.54458 0.90033C5.38393 0.90033 4.24936 1.2445 3.28432 1.88932C2.31928 2.53413 1.56713 3.45064 1.12297 4.52293C0.678812 5.59522 0.5626 6.77514 0.78903 7.91348C1.01546 9.05182 1.57436 10.0975 2.39506 10.9182C3.21576 11.7388 4.26139 12.2977 5.39973 12.5242C6.53807 12.7506 7.71799 12.6344 8.79028 12.1902C9.86257 11.7461 10.7791 10.9939 11.4239 10.0289C12.0687 9.06385 12.4129 7.92927 12.4129 6.76863C12.411 5.21283 11.7922 3.72127 10.6921 2.62114C9.59194 1.52102 8.10038 0.902165 6.54458 0.90033ZM6.54458 11.57C5.59496 11.57 4.66667 11.2884 3.87709 10.7608C3.08752 10.2332 2.47212 9.48336 2.10872 8.60603C1.74531 7.7287 1.65023 6.76331 1.83549 5.83194C2.02075 4.90057 2.47804 4.04505 3.14952 3.37357C3.821 2.70209 4.67651 2.24481 5.60788 2.05955C6.53925 1.87429 7.50464 1.96937 8.38197 2.33277C9.2593 2.69618 10.0092 3.31158 10.5367 4.10115C11.0643 4.89073 11.3459 5.81902 11.3459 6.76863C11.3444 8.04155 10.838 9.26189 9.93792 10.162C9.03783 11.0621 7.81749 11.5684 6.54458 11.57Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 5.16815C6.40329 5.16815 6.2676 5.22436 6.16755 5.32441C6.0675 5.42445 6.01129 5.56015 6.01129 5.70163V9.43601C6.01129 9.5775 6.0675 9.71319 6.16755 9.81324C6.2676 9.91329 6.40329 9.96949 6.54478 9.96949C6.68627 9.96949 6.82196 9.91329 6.92201 9.81324C7.02206 9.71319 7.07827 9.5775 7.07827 9.43601V5.70163C7.07827 5.56015 7.02206 5.42445 6.92201 5.32441C6.82196 5.22436 6.68627 5.16815 6.54478 5.16815Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 4.63465C6.83942 4.63465 7.07827 4.3958 7.07827 4.10117C7.07827 3.80654 6.83942 3.56769 6.54478 3.56769C6.25014 3.56769 6.01129 3.80654 6.01129 4.10117C6.01129 4.3958 6.25014 4.63465 6.54478 4.63465Z"
-                            fill="#70C3FF"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0">
-                            <rect
-                              width="12.8036"
-                              height="12.8036"
-                              fill="white"
-                              transform="translate(0.142883 0.366821)"
-                            />
-                          </clipPath>
-                        </defs>
-                      </svg>
+                      Upfront Costs
                     </p>
                     <h1>
                       <svg
-                        width="9"
-                        height="16"
-                        viewBox="0 0 9 16"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 3 20"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -1463,85 +1399,13 @@ const Home_2 = () => {
                 <div className="rate-box">
                   <div className="rate-text">
                     <p>
-                      Mo. payment
-                      <svg
-                        width="13"
-                        height="14"
-                        viewBox="0 0 13 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clipPath="url(#clip0)">
-                          <path
-                            d="M6.54458 0.90033C5.38393 0.90033 4.24936 1.2445 3.28432 1.88932C2.31928 2.53413 1.56713 3.45064 1.12297 4.52293C0.678812 5.59522 0.5626 6.77514 0.78903 7.91348C1.01546 9.05182 1.57436 10.0975 2.39506 10.9182C3.21576 11.7388 4.26139 12.2977 5.39973 12.5242C6.53807 12.7506 7.71799 12.6344 8.79028 12.1902C9.86257 11.7461 10.7791 10.9939 11.4239 10.0289C12.0687 9.06385 12.4129 7.92927 12.4129 6.76863C12.411 5.21283 11.7922 3.72127 10.6921 2.62114C9.59194 1.52102 8.10038 0.902165 6.54458 0.90033ZM6.54458 11.57C5.59496 11.57 4.66667 11.2884 3.87709 10.7608C3.08752 10.2332 2.47212 9.48336 2.10872 8.60603C1.74531 7.7287 1.65023 6.76331 1.83549 5.83194C2.02075 4.90057 2.47804 4.04505 3.14952 3.37357C3.821 2.70209 4.67651 2.24481 5.60788 2.05955C6.53925 1.87429 7.50464 1.96937 8.38197 2.33277C9.2593 2.69618 10.0092 3.31158 10.5367 4.10115C11.0643 4.89073 11.3459 5.81902 11.3459 6.76863C11.3444 8.04155 10.838 9.26189 9.93792 10.162C9.03783 11.0621 7.81749 11.5684 6.54458 11.57Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 5.16815C6.40329 5.16815 6.2676 5.22436 6.16755 5.32441C6.0675 5.42445 6.01129 5.56015 6.01129 5.70163V9.43601C6.01129 9.5775 6.0675 9.71319 6.16755 9.81324C6.2676 9.91329 6.40329 9.96949 6.54478 9.96949C6.68627 9.96949 6.82196 9.91329 6.92201 9.81324C7.02206 9.71319 7.07827 9.5775 7.07827 9.43601V5.70163C7.07827 5.56015 7.02206 5.42445 6.92201 5.32441C6.82196 5.22436 6.68627 5.16815 6.54478 5.16815Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 4.63465C6.83942 4.63465 7.07827 4.3958 7.07827 4.10117C7.07827 3.80654 6.83942 3.56769 6.54478 3.56769C6.25014 3.56769 6.01129 3.80654 6.01129 4.10117C6.01129 4.3958 6.25014 4.63465 6.54478 4.63465Z"
-                            fill="#70C3FF"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0">
-                            <rect
-                              width="12.8036"
-                              height="12.8036"
-                              fill="white"
-                              transform="translate(0.142883 0.366821)"
-                            />
-                          </clipPath>
-                        </defs>
-                      </svg>
+                      Monthly Payment
                     </p>
-                      <h1>{numberWithCommas(Math.round(principalInterest))}</h1>
-                  </div>
-                </div>
-                <div className="rate-box">
-                  <div className="rate-text">
-                    <p>
-                      Cash to Close
+                      <h1>
                       <svg
-                        width="13"
-                        height="14"
-                        viewBox="0 0 13 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clipPath="url(#clip0)">
-                          <path
-                            d="M6.54458 0.90033C5.38393 0.90033 4.24936 1.2445 3.28432 1.88932C2.31928 2.53413 1.56713 3.45064 1.12297 4.52293C0.678812 5.59522 0.5626 6.77514 0.78903 7.91348C1.01546 9.05182 1.57436 10.0975 2.39506 10.9182C3.21576 11.7388 4.26139 12.2977 5.39973 12.5242C6.53807 12.7506 7.71799 12.6344 8.79028 12.1902C9.86257 11.7461 10.7791 10.9939 11.4239 10.0289C12.0687 9.06385 12.4129 7.92927 12.4129 6.76863C12.411 5.21283 11.7922 3.72127 10.6921 2.62114C9.59194 1.52102 8.10038 0.902165 6.54458 0.90033ZM6.54458 11.57C5.59496 11.57 4.66667 11.2884 3.87709 10.7608C3.08752 10.2332 2.47212 9.48336 2.10872 8.60603C1.74531 7.7287 1.65023 6.76331 1.83549 5.83194C2.02075 4.90057 2.47804 4.04505 3.14952 3.37357C3.821 2.70209 4.67651 2.24481 5.60788 2.05955C6.53925 1.87429 7.50464 1.96937 8.38197 2.33277C9.2593 2.69618 10.0092 3.31158 10.5367 4.10115C11.0643 4.89073 11.3459 5.81902 11.3459 6.76863C11.3444 8.04155 10.838 9.26189 9.93792 10.162C9.03783 11.0621 7.81749 11.5684 6.54458 11.57Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 5.16815C6.40329 5.16815 6.2676 5.22436 6.16755 5.32441C6.0675 5.42445 6.01129 5.56015 6.01129 5.70163V9.43601C6.01129 9.5775 6.0675 9.71319 6.16755 9.81324C6.2676 9.91329 6.40329 9.96949 6.54478 9.96949C6.68627 9.96949 6.82196 9.91329 6.92201 9.81324C7.02206 9.71319 7.07827 9.5775 7.07827 9.43601V5.70163C7.07827 5.56015 7.02206 5.42445 6.92201 5.32441C6.82196 5.22436 6.68627 5.16815 6.54478 5.16815Z"
-                            fill="#70C3FF"
-                          />
-                          <path
-                            d="M6.54478 4.63465C6.83942 4.63465 7.07827 4.3958 7.07827 4.10117C7.07827 3.80654 6.83942 3.56769 6.54478 3.56769C6.25014 3.56769 6.01129 3.80654 6.01129 4.10117C6.01129 4.3958 6.25014 4.63465 6.54478 4.63465Z"
-                            fill="#70C3FF"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0">
-                            <rect
-                              width="12.8036"
-                              height="12.8036"
-                              fill="white"
-                              transform="translate(0.142883 0.366821)"
-                            />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </p>
-                    <h1>
-                    <svg
-                        width="9"
-                        height="16"
-                        viewBox="0 0 9 16"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 3 20"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -1550,7 +1414,35 @@ const Home_2 = () => {
                           fill="#2CC14E"
                         />
                       </svg>
-                      {numberWithCommas(Math.round(estimatedCashToClose))}</h1>
+                        {numberWithCommas(Math.round(principalInterest))}</h1>
+                  </div>
+                </div>
+                <div className="rate-box">
+                  <div className="rate-text">
+                    <p>
+                      Cash to Close
+                    </p>
+                    <h1>
+                    <svg
+                        width="40"
+                        height="40"
+                        viewBox="0 0 3 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.53571 10.2507C8.53571 10.8224 8.38875 11.3597 8.09482 11.8628C7.81265 12.3659 7.38939 12.7889 6.82504 13.1319C6.27246 13.4749 5.61405 13.6807 4.84984 13.7493V15.1384H3.70351V13.7493C2.59834 13.6464 1.70479 13.3091 1.02287 12.7375C0.340958 12.1658 0 11.4112 0 10.4737H2.15156C2.18684 10.9196 2.3338 11.2912 2.59246 11.5884C2.85112 11.8742 3.22147 12.0572 3.70351 12.1372V8.36425C2.91578 8.16988 2.27501 7.97552 1.78121 7.78115C1.28741 7.57535 0.864153 7.25522 0.511437 6.82076C0.170479 6.3863 0 5.79177 0 5.03718C0 4.08822 0.340958 3.30505 1.02287 2.68765C1.70479 2.05883 2.59834 1.69296 3.70351 1.59006V0.200928H4.84984V1.59006C5.88447 1.68153 6.71335 2.00166 7.33648 2.55045C7.97137 3.08782 8.32996 3.83097 8.41226 4.77993H6.2607C6.22543 4.4255 6.08434 4.11109 5.83744 3.83669C5.59054 3.55086 5.26134 3.3565 4.84984 3.2536V6.95796C5.63757 7.14089 6.27833 7.33526 6.77214 7.54105C7.26594 7.73542 7.68332 8.04983 8.02428 8.48429C8.36523 8.90732 8.53571 9.49613 8.53571 10.2507ZM2.04575 4.93428C2.04575 5.40304 2.18684 5.76891 2.46901 6.03187C2.76294 6.29483 3.17444 6.50635 3.70351 6.66641V3.20215C3.19795 3.25931 2.79233 3.43653 2.48664 3.73379C2.19271 4.03106 2.04575 4.43122 2.04575 4.93428ZM4.84984 12.1372C5.36715 12.0572 5.77278 11.8571 6.06671 11.537C6.36064 11.2054 6.5076 10.811 6.5076 10.3536C6.5076 9.8963 6.36064 9.54187 6.06671 9.29034C5.78453 9.02737 5.37891 8.81586 4.84984 8.65579V12.1372Z"
+                          fill="#2CC14E"
+                        />
+                      </svg>     
+                      {/* {numberWithCommas(Math.round(estimatedCashToClose))} */}
+                      { 
+                          Math.sign(estimatedCashToClose) === -1 ?
+                            "(" + numberWithCommas(Math.abs(Math.round(estimatedCashToClose))) + ")"
+                          :
+                            numberWithCommas(Math.round(estimatedCashToClose))
+                        }
+                      </h1>
                   </div>
                 </div>
               </div>
@@ -1609,7 +1501,7 @@ const Home_2 = () => {
                           <li>
                             <p>Base Loan Amount</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.baseLoanAmount}
                               tabIndex={1}
                               onSave={(pass) => {
@@ -1779,7 +1671,7 @@ const Home_2 = () => {
                           <li>
                             <p>Interest Rate</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.interestRate}
                               tabIndex={3}
                               onSave={(pass) => {
@@ -1840,7 +1732,7 @@ const Home_2 = () => {
                           <li>
                             <p>Loan Price</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.loanPrice}
                               tabIndex={4}
                               onSave={(pass) => {
@@ -1854,7 +1746,7 @@ const Home_2 = () => {
                             <p>Lender Credit</p>
 
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.lenderCredit}
                               tabIndex={5}
                               onSave={(pass) => {
@@ -1875,7 +1767,7 @@ const Home_2 = () => {
                           <li>
                             <p>Government Funding Fee </p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.governmentFundingFeePercent}
                               tabIndex={6}
                               onSave={(pass) => {
@@ -1907,7 +1799,7 @@ const Home_2 = () => {
                           <li>
                             <p>Mortgage Insurance Rate</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.annualMortgageInsuranceRate}
                               tabIndex={7}
                               onSave={(pass) => {
@@ -2039,7 +1931,7 @@ const Home_2 = () => {
                           <li>
                             <p>Second Mortgage Balance</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.secondMortgageBalance}
                               tabIndex={8}
                               onSave={(pass) => {
@@ -2204,7 +2096,7 @@ const Home_2 = () => {
                           <li>
                             <p>Current Loan Balance</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.currentLoanBalance}
                               tabIndex={9}
                               onSave={(pass) => {
@@ -2217,7 +2109,7 @@ const Home_2 = () => {
                           <li>
                             <p>Cashout Request</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.cashoutRequest}
                               tabIndex={10}
                               onSave={(pass) => {
@@ -2270,7 +2162,7 @@ const Home_2 = () => {
                           <li>
                             <p>Credit Score</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.creditScore}
                               tabIndex={11}
                               onSave={(pass) => {
@@ -2283,7 +2175,7 @@ const Home_2 = () => {
                           <li>
                             <p>Annual Income</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.annualIncome}
                               tabIndex={11}
                               onSave={(pass) => {
@@ -2619,7 +2511,7 @@ const Home_2 = () => {
                           <li>
                             <p>House Value</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.houseValue}
                               tabIndex={13}
                               onSave={(pass) => {
@@ -2632,7 +2524,7 @@ const Home_2 = () => {
                           <li>
                             <p>Monthly HOA</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.monthlyHOA}
                               tabIndex={14}
                               onSave={(pass) => {
@@ -2645,7 +2537,7 @@ const Home_2 = () => {
                           <li>
                             <p>Monthly Property Taxes</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.monthlyPropertyTax}
                               tabIndex={15}
                               onSave={(pass) => {
@@ -2658,7 +2550,7 @@ const Home_2 = () => {
                           <li>
                             <p>Monthly HOI</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.monthlyHOI}
                               tabIndex={16}
                               onSave={(pass) => {
@@ -2684,8 +2576,8 @@ const Home_2 = () => {
                             <span>{estimatedEscrow}</span>
                           </li>
                           <li className="Total">
-                            <p>Total Monthly Payment</p>
-                            <span>{Math.round(principalInterest + estimatedEscrow)}</span>
+                              <p><b>Total Monthly Payment</b></p>
+                              <span className="text-val"><b>{Math.round(principalInterest + estimatedEscrow)}</b></span>
                           </li>
                         </ul>
                       </div>
@@ -2707,7 +2599,7 @@ const Home_2 = () => {
                           <li>
                             <p>Discount Fee </p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockADiscountFee}
                               tabIndex={101}
                               onSave={(pass) => {
@@ -2720,7 +2612,7 @@ const Home_2 = () => {
                           <li>
                             <p>Origination Fee</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockAOriginationFee}
                               tabIndex={102}
                               onSave={(pass) => {
@@ -2733,7 +2625,7 @@ const Home_2 = () => {
                           <li>
                             <p>Processing Fee</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockAprocessingFee}
                               tabIndex={103}
                               onSave={(pass) => {
@@ -2746,7 +2638,7 @@ const Home_2 = () => {
                           <li>
                             <p>Tax Service</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockATaxService}
                               tabIndex={104}
                               onSave={(pass) => {
@@ -2767,7 +2659,7 @@ const Home_2 = () => {
                           <li>
                             <p>Appraisal Fee</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockBAppraisalFee}
                               tabIndex={106}
                               onSave={(pass) => {
@@ -2780,7 +2672,7 @@ const Home_2 = () => {
                           <li>
                             <p>Credit Report Fees</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockBCreditFees}
                               tabIndex={107}
                               onSave={(pass) => {
@@ -2793,7 +2685,7 @@ const Home_2 = () => {
                           <li>
                             <p>Flood Certification Fee</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockBFloodCertification}
                               tabIndex={108}
                               onSave={(pass) => {
@@ -2806,7 +2698,7 @@ const Home_2 = () => {
                           <li>
                             <p>Tax Return Verification Fee</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={
                                 loanScenario.blockBtaxReturnVerificationFee
                               }
@@ -2824,7 +2716,7 @@ const Home_2 = () => {
                           <li>
                             <p>Verification of Employment </p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockBverificationEmployment}
                               tabIndex={110}
                               onSave={(pass) => {
@@ -2840,7 +2732,7 @@ const Home_2 = () => {
                           <li>
                             <p>HOA Questionnaire</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockBhoaQuestionnaire}
                               tabIndex={111}
                               onSave={(pass) => {
@@ -2853,7 +2745,7 @@ const Home_2 = () => {
                           <li>
                             <p>Condo Project Approval</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockBcondoProjectApproval}
                               tabIndex={112}
                               onSave={(pass) => {
@@ -2866,7 +2758,7 @@ const Home_2 = () => {
                           <li>
                             <p>Single Premium MI</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockBsinglePremiumMI}
                               tabIndex={113}
                               onSave={(pass) => {
@@ -2891,7 +2783,7 @@ const Home_2 = () => {
                           <li>
                             <p>Title Services & Insurance</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockCTitleServices}
                               tabIndex={113}
                               onSave={(pass) => {
@@ -2904,7 +2796,7 @@ const Home_2 = () => {
                           <li>
                             <p>Survey</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockCSurvey}
                               tabIndex={114}
                               onSave={(pass) => {
@@ -2935,7 +2827,7 @@ const Home_2 = () => {
                           <li>
                             <p>Recording Fees </p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockERecordingCharges}
                               tabIndex={115}
                               onSave={(pass) => {
@@ -2948,7 +2840,7 @@ const Home_2 = () => {
                           <li>
                             <p>Transfer Taxes</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockETransferTaxes}
                               tabIndex={116}
                               onSave={(pass) => {
@@ -2969,11 +2861,11 @@ const Home_2 = () => {
 
                           <li>
                             <div className="left-div"> 
-                                <p>Homeowner’s Insurance Premium (</p>
+                                <p>HOI Premium (</p>
                                 <EdiText
                                   value={loanScenario.blockFnumMonthsPrepaidHOI}
                                   tabIndex={119}
-                                  type="number"
+                                  type="text"
                                   // validationMessage=" "
                                   // validation={(val) => {
                                   //   if (
@@ -3005,7 +2897,7 @@ const Home_2 = () => {
                             <EdiText
                               value={loanScenario.blockFdaysPrepaidInterest}
                               tabIndex={118}
-                              type="number"
+                              type="text"
                               // validationMessage=" "
                               // validation={(val) => {
                               //   if (
@@ -3037,7 +2929,7 @@ const Home_2 = () => {
                             <EdiText
                               value={loanScenario.blockFnumMonthsPrepaidTaxes}
                               tabIndex={119}
-                              type="number"
+                              type="text"
                               // validationMessage=" "
                               // validation={(val) => {
                               //   if (
@@ -3212,7 +3104,7 @@ const Home_2 = () => {
                           <li>
                             <p>Owner's Title Insurance</p>
                             <EdiText
-                              type="number"
+                              type="text"
                               value={loanScenario.blockHOwnersTitleInsPremium}
                               tabIndex={122}
                               onSave={(pass) => {
@@ -3287,7 +3179,7 @@ const Home_2 = () => {
                                 <p className="text-icon">-</p>
                                 <EdiText
                                  className="text-val"
-                                    type="number"
+                                    type="text"
                                     value={loanScenario.sellerCredit}
                                     tabIndex={123}
                                     onSave={(pass) => {
@@ -3304,7 +3196,7 @@ const Home_2 = () => {
                               <p className="text-icon">-</p>
                               <EdiText
                                className="text-val"
-                                  type="number"
+                                  type="text"
                                   value={loanScenario.otherCredits}
                                   tabIndex={123}
                                   onSave={(pass) => {
