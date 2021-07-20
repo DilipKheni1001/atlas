@@ -772,26 +772,11 @@ tr.head-td th:after {
   top: 50%;
   transform: translateY(-50%);
 }
-/* 
-.two-btn button {
-  padding: 0;
-  border: none;
-  background-color: #fff;
-  padding: 0px 20px;
-} */
 
 .two-btn button svg {
   margin-right: 10px;
 }
-/* 
-.two-btn button {
-  font-size: 14px;
-  border: 1px solid #ccc !important;
-  background-color: #ddd !important;
-  padding: 0px 7px !important;
-  color: unset !important;
-  line-height: 36px;
-} */
+
 .two-btn button {
   border-radius: 50px !important;
   height: 20px;
@@ -1217,6 +1202,28 @@ button.cross-arrow.icon-btn {
 
 .Dropdown-control{
   margin-right: 5px;
+}
+
+.price-text .styles-module_Editext__view_container__3oSYx:hover .styles-module_Editext__edit_button__310_J{
+  display: block;
+}
+.price-text .styles-module_Editext__view_container__3oSYx{
+  cursor: pointer;
+}
+.price-text .styles-module_Editext__view_container__3oSYx .styles-module_Editext__edit_button__310_J{
+  display: none;
+}
+.price-text .main-div{
+  cursor: pointer;
+}
+.price-text .main-div>div{
+  display: flex;
+}
+.price-text .main-div:hover .edit-arrow1{
+display: block;
+}
+.price-text .main-div .edit-arrow1{
+  display: none;
 }
 
 @media (max-width: 1350px) {
