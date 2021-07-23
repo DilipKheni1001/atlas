@@ -24,6 +24,8 @@ import Home2_PDF from './Home2_PDF';
 import Loader from 'react-loader-spinner';
 import PreQualPDF from "./PreQualPDF";
 import logo_img from "../images/logo.png";
+import Header from "./Header";
+
 
 const Home_2 = () => {
   
@@ -755,6 +757,12 @@ const Home_2 = () => {
   const [link,setLink] = useState("");
   const [isLoading,setIsLoading] = useState(false);
   const [isLoadingPreQualPDF,setIsLoadingPreQualPDF] = useState(false);
+  const [headers, setHeaders] = useState("");
+  
+  
+  const handleProps = (e) => {
+    setHeaders(e);
+  };
 
   useEffect(() => {
     
@@ -1098,6 +1106,7 @@ const Home_2 = () => {
 
   return (
     <>
+    <Header value={handleProps} />
       <ToastContainer />
       {/* <div style={{"display":"none"}} ref={container} id="pdf-div">
         <h1>Hello</h1>
@@ -1355,7 +1364,7 @@ const Home_2 = () => {
                 <div className="rate-box">
                   <div className="rate-text">
                     <p>
-                      Rate
+                      Interest Rate
                     </p>
                     <h1>
                       {loanScenario.interestRate}
@@ -2339,7 +2348,7 @@ const Home_2 = () => {
 
                             <Modal open={open} onClose={onCloseModal}>
                               <div className="edit-Address">
-                                <ModalTitle> Edit Addresses</ModalTitle>
+                                <ModalTitle> Edit Address</ModalTitle>
                                 <ModalBody>
                                   <div className="inputBox">
                                     <input
@@ -2397,7 +2406,7 @@ const Home_2 = () => {
                                     className="save"
                                     onClick={handleSubmit}
                                   >
-                                    Save Addresses
+                                    Edit Address
                                   </button>
                                 </ModalFooter>
                               </div>
@@ -2893,7 +2902,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                           <div className="left-div"> 
-                            <p>Prepaid Interest for </p>
+                            <p style={{paddingRight:"5px"}}>Prepaid Interest for  </p>
                             <EdiText
                               value={loanScenario.blockFdaysPrepaidInterest}
                               tabIndex={118}

@@ -327,6 +327,7 @@ ul.pagination li.active {
   width: 85%;
   display: flex;
   flex-wrap: wrap;
+  line-height: 18px;
 }
 .right-div {
   width: 15%;
@@ -482,8 +483,7 @@ tr.head-td th:after {
 .profile-main {
   background-color: #fff;
   border-radius: 10px;
-
-  padding-bottom: 90px;
+  padding-bottom: 10px;
 }
 .profile-main .protb-img {
   width: 64px;
@@ -707,7 +707,7 @@ tr.head-td th:after {
   border: none;
   text-align: center;
   color: #fff;
-  font-size: 11px;
+  font-size: 14px;
   border-radius: 4px;
 }
 
@@ -791,7 +791,7 @@ tr.head-td th:after {
   font-size: 10px !important;
 }
 .styles-module_Editext__main_container__2azCD{
-  padding-left: 5px;
+  padding-left: 0px;
 }
 .main-div {
   padding-left: 5px;
@@ -857,11 +857,14 @@ justify-content: flex-end;
   list-style: none;
   padding: 0px 15px;
   font-size: 14px;
-  margin-top: 15px;
+  padding: 8px 15px;
   display: flex;
   line-height: normal;
   align-items: center;
   justify-content: space-between;
+}
+.price-text ul li:hover{
+  background-color: #f7f9fa;
 }
 li.head-price {
   padding-bottom: 6px !important;
@@ -873,7 +876,7 @@ li.head-price {
   padding: 6px 15px;
   border-radius: 4px;
   font-size: 14px;
-  margin: 0;
+  margin: 0 0 7px 0;
 }
 .price-text {
   background-color: #fff;
@@ -953,7 +956,7 @@ li.head-price {
   padding-top: 15px;
   border-top: 1px solid #dee2e6;
   margin: 0px 15px;
-  margin-top: 15px;
+  margin-top: 7px;
   padding-bottom: 20px;
 }
 /* .second-tab .price-box.pb-1 .price-text ul li.Total span {
@@ -1201,6 +1204,8 @@ button.cross-arrow.icon-btn {
 }
 
 .Dropdown-control{
+  border:1px solid #d7dee2;
+  border-radius: 4px;
   margin-right: 5px;
 }
 
