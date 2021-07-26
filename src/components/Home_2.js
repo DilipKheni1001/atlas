@@ -25,7 +25,7 @@ import Loader from 'react-loader-spinner';
 import PreQualPDF from "./PreQualPDF";
 import logo_img from "../images/logo.png";
 import Header from "./Header";
-
+import RateCampaign from "./RateCampaign"
 
 const Home_2 = () => {
   
@@ -758,8 +758,9 @@ const Home_2 = () => {
   const [isLoading,setIsLoading] = useState(false);
   const [isLoadingPreQualPDF,setIsLoadingPreQualPDF] = useState(false);
   const [headers, setHeaders] = useState("");
+  const [isRateCampaign, setIsRateCampaign] = useState(false);
   
-  
+
   const handleProps = (e) => {
     setHeaders(e);
   };
@@ -1102,15 +1103,16 @@ const Home_2 = () => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
+  const showRateCampain = () => {
+      setIsRateCampaign(true);
+  }
+  
   console.log("loanScenario", loanScenario);
 
   return (
     <>
     <Header value={handleProps} />
       <ToastContainer />
-      {/* <div style={{"display":"none"}} ref={container} id="pdf-div">
-        <h1>Hello</h1>
-      </div> */}
       <div className="maindiv">
         <div className="pro-class">
           <div className="profile-sec">
@@ -1277,8 +1279,7 @@ const Home_2 = () => {
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
                         <div className="pro-detail-text new-pro">
-                          <h3>Some Rate Campain</h3>
-                          <p>This campain is...</p>
+                          <h3 onClick={showRateCampain}>{loanScenario.loanProduct}</h3>
                         </div>
                       </Card.Body>
                     </Accordion.Collapse>
@@ -1350,6 +1351,10 @@ const Home_2 = () => {
               </div>
             </div>
           </div>
+        {
+          isRateCampaign ?  
+            <RateCampaign loanScenario={loanScenario} />
+          :
           <div className="stone">
             <div className="stone-sec">
               <div className="stone-text">
@@ -3373,6 +3378,9 @@ const Home_2 = () => {
               </Tabs>
             </div>
           </div>
+           
+          
+         }
         </div>
       </div>
     </>
