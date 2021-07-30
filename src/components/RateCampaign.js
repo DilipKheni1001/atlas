@@ -1,192 +1,518 @@
-const RateCampaign = ({loanScenario}) => {
-    
-    return (
-        <div className="stone">
-        <div className="stone-sec">
-          <div className="stone-text">
-          <h1>Rate Campaign: {loanScenario.loanProduct}</h1>
-            <span className="updated-date">
-              Last Updated
-              <br />
-              {new Date(loanScenario.dateUpdated).toLocaleDateString("en-US")}
-            </span>
-          </div>
-          <div className="rate-sec">
-            <div className="rate-box">
-              <div className="rate-text">
-                <p>
-                  Interest Rate
-                </p>
-                <h1>
-                  {loanScenario.interestRate}
-                  <svg
-                    width="40"
-                    height="34"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M0.232178 3.23432C0.232178 2.36937 0.480901 1.6922 0.978346 1.20282C1.4871 0.71344 2.13717 0.46875 2.92856 0.46875C3.71995 0.46875 4.36437 0.71344 4.86181 1.20282C5.37056 1.6922 5.62494 2.36937 5.62494 3.23432C5.62494 4.11066 5.37056 4.79351 4.86181 5.28289C4.36437 5.77227 3.71995 6.01696 2.92856 6.01696C2.13717 6.01696 1.4871 5.77227 0.978346 5.28289C0.480901 4.79351 0.232178 4.11066 0.232178 3.23432ZM11.1195 0.673607L4.45481 12.6236H2.14847L8.79616 0.673607H11.1195ZM2.9116 1.90275C2.28979 1.90275 1.97889 2.34661 1.97889 3.23432C1.97889 4.13342 2.28979 4.58296 2.9116 4.58296C3.21685 4.58296 3.45427 4.47485 3.62385 4.25861C3.79344 4.03099 3.87823 3.68956 3.87823 3.23432C3.87823 2.34661 3.55602 1.90275 2.9116 1.90275ZM7.6769 10.0458C7.6769 9.16949 7.92563 8.49232 8.42307 8.01432C8.93182 7.52494 9.58189 7.28025 10.3733 7.28025C11.1647 7.28025 11.8034 7.52494 12.2896 8.01432C12.787 8.49232 13.0357 9.16949 13.0357 10.0458C13.0357 10.9222 12.787 11.605 12.2896 12.0944C11.8034 12.5838 11.1647 12.8285 10.3733 12.8285C9.57059 12.8285 8.92052 12.5838 8.42307 12.0944C7.92563 11.605 7.6769 10.9222 7.6769 10.0458ZM10.3563 8.71425C9.71191 8.71425 9.3897 9.15811 9.3897 10.0458C9.3897 10.9449 9.71191 11.3945 10.3563 11.3945C10.9894 11.3945 11.306 10.9449 11.306 10.0458C11.306 9.15811 10.9894 8.71425 10.3563 8.71425Z"
-                      fill="#2CC14E"
-                    />
-                  </svg>
-                </h1>
-              </div>
-            </div>
-            <div className="rate-box">
-              <div className="rate-text">
-                <p>
-                  Upfront Costs
-                </p>
-                <h1>
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 3 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.53571 10.2507C8.53571 10.8224 8.38875 11.3597 8.09482 11.8628C7.81265 12.3659 7.38939 12.7889 6.82504 13.1319C6.27246 13.4749 5.61405 13.6807 4.84984 13.7493V15.1384H3.70351V13.7493C2.59834 13.6464 1.70479 13.3091 1.02287 12.7375C0.340958 12.1658 0 11.4112 0 10.4737H2.15156C2.18684 10.9196 2.3338 11.2912 2.59246 11.5884C2.85112 11.8742 3.22147 12.0572 3.70351 12.1372V8.36425C2.91578 8.16988 2.27501 7.97552 1.78121 7.78115C1.28741 7.57535 0.864153 7.25522 0.511437 6.82076C0.170479 6.3863 0 5.79177 0 5.03718C0 4.08822 0.340958 3.30505 1.02287 2.68765C1.70479 2.05883 2.59834 1.69296 3.70351 1.59006V0.200928H4.84984V1.59006C5.88447 1.68153 6.71335 2.00166 7.33648 2.55045C7.97137 3.08782 8.32996 3.83097 8.41226 4.77993H6.2607C6.22543 4.4255 6.08434 4.11109 5.83744 3.83669C5.59054 3.55086 5.26134 3.3565 4.84984 3.2536V6.95796C5.63757 7.14089 6.27833 7.33526 6.77214 7.54105C7.26594 7.73542 7.68332 8.04983 8.02428 8.48429C8.36523 8.90732 8.53571 9.49613 8.53571 10.2507ZM2.04575 4.93428C2.04575 5.40304 2.18684 5.76891 2.46901 6.03187C2.76294 6.29483 3.17444 6.50635 3.70351 6.66641V3.20215C3.19795 3.25931 2.79233 3.43653 2.48664 3.73379C2.19271 4.03106 2.04575 4.43122 2.04575 4.93428ZM4.84984 12.1372C5.36715 12.0572 5.77278 11.8571 6.06671 11.537C6.36064 11.2054 6.5076 10.811 6.5076 10.3536C6.5076 9.8963 6.36064 9.54187 6.06671 9.29034C5.78453 9.02737 5.37891 8.81586 4.84984 8.65579V12.1372Z"
-                      fill="#2CC14E"
-                    />
-                  </svg>
-                  
-                </h1>
-              </div>
-            </div>
-            <div className="rate-box">
-              <div className="rate-text">
-                <p>
-                  Monthly Payment
-                </p>
-                  <h1>
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 3 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.53571 10.2507C8.53571 10.8224 8.38875 11.3597 8.09482 11.8628C7.81265 12.3659 7.38939 12.7889 6.82504 13.1319C6.27246 13.4749 5.61405 13.6807 4.84984 13.7493V15.1384H3.70351V13.7493C2.59834 13.6464 1.70479 13.3091 1.02287 12.7375C0.340958 12.1658 0 11.4112 0 10.4737H2.15156C2.18684 10.9196 2.3338 11.2912 2.59246 11.5884C2.85112 11.8742 3.22147 12.0572 3.70351 12.1372V8.36425C2.91578 8.16988 2.27501 7.97552 1.78121 7.78115C1.28741 7.57535 0.864153 7.25522 0.511437 6.82076C0.170479 6.3863 0 5.79177 0 5.03718C0 4.08822 0.340958 3.30505 1.02287 2.68765C1.70479 2.05883 2.59834 1.69296 3.70351 1.59006V0.200928H4.84984V1.59006C5.88447 1.68153 6.71335 2.00166 7.33648 2.55045C7.97137 3.08782 8.32996 3.83097 8.41226 4.77993H6.2607C6.22543 4.4255 6.08434 4.11109 5.83744 3.83669C5.59054 3.55086 5.26134 3.3565 4.84984 3.2536V6.95796C5.63757 7.14089 6.27833 7.33526 6.77214 7.54105C7.26594 7.73542 7.68332 8.04983 8.02428 8.48429C8.36523 8.90732 8.53571 9.49613 8.53571 10.2507ZM2.04575 4.93428C2.04575 5.40304 2.18684 5.76891 2.46901 6.03187C2.76294 6.29483 3.17444 6.50635 3.70351 6.66641V3.20215C3.19795 3.25931 2.79233 3.43653 2.48664 3.73379C2.19271 4.03106 2.04575 4.43122 2.04575 4.93428ZM4.84984 12.1372C5.36715 12.0572 5.77278 11.8571 6.06671 11.537C6.36064 11.2054 6.5076 10.811 6.5076 10.3536C6.5076 9.8963 6.36064 9.54187 6.06671 9.29034C5.78453 9.02737 5.37891 8.81586 4.84984 8.65579V12.1372Z"
-                      fill="#2CC14E"
-                    />
-                  </svg>
-                  </h1>
-              </div>
-            </div>
-            <div className="rate-box">
-              <div className="rate-text">
-                <p>
-                  Cash to Close
-                </p>
-                <h1>
-                <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 3 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.53571 10.2507C8.53571 10.8224 8.38875 11.3597 8.09482 11.8628C7.81265 12.3659 7.38939 12.7889 6.82504 13.1319C6.27246 13.4749 5.61405 13.6807 4.84984 13.7493V15.1384H3.70351V13.7493C2.59834 13.6464 1.70479 13.3091 1.02287 12.7375C0.340958 12.1658 0 11.4112 0 10.4737H2.15156C2.18684 10.9196 2.3338 11.2912 2.59246 11.5884C2.85112 11.8742 3.22147 12.0572 3.70351 12.1372V8.36425C2.91578 8.16988 2.27501 7.97552 1.78121 7.78115C1.28741 7.57535 0.864153 7.25522 0.511437 6.82076C0.170479 6.3863 0 5.79177 0 5.03718C0 4.08822 0.340958 3.30505 1.02287 2.68765C1.70479 2.05883 2.59834 1.69296 3.70351 1.59006V0.200928H4.84984V1.59006C5.88447 1.68153 6.71335 2.00166 7.33648 2.55045C7.97137 3.08782 8.32996 3.83097 8.41226 4.77993H6.2607C6.22543 4.4255 6.08434 4.11109 5.83744 3.83669C5.59054 3.55086 5.26134 3.3565 4.84984 3.2536V6.95796C5.63757 7.14089 6.27833 7.33526 6.77214 7.54105C7.26594 7.73542 7.68332 8.04983 8.02428 8.48429C8.36523 8.90732 8.53571 9.49613 8.53571 10.2507ZM2.04575 4.93428C2.04575 5.40304 2.18684 5.76891 2.46901 6.03187C2.76294 6.29483 3.17444 6.50635 3.70351 6.66641V3.20215C3.19795 3.25931 2.79233 3.43653 2.48664 3.73379C2.19271 4.03106 2.04575 4.43122 2.04575 4.93428ZM4.84984 12.1372C5.36715 12.0572 5.77278 11.8571 6.06671 11.537C6.36064 11.2054 6.5076 10.811 6.5076 10.3536C6.5076 9.8963 6.36064 9.54187 6.06671 9.29034C5.78453 9.02737 5.37891 8.81586 4.84984 8.65579V12.1372Z"
-                      fill="#2CC14E"
-                    />
-                  </svg>     
-                  </h1>
-              </div>
-            </div>
-          </div>
-       
-        </div>
-              <div className="price-tab second-tab">
-                <div className="price-box">
-                  <div className="price-text">
-                    <ul>
-                      <li className="head-price">
-                        <p>Loan Terms</p>
-                      </li>
+import React, { useState, useEffect, useRef } from "react";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+import MultiSelect from "react-multi-select-component";
+import axios from "axios";
 
-                      <li>
-                        <p>Base Loan Amount</p>
-                        {/* <EdiText
-                          type="text"
-                          value={loanScenario.baseLoanAmount}
-                          tabIndex={1}
-                          onSave={(pass) => {
-                            handleSave(pass, "baseLoanAmount");
-                          }}
-                          submitOnUnfocus
-                          startEditingOnFocus
-                        /> */}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="price-box pb-1">
-                  <div className="price-text">
-                    <ul>
-                      <li className="head-price">
-                        <p>Borrower Request and Profile</p>
-                      </li>
-                      <li>
-                        <p>Loan Purpose</p>
-                        {/* {isEqual === "loanPurpose" ? (
-                          <div className="dropdown-main">
-                            <div id="wrap">
-                              <Dropdown
-                                className="cust-select"
-                                options={loanPurposeOptions}
-                                onChange={onSelect}
-                                value={loanScenario.loanPurpose}
-                                placeholder="Select an option"
-                              />
-                              <div className="btn-div">
-                                <button
-                                  className="right-arrow icon-btn"
-                                  onClick={() =>
-                                    handleSave(selectedValue, "loanPurpose")
-                                  }
-                                >
-                                  &#10003;
-                                </button>
-                                <button
-                                  className="cross-arrow icon-btn"
-                                  onClick={() => onClick("", "")}
-                                >
-                                  &#10005;
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div
-                            className="main-div"
-                            onClick={() =>
-                              onClick(
-                                "loanPurpose",
-                                loanScenario.loanPurpose
-                              )
-                            }
-                          >
-                            <div>
-                              <span>{loanScenario.loanPurpose}</span>
-                              <button className="edit-arrow1 icon-btn1">
-                                &#9998;
-                              </button>
-                            </div>
-                          </div>
-                        )} */}
-                      </li>
-                      
-                    </ul>
-                  </div>
-                </div>
-              </div>
+const RateCampaign = ({ loanScenario }) => {
+  const [isEqual, setIsEqual] = useState("");
+  const [selectedValue, setSelectedValue] = useState();
+  const [selected, setSelected] = useState([]);
+  const [loanScenarioContactId, setLoanScenarioContactId] = useState();
+  const [loanScenariosName, setLoanScenariosName] = useState("");
+
+  const [rateCampaign, setRateCampaign] = useState({
+    contactId: 0,
+    loanScenarioId: 0,
+    campaignSeries: "",
+    campaignStatus: "Active",
+    isAppButtonDisplayed: 0,
+    isPaused: 0,
+    campaignDetails: "Stone HP 30 100k Cashout",
+    frequency: "",
+    additionalLoanProducts: "",
+    isOptedOut: 0,
+    startDate: "",
+    terminationDate: "",
+    additionalEmails: "",
+    selectedDays: "",
+  });
+
+  const [ScenariosName, setScenariosName] = useState([]);
+  const newName = Object.values(ScenariosName);
+  const scenarioOptions = newName.map((item) => {
+    return { label: item.scenarioName, value: item.id };
+  });
+  const defaultName = loanScenariosName;
+
+  const frequencyOption = ["Daily (M-F)", "Weekly", "Bi-Weekly", "Monthly"];
+
+  const additionalLoanProductOptions = [
+    "10-yr Fixed",
+    "15-yr Fixed",
+    "20-yr Fixed",
+    "25-yr Fixed",
+    "30-yr Fixed",
+    "5/1 ARM",
+    "5/5 ARM",
+    "7/1 ARM",
+    "10/1 ARM",
+  ];
+
+  const selectedDaysOption = [
+    { label: "Mon", value: "Monday" },
+    { label: "Tue", value: "Tuesday" },
+    { label: "Wed", value: "Wednesday" },
+    { label: "Thu", value: "Thursday" },
+    { label: "Fri", value: "Friday" },
+    { label: "Sat", value: "Saturday" },
+    { label: "Sun", value: "Sunday" },
+  ];
+
+  const onClick = (v, dropdownValue) => {
+    setIsEqual(v);
+    setSelectedValue(dropdownValue);
+  };
+
+  const onSelect = (v) => {
+    console.log("Value--", v);
+    setSelectedValue(v.value);
+  };
+
+  const setDays = (v) => {
+    // console.log("days-->", v)
+    setSelected(v);
+  };
+  const onClose = () => {
+    setIsEqual("");
+    setSelected(prevState);
+  };
+  const handleSave = (val, field) => {
+    // console.log("event", val);
+    // console.log("val", field);
+
+    var formData = new FormData();
+    formData.append("id", rateCampaign.id);
+    formData.append(field, val);
+
+    axios
+      .post(
+        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        formData
+      )
+      .then((res) => {
+        setIsEqual("");
+        setRateCampaign({ ...rateCampaign, [field]: val });
+        console.log("Update-------------------------", res.data);
+        // console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const handleSelectedDays = (val, field) => {
+    // setIsEqual("")
+    // setSelected(val)
+    const newData = val
+      .map((item) => {
+        return item.value;
+      })
+      .join(";");
+    // console.log(newData)
+    var formData = new FormData();
+    formData.append("id", rateCampaign.id);
+    formData.append(field, newData);
+
+    axios
+      .post(
+        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        formData
+      )
+      .then((res) => {
+        setIsEqual("");
+        // setRateCampaign({ ...rateCampaign, [field]: val });
+        // setSelected(res)
+        console.log("Update-------------------------", res.data);
+        // console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  function reformatDate(dateStr) {
+    const date = new Date(dateStr).toLocaleDateString("en-US");
+    let dArr = date.split("/"); // ex input "2010-01-18"
+    const month = dArr[0];
+    const day = dArr[1];
+    const year = dArr[2] ? dArr[2].substring(2) : "";
+    const formatedDate = month + "/" + day + "/" + year;
+    // console.log(formatedDate)
+    return formatedDate;
+  }
+
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
+  const prevState = usePrevious(selected);
+
+  useEffect(() => {
+    getRateCampaignData();
+  }, [rateCampaign.contactId, rateCampaign.loanScenarioId]);
+
+  async function getRateCampaignData() {
+    try {
+      var result = {
+        id: 5,
+      };
+      await axios({
+        method: "get",
+        url: "https://atlas.keystonefunding.com/api/ratecampaign/details",
+        params: result,
+      }).then((res) => {
+        if (res.status === 200) {
+          console.log(res.data.data[0]);
+          let newArray = res.data.data[0].selectedDays.split(";");
+          let newData = newArray.map((item) => {
+            return { label: item.substring(0, 3), value: item };
+          });
+          // console.log(newData)
+          setSelected(newData);
+          setRateCampaign(res.data.data[0]);
+        }
+        var searchId = { id: rateCampaign.contactId };
+        axios({
+          method: "get",
+          url: "https://atlas.keystonefunding.com/api/contact/details",
+          params: searchId,
+        }).then((res) => {
+          if (res.status === 200) {
+            // console.log(res.data.data.loanScenarios)
+            setScenariosName(res.data.data.loanScenarios);
+          }
+          var ID = { id: rateCampaign.loanScenarioId };
+          axios({
+            method: "get",
+            url: "https://atlas.keystonefunding.com/api/loanscenario/details",
+            params: ID,
+          }).then((res) => {
+            if (res.status === 200) {
+              // console.log(res.data.data[0].scenarioName)
+              // console.log(res.data.data[0].contactId)
+              setLoanScenarioContactId(res.data.data[0].contactId);
+              setLoanScenariosName(res.data.data[0].scenarioName);
+            }
+          });
+        });
+      });
+    } catch (error) {}
+  }
+
+  return (
+    <div className="stone">
+      <div className="stone-sec mb-20">
+        <div className="stone-text">
+          <h1>Rate Campaign: {loanScenario.loanProduct}</h1>
+          <span className="updated-date">
+            Last Updated
+            <br />
+            {new Date(loanScenario.dateUpdated).toLocaleDateString("en-US")}
+          </span>
+        </div>
+        <div className="rate-sec">
+          <div className="rate-box">
+            <div className="rate-text">
+              <p>Campaign Status</p>
+              <h1>{rateCampaign.campaignStatus}</h1>
+            </div>
+          </div>
+          <div className="rate-box">
+            <div className="rate-text">
+              <p>Start Date</p>
+              <h1>{reformatDate(rateCampaign.startDate)}</h1>
+            </div>
+          </div>
+          <div className="rate-box">
+            <div className="rate-text">
+              <p>Emails Sent</p>
+              <h1>15</h1>
+            </div>
+          </div>
+          <div className="rate-box">
+            <div className="rate-text">
+              <p>Last Email Opened</p>
+              <h1>N/A</h1>
+            </div>
+          </div>
+        </div>
       </div>
-    )
-}
+      <div className="price-tab second-tab">
+        <div className="price-box">
+          <div className="price-text">
+            <ul>
+              <li className="head-price">
+                <p>Campaign Details</p>
+              </li>
+              <li>
+                <p>Loan Scenario</p>
+                {loanScenarioContactId === rateCampaign.contactId &&
+                isEqual === "loanScenarioId" ? (
+                  <div className="dropdown-main">
+                    <div id="wrap">
+                      <Dropdown
+                        className="cust-select"
+                        options={scenarioOptions}
+                        onChange={onSelect}
+                        value={defaultName}
+                        placeholder="Select an option"
+                      />
+                      <div className="btn-div">
+                        <button
+                          className="right-arrow icon-btn"
+                          onClick={() =>
+                            handleSave(selectedValue, "loanScenarioId")
+                          }
+                        >
+                          &#10003;
+                        </button>
+                        <button
+                          className="cross-arrow icon-btn"
+                          onClick={() => onClick("", "")}
+                        >
+                          &#10005;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="main-div w100"
+                    onClick={() =>
+                      onClick("loanScenarioId", rateCampaign.loanScenarioId)
+                    }
+                  >
+                    <div>
+                      <span>{loanScenariosName}</span>
+                      <button className="edit-arrow1 icon-btn1">&#9998;</button>
+                    </div>
+                  </div>
+                )}
+              </li>
+              <li>
+                <p>Additional Loan Products</p>
+                {isEqual === "additionalLoanProducts" ? (
+                  <div className="dropdown-main">
+                    <div id="wrap">
+                      <Dropdown
+                        className="cust-select"
+                        options={additionalLoanProductOptions}
+                        onChange={onSelect}
+                        value={rateCampaign.additionalLoanProducts}
+                        placeholder="Select an option"
+                      />
+                      <div className="btn-div">
+                        <button
+                          className="right-arrow icon-btn"
+                          onClick={() =>
+                            handleSave(selectedValue, "additionalLoanProducts")
+                          }
+                        >
+                          &#10003;
+                        </button>
+                        <button
+                          className="cross-arrow icon-btn"
+                          onClick={() => onClick("", "")}
+                        >
+                          &#10005;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="main-div w100"
+                    onClick={() =>
+                      onClick(
+                        "additionalLoanProducts",
+                        rateCampaign.additionalLoanProducts
+                      )
+                    }
+                  >
+                    <div>
+                      <span>{rateCampaign.additionalLoanProducts}</span>
+                      <button className="edit-arrow1 icon-btn1">&#9998;</button>
+                    </div>
+                  </div>
+                )}
+              </li>
+              <li>
+                <p>Show Submit Application</p>
+                <span>
+                  <label className="lab-check">
+                    <input
+                      type="checkbox"
+                      checked={rateCampaign.isAppButtonDisplayed}
+                      onChange={(pass) => {
+                        if (pass.target.checked) {
+                          handleSave(1, "isAppButtonDisplayed");
+                        } else {
+                          handleSave(0, "isAppButtonDisplayed");
+                        }
+                      }}
+                    />
+                    <span className="checkmark"></span>
+                  </label>
+                </span>
+              </li>
+              <li>
+                <p>Additional Emails</p>
+                <span>{rateCampaign.additionalEmails}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="price-box pb-1">
+          <div className="price-text">
+            <ul>
+              <li className="head-price">
+                <p>Schedule</p>
+              </li>
+              <li>
+                <p>Start Date</p>
+                <span>{reformatDate(rateCampaign.startDate)}</span>
+              </li>
+              <li>
+                <p>Frequency</p>
+                {isEqual === "frequency" ? (
+                  <div className="dropdown-main">
+                    <div id="wrap">
+                      <Dropdown
+                        className="cust-select"
+                        options={frequencyOption}
+                        onChange={onSelect}
+                        value={rateCampaign.frequency}
+                        placeholder="Select an option"
+                      />
+                      <div className="btn-div">
+                        <button
+                          className="right-arrow icon-btn"
+                          onClick={() => handleSave(selectedValue, "frequency")}
+                        >
+                          &#10003;
+                        </button>
+                        <button
+                          className="cross-arrow icon-btn"
+                          onClick={() => onClick("", "")}
+                        >
+                          &#10005;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="main-div w100"
+                    onClick={() => onClick("frequency", rateCampaign.frequency)}
+                  >
+                    <div>
+                      <span>{rateCampaign.frequency}</span>
+                      <button className="edit-arrow1 icon-btn1">&#9998;</button>
+                    </div>
+                  </div>
+                )}
+              </li>
+              <li>
+                <p>Selected Days</p>
+                {isEqual === "selectedDays" ? (
+                  <div id="wrap" className="w100">
+                    <MultiSelect
+                      className="w100"
+                      options={selectedDaysOption}
+                      value={selected}
+                      onChange={setDays}
+                      labelledBy="Select"
+                    />
+                    <div className="btn-div">
+                      <button
+                        className="right-arrow icon-btn"
+                        onClick={() =>
+                          handleSelectedDays(selected, "selectedDays")
+                        }
+                      >
+                        &#10003;
+                      </button>
+                      <button
+                        className="cross-arrow icon-btn"
+                        onClick={() => onClose()}
+                      >
+                        &#10005;
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="main-div w100"
+                    onClick={() =>
+                      onClick("selectedDays", rateCampaign.selectedDays)
+                    }
+                  >
+                    <div>
+                      <span>
+                        {selected
+                          .map((item) => {
+                            return item.label;
+                          })
+                          .join(", ")}
+                      </span>
+                      <button className="edit-arrow1 icon-btn1">&#9998;</button>
+                    </div>
+                  </div>
+                )}
+              </li>
+              <li>
+                <p>Pause Campaign</p>
+                <span>
+                  <label className="lab-check">
+                    <input
+                      type="checkbox"
+                      checked={rateCampaign.isPaused}
+                      onChange={(pass) => {
+                        if (pass.target.checked) {
+                          handleSave(1, "isPaused");
+                        } else {
+                          handleSave(0, "isPaused");
+                        }
+                      }}
+                    />
+                    <span className="checkmark"></span>
+                  </label>
+                </span>
+              </li>
+              <li>
+                <p>Opted Out</p>
+                <span>
+                  <label className="lab-check">
+                    <input
+                      type="checkbox"
+                      checked={rateCampaign.isOptedOut}
+                      onChange={(pass) => {
+                        if (pass.target.checked) {
+                          handleSave(1, "isOptedOut");
+                        } else {
+                          handleSave(0, "isOptedOut");
+                        }
+                      }}
+                    />
+                    <span className="checkmark"></span>
+                  </label>
+                </span>
+              </li>
+              <li>
+                <p>Termination Date</p>
+                <span>{reformatDate(rateCampaign.terminationDate)}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default RateCampaign;

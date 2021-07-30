@@ -274,10 +274,10 @@ const Hometable = (props) => {
                   <>
                     <tr>
                       <td>
-                        {element.firstName} {element.lastName}
+                        {element?.firstName} {element?.lastName}
                       </td>
-                      <td>{element.stage}</td>
-                      <td>{element.createdDate}</td>
+                      <td>{element?.stage}</td>
+                      <td>{element?.createdDate}</td>
                       <td>
                         <div className="loan-td">
                           {element?.loanScenarios?.map((ele, index) => {

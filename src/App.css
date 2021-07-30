@@ -655,6 +655,10 @@ tr.head-td th:after {
   border-radius: 10px;
   padding-bottom: 30px;
 }
+
+.mb-20{
+  margin-bottom: 20px;
+}
 .stone-text {
   display: flex;
   justify-content: space-between;
@@ -1203,6 +1207,7 @@ button.right-arrow.icon-btn {
   color: #fff !important;
   font-size: 10px;
   line-height: 0px;
+  height: 20px;
 }
 
 
@@ -1215,6 +1220,7 @@ button.cross-arrow.icon-btn {
   color: #fff !important;
   font-size: 10px;
   line-height: 0px;
+  height: 20px;
 }
 
 .react-responsive-modal-modal {
