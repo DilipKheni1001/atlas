@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "react-dropdown";
+import EdiText from "react-editext";
 import "react-dropdown/style.css";
 import MultiSelect from "react-multi-select-component";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 
 const RateCampaign = ({ loanScenario }) => {
@@ -10,12 +13,11 @@ const RateCampaign = ({ loanScenario }) => {
   const [selected, setSelected] = useState([]);
   const [loanScenarioContactId, setLoanScenarioContactId] = useState();
   const [loanScenariosName, setLoanScenariosName] = useState("");
-
   const [rateCampaign, setRateCampaign] = useState({
     contactId: 0,
     loanScenarioId: 0,
     campaignSeries: "",
-    campaignStatus: "Active",
+    campaignStatus: "",
     isAppButtonDisplayed: 0,
     isPaused: 0,
     campaignDetails: "Stone HP 30 100k Cashout",
@@ -26,7 +28,18 @@ const RateCampaign = ({ loanScenario }) => {
     terminationDate: "",
     additionalEmails: "",
     selectedDays: "",
+    sentCampaignItem: [],
   });
+
+  const [dateState, setDateState] = useState();
+  const [tDateState, setTDateState] = useState();
+
+  const changeDate = (e) => {
+    setDateState(e);
+  };
+  const changeTDate = (e) => {
+    setTDateState(e);
+  };
 
   const [ScenariosName, setScenariosName] = useState([]);
   const newName = Object.values(ScenariosName);
@@ -50,13 +63,13 @@ const RateCampaign = ({ loanScenario }) => {
   ];
 
   const selectedDaysOption = [
-    { label: "Mon", value: "Monday" },
-    { label: "Tue", value: "Tuesday" },
-    { label: "Wed", value: "Wednesday" },
-    { label: "Thu", value: "Thursday" },
-    { label: "Fri", value: "Friday" },
-    { label: "Sat", value: "Saturday" },
-    { label: "Sun", value: "Sunday" },
+    { label: "Monday", value: "Monday" },
+    { label: "Tuesday", value: "Tuesday" },
+    { label: "Wednesday", value: "Wednesday" },
+    { label: "Thursday", value: "Thursday" },
+    { label: "Friday", value: "Friday" },
+    { label: "Saturday", value: "Saturday" },
+    { label: "Sunday", value: "Sunday" },
   ];
 
   const onClick = (v, dropdownValue) => {
@@ -71,12 +84,27 @@ const RateCampaign = ({ loanScenario }) => {
 
   const setDays = (v) => {
     // console.log("days-->", v)
-    setSelected(v);
+    setSelected(
+      v?.map((item) => {
+        return { label: item.label.substring(0, 3), value: item.value };
+      })
+    );
   };
+
   const onClose = () => {
     setIsEqual("");
     setSelected(prevState);
   };
+
+  const onDateClose = () => {
+    setIsEqual("");
+    setDateState(prevSdate);
+  };
+  const onTDateClose = () => {
+    setIsEqual("");
+    setTDateState(prevTdate);
+  };
+
   const handleSave = (val, field) => {
     // console.log("event", val);
     // console.log("val", field);
@@ -93,6 +121,63 @@ const RateCampaign = ({ loanScenario }) => {
       .then((res) => {
         setIsEqual("");
         setRateCampaign({ ...rateCampaign, [field]: val });
+        console.log("Update-------------------------", res.data);
+        // console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  function formateDate(datePick) {
+    const date = new Date(datePick).toLocaleDateString("en-US");
+    const newdate = date.split("/");
+    return newdate[2] + "-" + newdate[0] + "-" + newdate[1];
+  }
+
+  const handleStartDate = (val, field) => {
+    // setDateState(val)
+    const sDate = formateDate(val);
+
+    var formData = new FormData();
+    formData.append("id", rateCampaign.id);
+    formData.append(field, sDate);
+
+    axios
+      .post(
+        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        formData
+      )
+      .then((res) => {
+        setIsEqual("");
+        setDateState(val);
+        // setRateCampaign({ ...rateCampaign, [field]: val });
+        // setSelected(res)
+        console.log("Update-------------------------", res.data);
+        // console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  const handleTerminationDate = (val, field) => {
+    // setDateState(val)
+    const tDate = formateDate(val);
+
+    var formData = new FormData();
+    formData.append("id", rateCampaign.id);
+    formData.append(field, tDate);
+
+    axios
+      .post(
+        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        formData
+      )
+      .then((res) => {
+        setIsEqual("");
+        setTDateState(val);
+        // setRateCampaign({ ...rateCampaign, [field]: val });
+        // setSelected(res)
         console.log("Update-------------------------", res.data);
         // console.log(res.data);
       })
@@ -151,55 +236,56 @@ const RateCampaign = ({ loanScenario }) => {
   }
 
   const prevState = usePrevious(selected);
+  const prevSdate = usePrevious(dateState);
+  const prevTdate = usePrevious(tDateState);
 
   useEffect(() => {
     getRateCampaignData();
-  }, [rateCampaign.contactId, rateCampaign.loanScenarioId]);
+  }, [rateCampaign.loanScenarioId]);
 
-  async function getRateCampaignData() {
+  function getRateCampaignData() {
     try {
       var result = {
         id: 5,
       };
-      await axios({
+      axios({
         method: "get",
         url: "https://atlas.keystonefunding.com/api/ratecampaign/details",
         params: result,
       }).then((res) => {
         if (res.status === 200) {
-          console.log(res.data.data[0]);
-          let newArray = res.data.data[0].selectedDays.split(";");
+          // console.log(res.data.data);
+          let newArray = res.data.data.selectedDays.split(";");
           let newData = newArray.map((item) => {
             return { label: item.substring(0, 3), value: item };
           });
           // console.log(newData)
           setSelected(newData);
-          setRateCampaign(res.data.data[0]);
-        }
-        var searchId = { id: rateCampaign.contactId };
-        axios({
-          method: "get",
-          url: "https://atlas.keystonefunding.com/api/contact/details",
-          params: searchId,
-        }).then((res) => {
-          if (res.status === 200) {
-            // console.log(res.data.data.loanScenarios)
-            setScenariosName(res.data.data.loanScenarios);
-          }
-          var ID = { id: rateCampaign.loanScenarioId };
+          setDateState(new Date(res.data.data.startDate));
+          setTDateState(new Date(res.data.data.terminationDate));
+          setRateCampaign(res.data.data);
+          var contactId = { id: res.data.data.contactId };
+          axios({
+            method: "get",
+            url: "https://atlas.keystonefunding.com/api/contact/details",
+            params: contactId,
+          }).then((res) => {
+            if (res.status === 200) {
+              setScenariosName(res.data.data.loanScenarios);
+            }
+          });
+          var loanId = { id: res.data.data.loanScenarioId };
           axios({
             method: "get",
             url: "https://atlas.keystonefunding.com/api/loanscenario/details",
-            params: ID,
+            params: loanId,
           }).then((res) => {
             if (res.status === 200) {
-              // console.log(res.data.data[0].scenarioName)
-              // console.log(res.data.data[0].contactId)
               setLoanScenarioContactId(res.data.data[0].contactId);
               setLoanScenariosName(res.data.data[0].scenarioName);
             }
           });
-        });
+        }
       });
     } catch (error) {}
   }
@@ -219,19 +305,27 @@ const RateCampaign = ({ loanScenario }) => {
           <div className="rate-box">
             <div className="rate-text">
               <p>Campaign Status</p>
-              <h1>{rateCampaign.campaignStatus}</h1>
+              <h1
+                style={
+                  rateCampaign.campaignStatus === "Unsubscribed"
+                    ? { fontSize: "30px" }
+                    : {}
+                }
+              >
+                {rateCampaign.campaignStatus}
+              </h1>
             </div>
           </div>
           <div className="rate-box">
             <div className="rate-text">
               <p>Start Date</p>
-              <h1>{reformatDate(rateCampaign.startDate)}</h1>
+              <h1>{reformatDate(dateState)}</h1>
             </div>
           </div>
           <div className="rate-box">
             <div className="rate-text">
               <p>Emails Sent</p>
-              <h1>15</h1>
+              <h1>{rateCampaign.sentCampaignItem.length}</h1>
             </div>
           </div>
           <div className="rate-box">
@@ -362,7 +456,19 @@ const RateCampaign = ({ loanScenario }) => {
               </li>
               <li>
                 <p>Additional Emails</p>
-                <span>{rateCampaign.additionalEmails}</span>
+                <div className="w100">
+                  <EdiText
+                    viewContainerClassName="view-wrapper"
+                    type="text"
+                    value={rateCampaign.additionalEmails}
+                    tabIndex={1}
+                    onSave={(pass) => {
+                      handleSave(pass, "additionalEmails");
+                    }}
+                    submitOnUnfocus
+                    startEditingOnFocus
+                  />
+                </div>
               </li>
             </ul>
           </div>
@@ -375,7 +481,35 @@ const RateCampaign = ({ loanScenario }) => {
               </li>
               <li>
                 <p>Start Date</p>
-                <span>{reformatDate(rateCampaign.startDate)}</span>
+                {isEqual === "startDate" ? (
+                  <div id="wrap">
+                    <Calendar value={dateState} onChange={changeDate} />
+                    <div className="btn-div">
+                      <button
+                        className="right-arrow icon-btn"
+                        onClick={() => handleStartDate(dateState, "startDate")}
+                      >
+                        &#10003;
+                      </button>
+                      <button
+                        className="cross-arrow icon-btn"
+                        onClick={() => onDateClose()}
+                      >
+                        &#10005;
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="main-div w100"
+                    onClick={() => onClick("startDate", rateCampaign.startDate)}
+                  >
+                    <div>
+                      <span>{reformatDate(dateState)}</span>
+                      <button className="edit-arrow1 icon-btn1">&#9998;</button>
+                    </div>
+                  </div>
+                )}
               </li>
               <li>
                 <p>Frequency</p>
@@ -505,7 +639,39 @@ const RateCampaign = ({ loanScenario }) => {
               </li>
               <li>
                 <p>Termination Date</p>
-                <span>{reformatDate(rateCampaign.terminationDate)}</span>
+                {isEqual === "terminationDate" ? (
+                  <div id="wrap">
+                    <Calendar value={tDateState} onChange={changeTDate} />
+                    <div className="btn-div">
+                      <button
+                        className="right-arrow icon-btn"
+                        onClick={() =>
+                          handleTerminationDate(tDateState, "terminationDate")
+                        }
+                      >
+                        &#10003;
+                      </button>
+                      <button
+                        className="cross-arrow icon-btn"
+                        onClick={() => onTDateClose()}
+                      >
+                        &#10005;
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="main-div w100"
+                    onClick={() =>
+                      onClick("terminationDate", rateCampaign.terminationDate)
+                    }
+                  >
+                    <div>
+                      <span>{reformatDate(tDateState)}</span>
+                      <button className="edit-arrow1 icon-btn1">&#9998;</button>
+                    </div>
+                  </div>
+                )}
               </li>
             </ul>
           </div>

@@ -904,7 +904,7 @@ const Home_2 = () => {
     var estimatedEscrowVal = Number(loanScenario.monthlyPropertyTax) + Number(loanScenario.monthlyHOI);
     setEstimatedEscrow(estimatedEscrowVal);
 
-    var loanTerm = loanScenario.loanProduct.includes("ARM") ? 360 : 12 * Number(loanScenario.loanProduct.substring(0,2));
+    var loanTerm = loanScenario?.loanProduct?.includes("ARM") ? 360 : 12 * Number(loanScenario?.loanProduct?.substring(0,2));
     
     var principalInterestVal = totalLoanAmountVal * (Number(loanScenario.interestRate)/1200) * ((1+(Number(loanScenario.interestRate)/1200)) ^ loanTerm) /
     (((1+ (Number(loanScenario.interestRate)/1200)) ^ loanTerm) - 1);
@@ -1106,6 +1106,21 @@ const Home_2 = () => {
   const showRateCampain = () => {
       setIsRateCampaign(true);
   }
+
+  const showLoanScenario = (index) => {
+    setIsRateCampaign(false);
+    const loanId = {id:index}
+    axios({
+      method:"get",
+      url:"https://atlas.keystonefunding.com/api/loanscenario/details/",
+      params:loanId
+    }).then((res) => {
+      if(res.status === 200){
+        console.log(`id: ${loanId.id} --->`,res.data.data)
+        setLoanScenario(res.data.data[0]);
+      }
+    })
+  }
   
   console.log("loanScenario", loanScenario);
 
@@ -1208,18 +1223,20 @@ const Home_2 = () => {
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
                       <Card.Body>
-                        <div className="pro-detail-text new-pro">
-                          <h3>StoneHP 30y 100k 2.500% Cashout</h3>
-                          <p>And this loan scenario is...</p>
-                        </div>
-                        <div className="pro-detail-text new-pro">
+                          {contactDetails.loanScenarios && contactDetails.loanScenarios?.map((data, index) => (
+                              <div className="pro-detail-text new-pro" key={index}>
+                              <h3 onClick={() =>showLoanScenario(data.id)}>{data.scenarioName}</h3>
+                            </div>
+                          ))}
+                          {/* <p>And this loan scenario is...</p> */}
+                        {/* <div className="pro-detail-text new-pro">
                           <h3>FHA 30y 100K 2.000% PMI</h3>
                           <p>And this loan scenario is...</p>
                         </div>
                         <div className="pro-detail-text new-pro">
                           <h3>HP/HR 10-yr 1.4M PMI</h3>
                           <p>And this loan scenario is...</p>
-                        </div>
+                        </div> */}
                       </Card.Body>
                     </Accordion.Collapse>
                     <div className="border-bottom"></div>
@@ -1278,9 +1295,9 @@ const Home_2 = () => {
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
-                        <div className="pro-detail-text new-pro">
-                          <h3 onClick={showRateCampain}>{loanScenario.loanProduct}</h3>
-                        </div>
+                            <div className="pro-detail-text new-pro">
+                                <h3 onClick={() => showRateCampain()}>{loanScenario.loanType + " "+ loanScenario.loanProduct +"; " + (contactDetails.rateCampaings.map((data) =>(data.additionalLoanProducts)))}</h3>
+                            </div>
                       </Card.Body>
                     </Accordion.Collapse>
                     <div className="border-bottom"></div>
@@ -1428,7 +1445,7 @@ const Home_2 = () => {
                           fill="#2CC14E"
                         />
                       </svg>
-                        {numberWithCommas(Math.round(principalInterest))}</h1>
+                        {isNaN(numberWithCommas(Math.round(principalInterest)))?0 :numberWithCommas(Math.round(principalInterest))}</h1>
                   </div>
                 </div>
                 <div className="rate-box">
@@ -1531,7 +1548,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>LTV/CLTV</p>
-                            <span>{LTV_CLTV}</span>
+                            <span>{isNaN(LTV_CLTV)? 0 : LTV_CLTV}</span>
                           </li>
                           <li>
                             <p>Total Loan Amount</p>
@@ -2642,7 +2659,7 @@ const Home_2 = () => {
                           </li>
                           <li>
                             <p>Principal & Interest</p>
-                            <span>{principalInterest.toFixed(2)}</span>
+                            <span>{isNaN(principalInterest.toFixed(2))? 0:principalInterest.toFixed(2)}</span>
                           </li>
                           <li>
                             <p>Estimated Escrow</p>
@@ -2650,7 +2667,7 @@ const Home_2 = () => {
                           </li>
                           <li className="Total">
                               <p><b>Total Monthly Payment</b></p>
-                              <span className="text-val"><b>{Math.round(principalInterest + estimatedEscrow)}</b></span>
+                              <span className="text-val"><b>{isNaN(Math.round(principalInterest + estimatedEscrow))? 0: Math.round(principalInterest + estimatedEscrow)}</b></span>
                           </li>
                         </ul>
                       </div>
