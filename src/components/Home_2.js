@@ -1239,8 +1239,10 @@ const Home_2 = () => {
                         </div> */}
                       </Card.Body>
                     </Accordion.Collapse>
-                    <div className="border-bottom"></div>
                   </Card>
+                    <div className="border-bottom"></div>
+                </Accordion>
+                <Accordion>
                   <Card>
                     <Card.Header>
                       <Accordion.Toggle as={Button} variant="link" eventKey="1">
@@ -1300,8 +1302,10 @@ const Home_2 = () => {
                             </div>
                       </Card.Body>
                     </Accordion.Collapse>
-                    <div className="border-bottom"></div>
                   </Card>
+                    <div className="border-bottom"></div>
+                </Accordion>
+                <Accordion >
                   <Card>
                     <Card.Header>
                       <Accordion.Toggle as={Button} variant="link" eventKey="2">
@@ -1362,8 +1366,8 @@ const Home_2 = () => {
                         </div>
                       </Card.Body>
                     </Accordion.Collapse>
-                    <div className="border-bottom"></div>
                   </Card>
+                    {/* <div className="border-bottom"></div> */}
                 </Accordion>
               </div>
             </div>
