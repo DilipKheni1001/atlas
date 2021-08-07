@@ -571,11 +571,23 @@ tr.head-td th:after {
   background: #70c3ff40;
 }
 .pro-detail-text.new-pro {
+  display: flex;
+  justify-content: space-between;
   margin: 10px 0px;
   padding: 8px 20px;
   cursor: pointer;
   margin-top: 0px;
 }
+
+.pro-detail-text.new-pro svg{
+  margin-top: -4px;
+  margin-right: 21px;
+  display: none;
+}
+.pro-detail-text.new-pro:hover svg{
+  display: block;
+}
+
 .accro-pro {
   padding: 20px 0px;
   padding-top: 10px;
@@ -1130,6 +1142,14 @@ select::-ms-expand {
   padding: 10px;
   width: 450px;
 }
+.create-loan-scenario {
+  padding: 10px;
+  width: 550px;
+}
+.delete-loan-scenario {
+  padding: 10px;
+  width: 550px;
+}
 .inputBox.pincode {
   width: 30%;
 }
@@ -1149,9 +1169,30 @@ select::-ms-expand {
   padding: 0px;
   margin-top: 15px;
 }
+.create-loan-scenario .modal-footer {
+  border: none;
+  padding: 0px;
+  margin-top: 15px;
+}
+
+.delete-loan-scenario .modal-footer {
+  border: none;
+  padding: 0px;
+  margin-top: 15px;
+}
+
 .edit-Address .modal-body {
   padding: 0;
 }
+.create-loan-scenario .modal-body {
+  padding: 0;
+}
+
+
+.delete-loan-scenario .modal-body {
+  padding: 0;
+}
+
 .Dropdown-root {
   position: relative;
 }
@@ -1183,6 +1224,44 @@ button[editext="edit-button"] {
   font-size: 18px;
   border: none;
 }
+
+.create-loan-scenario .modal-footer .cancel {
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  color: #636f79;
+  padding: 0px 10px;
+}
+.create-loan-scenario button.save {
+  background-color: #40a2d9;
+  color: #fff;
+  height: 50px;
+  padding: 0px 20px;
+  border-radius: 50px;
+  font-size: 18px;
+  border: none;
+}
+
+.delete-loan-scenario .modal-footer .cancel {
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  color: #636f79;
+  padding: 0px 10px;
+}
+
+.delete-loan-scenario button.delete {
+  background-color: #d94040;
+  color: #fff;
+  height: 50px;
+  padding: 0px 20px;
+  border-radius: 50px;
+  font-size: 18px;
+  border: none;
+}
+
+
+
 button.edit-arrow1.icon-btn1 {
   border: 0px !important;
   background-color: transparent !important;

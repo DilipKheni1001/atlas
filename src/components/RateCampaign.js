@@ -7,7 +7,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 
-const RateCampaign = ({ loanScenario }) => {
+const RateCampaign = ({ loanScenario, RateId }) => {
   const [isEqual, setIsEqual] = useState("");
   const [selectedValue, setSelectedValue] = useState();
   const [selected, setSelected] = useState([]);
@@ -240,13 +240,13 @@ const RateCampaign = ({ loanScenario }) => {
   const prevTdate = usePrevious(tDateState);
 
   useEffect(() => {
-    getRateCampaignData();
-  }, [rateCampaign.loanScenarioId]);
+    getRateCampaignData(RateId);
+  }, [rateCampaign.loanScenarioId, RateId]);
 
-  function getRateCampaignData() {
+  function getRateCampaignData(RateId) {
     try {
       var result = {
-        id: 5,
+        id: RateId,
       };
       axios({
         method: "get",
