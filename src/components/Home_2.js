@@ -1720,8 +1720,8 @@ const Home_2 = () => {
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
-                        {contactDetails?.rateCampaings?.map((data) => (
-                          <div className="pro-detail-text new-pro">
+                        {contactDetails?.rateCampaings?.map((data, index) => (
+                          <div className="pro-detail-text new-pro" key={index}>
                             <h3 onClick={() => showRateCampain(data.id)}>
                               {loanScenario.loanType +
                                 " " +

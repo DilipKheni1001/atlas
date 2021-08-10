@@ -10,6 +10,7 @@ const Hometable = (props) => {
   const [currentPage, setcurrentPage] = useState(1);
   const [itemsPerPage, setitemsPerPage] = useState(50);
 
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -54,6 +55,7 @@ const Hometable = (props) => {
     }
   }
 
+
   useEffect(() => {
     getmyData("", "");
   }, []);
@@ -93,7 +95,24 @@ const Hometable = (props) => {
       setTableArr(myData);
     }
   };
-  console.log("tableArr", tableArr);
+  // console.log("tableArr", tableArr);
+
+  const getDays = (date) => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    var startDate = Date.parse(today);
+    var endDate = Date.parse(date);
+    var timeDiff = startDate - endDate;
+    var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+    return daysDiff + " days ago"
+  }
+
+  let loanType = ""
+  let loanProduct = ""
   return (
     <>
       <div className="td-main">
@@ -272,42 +291,73 @@ const Hometable = (props) => {
               ?.map((element, index) => {
                 return (
                   <>
-                    <tr>
+                    <tr key={index}>
                       <td>
                         {element?.firstName} {element?.lastName}
                       </td>
                       <td>{element?.stage}</td>
-                      <td>{element?.createdDate}</td>
+                      <td>{getDays(element?.createdDate)}</td>
                       <td>
                         <div className="loan-td">
                           {element?.loanScenarios?.map((ele, index) => {
+                                let totalLoanAmountVal = 0;
+                                let governmentFundingFeeVal = 0
+                                let loanTermVal = 0
+                                let principalInterestVal = 0
+                                
+                                element.rateCampaings.map((item) => {
+                                  if(item.loanScenarioId === ele.id){
+                                    loanType = ele.loanType
+                                    loanProduct = ele.loanProduct
+                                  }
+                                })
+
+                                if(ele.isFinancedFundingFeeMI){
+                                  totalLoanAmountVal = Number(ele.baseLoanAmount)
+                                }else if(ele.mortgageInsurancePremiumType === "Single Premium"){
+                                  totalLoanAmountVal = Number(ele.baseLoanAmount) + (Number(ele.annualMortgageInsuranceRate) * Number(ele.baseLoanAmount)) / 100;
+                                }else{
+                                  governmentFundingFeeVal = (Number(ele.baseLoanAmount) * Number(ele.governmentFundingFeePercent)) /100;
+                                  totalLoanAmountVal = Number(ele.baseLoanAmount) + Number(governmentFundingFeeVal);
+                                }
+                                loanTermVal = ele.loanProduct.includes("ARM") ? 360 : 12 * Number(ele.loanProduct.substring(0, 2));
+                                principalInterestVal = (totalLoanAmountVal * (Number(ele.interestRate) / 1200) * ((1 + Number(ele.interestRate) / 1200) ^ loanTermVal)) / (((1 + Number(ele.interestRate) / 1200) ^ loanTermVal) - 1)
+
                             return (
                               <>
-                                <div className="loan-box">
+                                <div className="loan-box" key={index}>
                                   <div className="box-l">
-                                    Stone HP 30 100k Cashout
+                                    {ele.scenarioName}
                                   </div>
                                   <div className="hp-main">
                                     <div className="hp-box">
                                       <h5>
-                                        Home Possible 30yr 100K 2.000% Cashout
+                                        {ele.scenarioName + " " + ele.interestRate + "% "+"Cashout"}
                                       </h5>
                                       <div className="row hp-sub">
                                         <div className="col-md-3">
                                           <p>Rate</p>
-                                          <h4>2.750%</h4>
+                                          <h4>{ele.interestRate}%</h4>
                                         </div>
                                         <div className="col-md-3">
                                           <p>Upfront costs</p>
-                                          <h4>$1,234</h4>
+                                          <h4>${
+                                                Number(ele.blockADiscountFee) +
+                                                Number(ele.blockAOriginationFee) +
+                                                Number(ele.blockAprocessingFee) +
+                                                Number(ele.blockATaxService)
+                                              }
+                                          </h4>
                                         </div>
                                         <div className="col-md-3">
                                           <p>Mo. payment</p>
-                                          <h4>1.234,56</h4>
+                                              <h4>
+                                                {Math.round(principalInterestVal)}
+                                            </h4>
                                         </div>
                                         <div className="col-md-3">
                                           <p>Mo. payment</p>
-                                          <h4>1.234,56</h4>
+                                          <h4>{Math.round(principalInterestVal)}</h4>
                                         </div>
                                       </div>
                                     </div>
@@ -321,20 +371,19 @@ const Hometable = (props) => {
 
                       <td>
                         <div className="loan-td">
-                          <div className="campa-box">
-                            <div className="box-l">
-                              Stone HP 30 100k Cashout
-                            </div>
-                          </div>
-                          <div className="campa-box">
-                            <div className="box-l">
-                              Stone HP 30 100k Cashout
-                            </div>
-                          </div>
-                        </div>
+                          {element?.rateCampaings?.map((ele, index) => {
+                            return (
+                              <div className="campa-box" key={index}>
+                                <div className="box-l">
+                                {loanType + " " + loanProduct + "; " + ele.additionalLoanProducts}
+                                </div>
+                              </div>
+                            )})}
+                      </div>
                       </td>
                       <td>
                         <div className="loan-td">
+
                           <div className="apps-box">
                             <div className="box-l">
                               Stone HP 30 100k Cashout
