@@ -27,8 +27,12 @@ import logo_img from "../images/logo.png";
 import Header from "./Header";
 import RateCampaign from "./RateCampaign";
 import Select from "react-select";
+import {useLocation} from 'react-router-dom'
 
 const Home_2 = () => {
+
+  const location = useLocation()
+
   // const container = React.useRef(null);
   const exportPDFWithMethod = () => {
     setIsLoading(true);
@@ -1077,12 +1081,12 @@ const Home_2 = () => {
     getData();
   }, []);
 
+
   async function getData() {
     try {
-      var result = {
-        id: 1,
+      let result = {
+        id: location?.state?.id? location?.state?.id : 1 ,
       };
-
       await axios({
         method: "get",
         url: "https://atlas.keystonefunding.com/api/loanscenario/details",
@@ -1444,7 +1448,7 @@ const Home_2 = () => {
 
   return (
     <>
-      <Header value={handleProps} />
+      {/* <Header value={handleProps} /> */}
       <ToastContainer />
 
       {/* create modal */}

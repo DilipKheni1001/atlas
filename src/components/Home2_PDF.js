@@ -72,9 +72,7 @@ const Home2_PDF = ({
                             {
                               Atlas_Loan_Scenario.loanPurpose === "Refinance" ?
                                 Atlas_Loan_Scenario.isCashout === 1 ? "Refinance- Cash Out" : "Refinance- Rate/Term"
-                              : null
-
-                              (Atlas_Loan_Scenario.loanPurpose === "Purchase" ? "Purchase" : null)
+                              : (Atlas_Loan_Scenario.loanPurpose === "Purchase" ? "Purchase" : "")
                             }
                         </td>
                     </tr>

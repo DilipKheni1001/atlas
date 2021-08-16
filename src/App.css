@@ -146,6 +146,13 @@ img {
   position: relative;
   z-index: 22222;
 }
+
+.fa, .fas {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  color: white;
+}
+
 .text-box p {
   color: #949494;
   font-size: 20px;
@@ -158,7 +165,7 @@ table {
   border-collapse: collapse;
 }
 .maindiv {
-  padding: 100px 30px 0px 96px;
+  padding: 30px 30px 0px 96px;
 }
 .tablemain {
   background: #ffffff;
@@ -173,10 +180,12 @@ table {
   height: 75vh;
 }
 .tablemain td {
+  font-size: 16px !important;
   border: 0.2px solid rgba(0, 0, 0, 0.2);
   border-top: 0;
   border-bottom: 0;
   border-right: 0;
+  color: #808080 !important;
 }
 .tablemain th {
   border-top: 0;
@@ -246,6 +255,13 @@ thead {
   height: 46px;
   border-radius: 50%;
   background-image: url("./images/tb-pro.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.users-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
   background-size: cover;
   background-position: center;
 }
@@ -399,13 +415,14 @@ ul.pagination li.active {
   font-size: 12px;
   text-align: center;
   border-bottom: 1px solid;
-
+  font-weight: bold;
   border-bottom: 0.5px solid #a7b6c063;
   padding-bottom: 13px;
 }
 .row.hp-sub h4 {
   font-style: normal;
   font-weight: bold;
+  color: #244961;
   font-size: 14px;
   margin-bottom: 0;
   margin-top: 4px;
@@ -585,7 +602,6 @@ tr.head-td th:after {
 }
 
 .pro-detail-text.new-pro svg{
-  margin-top: -4px;
   margin-right: 21px;
   display: none;
 }
@@ -636,6 +652,7 @@ tr.head-td th:after {
 .pro-detail-text.new-pro h3 {
   margin-bottom: 5px;
   color: #6d8291;
+  padding-top: 4px;
 }
 .accordion .border-bottom {
   border-bottom: 1px solid #dee2e6 !important;

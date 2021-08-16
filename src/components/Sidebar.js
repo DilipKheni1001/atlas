@@ -35,7 +35,7 @@ const Sidebar = () => {
 
           <NavLink
             exact
-            to="/home"
+            to="/home_2"
             activeClassName="active"
             className="slide-img home"
           >
@@ -52,10 +52,15 @@ const Sidebar = () => {
               />
             </svg>
           </NavLink>
-
+          <NavLink exact to="/home" activeClassName="active" className="slide-img users">
+          <i className="fas fa-user-friends fa-2x"></i>
+          </NavLink>
+          <NavLink exact to="/" activeClassName="active" className="slide-img settings">
+          <i className="fas fa-cog fa-2x"></i>
+          </NavLink>
           <NavLink
             exact
-            to="/home_2"
+            to="/"
             activeClassName="active"
             className="slide-img home_2"
           >

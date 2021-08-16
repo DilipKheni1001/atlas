@@ -10,7 +10,7 @@ const Home = () => {
 
   return (
     <>
-      <Header value={handleProps} />
+      {/* <Header value={handleProps} /> */}
       <div className="maindiv">
         <Hometable name={headers} />
       </div>

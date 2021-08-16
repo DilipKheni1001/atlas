@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import {useHistory} from 'react-router-dom'
 
 const Hometable = (props) => {
   const [tableArr, setTableArr] = useState();
@@ -10,6 +11,7 @@ const Hometable = (props) => {
   const [currentPage, setcurrentPage] = useState(1);
   const [itemsPerPage, setitemsPerPage] = useState(50);
 
+  const history = useHistory()
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -84,8 +86,8 @@ const Hometable = (props) => {
           if (filed === "firstName+lastName") {
             return `${a.firstName} ${a.lastName}` >
               `${b.firstName} ${b.lastName}`
-              ? 1
-              : -1;
+              ? -1
+              : 1;
           }
           return a[filed] < b[filed] ? 1 : -1;
         })
@@ -96,6 +98,13 @@ const Hometable = (props) => {
     }
   };
   // console.log("tableArr", tableArr);
+
+  const handleLoanPage = (loanId) =>{
+    history.push({
+      pathname:"/home_2",
+      state:{id:loanId}
+    })
+  }
 
   const getDays = (date) => {
     var today = new Date();
@@ -293,7 +302,8 @@ const Hometable = (props) => {
                   <>
                     <tr key={index}>
                       <td>
-                        {element?.firstName} {element?.lastName}
+                      <img className="users-img" src={element.pictureURL} />&nbsp;&nbsp;
+                      {element?.firstName} {element?.lastName}
                       </td>
                       <td>{element?.stage}</td>
                       <td>{getDays(element?.createdDate)}</td>
@@ -326,7 +336,7 @@ const Hometable = (props) => {
                             return (
                               <>
                                 <div className="loan-box" key={index}>
-                                  <div className="box-l">
+                                  <div className="box-l" onClick={() => handleLoanPage(ele.id)}>
                                     {ele.scenarioName}
                                   </div>
                                   <div className="hp-main">
@@ -374,7 +384,7 @@ const Hometable = (props) => {
                           {element?.rateCampaings?.map((ele, index) => {
                             return (
                               <div className="campa-box" key={index}>
-                                <div className="box-l">
+                                <div className="box-l" onClick={() => handleLoanPage(ele.loanScenarioId)}>
                                 {loanType + " " + loanProduct + "; " + ele.additionalLoanProducts}
                                 </div>
                               </div>
