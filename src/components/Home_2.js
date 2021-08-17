@@ -302,7 +302,7 @@ const Home_2 = () => {
   const [open, setOpen] = useState(false);
   const [openLoanModal, setOpenLoanModal] = useState(false);
   const [deleteLoanModal, setDeleteModal] = useState(false)
-  const [customMessage, setCustomMessage] = useState("Want to delete?")
+  const [customMessage, setCustomMessage] = useState("")
   const [modalTitle, setModalTitle]= useState("")
   const [DeleteID, setDeleteID] = useState("")
   const [DeleteRateID,setDeleteRateID]= useState("")
@@ -1246,7 +1246,7 @@ const Home_2 = () => {
     setDeleteModal(false)
     setDeleteID("")
     setDeleteRateID("")
-    setCustomMessage("Want to delete?")
+    setCustomMessage("Please confirm deletion of this Loan Scenario")
   }
 
 
@@ -1425,16 +1425,17 @@ const Home_2 = () => {
       params: loanId,
     }).then((res) => {
       if (res.status === 200) {
-        console.log(`id: ${loanId.id} --->`, res.data.data);
+        // console.log(`id: ${loanId.id} --->`, res.data.data);
         setLoanScenario(res.data.data[0]);
       }
     });
   };
 
-  const deleteLoanScenario = (id) => {
-    
+  const deleteLoanScenario = (id, name) => {
+    setCustomMessage("Please confirm deletion of this Loan Scenario")
     setDeleteModal(true)
-    setModalTitle("Loan Scenario")
+    setModalTitle("'" + name + "'")
+
     setDeleteID(id)
     const rateId = contactDetails.rateCampaings.map((item) => {
       return item.id;
@@ -1453,6 +1454,7 @@ const Home_2 = () => {
   };
 
   const deleteRateCampaign = (id) => {
+    setCustomMessage("Please confirm deletion of this Rate Campaign")
     setDeleteRateID(id)
     setDeleteModal(true)
     setModalTitle("Rate Campaign")
@@ -1643,21 +1645,22 @@ const Home_2 = () => {
                         {contactDetails.loanScenarios &&
                           contactDetails.loanScenarios?.map((data, index) => (
                             <div
+                            onClick={() => showLoanScenario(data.id)}
                               className="pro-detail-text new-pro"
                               key={index}
                             >
-                              <h3 onClick={() => showLoanScenario(data.id)}>
+                              <h3 >
                                 {data.scenarioName}
                               </h3>
                               <svg
-                                onClick={() => deleteLoanScenario(data.id)}
+                                onClick={() => deleteLoanScenario(data.id, data.scenarioName)}
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512"
                                 width="20.5"
                                 height="25"
                               >
                                 <path
-                                  fill="#E04F5F"
+                                  fill="#ff6767"
                                   d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z"
                                 />
                                 <path
@@ -1737,8 +1740,8 @@ const Home_2 = () => {
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
                         {contactDetails?.rateCampaings?.map((data, index) => (
-                          <div className="pro-detail-text new-pro" key={index}>
-                            <h3 onClick={() => showRateCampain(data.id)}>
+                          <div onClick={() => showRateCampain(data.id)} className="pro-detail-text new-pro" key={index}>
+                            <h3 >
                               {loanScenario.loanType +
                                 " " +
                                 loanScenario.loanProduct +
