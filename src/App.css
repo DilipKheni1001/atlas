@@ -177,7 +177,15 @@ table {
   color: #6d8291;
   overflow-x: auto;
   touch-action: auto;
-  height: 75vh;
+  /* height: 75vh; */
+}
+
+table.table tr:nth-child(2) td {
+  padding-top: 20px;
+}
+
+table.table tr:last-child td {
+  padding-bottom: 20px;
 }
 .tablemain td {
   font-size: 16px !important;
@@ -207,7 +215,7 @@ table {
   border-left: 0;
 }
 .tablemain td {
-  padding: 15px 20px;
+  padding: 0px 20px;
   font-size: 16px;
   font-weight: 500;
   vertical-align: text-top;
@@ -362,10 +370,10 @@ ul.pagination li.active {
   cursor: pointer;
   background: #f1f4f8;
   border-radius: 6px;
-  padding: 15px;
-  font-size: 11px;
+  padding: 10px;
+  font-size: 12px;
   text-align: center;
-  line-height: 111.7%;
+  line-height: 130%;
   font-weight: normal;
   display: inline-flex;
   align-items: center;
@@ -438,7 +446,6 @@ ul.pagination li.active {
   top: auto;
   display: none;
   padding-top: 15px;
-  padding-bottom: 10px;
   z-index: 1;
 }
 .hp-box {
@@ -1404,13 +1411,22 @@ display: block;
 .styles-module_Editext__buttons_container__2za5Q {
   align-items: center;
 }
-
+.table tr:last-child td .loan-td .loan-box .hp-main {
+  top: -125px;
+}
+.table tr:last-child td .loan-td .loan-box .box-l:after {
+  top: -5px;
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid #70c3ff;
+  border-top: 0;
+  border-right: 5px solid transparent;
+}
 @media (max-width: 1350px) {
   .rate-text h1 {
     font-size: 30px !important; 
   }
   .tablemain table {
-    width: max-content;
+    width: 100vw;
   }
 }
 

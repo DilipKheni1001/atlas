@@ -99,10 +99,10 @@ const Hometable = (props) => {
   };
   // console.log("tableArr", tableArr);
 
-  const handleLoanPage = (loanId) =>{
+  const handleLoanPage = (loanId, rateId) =>{
     history.push({
       pathname:"/home_2",
-      state:{id:loanId}
+      state:{id:loanId, RId:rateId}
     })
   }
 
@@ -294,7 +294,6 @@ const Hometable = (props) => {
                 <div className="thblock">Borrower Apps</div>
               </th>
             </tr>
-
             {tableArr
               ?.slice(indexOfFirstItem, indexOfLastItem)
               ?.map((element, index) => {
@@ -384,7 +383,7 @@ const Hometable = (props) => {
                           {element?.rateCampaings?.map((ele, index) => {
                             return (
                               <div className="campa-box" key={index}>
-                                <div className="box-l" onClick={() => handleLoanPage(ele.loanScenarioId)}>
+                                <div className="box-l" onClick={() => handleLoanPage(ele.loanScenarioId, ele.id)}>
                                 {loanType + " " + loanProduct + "; " + ele.additionalLoanProducts}
                                 </div>
                               </div>

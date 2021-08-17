@@ -33,6 +33,17 @@ const Home_2 = () => {
 
   const location = useLocation()
 
+  
+  useEffect(() => {
+    if(location?.state?.RId !== undefined){
+      // console.log("rate id", location?.state?.RId)
+      setIsRateCampaign(true);
+      setIdToRatePage(location?.state?.RId)
+    }else{
+      return
+    }
+  },[])
+
   // const container = React.useRef(null);
   const exportPDFWithMethod = () => {
     setIsLoading(true);
@@ -1399,6 +1410,7 @@ const Home_2 = () => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+
   const showRateCampain = (id) => {
     setIsRateCampaign(true);
     setIdToRatePage(id)
@@ -1829,7 +1841,7 @@ const Home_2 = () => {
             <div className="stone">
               <div className="stone-sec">
                 <div className="stone-text">
-                  <h1>Stone HP 30 100k Cashout</h1>
+                  <h1>{loanScenario.scenarioName}</h1>
                   <span className="updated-date">
                     Last Updated
                     <br />
