@@ -273,6 +273,32 @@ thead {
   background-size: cover;
   background-position: center;
 }
+
+.signature-img{
+  width: 170px;
+  height: 75px;
+  /* border-radius: 50%; */
+  background-size: cover;
+  background-position: center;
+}
+
+.errorMessage{
+  margin-left: 15px;
+}
+
+.updateFileBtn{
+  background-color: #f4f6f8;
+    color: #6f8393;
+    font-weight: 550;
+    height: 40px;
+    border: 1px solid;
+    margin-left: 15px;
+    width: 120px;
+    /* max-width: 150px; */
+    /* max-height: 46px; */
+    border-radius: 5px;
+}
+
 ul.pagination li.active {
   color: #fff;
   background-color: #70c3ff;
@@ -1077,6 +1103,119 @@ select {
 select::-ms-expand {
   display: none;
 }
+
+.setting{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -15px;
+}
+
+.saveSetting{
+  margin-top: 15px;
+  text-align: right;
+}
+
+.saveSetting button.save{
+  background-color: #40a2d9;
+  color: #fff;
+  height: 50px;
+  padding: 0px 20px;
+  border-radius: 50px;
+  font-size: 18px;
+  border: none;
+}
+
+.setting-sec{
+  padding-bottom: 20px;
+}
+
+.settingBody{
+  width: 100%;
+  margin-top: 3px;
+  color: #aaa8a8;
+}
+
+.text-details{
+  padding-top: 15px;
+    padding-bottom: 15px;
+    /* border-bottom: 1px solid #dee2e6; */
+}
+
+
+
+.seperator {
+  width: 100%;
+    text-align: center;
+    line-height: 0.1em;
+    /* margin: 10px 0 20px; */
+    overflow: hidden;
+    text-align: center;
+    /* border-bottom: 1px solid #dee2e6; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.seperator2{
+    border-bottom: 1px solid #dee2e6;
+}
+
+.seperator h6:after, .seperator h6:before {
+  background-color: #dee2e6;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.seperator h6:before {
+  right: 10px;
+  margin-left: -50%;
+}
+
+.setting-page{
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.seperator h6:after {
+  left: 10px;
+  margin-right: -50%;
+}
+.seperator h6{
+  font-style: normal;
+    font-weight: 500;
+    font-size: 37px;
+    line-height: 42px;
+    font-size: 15px;
+    color: black
+}
+
+.texts{
+  display: flex;
+  font-size: 15px;
+  align-items: center;
+}
+
+.texts .imgSelector{
+  padding-left: 10px;
+}
+.texts .text-prop {
+  width: 25%;
+}
+
+.texts p .right-text {
+  width: 75%;
+}
+
+
+.settingIcon{
+  color: #aaa8a8;
+  padding: 5px;
+}
+
 .icon-btn {
   position: absolute;
   top: 8px;
@@ -1253,6 +1392,7 @@ button[editext="edit-button"] {
   font-size: 18px;
   border: none;
 }
+
 
 .create-loan-scenario .modal-footer .cancel {
   border: none;
@@ -1431,6 +1571,16 @@ display: block;
 }
 
 @media (max-width: 1200px) {
+
+  .errorMessage{
+    max-width: 140px;
+  }
+
+  .signature-img{
+    width: 120px;
+    height: 45px;
+  }
+
   .stone-btn button {
     min-width: 120px;
   }
@@ -1462,6 +1612,7 @@ display: block;
 }
 
 @media (max-width: 991px) {
+
   .text-pro {
     padding-left: 0px;
     margin-top: 10px;
@@ -1498,6 +1649,7 @@ display: block;
 }
 
 @media (max-width: 767px) {
+  
   .profile-sec {
     width: 100%;
   }

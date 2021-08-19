@@ -1421,7 +1421,7 @@ const Home_2 = () => {
     const loanId = { id: index };
     axios({
       method: "get",
-      url: "https://atlas.keystonefunding.com/api/loanscenario/details/",
+      url: "https://atlas.keystonefunding.com/api/loanscenario/details",
       params: loanId,
     }).then((res) => {
       if (res.status === 200) {
@@ -1431,7 +1431,8 @@ const Home_2 = () => {
     });
   };
 
-  const deleteLoanScenario = (id, name) => {
+  const deleteLoanScenario = (e, id, name) => {
+    e.preventDefault()
     setCustomMessage("Please confirm deletion of this Loan Scenario")
     setDeleteModal(true)
     setModalTitle("'" + name + "'")
@@ -1653,7 +1654,7 @@ const Home_2 = () => {
                                 {data.scenarioName}
                               </h3>
                               <svg
-                                onClick={() => deleteLoanScenario(data.id, data.scenarioName)}
+                                onClick={(e) => deleteLoanScenario(e,data.id, data.scenarioName)}
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512"
                                 width="20.5"
@@ -1756,7 +1757,7 @@ const Home_2 = () => {
                               height="25"
                             >
                               <path
-                                fill="#E04F5F"
+                                fill="#ff6767"
                                 d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z"
                               />
                               <path
