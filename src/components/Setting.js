@@ -121,7 +121,7 @@ const Setting = () => {
   };
   return (
     <div className="maindiv">
-      <div className="stone setting-page">
+      <div className="setting-page">
         <div className="stone-sec setting-sec">
           <div className="stone-text">
             <div className="setting">
@@ -160,7 +160,6 @@ const Setting = () => {
                         : user?.signatureImage
                     }
                   />
-                  {/* <img className="signature-img" src={user?.signatureImage} /> */}
                   <input
                     ref={ref}
                     className="imgSelector"
@@ -172,17 +171,18 @@ const Setting = () => {
                     className="updateFileBtn"
                     onClick={() => ref.current.click()}
                   >
-                    {inputFiles?.file?.name
-                      ? inputFiles?.file?.name.slice(0, 6) + "..."
-                      : "Update Image"}
+                    Update Image
                   </button>
                 </div>
+              </div>
+              <div className="texts">
+
                 {fileSizeError && (
-                  <span className="errorMessage" style={{ color: "red" }}>
+                  <span className="errorMessage" style={{width:"67%" ,color: "red" }}>
                     {errorMessage}
                   </span>
                 )}
-              </div>
+                </div>
             </div>
             <div className="seperator">
               <h6>CONTACT INFORMATION</h6>

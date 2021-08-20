@@ -27,11 +27,12 @@ import logo_img from "../images/logo.png";
 import Header from "./Header";
 import RateCampaign from "./RateCampaign";
 import Select from "react-select";
-import {useLocation} from 'react-router-dom'
+import {useLocation, useHistory} from 'react-router-dom'
 
 const Home_2 = () => {
 
   const location = useLocation()
+  const history  = useHistory()
 
   
   useEffect(() => {
@@ -1328,6 +1329,11 @@ const Home_2 = () => {
           console.log("----> res",res)
           setDeleteModal(false)
           setDeleteID("")
+          if(location?.state?.id === DeleteID){
+            history.push({
+              pathname:"/home",
+            })
+          }
           getData()
         })
         .catch((e) => {
