@@ -1482,6 +1482,45 @@ button.cross-arrow.icon-btn {
   width: 1050px;
 }
 
+.framediv{
+  max-width: 380px;
+  background-color: white;
+  margin: 0 auto;
+  padding: 15px;
+}
+.head-logo{
+  display: flex;
+  align-items: flex-end;
+}
+.head-logo img {
+  width: 32px;
+}
+.head-logo span {
+  font-size: 20px;
+  padding-left: 10px;
+  line-height: 26px;
+}
+
+.head-logo.head-logo-2 {
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+.frame-box .loan-box {
+  margin: 0;
+  width: auto;
+}
+
+.frame-box {
+  color: #808080 ;
+}
+
+.head-logo-2 span {
+  font-size: 16px;
+  padding-left: 10px;
+  line-height: normal;
+}
+
 .iframe-modal .modal-body {
   padding-top: 1.6rem !important;
 }

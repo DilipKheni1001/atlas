@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
 import Home_2 from "./components/Home_2";
 import Setting from "./components/Setting"
+import AtlasLoanPage from "./components/AtlasLoanPage";
 
 import {
   BrowserRouter as Router,
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/setting">
             <Setting />
+          </Route>
+          <Route path="/embeddedApp">
+            <AtlasLoanPage />
           </Route>
         </Switch>
       </Router>
