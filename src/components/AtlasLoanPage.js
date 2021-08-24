@@ -14,9 +14,11 @@ const AtlasLoanPage = () => {
   const [contactDetails, setContactDetails] = useState();
 
   useEffect(() => {
+    document.body.style.backgroundColor = "white"
     const scriptTag = document.createElement("script");
     // getData(params.personId);
-    getData(personId);
+    let system = "FollowUpBoss"
+    getData(personId, system);
 
     scriptTag.src = "https://eia.followupboss.com/embeddedApps-v1.0.0.js";
     scriptTag.async = true;
@@ -27,18 +29,11 @@ const AtlasLoanPage = () => {
     };
   }, []);
 
-  const getData = async (context) => {
-    let id = {
-      id: context,
-    };
+  const getData = async (id,system) => {
 
-    await axios({
-      method: "get",
-      url: "https://atlas.keystonefunding.com/api/contact/details",
-      params: id,
-    })
+    await axios.get(`https://atlas.keystonefunding.com/api/contact/details-by-sales-sytem?salesSystemId=${id}&salesSystem=${system}`)
       .then((res) => {
-        // console.log("res", res.data.data);
+        console.log("res", res.data.data);
         setContactDetails(res.data.data);
       })
       .catch((err) => {
@@ -56,7 +51,7 @@ const AtlasLoanPage = () => {
 
   return (
     <>
-      <div className="maindiv">
+      <div className="mainFrame">
         <div className="framediv">
           <div className="head-logo">
             <img src={logo} alt="logo" />
@@ -139,11 +134,11 @@ const AtlasLoanPage = () => {
                                 "Cashout"}
                             </h5>
                             <div className="row hp-sub">
-                              <div className="col-md-3">
+                              <div className="col-md-3 col-3">
                                 <p>Rate</p>
                                 <h4>{ele.interestRate}%</h4>
                               </div>
-                              <div className="col-md-3">
+                              <div className="col-md-3 col-3">
                                 <p>Upfront costs</p>
                                 <h4>
                                   $
@@ -153,11 +148,11 @@ const AtlasLoanPage = () => {
                                     Number(ele.blockATaxService)}
                                 </h4>
                               </div>
-                              <div className="col-md-3">
+                              <div className="col-md-3 col-3">
                                 <p>Mo. payment</p>
                                 <h4>{Math.round(principalInterestVal)}</h4>
                               </div>
-                              <div className="col-md-3">
+                              <div className="col-md-3 col-3">
                                 <p>Mo. payment</p>
                                 <h4>{Math.round(principalInterestVal)}</h4>
                               </div>

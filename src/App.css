@@ -1482,10 +1482,14 @@ button.cross-arrow.icon-btn {
   width: 1050px;
 }
 
-.framediv{
+.mainFrame{
   max-width: 380px;
+}
+
+.framediv{
+  /* max-width: 380px; */
   background-color: white;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   padding: 15px;
 }
 .head-logo{
