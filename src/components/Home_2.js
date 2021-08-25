@@ -1734,7 +1734,7 @@ const Home_2 = () => {
                               fill="#FFC6AE"
                             />
                           </svg>
-                          <p>Rate Campains</p>
+                          <p>Rate Campaigns</p>
                         </div>
                         <span>
                           <svg

@@ -17,7 +17,6 @@ const AtlasLoanPage = () => {
 
   useEffect(() => {
     document.body.style.backgroundColor = "white";
-    const scriptTag = document.createElement("script");
 
     const personId = new URLSearchParams(search).get("personId");
     const userId = new URLSearchParams(search).get("userId");
@@ -28,13 +27,6 @@ const AtlasLoanPage = () => {
     let system = "FollowUpBoss";
     getData(personId, system);
 
-    scriptTag.src = "https://eia.followupboss.com/embeddedApps-v1.0.0.js";
-    scriptTag.async = true;
-
-    document.body.appendChild(scriptTag);
-    return () => {
-      document.body.removeChild(scriptTag);
-    };
   }, []);
 
   const getData = async (id, system) => {
@@ -228,7 +220,7 @@ const AtlasLoanPage = () => {
                   fill="#FFC6AE"
                 ></path>
               </svg>
-              <span>Rate Campains</span>
+              <span>Rate Campaigns</span>
             </div>
             <div className="loan-td">
               {contactDetails?.rateCampaings.map((ele, index) => {
