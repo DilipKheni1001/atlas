@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from "react";
 import logo from "../images/Atlas_logo_grey.png";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useHistory, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
 const AtlasLoanPage = () => {
   // const params = useParams();
   const search = useLocation().search;
-  const personId = new URLSearchParams(search).get("personId");
-  const userId = new URLSearchParams(search).get("userId");
-  console.log("personId", personId);
-  console.log("userId", userId);
+  const history = useHistory();
 
   const [contactDetails, setContactDetails] = useState();
+  const [popUp, setPopUp] = useState(false);
+  const [popUpData, setPopUpData] = useState({
+    ele: "",
+    principalInterestVal: "",
+  });
 
   useEffect(() => {
-    document.body.style.backgroundColor = "white"
+    document.body.style.backgroundColor = "white";
     const scriptTag = document.createElement("script");
+
+    const personId = new URLSearchParams(search).get("personId");
+    const userId = new URLSearchParams(search).get("userId");
+    console.log("personId", personId);
+    console.log("userId", userId);
+
     // getData(params.personId);
-    let system = "FollowUpBoss"
+    let system = "FollowUpBoss";
     getData(personId, system);
 
     scriptTag.src = "https://eia.followupboss.com/embeddedApps-v1.0.0.js";
@@ -29,9 +37,11 @@ const AtlasLoanPage = () => {
     };
   }, []);
 
-  const getData = async (id,system) => {
-
-    await axios.get(`https://atlas.keystonefunding.com/api/contact/details-by-sales-sytem?salesSystemId=${id}&salesSystem=${system}`)
+  const getData = async (id, system) => {
+    await axios
+      .get(
+        `https://atlas.keystonefunding.com/api/contact/details-by-sales-sytem?salesSystemId=${id}&salesSystem=${system}`
+      )
       .then((res) => {
         console.log("res", res.data.data);
         setContactDetails(res.data.data);
@@ -39,6 +49,26 @@ const AtlasLoanPage = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleHover = (ele, principalInterestVal) => {
+    setPopUpData({
+      ele: ele,
+      principalInterestVal: principalInterestVal,
+    });
+    setPopUp(true);
+  };
+
+  const handleClick = (loanId) => {
+    const ids = { loanid: loanId, rateid: undefined };
+    localStorage.setItem("ids", JSON.stringify(ids));
+    window.open("/home_2", "_blank");
+  };
+
+  const handleRateClick = (rateId) => {
+    const ids = { loanid: undefined, rateid: rateId };
+    localStorage.setItem("ids", JSON.stringify(ids));
+    window.open("/home_2", "_blank");
   };
 
   let loanType = "";
@@ -77,92 +107,111 @@ const AtlasLoanPage = () => {
               </svg>
               <span>Loan Scenarios</span>
             </div>
-            <div className="loan-td">
-              {contactDetails &&
-                contactDetails?.loanScenarios.map((ele, index) => {
-                  let totalLoanAmountVal = 0;
-                  let governmentFundingFeeVal = 0;
-                  let loanTermVal = 0;
-                  let principalInterestVal = 0;
+            <div style={{ position: "relative" }}>
+              <div className="loan-td">
+                {contactDetails &&
+                  contactDetails?.loanScenarios.map((ele, index) => {
+                    let totalLoanAmountVal = 0;
+                    let governmentFundingFeeVal = 0;
+                    let loanTermVal = 0;
+                    let principalInterestVal = 0;
 
-                  contactDetails?.rateCampaings.map((item) => {
-                    if (item.loanScenarioId === ele.id) {
-                      loanType = ele.loanType;
-                      loanProduct = ele.loanProduct;
-                    }
-                  });
+                    contactDetails?.rateCampaings.map((item) => {
+                      if (item.loanScenarioId === ele.id) {
+                        loanType = ele.loanType;
+                        loanProduct = ele.loanProduct;
+                      }
+                    });
 
-                  if (ele.isFinancedFundingFeeMI) {
-                    totalLoanAmountVal = Number(ele.baseLoanAmount);
-                  } else if (
-                    ele.mortgageInsurancePremiumType === "Single Premium"
-                  ) {
-                    totalLoanAmountVal =
-                      Number(ele.baseLoanAmount) +
-                      (Number(ele.annualMortgageInsuranceRate) *
-                        Number(ele.baseLoanAmount)) /
+                    if (ele.isFinancedFundingFeeMI) {
+                      totalLoanAmountVal = Number(ele.baseLoanAmount);
+                    } else if (
+                      ele.mortgageInsurancePremiumType === "Single Premium"
+                    ) {
+                      totalLoanAmountVal =
+                        Number(ele.baseLoanAmount) +
+                        (Number(ele.annualMortgageInsuranceRate) *
+                          Number(ele.baseLoanAmount)) /
+                          100;
+                    } else {
+                      governmentFundingFeeVal =
+                        (Number(ele.baseLoanAmount) *
+                          Number(ele.governmentFundingFeePercent)) /
                         100;
-                  } else {
-                    governmentFundingFeeVal =
-                      (Number(ele.baseLoanAmount) *
-                        Number(ele.governmentFundingFeePercent)) /
-                      100;
-                    totalLoanAmountVal =
-                      Number(ele.baseLoanAmount) +
-                      Number(governmentFundingFeeVal);
-                  }
-                  loanTermVal = ele.loanProduct.includes("ARM")
-                    ? 360
-                    : 12 * Number(ele.loanProduct.substring(0, 2));
-                  principalInterestVal =
-                    (totalLoanAmountVal *
-                      (Number(ele.interestRate) / 1200) *
-                      ((1 + Number(ele.interestRate) / 1200) ^ loanTermVal)) /
-                    (((1 + Number(ele.interestRate) / 1200) ^ loanTermVal) - 1);
+                      totalLoanAmountVal =
+                        Number(ele.baseLoanAmount) +
+                        Number(governmentFundingFeeVal);
+                    }
+                    loanTermVal = ele.loanProduct.includes("ARM")
+                      ? 360
+                      : 12 * Number(ele.loanProduct.substring(0, 2));
+                    principalInterestVal =
+                      (totalLoanAmountVal *
+                        (Number(ele.interestRate) / 1200) *
+                        ((1 + Number(ele.interestRate) / 1200) ^ loanTermVal)) /
+                      (((1 + Number(ele.interestRate) / 1200) ^ loanTermVal) -
+                        1);
 
-                  return (
-                    <>
-                      <div className="loan-box" key={index}>
-                        <div className="box-l">{ele.scenarioName}</div>
-                        <div className="hp-main">
-                          <div className="hp-box">
-                            <h5>
-                              {ele.scenarioName +
-                                " " +
-                                ele.interestRate +
-                                "% " +
-                                "Cashout"}
-                            </h5>
-                            <div className="row hp-sub">
-                              <div className="col-md-3 col-3">
-                                <p>Rate</p>
-                                <h4>{ele.interestRate}%</h4>
-                              </div>
-                              <div className="col-md-3 col-3">
-                                <p>Upfront costs</p>
-                                <h4>
-                                  $
-                                  {Number(ele.blockADiscountFee) +
-                                    Number(ele.blockAOriginationFee) +
-                                    Number(ele.blockAprocessingFee) +
-                                    Number(ele.blockATaxService)}
-                                </h4>
-                              </div>
-                              <div className="col-md-3 col-3">
-                                <p>Mo. payment</p>
-                                <h4>{Math.round(principalInterestVal)}</h4>
-                              </div>
-                              <div className="col-md-3 col-3">
-                                <p>Mo. payment</p>
-                                <h4>{Math.round(principalInterestVal)}</h4>
-                              </div>
-                            </div>
-                          </div>
+                    return (
+                      <>
+                        <div
+                          className="loan-box"
+                          onClick={(e) => {
+                            handleClick(ele.id);
+                          }}
+                          onMouseEnter={() =>
+                            handleHover(ele, principalInterestVal)
+                          }
+                          onMouseLeave={() => setPopUp(false)}
+                          key={index}
+                        >
+                          <div className="box-l">{ele.scenarioName}</div>
+                        </div>
+                      </>
+                    );
+                  })}
+              </div>
+              {popUpData && popUp ? (
+                <div className="popUp">
+                  <div className="popupmain">
+                    <div className="hp-box popupbox">
+                      <h5>
+                        {popUpData?.ele?.scenarioName +
+                          " " +
+                          popUpData?.ele?.interestRate +
+                          "% " +
+                          "Cashout"}
+                      </h5>
+                      <div className="row hp-sub">
+                        <div className="col-md-3 col-6">
+                          <p>Rate</p>
+                          <h4>{popUpData?.ele?.interestRate}%</h4>
+                        </div>
+                        <div className="col-md-3 col-6">
+                          <p>Upfront costs</p>
+                          <h4>
+                            $
+                            {Number(popUpData?.ele?.blockADiscountFee) +
+                              Number(popUpData?.ele?.blockAOriginationFee) +
+                              Number(popUpData?.ele?.blockAprocessingFee) +
+                              Number(popUpData?.ele?.blockATaxService)}
+                          </h4>
+                        </div>
+                        <div className="col-md-3 col-6">
+                          <p>Mo. payment</p>
+                          <h4>{Math.round(popUpData?.principalInterestVal)}</h4>
+                        </div>
+                        <div className="col-md-3 col-6">
+                          <p>Mo. payment</p>
+                          <h4>{Math.round(popUpData?.principalInterestVal)}</h4>
                         </div>
                       </div>
-                    </>
-                  );
-                })}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="frame-box">
@@ -184,7 +233,11 @@ const AtlasLoanPage = () => {
             <div className="loan-td">
               {contactDetails?.rateCampaings.map((ele, index) => {
                 return (
-                  <div className="campa-box" key={index}>
+                  <div
+                    className="campa-box"
+                    onClick={() => handleRateClick(ele.id)}
+                    key={index}
+                  >
                     <div className="box-l">
                       {loanType +
                         " " +

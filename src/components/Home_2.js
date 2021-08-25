@@ -33,15 +33,21 @@ const Home_2 = () => {
 
   const location = useLocation()
   const history  = useHistory()
-
   
+  const IdObj = localStorage.getItem("ids")
+  const parseIDs = JSON.parse(IdObj)
+
   useEffect(() => {
-    if(location?.state?.RId !== undefined){
-      // console.log("rate id", location?.state?.RId)
+
+
+    if(location?.state?.RId === undefined){
+      if(parseIDs?.loanid === undefined && parseIDs?.rateid !=="" && parseIDs?.rateid !== undefined){
+        setIsRateCampaign(true);
+        setIdToRatePage(parseIDs?.rateid)  
+      }
+    }else{
       setIsRateCampaign(true);
       setIdToRatePage(location?.state?.RId)
-    }else{
-      return
     }
   },[])
 
@@ -1096,9 +1102,24 @@ const Home_2 = () => {
 
   async function getData() {
     try {
+      // let result = {
+      //   id: location?.state?.id? location?.state?.id : 1 ,
+      // };
+
       let result = {
-        id: location?.state?.id? location?.state?.id : 1 ,
-      };
+        id:""
+      }
+
+      if(location?.state?.id === undefined){
+        if(parseIDs?.rateid ===undefined && parseIDs?.loanid !=="" && parseIDs?.loanid !== undefined){
+          result.id = parseIDs?.loanid
+        }else{
+        result.id = 1
+        }
+      }else{
+        result.id = location?.state?.id
+      }
+
       await axios({
         method: "get",
         url: "https://atlas.keystonefunding.com/api/loanscenario/details",
@@ -1333,6 +1354,11 @@ const Home_2 = () => {
             history.push({
               pathname:"/home",
             })
+          }else if(parseIDs?.loanid === DeleteID){
+            history.push({
+              pathname:"/home",
+            })
+            localStorage.removeItem("ids")
           }
           getData()
         })
@@ -1552,7 +1578,7 @@ const Home_2 = () => {
           <div className="profile-sec">
             <div className="profile-main">
               <div className="profile">
-                <div className="protb-img"></div>
+                <img className="protb-img" src={contactDetails.pictureURL}/>
                 <div className="text-pro">
                   <p>
                     {contactDetails.firstName + " " + contactDetails.lastName}
