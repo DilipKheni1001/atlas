@@ -12,21 +12,28 @@ const AtlasLoanPage = () => {
   const [popUp, setPopUp] = useState(false);
   const [popUpData, setPopUpData] = useState({
     ele: "",
-    principalInterestVal: "",
+    principalInterestVal: 0,
+    estimatedCashToCloseVal: 0,
   });
 
   useEffect(() => {
     document.body.style.backgroundColor = "white";
 
-    const personId = new URLSearchParams(search).get("personId");
-    const userId = new URLSearchParams(search).get("userId");
-    console.log("personId", personId);
-    console.log("userId", userId);
+    const contextData = new URLSearchParams(search).get("context");
+    const system = new URLSearchParams(search).get("signature");
+    
+    // const baseData = "eyJleGFtcGxlIjp0cnVlLCJkZWJ1Z1N0YXRlIjoid29ya2luZyIsImNvbnRleHQiOiJwZXJzb24iLCJhY2NvdW50Ijp7ImlkIjoxMjM0NTY3ODksImRvbWFpbiI6ImV4YW1wbGUiLCJvd25lciI6eyJuYW1lIjoiVG9tIE1pbmNoIiwiZW1haWwiOiJ0b20ubWluY2hAZXhhbXBsZS5jb20ifX0sInBlcnNvbiI6eyJpZCI6MTIzLCJmaXJzdE5hbWUiOiJNZWxpc3NhIiwibGFzdE5hbWUiOiJIYXJ0bWFuIiwiZW1haWxzIjpbeyJ2YWx1ZSI6Im0uaGFydG1hbkBleGFtcGxlLmNvbSIsInR5cGUiOiJob21lIiwic3RhdHVzIjoiTm90IFZhbGlkYXRlZCIsImlzUHJpbWFyeSI6MX1dLCJwaG9uZXMiOlt7InZhbHVlIjoiKDg4OCkgNTU1LTEyMzQiLCJub3JtYWxpemVkIjoiODg4NTU1MTIzNCIsInR5cGUiOiJtb2JpbGUiLCJzdGF0dXMiOiJOb3QgVmFsaWRhdGVkIiwiaXNQcmltYXJ5IjoxfV19LCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImouZG9lQGV4YW1wbGUuY29tIn19"
+    
+    let base64ToString = Buffer.from(contextData, "base64").toString();
+    const parseData = JSON.parse(base64ToString)
+    
+    console.log("context OBJ",parseData)
+    console.log("personId", parseData.person.id);
+    console.log("userId", parseData.user.id);
 
     // getData(params.personId);
-    let system = "FollowUpBoss";
-    getData(personId, system);
-
+    // let system = "FollowUpBoss";
+    getData(parseData.person.id, system);
   }, []);
 
   const getData = async (id, system) => {
@@ -43,10 +50,11 @@ const AtlasLoanPage = () => {
       });
   };
 
-  const handleHover = (ele, principalInterestVal) => {
+  const handleHover = (ele, principalInterestVal, estimatedCashToCloseVal) => {
     setPopUpData({
       ele: ele,
       principalInterestVal: principalInterestVal,
+      estimatedCashToCloseVal: estimatedCashToCloseVal,
     });
     setPopUp(true);
   };
@@ -66,19 +74,18 @@ const AtlasLoanPage = () => {
   let loanType = "";
   let loanProduct = "";
 
-  // const baseData = "eyJleGFtcGxlIjp0cnVlLCJkZWJ1Z1N0YXRlIjoid29ya2luZyIsImNvbnRleHQiOiJwZXJzb24iLCJhY2NvdW50Ijp7ImlkIjoxMjM0NTY3ODksImRvbWFpbiI6ImV4YW1wbGUiLCJvd25lciI6eyJuYW1lIjoiVG9tIE1pbmNoIiwiZW1haWwiOiJ0b20ubWluY2hAZXhhbXBsZS5jb20ifX0sInBlcnNvbiI6eyJpZCI6MTIzLCJmaXJzdE5hbWUiOiJNZWxpc3NhIiwibGFzdE5hbWUiOiJIYXJ0bWFuIiwiZW1haWxzIjpbeyJ2YWx1ZSI6Im0uaGFydG1hbkBleGFtcGxlLmNvbSIsInR5cGUiOiJob21lIiwic3RhdHVzIjoiTm90IFZhbGlkYXRlZCIsImlzUHJpbWFyeSI6MX1dLCJwaG9uZXMiOlt7InZhbHVlIjoiKDg4OCkgNTU1LTEyMzQiLCJub3JtYWxpemVkIjoiODg4NTU1MTIzNCIsInR5cGUiOiJtb2JpbGUiLCJzdGF0dXMiOiJOb3QgVmFsaWRhdGVkIiwiaXNQcmltYXJ5IjoxfV19LCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImouZG9lQGV4YW1wbGUuY29tIn19"
-
-  // let base64ToString = Buffer.from(baseData, "base64").toString();
-  //  console.log(JSON.parse(base64ToString))
+  const numberWithCommas = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   return (
     <>
       <div className="mainFrame">
         <div className="framediv">
-          <div className="head-logo">
+          {/* <div className="head-logo">
             <img src={logo} alt="logo" />
             <span>Atlas</span>
-          </div>
+          </div> */}
           <div className="frame-box">
             <div className="head-logo head-logo-2">
               <svg
@@ -107,6 +114,7 @@ const AtlasLoanPage = () => {
                     let governmentFundingFeeVal = 0;
                     let loanTermVal = 0;
                     let principalInterestVal = 0;
+                    let estimatedCashToCloseVal = 0;
 
                     contactDetails?.rateCampaings.map((item) => {
                       if (item.loanScenarioId === ele.id) {
@@ -144,6 +152,87 @@ const AtlasLoanPage = () => {
                       (((1 + Number(ele.interestRate) / 1200) ^ loanTermVal) -
                         1);
 
+                    var HOIPremium = Math.round(
+                      Number(ele.blockFnumMonthsPrepaidHOI) *
+                        Number(ele.monthlyHOI)
+                    );
+
+                    var prepaidInterest = Math.round(
+                      (Number(ele.blockFdaysPrepaidInterest) *
+                        totalLoanAmountVal *
+                        Number(ele.interestRate)) /
+                        36000
+                    );
+
+                    var prepaidTaxes = Math.round(
+                      Number(ele.blockFnumMonthsPrepaidTaxes) *
+                        Number(ele.monthlyPropertyTax)
+                    );
+
+                    var HOI = Math.round(
+                      Number(ele.blockGnumMonthsInsReserves) *
+                        Number(ele.monthlyHOI)
+                    );
+
+                    var propertyTaxes = Math.round(
+                      Number(ele.blockGnumMonthsTaxReserves) *
+                        Number(ele.monthlyPropertyTax)
+                    );
+
+                    var dBlock =
+                      Number(ele.blockADiscountFee) +
+                      Number(ele.blockAOriginationFee) +
+                      Number(ele.blockAprocessingFee) +
+                      Number(ele.blockATaxService) +
+                      Number(ele.blockBAppraisalFee) +
+                      Number(ele.blockBCreditFees) +
+                      Number(ele.blockBFloodCertification) +
+                      Number(ele.blockBtaxReturnVerificationFee) +
+                      Number(ele.blockBverificationEmployment) +
+                      Number(ele.blockBhoaQuestionnaire) +
+                      Number(ele.blockBcondoProjectApproval) +
+                      Number(ele.blockBsinglePremiumMI) +
+                      Number(governmentFundingFeeVal) +
+                      Number(ele.blockCTitleServices) +
+                      Number(ele.blockCSurvey);
+
+                    var iBlock =
+                      Number(ele.blockERecordingCharges) +
+                      Number(ele.blockETransferTaxes) +
+                      Number(HOIPremium) +
+                      Number(prepaidInterest) +
+                      Number(prepaidTaxes) +
+                      Number(HOI) +
+                      Number(propertyTaxes) +
+                      Number(ele.blockHOwnersTitleInsPremium);
+
+                    var jBlock = dBlock + iBlock - Number(ele.lenderCredit);
+                    var secondM =
+                      ele.secondMortgageRequest === "New 2nd mortgage"
+                        ? Number(ele.secondMortgageBalance)
+                        : 0;
+
+                    var sellerC =
+                      ele.loanPurpose === "Purchase"
+                        ? Number(ele.sellerCredit)
+                        : 0;
+
+                    var salePriceOrPayoffs = 0;
+                    if (ele.loanPurpose === "Purchase") {
+                      salePriceOrPayoffs = Number(ele.houseValue);
+                    }
+                    if (ele.loanPurpose === "Refinance") {
+                      salePriceOrPayoffs = Number(ele.currentLoanBalance);
+                    }
+
+                    estimatedCashToCloseVal =
+                      salePriceOrPayoffs +
+                      jBlock -
+                      totalLoanAmountVal -
+                      secondM -
+                      sellerC -
+                      Number(ele.otherCredits);
+
                     return (
                       <>
                         <div
@@ -152,7 +241,11 @@ const AtlasLoanPage = () => {
                             handleClick(ele.id);
                           }}
                           onMouseEnter={() =>
-                            handleHover(ele, principalInterestVal)
+                            handleHover(
+                              ele,
+                              principalInterestVal,
+                              estimatedCashToCloseVal
+                            )
                           }
                           onMouseLeave={() => setPopUp(false)}
                           key={index}
@@ -175,12 +268,14 @@ const AtlasLoanPage = () => {
                           "Cashout"}
                       </h5>
                       <div className="row hp-sub">
-                        <div className="col-md-3 col-6">
+                        <div className="col-md-6 col-6">
                           <p>Rate</p>
-                          <h4>{popUpData?.ele?.interestRate}%</h4>
-                        </div>
-                        <div className="col-md-3 col-6">
                           <p>Upfront costs</p>
+                            <p>Mo. payment</p>
+                            <p>Cash to Close</p>
+                        </div>
+                        <div className="col-md-6 col-6 values">
+                          <h4>{popUpData?.ele?.interestRate}%</h4>
                           <h4>
                             $
                             {Number(popUpData?.ele?.blockADiscountFee) +
@@ -188,15 +283,28 @@ const AtlasLoanPage = () => {
                               Number(popUpData?.ele?.blockAprocessingFee) +
                               Number(popUpData?.ele?.blockATaxService)}
                           </h4>
+                          <h4>{Math.round(popUpData?.principalInterestVal)}</h4>
+                          <h4>
+                            {Math.sign(popUpData?.estimatedCashToCloseVal) ===
+                            -1
+                              ? "(" +
+                                numberWithCommas(
+                                  Math.abs(
+                                    Math.round(
+                                      popUpData?.estimatedCashToCloseVal
+                                    )
+                                  )
+                                ) +
+                                ")"
+                              : numberWithCommas(
+                                  Math.round(popUpData?.estimatedCashToCloseVal)
+                                )}
+                          </h4>
+                        </div>
+                        {/* <div className="col-md-3 col-6">
                         </div>
                         <div className="col-md-3 col-6">
-                          <p>Mo. payment</p>
-                          <h4>{Math.round(popUpData?.principalInterestVal)}</h4>
-                        </div>
-                        <div className="col-md-3 col-6">
-                          <p>Mo. payment</p>
-                          <h4>{Math.round(popUpData?.principalInterestVal)}</h4>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

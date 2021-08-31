@@ -462,6 +462,15 @@ ul.pagination li.active {
   margin-bottom: 0;
   margin-top: 4px;
 }
+
+.popUp .row.hp-sub h4 {
+  font-style: normal;
+  font-weight: bold;
+  color: #244961;
+  font-size: 12px;
+  margin-bottom: 0;
+  margin-top: 3px;
+}
 .row.hp-sub p {
   font-style: normal;
   font-weight: 300;
@@ -481,7 +490,7 @@ ul.pagination li.active {
 }
 
 .popupmain .popupbox{
-  
+  width: 325px;
   min-width: 100% !important;
 }
 .popUp {
@@ -572,9 +581,9 @@ tr.head-td th:after {
 }
 .profile-main .text-pro h5 {
   font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
-  color: rgba(27, 28, 30, 0.5);
+  font-size: 16px;
+  line-height: 20px;
+  color: #6d8291
 }
 .text-pro {
   padding-left: 15px;
@@ -1008,6 +1017,7 @@ li.head-price {
 }
 .view-wrapper:hover button[editext="edit-button"] {
   display: block;
+  height: 16px;
 }
 .view-wrapper > div:first-child {
 width: 100%;
@@ -1505,7 +1515,7 @@ button.cross-arrow.icon-btn {
   /* max-width: 380px; */
   background-color: white;
   /* margin: 0 auto; */
-  padding: 15px;
+  /* padding: 15px; */
 }
 .head-logo{
   display: flex;
@@ -1520,9 +1530,9 @@ button.cross-arrow.icon-btn {
   line-height: 26px;
 }
 
-.head-logo.head-logo-2 {
+.head-logo-2 {
   align-items: center;
-  margin-top: 25px;
+  /* margin-top: 25px; */
   margin-bottom: 15px;
 }
 .frame-box .loan-box {
@@ -1532,6 +1542,10 @@ button.cross-arrow.icon-btn {
 
 .frame-box {
   color: #808080 ;
+}
+
+.frame-box .loan-td{
+  margin-bottom: 15px;
 }
 
 .head-logo-2 span {
@@ -1604,6 +1618,7 @@ display: block;
 }
 .price-text .main-div:hover .edit-arrow1{
 display: block;
+height: 16px;
 }
 .price-text .main-div .edit-arrow1{
   display: none;
@@ -1613,7 +1628,7 @@ display: block;
   align-items: center;
 }
 .table tr:last-child td .loan-td .loan-box .hp-main {
-  top: -125px;
+  top: -135px;
 }
 .table tr:last-child td .loan-td .loan-box .box-l:after {
   top: -5px;

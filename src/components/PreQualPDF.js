@@ -10,7 +10,11 @@ const PreQualPDF = ({
         user}) => {
 
     const numberWithCommas = (num) => {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        if(num !== null){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }else{
+            return num
+        }
       }
     return (
     <html>
@@ -30,7 +34,7 @@ const PreQualPDF = ({
                         <tbody>
                             <tr>
                                 <td>Property Location</td>
-                                <td>{Atlas_Loan_Scenario.propertyCountry}, {Atlas_Loan_Scenario.propertyState}</td>
+                                <td>{Atlas_Loan_Scenario.propertyCounty}, {Atlas_Loan_Scenario.propertyState}</td>
                             </tr>
                             <tr>
                                 <td>Property Type</td>

@@ -228,7 +228,7 @@ const Home_2 = () => {
     propertyCity: "",
     propertyZip: "",
     propertyState: "",
-    propertyCountry: "",
+    propertyCounty: "",
     propertyType: "",
     creditScore: "",
     occupancy: "",
@@ -1583,7 +1583,7 @@ const Home_2 = () => {
                   <p>
                     {contactDetails.firstName + " " + contactDetails.lastName}
                   </p>
-                  <h5>{contactDetails.stage + " stage"}</h5>
+                  <h5>{contactDetails.stage}</h5>
                 </div>
               </div>
               <div className="pro-main">
@@ -1595,7 +1595,7 @@ const Home_2 = () => {
                   <div className="pro-detail-text">
                     <p>Location</p>
                     <h3>
-                      {loanScenario.propertyCountry +
+                      {loanScenario.propertyCounty +
                         " County, " +
                         loanScenario.propertyState}
                     </h3>
@@ -1979,7 +1979,7 @@ const Home_2 = () => {
                 </div>
                 <div className="stone-btn">
                   <div className="st-btn">
-                    <button onClick={onOpenRepriceModal}>Reprice</button>
+                    <button onClick={onOpenRepriceModal}>Price Loan</button>
                     <Modal
                       open={openRepriceModal}
                       onClose={onCloseRepriceModal}
@@ -1995,7 +1995,7 @@ const Home_2 = () => {
                     </Modal>
                   </div>
                   <div className="st-btn">
-                    <button>Clone</button>
+                    <button>Title & Taxes</button>
                   </div>
                   <div className="st-btn">
                     <button
@@ -2050,7 +2050,7 @@ const Home_2 = () => {
                             </li>
 
                             <li>
-                              <p>Base Loan Amount</p>
+                              <p>Base Loan Amount ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
@@ -2066,11 +2066,11 @@ const Home_2 = () => {
                               </div>
                             </li>
                             <li>
-                              <p>LTV/CLTV</p>
+                              <p>LTV/CLTV (%)</p>
                               <span>{isNaN(LTV_CLTV) ? 0 : LTV_CLTV}</span>
                             </li>
                             <li>
-                              <p>Total Loan Amount</p>
+                              <p>Total Loan Amount ($)</p>
                               <span>
                                 {numberWithCommas(Math.round(totalLoanAmount))}
                               </span>
@@ -2228,12 +2228,12 @@ const Home_2 = () => {
                             </li>
 
                             <li>
-                              <p>Interest Rate</p>
+                              <p>Interest Rate (%)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.interestRate}
+                                  value={loanScenario?.interestRate?loanScenario?.interestRate:0}
                                   tabIndex={3}
                                   onSave={(pass) => {
                                     handleSave(pass, "interestRate");
@@ -2288,7 +2288,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.lockPeriod}</span>
+                                    <span>{loanScenario?.lockPeriod?loanScenario?.lockPeriod:"0 Days" }</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -2303,7 +2303,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.loanPrice}
+                                  value={loanScenario?.loanPrice? loanScenario?.loanPrice:0}
                                   tabIndex={4}
                                   onSave={(pass) => {
                                     handleSave(pass, "loanPrice");
@@ -2314,12 +2314,12 @@ const Home_2 = () => {
                               </div>
                             </li>
                             <li>
-                              <p>Lender Credit</p>
+                              <p>Lender Credit ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.lenderCredit}
+                                  value={loanScenario?.lenderCredit?loanScenario?.lenderCredit:0}
                                   tabIndex={5}
                                   onSave={(pass) => {
                                     handleSave(pass, "lenderCredit");
@@ -2338,13 +2338,13 @@ const Home_2 = () => {
                               <p>Gov. Funding Fee or Mortgage</p>
                             </li>
                             <li>
-                              <p>Government Funding Fee </p>
+                              <p>Government Funding Fee ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
                                   value={
-                                    loanScenario.governmentFundingFeePercent
+                                    loanScenario?.governmentFundingFeePercent?loanScenario?.governmentFundingFeePercent:0
                                   }
                                   tabIndex={6}
                                   onSave={(pass) => {
@@ -2380,13 +2380,13 @@ const Home_2 = () => {
                               </span>
                             </li>
                             <li>
-                              <p>Mortgage Insurance Rate</p>
+                              <p>Mortgage Insurance Rate (%)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
                                   value={
-                                    loanScenario.annualMortgageInsuranceRate
+                                    loanScenario?.annualMortgageInsuranceRate?loanScenario?.annualMortgageInsuranceRate:0
                                   }
                                   tabIndex={7}
                                   onSave={(pass) => {
@@ -2450,7 +2450,7 @@ const Home_2 = () => {
                                   <div>
                                     <span>
                                       {
-                                        loanScenario.mortgageInsurancePremiumType
+                                        loanScenario?.mortgageInsurancePremiumType?loanScenario?.mortgageInsurancePremiumType:"Monthly"
                                       }
                                     </span>
                                     <button className="edit-arrow1 icon-btn1">
@@ -2468,7 +2468,7 @@ const Home_2 = () => {
                               <p>Mortgage Insurance Rate</p>
                             </li>
                             <li>
-                              <p>Second Mortgage Request</p>
+                              <p>Second Mortgage Request </p>
                               {isEqual === "secondMortgageRequest" ? (
                                 <div className="dropdown-main">
                                   <div id="wrap">
@@ -2512,7 +2512,7 @@ const Home_2 = () => {
                                 >
                                   <div>
                                     <span>
-                                      {loanScenario.secondMortgageRequest}
+                                      {loanScenario?.secondMortgageRequest?loanScenario?.secondMortgageRequest:"Mortgage"}
                                     </span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
@@ -2522,12 +2522,12 @@ const Home_2 = () => {
                               )}
                             </li>
                             <li>
-                              <p>Second Mortgage Balance</p>
+                              <p>Second Mortgage Balance ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.secondMortgageBalance}
+                                  value={loanScenario?.secondMortgageBalance?loanScenario?.secondMortgageBalance:0}
                                   tabIndex={8}
                                   onSave={(pass) => {
                                     handleSave(pass, "secondMortgageBalance");
@@ -2617,7 +2617,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.loanPurpose}</span>
+                                    <span>{loanScenario?.loanPurpose?loanScenario?.loanPurpose:"Purchase"}</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -2682,7 +2682,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.occupancy}</span>
+                                    <span>{loanScenario?.occupancy?loanScenario?.occupancy:"Investment"}</span>
 
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
@@ -2693,12 +2693,12 @@ const Home_2 = () => {
                             </li>
 
                             <li>
-                              <p>Current Loan Balance</p>
+                              <p>Current Loan Balance ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.currentLoanBalance}
+                                  value={loanScenario?.currentLoanBalance?loanScenario?.currentLoanBalance:0}
                                   tabIndex={9}
                                   onSave={(pass) => {
                                     handleSave(pass, "currentLoanBalance");
@@ -2709,12 +2709,12 @@ const Home_2 = () => {
                               </div>
                             </li>
                             <li>
-                              <p>Cashout Request</p>
+                              <p>Cashout Request ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.cashoutRequest}
+                                  value={loanScenario?.cashoutRequest?loanScenario?.cashoutRequest:0}
                                   tabIndex={10}
                                   onSave={(pass) => {
                                     handleSave(pass, "cashoutRequest");
@@ -2776,7 +2776,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.creditScore}
+                                  value={loanScenario?.creditScore?loanScenario?.creditScore:0}
                                   tabIndex={11}
                                   onSave={(pass) => {
                                     handleSave(pass, "creditScore");
@@ -2787,12 +2787,12 @@ const Home_2 = () => {
                               </div>
                             </li>
                             <li>
-                              <p>Annual Income</p>
+                              <p>Annual Income ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.annualIncome}
+                                  value={loanScenario?.annualIncome?loanScenario?.annualIncome:0}
                                   tabIndex={11}
                                   onSave={(pass) => {
                                     handleSave(pass, "annualIncome");
@@ -2847,7 +2847,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.currentLoanType}</span>
+                                    <span>{loanScenario?.currentLoanType?loanScenario?.currentLoanType:"Other"}</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -2998,7 +2998,7 @@ const Home_2 = () => {
                                             })
                                           }
                                           value={address.propertyState}
-                                          placeholder="Select State"
+                                          placeholder="State"
                                         />
                                       </div>
                                       <div className="inputBox pincode">
@@ -3032,14 +3032,14 @@ const Home_2 = () => {
                             </li>
                             <li>
                               <p>County</p>
-                              {isEqual === "propertyCountry" ? (
+                              {isEqual === "propertyCounty" ? (
                                 <div className="dropdown-main">
                                   <div id="wrap">
                                     <Dropdown
                                       className="cust-select"
                                       options={propertyCountryOptions}
                                       onChange={onSelect}
-                                      value={loanScenario.propertyCountry}
+                                      value={loanScenario.propertyCounty}
                                       placeholder="Select an option"
                                     />
                                     <div className="btn-div">
@@ -3048,7 +3048,7 @@ const Home_2 = () => {
                                         onClick={() =>
                                           handleSave(
                                             selectedValue,
-                                            "propertyCountry"
+                                            "propertyCounty"
                                           )
                                         }
                                       >
@@ -3068,13 +3068,13 @@ const Home_2 = () => {
                                   className="main-div w100"
                                   onClick={() =>
                                     onClick(
-                                      "propertyCountry",
-                                      loanScenario.propertyCountry
+                                      "propertyCounty",
+                                      loanScenario.propertyCounty
                                     )
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.propertyCountry}</span>
+                                    <span>{loanScenario?.propertyCounty?loanScenario?.propertyCounty:"Washington"}</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -3126,7 +3126,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.propertyType}</span>
+                                    <span>{loanScenario?.propertyType?loanScenario?.propertyType:"Single Family"}</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -3135,12 +3135,12 @@ const Home_2 = () => {
                               )}
                             </li>
                             <li>
-                              <p>House Value</p>
+                              <p>House Value ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.houseValue}
+                                  value={loanScenario?.houseValue?loanScenario?.houseValue:0}
                                   tabIndex={13}
                                   onSave={(pass) => {
                                     handleSave(pass, "houseValue");
@@ -3151,12 +3151,12 @@ const Home_2 = () => {
                               </div>
                             </li>
                             <li>
-                              <p>Monthly HOA</p>
+                              <p>Monthly HOA ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.monthlyHOA}
+                                  value={loanScenario?.monthlyHOA?loanScenario?.monthlyHOA:0}
                                   tabIndex={14}
                                   onSave={(pass) => {
                                     handleSave(pass, "monthlyHOA");
@@ -3167,12 +3167,12 @@ const Home_2 = () => {
                               </div>
                             </li>
                             <li>
-                              <p>Monthly Property Taxes</p>
+                              <p>Monthly Property Taxes ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.monthlyPropertyTax}
+                                  value={loanScenario?.monthlyPropertyTax?loanScenario?.monthlyPropertyTax:0}
                                   tabIndex={15}
                                   onSave={(pass) => {
                                     handleSave(pass, "monthlyPropertyTax");
@@ -3183,12 +3183,12 @@ const Home_2 = () => {
                               </div>
                             </li>
                             <li>
-                              <p>Monthly HOI</p>
+                              <p>Monthly HOI ($)</p>
                               <div className="w100">
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.monthlyHOI}
+                                  value={loanScenario?.monthlyHOI?loanScenario?.monthlyHOI:0}
                                   tabIndex={16}
                                   onSave={(pass) => {
                                     handleSave(pass, "monthlyHOI");
@@ -3206,7 +3206,7 @@ const Home_2 = () => {
                               <p>Projected Monthly Payment</p>
                             </li>
                             <li>
-                              <p>Principal & Interest</p>
+                              <p>Principal & Interest ($)</p>
                               <span>
                                 {isNaN(principalInterest.toFixed(2))
                                   ? 0
@@ -3214,12 +3214,12 @@ const Home_2 = () => {
                               </span>
                             </li>
                             <li>
-                              <p>Estimated Escrow</p>
+                              <p>Estimated Escrow ($)</p>
                               <span>{estimatedEscrow}</span>
                             </li>
                             <li className="Total">
                               <p>
-                                <b>Total Monthly Payment</b>
+                                <b>Total Monthly Payment ($)</b>
                               </p>
                               <span className="text-val">
                                 <b>
@@ -3258,7 +3258,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockADiscountFee}
+                                  value={loanScenario?.blockADiscountFee?loanScenario?.blockADiscountFee:0}
                                   tabIndex={101}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockADiscountFee");
@@ -3274,7 +3274,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockAOriginationFee}
+                                  value={loanScenario?.blockAOriginationFee?loanScenario?.blockAOriginationFee:0}
                                   tabIndex={102}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockAOriginationFee");
@@ -3290,7 +3290,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockAprocessingFee}
+                                  value={loanScenario?.blockAprocessingFee?loanScenario?.blockAprocessingFee:0}
                                   tabIndex={103}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockAprocessingFee");
@@ -3306,7 +3306,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockATaxService}
+                                  value={loanScenario?.blockATaxService?loanScenario?.blockATaxService:0}
                                   tabIndex={104}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockATaxService");
@@ -3330,7 +3330,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockBAppraisalFee}
+                                  value={loanScenario?.blockBAppraisalFee?loanScenario?.blockBAppraisalFee:0}
                                   tabIndex={106}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockBAppraisalFee");
@@ -3346,7 +3346,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockBCreditFees}
+                                  value={loanScenario?.blockBCreditFees?loanScenario?.blockBCreditFees:0}
                                   tabIndex={107}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockBCreditFees");
@@ -3362,7 +3362,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockBFloodCertification}
+                                  value={loanScenario?.blockBFloodCertification?loanScenario?.blockBFloodCertification:0}
                                   tabIndex={108}
                                   onSave={(pass) => {
                                     handleSave(
@@ -3382,7 +3382,7 @@ const Home_2 = () => {
                                   viewContainerClassName="view-wrapper"
                                   type="text"
                                   value={
-                                    loanScenario.blockBtaxReturnVerificationFee
+                                    loanScenario?.blockBtaxReturnVerificationFee?loanScenario?.blockBtaxReturnVerificationFee:0
                                   }
                                   tabIndex={109}
                                   onSave={(pass) => {
@@ -3403,7 +3403,7 @@ const Home_2 = () => {
                                   viewContainerClassName="view-wrapper"
                                   type="text"
                                   value={
-                                    loanScenario.blockBverificationEmployment
+                                    loanScenario?.blockBverificationEmployment?loanScenario?.blockBverificationEmployment:0
                                   }
                                   tabIndex={110}
                                   onSave={(pass) => {
@@ -3423,7 +3423,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockBhoaQuestionnaire}
+                                  value={loanScenario?.blockBhoaQuestionnaire?loanScenario?.blockBhoaQuestionnaire:0}
                                   tabIndex={111}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockBhoaQuestionnaire");
@@ -3440,7 +3440,7 @@ const Home_2 = () => {
                                   viewContainerClassName="view-wrapper"
                                   type="text"
                                   value={
-                                    loanScenario.blockBcondoProjectApproval
+                                    loanScenario?.blockBcondoProjectApproval?loanScenario?.blockBcondoProjectApproval:0
                                   }
                                   tabIndex={112}
                                   onSave={(pass) => {
@@ -3460,7 +3460,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockBsinglePremiumMI}
+                                  value={loanScenario?.blockBsinglePremiumMI?loanScenario?.blockBsinglePremiumMI:0}
                                   tabIndex={113}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockBsinglePremiumMI");
@@ -3492,7 +3492,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockCTitleServices}
+                                  value={loanScenario?.blockCTitleServices?loanScenario?.blockCTitleServices:0}
                                   tabIndex={113}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockCTitleServices");
@@ -3508,7 +3508,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockCSurvey}
+                                  value={loanScenario?.blockCSurvey?loanScenario?.blockCSurvey:0}
                                   tabIndex={114}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockCSurvey");
@@ -3542,7 +3542,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockERecordingCharges}
+                                  value={loanScenario?.blockERecordingCharges?loanScenario?.blockERecordingCharges:0}
                                   tabIndex={115}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockERecordingCharges");
@@ -3558,7 +3558,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.blockETransferTaxes}
+                                  value={loanScenario?.blockETransferTaxes?loanScenario?.blockETransferTaxes:0}
                                   tabIndex={116}
                                   onSave={(pass) => {
                                     handleSave(pass, "blockETransferTaxes");
@@ -3582,7 +3582,7 @@ const Home_2 = () => {
                                 <p>HOI Premium (</p>
                                 <EdiText
                                   viewContainerClassName="testBT"
-                                  value={loanScenario.blockFnumMonthsPrepaidHOI}
+                                  value={loanScenario?.blockFnumMonthsPrepaidHOI?loanScenario?.blockFnumMonthsPrepaidHOI:0}
                                   tabIndex={119}
                                   type="text"
                                   // validationMessage=" "
@@ -3622,7 +3622,7 @@ const Home_2 = () => {
                                   <EdiText
                                     viewContainerClassName="testBT"
                                     value={
-                                      loanScenario.blockFdaysPrepaidInterest
+                                      loanScenario?.blockFdaysPrepaidInterest?loanScenario?.blockFdaysPrepaidInterest:0
                                     }
                                     tabIndex={118}
                                     type="text"
@@ -3662,7 +3662,7 @@ const Home_2 = () => {
                                   <EdiText
                                     viewContainerClassName="testBT"
                                     value={
-                                      loanScenario.blockFnumMonthsPrepaidTaxes
+                                      loanScenario?.blockFnumMonthsPrepaidTaxes?loanScenario?.blockFnumMonthsPrepaidTaxes:0
                                     }
                                     tabIndex={119}
                                     type="text"
@@ -3708,7 +3708,7 @@ const Home_2 = () => {
                                 <p>Homeowner’s Insurance </p>
                                 <div className="left-child">
                                   <p>
-                                    ${loanScenario.monthlyHOI} per month for
+                                    ${loanScenario?.monthlyHOI?loanScenario?.monthlyHOI:0} per month for
                                   </p>
                                   {isEqual === "blockGnumMonthsInsReserves" ? (
                                     <div className="dropdown-main">
@@ -3717,7 +3717,7 @@ const Home_2 = () => {
                                           className="cust-select"
                                           options={monthsOptions}
                                           onChange={onSelect}
-                                          value={loanScenario.blockGnumMonthsInsReserves.toString()}
+                                          value={loanScenario?.blockGnumMonthsInsReserves?loanScenario?.blockGnumMonthsInsReserves.toString():0}
                                           placeholder="Select an option"
                                         />
                                         <div className="btn-div">
@@ -3754,7 +3754,7 @@ const Home_2 = () => {
                                       <div>
                                         <span>
                                           {
-                                            loanScenario.blockGnumMonthsInsReserves
+                                            loanScenario?.blockGnumMonthsInsReserves?loanScenario?.blockGnumMonthsInsReserves:0
                                           }
                                         </span>
                                         <button className="edit-arrow1 icon-btn1">
@@ -3775,7 +3775,7 @@ const Home_2 = () => {
                                 <p>Property Taxes</p>
                                 <div className="left-child">
                                   <p>
-                                    ${loanScenario.monthlyPropertyTax} per month
+                                    ${loanScenario?.monthlyPropertyTax?loanScenario?.monthlyPropertyTax:0} per month
                                     for
                                   </p>
                                   {isEqual === "blockGnumMonthsTaxReserves" ? (
@@ -3785,7 +3785,7 @@ const Home_2 = () => {
                                           className="cust-select"
                                           options={monthsOptions}
                                           onChange={onSelect}
-                                          value={loanScenario.blockGnumMonthsTaxReserves.toString()}
+                                          value={loanScenario?.blockGnumMonthsTaxReserves?loanScenario?.blockGnumMonthsTaxReserves.toString():0}
                                           placeholder="Select an option"
                                         />
                                         <div className="btn-div">
@@ -3822,7 +3822,7 @@ const Home_2 = () => {
                                       <div>
                                         <span>
                                           {
-                                            loanScenario.blockGnumMonthsTaxReserves
+                                            loanScenario?.blockGnumMonthsTaxReserves?loanScenario?.blockGnumMonthsTaxReserves:0
                                           }
                                         </span>
                                         <button className="edit-arrow1 icon-btn1">
@@ -3853,7 +3853,7 @@ const Home_2 = () => {
                                   viewContainerClassName="view-wrapper"
                                   type="text"
                                   value={
-                                    loanScenario.blockHOwnersTitleInsPremium
+                                    loanScenario?.blockHOwnersTitleInsPremium?loanScenario?.blockHOwnersTitleInsPremium:0
                                   }
                                   tabIndex={122}
                                   onSave={(pass) => {
@@ -3873,7 +3873,7 @@ const Home_2 = () => {
                           <ul>
                             <li className="head-price">
                               <p>I. Total Other Costs (E + F + G + H)</p>
-                              <span>${numberWithCommas(blockI)}</span>
+                              <span>${numberWithCommas((blockI).toFixed(2))}</span>
                             </li>
                           </ul>
                         </div>
@@ -3887,7 +3887,7 @@ const Home_2 = () => {
                             </li>
                             <li>
                               <p>D+I</p>
-                              <span>{numberWithCommas(blockD + blockI)}</span>
+                              <span>{numberWithCommas((blockD + blockI).toFixed(2))}</span>
                             </li>
                             <li>
                               <p>Lender Credit </p>
@@ -3935,12 +3935,12 @@ const Home_2 = () => {
                               <li>
                                 <p className="text-p">Seller Credit</p>
                                 <p className="text-icon">-</p>
-                                <div className="w100">
+                                <div className="widthPX">
                                   <EdiText
                                     viewContainerClassName="view-wrapper"
                                     className="text-val"
                                     type="text"
-                                    value={loanScenario.sellerCredit}
+                                    value={loanScenario?.sellerCredit?loanScenario?.sellerCredit:0}
                                     tabIndex={123}
                                     onSave={(pass) => {
                                       handleSave(pass, "sellerCredit");
@@ -3961,7 +3961,7 @@ const Home_2 = () => {
                                   viewContainerClassName="view-wrapper"
                                   className="text-val"
                                   type="text"
-                                  value={loanScenario.otherCredits}
+                                  value={loanScenario?.otherCredits?loanScenario?.otherCredits:0}
                                   tabIndex={123}
                                   onSave={(pass) => {
                                     handleSave(pass, "otherCredits");

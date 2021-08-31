@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const Hometable = (props) => {
   const [tableArr, setTableArr] = useState();
@@ -11,7 +11,7 @@ const Hometable = (props) => {
   const [currentPage, setcurrentPage] = useState(1);
   const [itemsPerPage, setitemsPerPage] = useState(50);
 
-  const history = useHistory()
+  const history = useHistory();
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -57,7 +57,6 @@ const Hometable = (props) => {
     }
   }
 
-
   useEffect(() => {
     getmyData("", "");
   }, []);
@@ -99,29 +98,32 @@ const Hometable = (props) => {
   };
   // console.log("tableArr", tableArr);
 
-  const handleLoanPage = (loanId, rateId) =>{
+  const handleLoanPage = (loanId, rateId) => {
     history.push({
-      pathname:"/home_2",
-      state:{id:loanId, RId:rateId}
-    })
-  }
+      pathname: "/home_2",
+      state: { id: loanId, RId: rateId },
+    });
+  };
 
   const getDays = (date) => {
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
+    today = yyyy + "-" + mm + "-" + dd;
     var startDate = Date.parse(today);
     var endDate = Date.parse(date);
     var timeDiff = startDate - endDate;
     var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-    return daysDiff + " days ago"
-  }
+    return daysDiff + " days ago";
+  };
 
-  let loanType = ""
-  let loanProduct = ""
+  let loanType = "";
+  let loanProduct = "";
+  const numberWithCommas = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   return (
     <>
       <div className="td-main">
@@ -201,8 +203,8 @@ const Hometable = (props) => {
                           d="M1 5.5L5.5 1L10 5.5"
                           stroke="#CCCCCC"
                           strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </button>
@@ -276,8 +278,8 @@ const Hometable = (props) => {
                           d="M1 1L5.5 5.5L10 1"
                           stroke="#CCCCCC"
                           strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </button>
@@ -301,47 +303,161 @@ const Hometable = (props) => {
                   <>
                     <tr key={index}>
                       <td>
-                      <img className="users-img" src={element.pictureURL} />&nbsp;&nbsp;
-                      {element?.firstName} {element?.lastName}
+                        <img className="users-img" src={element.pictureURL} />
+                        &nbsp;&nbsp;
+                        {element?.firstName} {element?.lastName}
                       </td>
                       <td>{element?.stage}</td>
                       <td>{getDays(element?.createdDate)}</td>
                       <td>
                         <div className="loan-td">
                           {element?.loanScenarios?.map((ele, index) => {
-                                let totalLoanAmountVal = 0;
-                                let governmentFundingFeeVal = 0
-                                let loanTermVal = 0
-                                let principalInterestVal = 0
-                                
-                                element.rateCampaings.map((item) => {
-                                  if(item.loanScenarioId === ele.id){
-                                    loanType = ele.loanType
-                                    loanProduct = ele.loanProduct
-                                  }
-                                })
+                            let totalLoanAmountVal = 0;
+                            let governmentFundingFeeVal = 0;
+                            let loanTermVal = 0;
+                            let principalInterestVal = 0;
+                            let estimatedCashToCloseVal = 0;
 
-                                if(ele.isFinancedFundingFeeMI){
-                                  totalLoanAmountVal = Number(ele.baseLoanAmount)
-                                }else if(ele.mortgageInsurancePremiumType === "Single Premium"){
-                                  totalLoanAmountVal = Number(ele.baseLoanAmount) + (Number(ele.annualMortgageInsuranceRate) * Number(ele.baseLoanAmount)) / 100;
-                                }else{
-                                  governmentFundingFeeVal = (Number(ele.baseLoanAmount) * Number(ele.governmentFundingFeePercent)) /100;
-                                  totalLoanAmountVal = Number(ele.baseLoanAmount) + Number(governmentFundingFeeVal);
-                                }
-                                loanTermVal = ele.loanProduct.includes("ARM") ? 360 : 12 * Number(ele.loanProduct.substring(0, 2));
-                                principalInterestVal = (totalLoanAmountVal * (Number(ele.interestRate) / 1200) * ((1 + Number(ele.interestRate) / 1200) ^ loanTermVal)) / (((1 + Number(ele.interestRate) / 1200) ^ loanTermVal) - 1)
+                            element.rateCampaings.map((item) => {
+                              if (item.loanScenarioId === ele.id) {
+                                loanType = ele.loanType;
+                                loanProduct = ele.loanProduct;
+                              }
+                            });
+
+                            if (ele.isFinancedFundingFeeMI) {
+                              totalLoanAmountVal = Number(ele.baseLoanAmount);
+                            } else if (
+                              ele.mortgageInsurancePremiumType ===
+                              "Single Premium"
+                            ) {
+                              totalLoanAmountVal =
+                                Number(ele.baseLoanAmount) +
+                                (Number(ele.annualMortgageInsuranceRate) *
+                                  Number(ele.baseLoanAmount)) /
+                                  100;
+                            } else {
+                              governmentFundingFeeVal =
+                                (Number(ele.baseLoanAmount) *
+                                  Number(ele.governmentFundingFeePercent)) /
+                                100;
+                              totalLoanAmountVal =
+                                Number(ele.baseLoanAmount) +
+                                Number(governmentFundingFeeVal);
+                            }
+                            loanTermVal = ele.loanProduct.includes("ARM")
+                              ? 360
+                              : 12 * Number(ele.loanProduct.substring(0, 2));
+                            principalInterestVal =
+                              (totalLoanAmountVal *
+                                (Number(ele.interestRate) / 1200) *
+                                ((1 + Number(ele.interestRate) / 1200) ^
+                                  loanTermVal)) /
+                              (((1 + Number(ele.interestRate) / 1200) ^
+                                loanTermVal) -
+                                1);
+
+                            var HOIPremium = Math.round(
+                              Number(ele.blockFnumMonthsPrepaidHOI) *
+                                Number(ele.monthlyHOI)
+                            );
+
+                            var prepaidInterest = Math.round(
+                              (Number(ele.blockFdaysPrepaidInterest) *
+                                totalLoanAmountVal *
+                                Number(ele.interestRate)) /
+                                36000
+                            );
+
+                            var prepaidTaxes = Math.round(
+                              Number(ele.blockFnumMonthsPrepaidTaxes) *
+                                Number(ele.monthlyPropertyTax)
+                            );
+
+                            var HOI = Math.round(
+                              Number(ele.blockGnumMonthsInsReserves) *
+                                Number(ele.monthlyHOI)
+                            );
+
+                            var propertyTaxes = Math.round(
+                              Number(ele.blockGnumMonthsTaxReserves) *
+                                Number(ele.monthlyPropertyTax)
+                            );
+
+                            var dBlock =
+                              Number(ele.blockADiscountFee) +
+                              Number(ele.blockAOriginationFee) +
+                              Number(ele.blockAprocessingFee) +
+                              Number(ele.blockATaxService) +
+                              Number(ele.blockBAppraisalFee) +
+                              Number(ele.blockBCreditFees) +
+                              Number(ele.blockBFloodCertification) +
+                              Number(ele.blockBtaxReturnVerificationFee) +
+                              Number(ele.blockBverificationEmployment) +
+                              Number(ele.blockBhoaQuestionnaire) +
+                              Number(ele.blockBcondoProjectApproval) +
+                              Number(ele.blockBsinglePremiumMI) +
+                              Number(governmentFundingFeeVal) +
+                              Number(ele.blockCTitleServices) +
+                              Number(ele.blockCSurvey);
+
+                            var iBlock =
+                              Number(ele.blockERecordingCharges) +
+                              Number(ele.blockETransferTaxes) +
+                              Number(HOIPremium) +
+                              Number(prepaidInterest) +
+                              Number(prepaidTaxes) +
+                              Number(HOI) +
+                              Number(propertyTaxes) +
+                              Number(ele.blockHOwnersTitleInsPremium);
+
+                            var jBlock =
+                              dBlock + iBlock - Number(ele.lenderCredit);
+                            var secondM =
+                              ele.secondMortgageRequest === "New 2nd mortgage"
+                                ? Number(ele.secondMortgageBalance)
+                                : 0;
+
+                            var sellerC =
+                              ele.loanPurpose === "Purchase"
+                                ? Number(ele.sellerCredit)
+                                : 0;
+
+                            var salePriceOrPayoffs = 0;
+                            if (ele.loanPurpose === "Purchase") {
+                              salePriceOrPayoffs = Number(ele.houseValue);
+                            }
+                            if (ele.loanPurpose === "Refinance") {
+                              salePriceOrPayoffs = Number(
+                                ele.currentLoanBalance
+                              );
+                            }
+
+                            estimatedCashToCloseVal =
+                              salePriceOrPayoffs +
+                              jBlock -
+                              totalLoanAmountVal -
+                              secondM -
+                              sellerC -
+                              Number(ele.otherCredits);
 
                             return (
                               <>
                                 <div className="loan-box" key={index}>
-                                  <div className="box-l" onClick={() => handleLoanPage(ele.id)}>
+                                  <div
+                                    className="box-l"
+                                    onClick={() => handleLoanPage(ele.id)}
+                                  >
                                     {ele.scenarioName}
                                   </div>
                                   <div className="hp-main">
                                     <div className="hp-box">
                                       <h5>
-                                        {ele.scenarioName + " " + ele.interestRate + "% "+"Cashout"}
+                                        {ele.scenarioName +
+                                          " " +
+                                          ele.interestRate +
+                                          "% " +
+                                          "Cashout"}
                                       </h5>
                                       <div className="row hp-sub">
                                         <div className="col-md-3">
@@ -350,23 +466,41 @@ const Hometable = (props) => {
                                         </div>
                                         <div className="col-md-3">
                                           <p>Upfront costs</p>
-                                          <h4>${
-                                                Number(ele.blockADiscountFee) +
-                                                Number(ele.blockAOriginationFee) +
-                                                Number(ele.blockAprocessingFee) +
-                                                Number(ele.blockATaxService)
-                                              }
+                                          <h4>
+                                            $
+                                            {Number(ele.blockADiscountFee) +
+                                              Number(ele.blockAOriginationFee) +
+                                              Number(ele.blockAprocessingFee) +
+                                              Number(ele.blockATaxService)}
                                           </h4>
                                         </div>
                                         <div className="col-md-3">
                                           <p>Mo. payment</p>
-                                              <h4>
-                                                {Math.round(principalInterestVal)}
-                                            </h4>
+                                          <h4>
+                                            {Math.round(principalInterestVal)}
+                                          </h4>
                                         </div>
                                         <div className="col-md-3">
-                                          <p>Mo. payment</p>
-                                          <h4>{Math.round(principalInterestVal)}</h4>
+                                          <p>Cash to Close</p>
+                                          <h4>
+                                            {Math.sign(
+                                              estimatedCashToCloseVal
+                                            ) === -1
+                                              ? "(" +
+                                                numberWithCommas(
+                                                  Math.abs(
+                                                    Math.round(
+                                                      estimatedCashToCloseVal
+                                                    )
+                                                  )
+                                                ) +
+                                                ")"
+                                              : numberWithCommas(
+                                                  Math.round(
+                                                    estimatedCashToCloseVal
+                                                  )
+                                                )}
+                                          </h4>
                                         </div>
                                       </div>
                                     </div>
@@ -383,16 +517,25 @@ const Hometable = (props) => {
                           {element?.rateCampaings?.map((ele, index) => {
                             return (
                               <div className="campa-box" key={index}>
-                                <div className="box-l" onClick={() => handleLoanPage(ele.loanScenarioId, ele.id)}>
-                                {loanType + " " + loanProduct + "; " + ele.additionalLoanProducts}
+                                <div
+                                  className="box-l"
+                                  onClick={() =>
+                                    handleLoanPage(ele.loanScenarioId, ele.id)
+                                  }
+                                >
+                                  {loanType +
+                                    " " +
+                                    loanProduct +
+                                    "; " +
+                                    ele.additionalLoanProducts}
                                 </div>
                               </div>
-                            )})}
-                      </div>
+                            );
+                          })}
+                        </div>
                       </td>
                       <td>
                         <div className="loan-td">
-
                           <div className="apps-box">
                             <div className="box-l">
                               Stone HP 30 100k Cashout
