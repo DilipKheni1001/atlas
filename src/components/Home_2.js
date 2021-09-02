@@ -1273,9 +1273,7 @@ const Home_2 = () => {
 
 
   const onOpenRepriceModal = () => {
-    setLink(
-      "https://argos.keystonefunding.com/intelliquote/index-atlas.php?loanOfficerEmail=rsargent@keystonefunding.com&eDocType=Full_Doc&target=100&eLoanPurpose=Refinance_Cashout&creditScore=740&loanAmount=460000&secondLoanAmount=&propertyValue=750000&ePropertyType=SFR&eOccupancy=OwnerOccupied&lockDays=45&propertyLocationState=NJ&county=Morris&eLoanPrograms=Conv&specialFeature=&upfrontMiFinanced=false&eImpounds=Both&eVeteranUseType=FirstTime&eLoanProducts=Fixed_30Yr&scenarioID=a0c0y00000QDPFL"
-    );
+    setLink(`https://argos.keystonefunding.com/intelliquote-modal/?id=${loanScenario.id}`)
     setOpenRepriceModal(true);
   };
 
