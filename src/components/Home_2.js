@@ -2053,7 +2053,7 @@ const Home_2 = () => {
                                 <EdiText
                                   viewContainerClassName="view-wrapper"
                                   type="text"
-                                  value={loanScenario.baseLoanAmount}
+                                  value={loanScenario?.baseLoanAmount?loanScenario?.baseLoanAmount:0}
                                   tabIndex={1}
                                   onSave={(pass) => {
                                     handleSave(pass, "baseLoanAmount");
@@ -2164,7 +2164,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.loanType}</span>
+                                    <span>{loanScenario?.loanType?loanScenario?.loanType:"Conforming"}</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -2216,7 +2216,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario.loanTypeSpecial}</span>
+                                    <span>{loanScenario?.loanTypeSpecial?loanScenario?.loanTypeSpecial:"Home Possible"}</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -3889,7 +3889,7 @@ const Home_2 = () => {
                             </li>
                             <li>
                               <p>Lender Credit </p>
-                              <span>{loanScenario.lenderCredit}</span>
+                              <span>{loanScenario?.lenderCredit?loanScenario?.lenderCredit:0}</span>
                             </li>
                           </ul>
                         </div>

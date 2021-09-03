@@ -20,10 +20,8 @@ const AtlasLoanPage = () => {
     document.body.style.backgroundColor = "white";
 
     const contextData = new URLSearchParams(search).get("context");
-    const system = new URLSearchParams(search).get("signature");
-    
-    // const baseData = "eyJleGFtcGxlIjp0cnVlLCJkZWJ1Z1N0YXRlIjoid29ya2luZyIsImNvbnRleHQiOiJwZXJzb24iLCJhY2NvdW50Ijp7ImlkIjoxMjM0NTY3ODksImRvbWFpbiI6ImV4YW1wbGUiLCJvd25lciI6eyJuYW1lIjoiVG9tIE1pbmNoIiwiZW1haWwiOiJ0b20ubWluY2hAZXhhbXBsZS5jb20ifX0sInBlcnNvbiI6eyJpZCI6MTIzLCJmaXJzdE5hbWUiOiJNZWxpc3NhIiwibGFzdE5hbWUiOiJIYXJ0bWFuIiwiZW1haWxzIjpbeyJ2YWx1ZSI6Im0uaGFydG1hbkBleGFtcGxlLmNvbSIsInR5cGUiOiJob21lIiwic3RhdHVzIjoiTm90IFZhbGlkYXRlZCIsImlzUHJpbWFyeSI6MX1dLCJwaG9uZXMiOlt7InZhbHVlIjoiKDg4OCkgNTU1LTEyMzQiLCJub3JtYWxpemVkIjoiODg4NTU1MTIzNCIsInR5cGUiOiJtb2JpbGUiLCJzdGF0dXMiOiJOb3QgVmFsaWRhdGVkIiwiaXNQcmltYXJ5IjoxfV19LCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImouZG9lQGV4YW1wbGUuY29tIn19"
-    
+    // const system = new URLSearchParams(search).get("signature");
+        
     let base64ToString = Buffer.from(contextData, "base64").toString();
     const parseData = JSON.parse(base64ToString)
     
@@ -32,7 +30,7 @@ const AtlasLoanPage = () => {
     console.log("userId", parseData.user.id);
 
     // getData(params.personId);
-    // let system = "FollowUpBoss";
+    let system = "FollowUpBoss";
     getData(parseData.person.id, system);
   }, []);
 

@@ -115,8 +115,8 @@ const Hometable = (props) => {
     var endDate = Date.parse(date);
     var timeDiff = startDate - endDate;
     var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-
-    return daysDiff + " days ago";
+    return isNaN(daysDiff)? "":(daysDiff + " days ago");
+    // return daysDiff + " days ago";
   };
 
   let loanType = "";
