@@ -490,11 +490,12 @@ ul.pagination li.active {
 }
 
 .popupmain .popupbox{
-  width: 325px;
+  width: 290px;
   min-width: 100% !important;
 }
 .popUp {
-  margin-top: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
   position: absolute;
 }
 
