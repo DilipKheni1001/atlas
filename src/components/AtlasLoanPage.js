@@ -21,17 +21,14 @@ const AtlasLoanPage = () => {
 
     const contextData = new URLSearchParams(search).get("context");
     // const system = new URLSearchParams(search).get("signature");
-        
-    let base64ToString = Buffer.from(contextData, "base64").toString();
-    const parseData = JSON.parse(base64ToString)
+      if(contextData){
+        let base64ToString = Buffer.from(contextData, "base64").toString();
+        const parseData = JSON.parse(base64ToString)
+        let system = "FollowUpBoss";
+        getData(parseData.person.id, system);
+      }
     
-    console.log("context OBJ",parseData)
-    console.log("personId", parseData.person.id);
-    console.log("userId", parseData.user.id);
-
     // getData(params.personId);
-    let system = "FollowUpBoss";
-    getData(parseData.person.id, system);
   }, []);
 
   const getData = async (id, system) => {
