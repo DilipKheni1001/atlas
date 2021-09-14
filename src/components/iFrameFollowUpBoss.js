@@ -57,13 +57,13 @@ const AtlasLoanPage = () => {
   const handleClick = (loanId) => {
     const ids = { loanid: loanId, rateid: undefined };
     localStorage.setItem("ids", JSON.stringify(ids));
-    window.open("/home_2", "_blank");
+    window.open("/home", "_blank");
   };
 
   const handleRateClick = (rateId) => {
     const ids = { loanid: undefined, rateid: rateId };
     localStorage.setItem("ids", JSON.stringify(ids));
-    window.open("/home_2", "_blank");
+    window.open("/home", "_blank");
   };
 
   let loanType = "";

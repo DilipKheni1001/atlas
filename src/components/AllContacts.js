@@ -100,7 +100,7 @@ const Hometable = (props) => {
 
   const handleLoanPage = (loanId, rateId) => {
     history.push({
-      pathname: "/home_2",
+      pathname: "/home",
       state: { id: loanId, RId: rateId },
     });
   };

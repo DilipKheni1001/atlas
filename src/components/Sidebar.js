@@ -42,7 +42,7 @@ const Sidebar = () => {
 
               <NavLink
                 exact
-                to="/home_2"
+                to="/home"
                 activeClassName="active"
                 className="slide-img home"
               >
@@ -61,7 +61,7 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 exact
-                to="/home"
+                to="/allcontacts"
                 activeClassName="active"
                 className="slide-img users"
               >
@@ -69,7 +69,7 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 exact
-                to="/setting"
+                to="/settings"
                 activeClassName="active"
                 className="slide-img settings"
               >

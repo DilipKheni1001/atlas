@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import head_img from "../images/head-profile.jpg";
-import Hometable from "./Hometable";
+import Hometable from "./AllContacts";
 
 const Header = (props) => {
   return (
