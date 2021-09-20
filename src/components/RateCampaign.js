@@ -116,7 +116,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
 
     axios
       .post(
-        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        `https://atlas-admin.keystonefunding.com/api/ratecampaign/update`,
         formData
       )
       .then((res) => {
@@ -146,7 +146,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
 
     axios
       .post(
-        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        `https://atlas-admin.keystonefunding.com/api/ratecampaign/update`,
         formData
       )
       .then((res) => {
@@ -171,7 +171,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
 
     axios
       .post(
-        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        `https://atlas-admin.keystonefunding.com/api/ratecampaign/update`,
         formData
       )
       .then((res) => {
@@ -202,7 +202,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
 
     axios
       .post(
-        `https://atlas.keystonefunding.com/api/ratecampaign/update`,
+        `https://atlas-admin.keystonefunding.com/api/ratecampaign/update`,
         formData
       )
       .then((res) => {
@@ -251,7 +251,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
       };
       axios({
         method: "get",
-        url: "https://atlas.keystonefunding.com/api/ratecampaign/details",
+        url: "https://atlas-admin.keystonefunding.com/api/ratecampaign/details",
         params: result,
       }).then((res) => {
         if (res.status === 200) {
@@ -268,7 +268,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
           var contactId = { id: res.data.data.contactId };
           axios({
             method: "get",
-            url: "https://atlas.keystonefunding.com/api/contact/details",
+            url: "https://atlas-admin.keystonefunding.com/api/contact/details",
             params: contactId,
           }).then((res) => {
             if (res.status === 200) {
@@ -278,7 +278,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
           var loanId = { id: res.data.data.loanScenarioId };
           axios({
             method: "get",
-            url: "https://atlas.keystonefunding.com/api/loanscenario/details",
+            url: "https://atlas-admin.keystonefunding.com/api/loanscenario/details",
             params: loanId,
           }).then((res) => {
             if (res.status === 200) {

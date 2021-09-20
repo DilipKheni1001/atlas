@@ -808,9 +808,6 @@ const Home_2 = () => {
     { VA: [{ id: "IRRRL", value: "VA IRRRL" }] },
   ];
 
-  useEffect(() => {
-    console.log(DescriptorObject);
-  }, []);
 
   const currentLoanTypeOptions = ["Conventional", "FHA", "USDA", "VA", "Other"];
 
@@ -1122,7 +1119,7 @@ const Home_2 = () => {
 
       await axios({
         method: "get",
-        url: "https://atlas.keystonefunding.com/api/loanscenario/details",
+        url: "https://atlas-admin.keystonefunding.com/api/loanscenario/details",
         params: result,
       })
         .then((res) => {
@@ -1135,7 +1132,7 @@ const Home_2 = () => {
 
             return axios({
               method: "get",
-              url: "https://atlas.keystonefunding.com/api/contact/details",
+              url: "https://atlas-admin.keystonefunding.com/api/contact/details",
               params: contactId,
             });
           }
@@ -1150,7 +1147,7 @@ const Home_2 = () => {
 
           return axios({
             method: "get",
-            url: "https://atlas.keystonefunding.com/api/user/details",
+            url: "https://atlas-admin.keystonefunding.com/api/user/details",
             params: userId,
           });
         })
@@ -1183,7 +1180,7 @@ const Home_2 = () => {
 
     axios
       .post(
-        `https://atlas.keystonefunding.com/api/loanscenario/update`,
+        `https://atlas-admin.keystonefunding.com/api/loanscenario/update`,
         formData
       )
       .then((res) => {
@@ -1289,7 +1286,7 @@ const Home_2 = () => {
 
     axios
       .post(
-        `https://atlas.keystonefunding.com/api/loanscenario/update`,
+        `https://atlas-admin.keystonefunding.com/api/loanscenario/update`,
         formData
       )
       .then((res) => {
@@ -1322,7 +1319,7 @@ const Home_2 = () => {
     
     if(DeleteRateID){
       formData.append("id", DeleteRateID)
-        axios.post(`https://atlas.keystonefunding.com/api/ratecampaign/delete`
+        axios.post(`https://atlas-admin.keystonefunding.com/api/ratecampaign/delete`
         ,formData)
         .then((res) => {
           console.log("====> successfully deleted",DeleteRateID)
@@ -1341,7 +1338,7 @@ const Home_2 = () => {
       }
       else{
         formData.append("id", DeleteID)
-        axios.post(`https://atlas.keystonefunding.com/api/loanscenario/delete`
+        axios.post(`https://atlas-admin.keystonefunding.com/api/loanscenario/delete`
         ,formData)
         .then((res) => {
           console.log("----> successfully deleted",DeleteID)
@@ -1420,7 +1417,7 @@ const Home_2 = () => {
 
     axios
     .post(
-      `https://atlas.keystonefunding.com/api/loanscenario/create`,
+      `https://atlas-admin.keystonefunding.com/api/loanscenario/create`,
       formData
       ).then((res) => {
         setOpenLoanModal(false)
@@ -1451,7 +1448,7 @@ const Home_2 = () => {
     const loanId = { id: index };
     axios({
       method: "get",
-      url: "https://atlas.keystonefunding.com/api/loanscenario/details",
+      url: "https://atlas-admin.keystonefunding.com/api/loanscenario/details",
       params: loanId,
     }).then((res) => {
       if (res.status === 200) {
@@ -1475,7 +1472,7 @@ const Home_2 = () => {
     const rId = {id:rateId[0]}
     axios({
       method:"get",
-      url:"https://atlas.keystonefunding.com/api/ratecampaign/details",
+      url:"https://atlas-admin.keystonefunding.com/api/ratecampaign/details",
       params:rId
     }).then(res => {
       setRateLoanScenarioId(res.data.data.loanScenarioId)
@@ -1857,10 +1854,20 @@ const Home_2 = () => {
                     </Card.Header>
                     <Accordion.Collapse eventKey="2">
                       <Card.Body>
-                        <div className="pro-detail-text new-pro">
-                          <h3>Some Borrower App</h3>
-                          <p>This campain is...</p>
-                        </div>
+                        {contactDetails?.scenarioCompare?.map((data, index) => {
+                          return (
+                            <div className="pro-detail-text new-pro" key={index}>
+                              <h3>{data.displayName}</h3>
+                            </div>
+                          )
+                        })}
+                        {contactDetails?.preApprovalTool?.map((data, index) => {
+                            return(
+                              <div className="pro-detail-text new-pro" key={index}>
+                              <h3>{data.displayName}</h3>
+                            </div>
+                            )
+                          })}
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>

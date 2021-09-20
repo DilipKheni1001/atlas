@@ -22,7 +22,7 @@ const Setting = () => {
     const userId = { id: 1 };
     axios({
       method: "get",
-      url: "https://atlas.keystonefunding.com/api/user/details",
+      url: "https://atlas-admin.keystonefunding.com/api/user/details",
       params: userId,
     })
       .then((res) => {
@@ -101,7 +101,7 @@ const Setting = () => {
       formData.append("id", user.id);
 
       axios
-        .post("https://atlas.keystonefunding.com/api/user/update", formData)
+        .post("https://atlas-admin.keystonefunding.com/api/user/update", formData)
         .then((res) => {
           setErrorMessage("");
           setFileSizeError(false);

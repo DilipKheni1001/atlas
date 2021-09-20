@@ -43,7 +43,7 @@ const Hometable = (props) => {
 
       const data = await axios({
         method: "get",
-        url: "https://atlas.keystonefunding.com/api/contact/list",
+        url: "https://atlas-admin.keystonefunding.com/api/contact/list",
         params: result,
       }).then((res) => {
         if (res.status === 200) {
@@ -115,7 +115,7 @@ const Hometable = (props) => {
     var endDate = Date.parse(date);
     var timeDiff = startDate - endDate;
     var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    return isNaN(daysDiff)? "":(daysDiff + " days ago");
+    return isNaN(daysDiff) ? "" : daysDiff + " days ago";
     // return daysDiff + " days ago";
   };
 
@@ -303,7 +303,7 @@ const Hometable = (props) => {
                   <>
                     <tr key={index}>
                       <td>
-                        <img className="users-img" src={element.pictureURL} />
+                        <img className="users-img" src={element?.pictureURL} />
                         &nbsp;&nbsp;
                         {element?.firstName} {element?.lastName}
                       </td>
@@ -536,11 +536,26 @@ const Hometable = (props) => {
                       </td>
                       <td>
                         <div className="loan-td">
-                          <div className="apps-box">
-                            <div className="box-l">
-                              Stone HP 30 100k Cashout
-                            </div>
-                          </div>
+                          {element?.scenarioCompare?.map((ele, index) => {
+                            return (
+                              <div>
+                                <div className="apps-box" key={index}>
+                                  <div className="box-l">{ele.displayName}</div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                          {element?.preApprovalTool?.map((ele, index) => {
+                            return (
+                              <div>
+                                <div className="apps-box" key={index}>
+                                  <div className="box-l">
+                                    {ele.displayName}
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
                       </td>
                     </tr>

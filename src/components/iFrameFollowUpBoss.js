@@ -21,20 +21,20 @@ const AtlasLoanPage = () => {
 
     const contextData = new URLSearchParams(search).get("context");
     // const system = new URLSearchParams(search).get("signature");
-      if(contextData){
-        let base64ToString = Buffer.from(contextData, "base64").toString();
-        const parseData = JSON.parse(base64ToString)
-        let system = "FollowUpBoss";
-        getData(parseData.person.id, system);
-      }
-    
+    if (contextData) {
+      let base64ToString = Buffer.from(contextData, "base64").toString();
+      const parseData = JSON.parse(base64ToString);
+      let system = "FollowUpBoss";
+      getData(parseData.person.id, system);
+    }
+
     // getData(params.personId);
   }, []);
 
   const getData = async (id, system) => {
     await axios
       .get(
-        `https://atlas.keystonefunding.com/api/contact/details-by-sales-sytem?salesSystemId=${id}&salesSystem=${system}`
+        `https://atlas-admin.keystonefunding.com/api/contact/details-by-sales-sytem?salesSystemId=${id}&salesSystem=${system}`
       )
       .then((res) => {
         console.log("res", res.data.data);
@@ -266,8 +266,8 @@ const AtlasLoanPage = () => {
                         <div className="col-md-6 col-6">
                           <p>Rate</p>
                           <p>Upfront costs</p>
-                            <p>Mo. payment</p>
-                            <p>Cash to Close</p>
+                          <p>Mo. payment</p>
+                          <p>Cash to Close</p>
                         </div>
                         <div className="col-md-6 col-6 values">
                           <h4>{popUpData?.ele?.interestRate}%</h4>
@@ -362,9 +362,24 @@ const AtlasLoanPage = () => {
               <span>Borrower Apps</span>
             </div>
             <div className="loan-td">
-              <div className="apps-box">
-                <div className="box-l">Stone HP 30 100k Cashout</div>
-              </div>
+              {contactDetails?.scenarioCompare?.map((ele, index) => {
+                return (
+                  <div>
+                    <div className="apps-box" key={index}>
+                      <div className="box-l">{ele.displayName}</div>
+                    </div>
+                  </div>
+                );
+              })}
+              {contactDetails?.preApprovalTool?.map((ele, index) => {
+                return (
+                  <div>
+                    <div className="apps-box" key={index}>
+                      <div className="box-l">{ele.displayName}</div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
