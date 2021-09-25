@@ -11,7 +11,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
   const [isEqual, setIsEqual] = useState("");
   const [selectedValue, setSelectedValue] = useState();
   const [selected, setSelected] = useState([]);
-  const [defaultDays, setDefaultDays] = useState(['Mon','Tue'])
+  const [defaultDays, setDefaultDays] = useState(['N/A'])
   const [loanScenarioContactId, setLoanScenarioContactId] = useState();
   const [loanScenariosName, setLoanScenariosName] = useState("");
   const [rateCampaign, setRateCampaign] = useState({
@@ -383,7 +383,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                     }
                   >
                     <div>
-                      <span>{loanScenariosName?loanScenariosName:"Default" }</span>
+                      <span>{loanScenariosName?loanScenariosName:"N/A" }</span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
                   </div>
@@ -430,7 +430,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                     }
                   >
                     <div>
-                      <span>{rateCampaign.additionalLoanProducts?rateCampaign.additionalLoanProducts:"10-yr Fixed"}</span>
+                      <span>{rateCampaign.additionalLoanProducts?rateCampaign.additionalLoanProducts:"N/A"}</span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
                   </div>
@@ -461,7 +461,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <EdiText
                     viewContainerClassName="view-wrapper"
                     type="text"
-                    value={rateCampaign.additionalEmails?rateCampaign.additionalEmails:"test@atlas.com"}
+                    value={rateCampaign.additionalEmails?rateCampaign.additionalEmails:"N/A"}
                     tabIndex={1}
                     onSave={(pass) => {
                       handleSave(pass, "additionalEmails");
@@ -546,7 +546,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                     onClick={() => onClick("frequency", rateCampaign.frequency)}
                   >
                     <div>
-                      <span>{rateCampaign.frequency?rateCampaign.frequency:"Weekly"}</span>
+                      <span>{rateCampaign.frequency?rateCampaign.frequency:"N/A"}</span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
                   </div>

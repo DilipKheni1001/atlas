@@ -1318,9 +1318,20 @@ select::-ms-expand {
   margin-right: 0;
 }
 .inputBox {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-size: 16px;
+  display: flex;
 }
+
+.inputBox label{
+  width: 45%;
+  margin-top: 15px;
+}
+
+.css-2b097c-container {
+  width: 55%;
+}
+
 .inputBox input {
   width: 100%;
   box-sizing: border-box;
@@ -1342,6 +1353,7 @@ select::-ms-expand {
 .create-loan-scenario {
   padding: 10px;
   width: 550px;
+  height: 500px;
 }
 .delete-loan-scenario {
   padding: 10px;
@@ -1369,7 +1381,7 @@ select::-ms-expand {
 .create-loan-scenario .modal-footer {
   border: none;
   padding: 0px;
-  margin-top: 15px;
+  margin-top: 30px;
 }
 
 .delete-loan-scenario .modal-footer {
