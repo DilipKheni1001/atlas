@@ -1429,7 +1429,7 @@ button[editext="edit-button"] {
   color: #fff;
   height: 50px;
   padding: 0px 20px;
-  border-radius: 50px;
+  border-radius: 20px;
   font-size: 18px;
   border: none;
 }
@@ -1447,7 +1447,7 @@ button[editext="edit-button"] {
   color: #fff;
   height: 50px;
   padding: 0px 20px;
-  border-radius: 50px;
+  border-radius: 20px;
   font-size: 18px;
   border: none;
 }
@@ -1650,6 +1650,12 @@ height: 16px;
   border-top: 0;
   border-right: 5px solid transparent;
 }
+@media only screen and (min-width: 1351px) and (max-width: 1440px) {
+  .rate-text h1 {
+    font-size: 30px !important; 
+  }
+}
+
 @media (max-width: 1350px) {
 
   

@@ -753,6 +753,7 @@ const Home_2 = () => {
   const loanPurposeOptions = ["Purchase", "Refinance"];
 
   const loanTypeSpecialOptions = [
+    "N/A",
     "Home Possible",
     "HomeReady",
     "HomeReady/Possible",
@@ -811,9 +812,10 @@ const Home_2 = () => {
 
   const currentLoanTypeOptions = ["Conventional", "FHA", "USDA", "VA", "Other"];
 
-  const mortgageInsurancePremiumTypeOptions = ["Monthly", "Single Premium"];
+  const mortgageInsurancePremiumTypeOptions = ["N/A","Monthly", "Single Premium"];
 
   const secondMortgageRequestOptions = [
+    "N/A",
     "Payoff existing 2nd mortgage",
     "Re-subordinate existing 2nd mortgage",
     "New 2nd mortgage",
@@ -1097,7 +1099,7 @@ const Home_2 = () => {
   }, []);
 
 
-  async function getData() {
+  async function getData(LID) {
     try {
       // let result = {
       //   id: location?.state?.id? location?.state?.id : 1 ,
@@ -1106,15 +1108,18 @@ const Home_2 = () => {
       let result = {
         id:""
       }
-
-      if(location?.state?.id === undefined){
-        if(parseIDs?.rateid ===undefined && parseIDs?.loanid !=="" && parseIDs?.loanid !== undefined){
-          result.id = parseIDs?.loanid
-        }else{
-        result.id = 1
-        }
+      if(LID !== "" && LID !== null && LID !== undefined){
+        result.id= LID
       }else{
-        result.id = location?.state?.id
+        if(location?.state?.id === undefined){
+          if(parseIDs?.rateid ===undefined && parseIDs?.loanid !=="" && parseIDs?.loanid !== undefined){
+            result.id = parseIDs?.loanid
+          }else{
+            result.id = 1
+          }
+        }else{
+          result.id = location?.state?.id
+        }
       }
 
       await axios({
@@ -1177,6 +1182,20 @@ const Home_2 = () => {
     var formData = new FormData();
     formData.append("id", loanScenario.id);
     formData.append(field, val);
+
+    if(val === "N/A"){
+      formData.append(field,null);
+    }else{
+      formData.append(field, val)
+    }
+
+    // console.log("keys", formData.get(field))
+
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
+
+
 
     axios
       .post(
@@ -1427,7 +1446,7 @@ const Home_2 = () => {
         setLoanTypeSelect("")
         console.log("Created...........", res)
         console.log(res.data)
-        getData()
+        getData(res.data.id)
       }).catch((e) => {
         console.log(e)
       })
@@ -1496,7 +1515,7 @@ const Home_2 = () => {
       {/* create modal */}
       <Modal open={openLoanModal} onClose={onCloseLoanModal}>
         <div className="create-loan-scenario">
-          <ModalTitle>Loan Scenario</ModalTitle>
+          <ModalTitle>New Loan Scenario</ModalTitle>
           <ModalBody>
               <div className="inputBox loanProduct" style={{ width: "100%" }}>
                 <label>Loan Product</label>
@@ -2226,7 +2245,7 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario?.loanTypeSpecial?loanScenario?.loanTypeSpecial:"N/A"}</span>
+                                    <span>{loanScenario?.loanTypeSpecial !== "null" ? loanScenario?.loanTypeSpecial : "N/A"}</span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -2458,7 +2477,7 @@ const Home_2 = () => {
                                   <div>
                                     <span>
                                       {
-                                        loanScenario?.mortgageInsurancePremiumType?loanScenario?.mortgageInsurancePremiumType:"N/A"
+                                        loanScenario?.mortgageInsurancePremiumType !== "null" ?loanScenario?.mortgageInsurancePremiumType : "N/A"
                                       }
                                     </span>
                                     <button className="edit-arrow1 icon-btn1">
@@ -2520,7 +2539,7 @@ const Home_2 = () => {
                                 >
                                   <div>
                                     <span>
-                                      {loanScenario?.secondMortgageRequest?loanScenario?.secondMortgageRequest:"N/A"}
+                                      {loanScenario?.secondMortgageRequest !== "null" ? loanScenario?.secondMortgageRequest : "N/A"}
                                     </span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;

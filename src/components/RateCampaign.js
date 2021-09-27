@@ -588,7 +588,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                     }
                   >
                     <div>
-                      <span>{console.log(selected)}
+                      <span>
                         {selected.length !==0?selected
                           .map((item) => {
                             return item.label;
