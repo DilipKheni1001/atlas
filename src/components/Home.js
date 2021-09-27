@@ -2245,7 +2245,9 @@ const Home_2 = () => {
                                   }
                                 >
                                   <div>
-                                    <span>{loanScenario?.loanTypeSpecial !== "null" ? loanScenario?.loanTypeSpecial : "N/A"}</span>
+                                    <span>
+                                      { loanScenario?.loanTypeSpecial? loanScenario?.loanTypeSpecial === "null" ? "N/A" : loanScenario?.loanTypeSpecial : "N/A"}
+                                    </span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
                                     </button>
@@ -2477,8 +2479,8 @@ const Home_2 = () => {
                                   <div>
                                     <span>
                                       {
-                                        loanScenario?.mortgageInsurancePremiumType !== "null" ?loanScenario?.mortgageInsurancePremiumType : "N/A"
-                                      }
+                                      loanScenario?.mortgageInsurancePremiumType ?  loanScenario?.mortgageInsurancePremiumType === "null" ? "N/A" : loanScenario?.mortgageInsurancePremiumType : "N/A"
+                                    }
                                     </span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
@@ -2539,7 +2541,7 @@ const Home_2 = () => {
                                 >
                                   <div>
                                     <span>
-                                      {loanScenario?.secondMortgageRequest !== "null" ? loanScenario?.secondMortgageRequest : "N/A"}
+                                      {loanScenario?.secondMortgageRequest ?  loanScenario?.secondMortgageRequest === "null" ? "N/A" : loanScenario?.secondMortgageRequest : "N/A"}
                                     </span>
                                     <button className="edit-arrow1 icon-btn1">
                                       &#9998;
