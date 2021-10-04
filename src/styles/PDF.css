@@ -38,12 +38,21 @@ body {
     width: 50%;
 }
 table {
-    border-collapse: collapse !important;
+    /* border-collapse: collapse !important; */
     width: 534px;
     
     /* table-layout: fixed; */
     /* margin: 0px 50px; */
 }
+
+
+img{
+    width: auto;
+}
+img.pdfLogo{
+    max-width: 100%;
+}
+
 .border-left-0{
     border-left: 0px !important;
 }

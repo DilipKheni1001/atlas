@@ -55,36 +55,7 @@ const Home_2 = () => {
   const exportPDFWithMethod = () => {
     setIsLoading(true);
     var doc = new jsPDF("p", "pt", "a4");
-    const htmlText = renderToString(
-      <Home2_PDF
-        totalHOIPremium={totalHOIPremium}
-        totalPrepaidInterest={totalPrepaidInterest}
-        totalPrepaidTaxes={totalPrepaidTaxes}
-        totalHOI={totalHOI}
-        totalPropertyTaxes={totalPropertyTaxes}
-        sale_Price_OR_Payoffs={sale_Price_OR_Payoffs}
-        secondMortgage={secondMortgage}
-        estimatedEscrow={estimatedEscrow}
-        principalInterest={principalInterest}
-        totalLoanAmount={totalLoanAmount}
-        Atlas_Loan_Scenario={loanScenario}
-        estimatedCashToClose={estimatedCashToClose}
-        governmentFundingFee={governmentFundingFee}
-        contactDetails={contactDetails}
-        blockA={blockA}
-        blockB={blockB}
-        blockC={blockC}
-        blockD={blockD}
-        blockE={blockE}
-        blockF={blockF}
-        blockG={blockG}
-        blockH={blockH}
-        blockI={blockI}
-        blockJ={blockJ}
-        user={user}
-      />
-    )
-    console.log("html", htmlText)
+    
     doc.html(
       renderToString(
         <Home2_PDF

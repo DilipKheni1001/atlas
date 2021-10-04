@@ -41,7 +41,7 @@ const Home2_PDF = ({
                     <tbody>
                         <tr className="border-bottom">
                             <td className="leftCol border-left-0" style={{borderBottom:"0px",borderTop:"0px",borderLeft:"0px",width:"200px"}}>
-                                <img src={logo_img} style={{"padding":"5px 5px 5px 0px"}} />
+                                <img className="pdfLogo" src={logo_img} style={{"padding":"5px 5px 5px 0px"}} />
                             </td>
                             <td className="rightCol border-left-0" style={{"lineHeight": "20px",width:"334px",borderBottom:"0px"}}>
                             <span className="line-height"> Prepared For: {contactDetails.firstName + " " + contactDetails.lastName}<br/></span>
@@ -771,8 +771,9 @@ const Home2_PDF = ({
                              
                                <span className="border-bottom text-bold">Both the prepaid interest and the </span> 
                                <span className="border-bottom text-bold">amount required for the escrow account will be adjusted to match your </span> 
-                               <span className="border-bottom text-bold">specific requirements once the loan is locked; a settlement date is finalized;</span> 
-                               <span className="border-bottom text-bold"> and escrow amount are verified.</span></td>
+                               <span className="border-bottom text-bold">specific requirements once the loan is locked, a settlement date is finalized;</span> 
+                               <span className="border-bottom text-bold"> and escrow amount are verified.</span>
+                               </td>
                     </tr>
                 </tbody>
             </table>
