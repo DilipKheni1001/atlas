@@ -128,7 +128,7 @@ const Setting = () => {
               <i className="fas fa-cog fa-2x settingIcon"></i>
               <h3>Settings</h3>
               <div className="settingBody">
-                <h6>
+                <h6 style={{lineHeight:"1.4"}}>
                   Most changes to settings need to be made by the System
                   Administrator.
                 </h6>

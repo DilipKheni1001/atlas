@@ -28,6 +28,7 @@ import Header from "./Header";
 import RateCampaign from "./RateCampaign";
 import Select from "react-select";
 import {useLocation, useHistory} from 'react-router-dom'
+import moment from "moment";
 
 const Home_2 = () => {
 
@@ -203,6 +204,7 @@ const Home_2 = () => {
   const [user, setUser] = useState({});
   const [loanTypeSelect, setLoanTypeSelect] = useState("");
   const [loanProductSelect, setLoanProductSelect] = useState("")
+  const [rateLoanIdSelect, setRateLoanIdSelect] = useState("")
   const [loanTypeOp, setLoanTypeOp] = useState({});
 
   const [specialProgramSelect, setSpecialProgramSelect] = useState("");
@@ -321,6 +323,7 @@ const Home_2 = () => {
 
   const [open, setOpen] = useState(false);
   const [openLoanModal, setOpenLoanModal] = useState(false);
+  const [openRateModal, setOpenRateModal] = useState(false);
   const [deleteLoanModal, setDeleteModal] = useState(false)
   const [customMessage, setCustomMessage] = useState("")
   const [modalTitle, setModalTitle]= useState("")
@@ -352,6 +355,24 @@ const Home_2 = () => {
     { label: "7/1 ARM", value: "7-1A" },
     { label: "10/1 ARM", value: "10-1A" },
   ];
+
+  const [RateLoanOptions, setRateLoanOptions] = useState()
+useEffect(() => {
+  // console.log("sss",contactDetails)
+  if(Object.values(contactDetails)!== "" || Object.values(contactDetails)!== null){
+    const newData = contactDetails?.loanScenarios?.map((l, index) => {
+        return {label:l.scenarioName, value:l.id}
+      })
+    setRateLoanOptions(newData)
+  }
+},[contactDetails])
+
+// useEffect(() => {
+//   console.log("options", RateLoanOptions)
+// },[RateLoanOptions])
+
+
+
 
   const occupancyOptions = ["Owner-Occupied", "Second Home", "Investment"];
 
@@ -1257,6 +1278,11 @@ const Home_2 = () => {
     setLoanProductSelect(loanProductSelect)
   }
 
+  const handleRateLoanIdSelect = (rateLoanId) => {
+    console.log(rateLoanId)
+    setRateLoanIdSelect(rateLoanId)
+  }
+
   const handleSpecialProgramSelect = (specialProgramSelect) => {
     console.log(specialProgramSelect);
     setSpecialProgramSelect(specialProgramSelect);
@@ -1291,8 +1317,14 @@ const Home_2 = () => {
     setOpenLoanModal(true);
   };
 
+  const onOpenRateModal = () => {
+    setOpenRateModal(true)
+  }
+
   const onCloseModal = () => setOpen(false);
   const onCloseLoanModal = () => setOpenLoanModal(false);
+  const onCloseRateModal = () => setOpenRateModal(false);
+
   const onCloseDeleteLoanModal = () => {
     setDeleteModal(false)
     setDeleteID("")
@@ -1354,8 +1386,8 @@ const Home_2 = () => {
         axios.post(`https://atlas-admin.keystonefunding.com/api/ratecampaign/delete`
         ,formData)
         .then((res) => {
-          console.log("====> successfully deleted",DeleteRateID)
-          console.log("====> res",res)
+          // console.log("====> successfully deleted",DeleteRateID)
+          // console.log("====> res",res)
           setDeleteRateID("")
           setDeleteModal(false)
           getData()
@@ -1373,8 +1405,8 @@ const Home_2 = () => {
         axios.post(`https://atlas-admin.keystonefunding.com/api/loanscenario/delete`
         ,formData)
         .then((res) => {
-          console.log("----> successfully deleted",DeleteID)
-          console.log("----> res",res)
+          // console.log("----> successfully deleted",DeleteID)
+          // console.log("----> res",res)
           setDeleteModal(false)
           setDeleteID("")
           if(location?.state?.id === DeleteID){
@@ -1465,6 +1497,50 @@ const Home_2 = () => {
       })
   };
 
+
+  const handleRateModalSubmit = () => {
+    console.log("created.......", rateLoanIdSelect.value, contactDetails.id)
+
+    var formData = new FormData()
+    const CurrentDate = new Date()
+
+    const day = moment(CurrentDate).format('dddd')
+    formData.append("contactId", contactDetails.id)
+    formData.append("loanScenarioId", rateLoanIdSelect.value)
+
+    if(day === "Sunday" || day === "Monday" || day === "Tuesday" ||day === "Wednesday" ||day === "Thursday"){
+      const startDate = moment(CurrentDate).add(1,'days').format('YYYY-MM-DD')
+      formData.append("startDate", startDate)
+    }
+    else if(day === "Friday"){
+      const startDate = moment(CurrentDate).add(3,'days').format('YYYY-MM-DD')
+      formData.append("startDate", startDate)
+    }
+    else if(day === "Saturday"){
+      const startDate = moment(CurrentDate).add(2,'days').format('YYYY-MM-DD')
+      formData.append("startDate", startDate)
+    }
+
+    formData.append("frequency", "Daily (M-F)")
+    formData.append("selectedDays", day)
+
+    axios
+    .post(
+      `https://atlas-admin.keystonefunding.com/api/ratecampaign/create`,
+      formData
+      ).then((res) => {
+        console.log("Created...........", res.data.id)
+        // console.log(res.data)
+        setOpenRateModal(false)
+        setRateLoanIdSelect("")
+        getData()
+            showRateCampain(res.data.id)
+      }).catch((e) => {
+        console.log(e)
+      })    
+
+  }
+
   const numberWithCommas = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -1525,7 +1601,7 @@ const Home_2 = () => {
       {/* <Header value={handleProps} /> */}
       <ToastContainer />
 
-      {/* create modal */}
+      {/* create loan modal */}
       <Modal open={openLoanModal} onClose={onCloseLoanModal}>
         <div className="create-loan-scenario">
           <ModalTitle>New Loan Scenario</ModalTitle>
@@ -1581,6 +1657,34 @@ const Home_2 = () => {
 
             <button className="save" onClick={handleLoanModalSubmit}>
               Create New Scenario
+            </button>
+          </ModalFooter>
+        </div>
+      </Modal>
+
+      {/* create rateCampaign modal */}
+      <Modal open={openRateModal} onClose={onCloseRateModal}>
+        <div className="create-loan-scenario">
+          <ModalTitle>New Rate Campaign</ModalTitle>
+          <ModalBody>
+              <div className="inputBox loanProduct" style={{ width: "100%" }}>
+                <label>Loan Scenario</label>
+                <Select
+                maxMenuHeight={550}
+                  value={rateLoanIdSelect}
+                  onChange={handleRateLoanIdSelect}
+                  options={RateLoanOptions}
+                  placeholder="Loan Scenario"
+                />
+              </div>
+          </ModalBody>
+          <ModalFooter>
+            <button className="cancel" onClick={onCloseRateModal}>
+              Cancel
+            </button>
+
+            <button className="save" onClick={handleRateModalSubmit}>
+            Create New Campaign
             </button>
           </ModalFooter>
         </div>
@@ -1768,6 +1872,7 @@ const Home_2 = () => {
                         </div>
                         <span>
                           <svg
+                            onClick={onOpenRateModal}
                             width="20"
                             height="20"
                             viewBox="0 0 20 20"

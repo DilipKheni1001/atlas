@@ -11,7 +11,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
   const [isEqual, setIsEqual] = useState("");
   const [selectedValue, setSelectedValue] = useState();
   const [selected, setSelected] = useState([]);
-  const [defaultDays, setDefaultDays] = useState(['N/A'])
+  const [defaultDays, setDefaultDays] = useState(["N/A"]);
   const [loanScenarioContactId, setLoanScenarioContactId] = useState();
   const [loanScenariosName, setLoanScenariosName] = useState("");
   const [rateCampaign, setRateCampaign] = useState({
@@ -43,11 +43,12 @@ const RateCampaign = ({ loanScenario, RateId }) => {
   };
 
   const [ScenariosName, setScenariosName] = useState([]);
+  const [LoanID,setLoanID] = useState()
   const newName = Object.values(ScenariosName);
   const scenarioOptions = newName.map((item) => {
     return { label: item.scenarioName, value: item.id };
   });
-  const defaultName = loanScenariosName?loanScenariosName:"Default";
+  const defaultName = loanScenariosName ? loanScenariosName : "Default";
 
   const frequencyOption = ["Daily (M-F)", "Weekly", "Bi-Weekly", "Monthly"];
 
@@ -241,55 +242,80 @@ const RateCampaign = ({ loanScenario, RateId }) => {
   const prevTdate = usePrevious(tDateState);
 
   useEffect(() => {
-    getRateCampaignData(RateId);
-  }, [rateCampaign.loanScenarioId, RateId]);
+    if (RateId !== "" || RateId !== null) {
+      getRateCampaignData(RateId);
+    }
+  }, [rateCampaign?.loanScenarioId, RateId]);
 
-  function getRateCampaignData(RateId) {
+  async function getRateCampaignData(RateId) {
     try {
       var result = {
         id: RateId,
       };
-      axios({
+      await axios({
         method: "get",
         url: "https://atlas-admin.keystonefunding.com/api/ratecampaign/details",
         params: result,
-      }).then((res) => {
-        if (res.status === 200) {
-          // console.log(res.data.data);
-          let newArray = res.data.data.selectedDays.split(";");
-          let newData = newArray.map((item) => {
-            return { label: item.substring(0, 3), value: item };
-          });
-          // console.log(newData)
-          setSelected(newData);
-          setDateState(new Date(res.data.data.startDate));
-          setTDateState(new Date(res.data.data.terminationDate));
-          setRateCampaign(res.data.data);
-          var contactId = { id: res.data.data.contactId };
-          axios({
-            method: "get",
-            url: "https://atlas-admin.keystonefunding.com/api/contact/details",
-            params: contactId,
-          }).then((res) => {
-            if (res.status === 200) {
-              setScenariosName(res.data.data.loanScenarios);
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            // console.log(res.data.data.selectedDays);
+            let newData;
+            if (
+              res.data?.data?.selectedDays !== null ||
+              res.data?.data?.selectedDays !== ""
+            ) {
+              let newArray = res.data.data?.selectedDays?.split(";");
+              newData = newArray?.map((item) => {
+                return { label: item.substring(0, 3), value: item };
+              });
             }
-          });
-          var loanId = { id: res.data.data.loanScenarioId };
-          axios({
-            method: "get",
-            url: "https://atlas-admin.keystonefunding.com/api/loanscenario/details",
-            params: loanId,
-          }).then((res) => {
-            if (res.status === 200) {
-              setLoanScenarioContactId(res.data.data[0].contactId);
-              setLoanScenariosName(res.data.data[0].scenarioName);
-            }
-          });
-        }
-      });
+            // console.log(newData)
+            setSelected(newData);
+            setDateState(new Date(res.data?.data?.startDate));
+            setTDateState(new Date(res.data?.data?.terminationDate));
+            setRateCampaign(res.data?.data);
+            var contactId = { id: res.data?.data?.contactId };
+            setLoanID(res.data.data.loanScenarioId)
+            // var loanId = { id: res.data?.data?.loanScenarioId };
+            return axios({
+              method: "get",
+              url: "https://atlas-admin.keystonefunding.com/api/contact/details",
+              params: contactId,
+            });
+          }
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            // console.log("loan", res.data.data.loanScenarios)
+            setScenariosName(res.data?.data?.loanScenarios);
+          }
+        });
+      
     } catch (error) {}
   }
+
+useEffect(() => {
+  if(LoanID){
+    let loanId = {
+      id:LoanID
+    }
+    axios({
+      method: "get",
+      url: "https://atlas-admin.keystonefunding.com/api/loanscenario/details",
+      params: loanId,
+    }).then((res) => {
+      if (res.status === 200) {
+        console.log("loan", res.data.data[0]);
+        setLoanScenarioContactId(res.data?.data[0].contactId);
+        setLoanScenariosName(res.data?.data[0].scenarioName);
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+},[LoanID])
 
   return (
     <div className="stone">
@@ -308,12 +334,12 @@ const RateCampaign = ({ loanScenario, RateId }) => {
               <p>Campaign Status</p>
               <h1
                 style={
-                  rateCampaign.campaignStatus === "Unsubscribed"
+                  rateCampaign?.campaignStatus === "Unsubscribed"
                     ? { fontSize: "30px" }
                     : {}
                 }
               >
-                {rateCampaign.campaignStatus}
+                {rateCampaign?.campaignStatus}
               </h1>
             </div>
           </div>
@@ -326,7 +352,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
           <div className="rate-box">
             <div className="rate-text">
               <p>Emails Sent</p>
-              <h1>{rateCampaign.sentCampaignItem.length}</h1>
+              <h1>{rateCampaign?.sentCampaignItem.length}</h1>
             </div>
           </div>
           <div className="rate-box">
@@ -346,7 +372,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
               </li>
               <li>
                 <p>Loan Scenario</p>
-                {loanScenarioContactId === rateCampaign.contactId &&
+                {loanScenarioContactId === rateCampaign?.contactId &&
                 isEqual === "loanScenarioId" ? (
                   <div className="dropdown-main">
                     <div id="wrap">
@@ -379,11 +405,13 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <div
                     className="main-div w100"
                     onClick={() =>
-                      onClick("loanScenarioId", rateCampaign.loanScenarioId)
+                      onClick("loanScenarioId", rateCampaign?.loanScenarioId)
                     }
                   >
                     <div>
-                      <span>{loanScenariosName?loanScenariosName:"N/A" }</span>
+                      <span>
+                        {loanScenariosName ? loanScenariosName : "N/A"}
+                      </span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
                   </div>
@@ -398,7 +426,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                         className="cust-select"
                         options={additionalLoanProductOptions}
                         onChange={onSelect}
-                        value={rateCampaign.additionalLoanProducts}
+                        value={rateCampaign?.additionalLoanProducts}
                         placeholder="Select an option"
                       />
                       <div className="btn-div">
@@ -425,12 +453,16 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                     onClick={() =>
                       onClick(
                         "additionalLoanProducts",
-                        rateCampaign.additionalLoanProducts
+                        rateCampaign?.additionalLoanProducts
                       )
                     }
                   >
                     <div>
-                      <span>{rateCampaign.additionalLoanProducts?rateCampaign.additionalLoanProducts:"N/A"}</span>
+                      <span>
+                        {rateCampaign?.additionalLoanProducts
+                          ? rateCampaign?.additionalLoanProducts
+                          : "N/A"}
+                      </span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
                   </div>
@@ -442,7 +474,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <label className="lab-check">
                     <input
                       type="checkbox"
-                      checked={rateCampaign.isAppButtonDisplayed}
+                      checked={rateCampaign?.isAppButtonDisplayed}
                       onChange={(pass) => {
                         if (pass.target.checked) {
                           handleSave(1, "isAppButtonDisplayed");
@@ -461,7 +493,11 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <EdiText
                     viewContainerClassName="view-wrapper"
                     type="text"
-                    value={rateCampaign.additionalEmails?rateCampaign.additionalEmails:"N/A"}
+                    value={
+                      rateCampaign?.additionalEmails
+                        ? rateCampaign?.additionalEmails
+                        : "N/A"
+                    }
                     tabIndex={1}
                     onSave={(pass) => {
                       handleSave(pass, "additionalEmails");
@@ -503,7 +539,9 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                 ) : (
                   <div
                     className="main-div w100"
-                    onClick={() => onClick("startDate", rateCampaign.startDate)}
+                    onClick={() =>
+                      onClick("startDate", rateCampaign?.startDate)
+                    }
                   >
                     <div>
                       <span>{reformatDate(dateState)}</span>
@@ -521,7 +559,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                         className="cust-select"
                         options={frequencyOption}
                         onChange={onSelect}
-                        value={rateCampaign.frequency}
+                        value={rateCampaign?.frequency}
                         placeholder="Select an option"
                       />
                       <div className="btn-div">
@@ -543,10 +581,16 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                 ) : (
                   <div
                     className="main-div w100"
-                    onClick={() => onClick("frequency", rateCampaign.frequency)}
+                    onClick={() =>
+                      onClick("frequency", rateCampaign?.frequency)
+                    }
                   >
                     <div>
-                      <span>{rateCampaign.frequency?rateCampaign.frequency:"N/A"}</span>
+                      <span>
+                        {rateCampaign?.frequency
+                          ? rateCampaign?.frequency
+                          : "N/A"}
+                      </span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
                   </div>
@@ -584,16 +628,22 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <div
                     className="main-div w100"
                     onClick={() =>
-                      onClick("selectedDays", rateCampaign.selectedDays)
+                      onClick("selectedDays", rateCampaign?.selectedDays)
                     }
                   >
                     <div>
                       <span>
-                        {selected.length !==0?selected
-                          .map((item) => {
-                            return item.label;
-                          })
-                          .join(", "):defaultDays.map(item =>{return item}).join(", ")}
+                        {selected?.length !== 0
+                          ? selected
+                              ?.map((item) => {
+                                return item.label;
+                              })
+                              .join(", ")
+                          : defaultDays
+                              ?.map((item) => {
+                                return item;
+                              })
+                              .join(", ")}
                       </span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
@@ -606,7 +656,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <label className="lab-check">
                     <input
                       type="checkbox"
-                      checked={rateCampaign.isPaused}
+                      checked={rateCampaign?.isPaused}
                       onChange={(pass) => {
                         if (pass.target.checked) {
                           handleSave(1, "isPaused");
@@ -625,7 +675,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <label className="lab-check">
                     <input
                       type="checkbox"
-                      checked={rateCampaign.isOptedOut}
+                      checked={rateCampaign?.isOptedOut}
                       onChange={(pass) => {
                         if (pass.target.checked) {
                           handleSave(1, "isOptedOut");
@@ -664,7 +714,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <div
                     className="main-div w100"
                     onClick={() =>
-                      onClick("terminationDate", rateCampaign.terminationDate)
+                      onClick("terminationDate", rateCampaign?.terminationDate)
                     }
                   >
                     <div>
