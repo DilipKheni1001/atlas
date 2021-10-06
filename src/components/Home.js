@@ -1521,6 +1521,12 @@ useEffect(() => {
       formData.append("startDate", startDate)
     }
 
+    if(contactDetails.stage === "Lead" || contactDetails.stage == "Qualified Lead"){
+      formData.append("isAppButtonDisplayed", 1)
+    }else{
+      formData.append("isAppButtonDisplayed", 0)
+    }
+
     formData.append("frequency", "Daily (M-F)")
     formData.append("selectedDays", day)
 
@@ -1664,13 +1670,13 @@ useEffect(() => {
 
       {/* create rateCampaign modal */}
       <Modal open={openRateModal} onClose={onCloseRateModal}>
-        <div className="create-loan-scenario">
+        <div className="create-rate-campaign">
           <ModalTitle>New Rate Campaign</ModalTitle>
           <ModalBody>
               <div className="inputBox loanProduct" style={{ width: "100%" }}>
                 <label>Loan Scenario</label>
                 <Select
-                maxMenuHeight={550}
+                  maxMenuHeight={100}
                   value={rateLoanIdSelect}
                   onChange={handleRateLoanIdSelect}
                   options={RateLoanOptions}

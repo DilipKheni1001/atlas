@@ -1355,6 +1355,13 @@ select::-ms-expand {
   width: 550px;
   height: 500px;
 }
+
+.create-rate-campaign {
+  padding: 10px;
+  width: 550px;
+  height: auto;
+}
+
 .delete-loan-scenario {
   padding: 10px;
   width: 550px;
@@ -1384,6 +1391,12 @@ select::-ms-expand {
   margin-top: 30px;
 }
 
+.create-rate-campaign .modal-footer {
+  border: none;
+  padding: 0px;
+  margin-top: 30px;
+}
+
 .delete-loan-scenario .modal-footer {
   border: none;
   padding: 0px;
@@ -1394,6 +1407,10 @@ select::-ms-expand {
   padding: 0;
 }
 .create-loan-scenario .modal-body {
+  padding: 0;
+}
+
+.create-rate-campaign .modal-body {
   padding: 0;
 }
 
@@ -1452,6 +1469,23 @@ button[editext="edit-button"] {
   border: none;
 }
 
+
+.create-rate-campaign .modal-footer .cancel {
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  color: #636f79;
+  padding: 0px 10px;
+}
+.create-rate-campaign button.save {
+  background-color: #40a2d9;
+  color: #fff;
+  height: 50px;
+  padding: 0px 20px;
+  border-radius: 20px;
+  font-size: 18px;
+  border: none;
+}
 .delete-loan-scenario .modal-footer .cancel {
   border: none;
   background-color: transparent;
