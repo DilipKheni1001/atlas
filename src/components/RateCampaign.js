@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "react-dropdown";
 import EdiText from "react-editext";
 import "react-dropdown/style.css";
-import MultiSelect from "react-multi-select-component";
+import {MultiSelect} from "react-multi-select-component";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
