@@ -43,7 +43,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
   };
 
   const [ScenariosName, setScenariosName] = useState([]);
-  const [LoanID,setLoanID] = useState()
+  const [LoanID, setLoanID] = useState();
   const newName = Object.values(ScenariosName);
   const scenarioOptions = newName.map((item) => {
     return { label: item.scenarioName, value: item.id };
@@ -259,24 +259,24 @@ const RateCampaign = ({ loanScenario, RateId }) => {
       })
         .then((res) => {
           if (res.status === 200) {
-            // console.log(res.data.data.selectedDays);
             let newData;
             if (
-              res.data?.data?.selectedDays !== null ||
+              res.data?.data?.selectedDays !== null &&
               res.data?.data?.selectedDays !== ""
             ) {
               let newArray = res.data.data?.selectedDays?.split(";");
               newData = newArray?.map((item) => {
                 return { label: item.substring(0, 3), value: item };
               });
+              setSelected(newData);
+            } else {
+              setSelected([]);
             }
-            // console.log(newData)
-            setSelected(newData);
             setDateState(new Date(res.data?.data?.startDate));
             setTDateState(new Date(res.data?.data?.terminationDate));
             setRateCampaign(res.data?.data);
             var contactId = { id: res.data?.data?.contactId };
-            setLoanID(res.data.data.loanScenarioId)
+            setLoanID(res.data.data.loanScenarioId);
             // var loanId = { id: res.data?.data?.loanScenarioId };
             return axios({
               method: "get",
@@ -291,31 +291,31 @@ const RateCampaign = ({ loanScenario, RateId }) => {
             setScenariosName(res.data?.data?.loanScenarios);
           }
         });
-      
     } catch (error) {}
   }
 
-useEffect(() => {
-  if(LoanID){
-    let loanId = {
-      id:LoanID
+  useEffect(() => {
+    if (LoanID) {
+      let loanId = {
+        id: LoanID,
+      };
+      axios({
+        method: "get",
+        url: "https://atlas-admin.keystonefunding.com/api/loanscenario/details",
+        params: loanId,
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("loan", res.data.data[0]);
+            setLoanScenarioContactId(res.data?.data[0].contactId);
+            setLoanScenariosName(res.data?.data[0].scenarioName);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    axios({
-      method: "get",
-      url: "https://atlas-admin.keystonefunding.com/api/loanscenario/details",
-      params: loanId,
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log("loan", res.data.data[0]);
-        setLoanScenarioContactId(res.data?.data[0].contactId);
-        setLoanScenariosName(res.data?.data[0].scenarioName);
-      }
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
-},[LoanID])
+  }, [LoanID]);
 
   return (
     <div className="stone">
@@ -633,15 +633,11 @@ useEffect(() => {
                   >
                     <div>
                       <span>
-                        {selected?.length !== 0
-                          ? selected
+                        {selected && selected.length == 0
+                          ? defaultDays[0]
+                          : selected
                               ?.map((item) => {
                                 return item.label;
-                              })
-                              .join(", ")
-                          : defaultDays
-                              ?.map((item) => {
-                                return item;
                               })
                               .join(", ")}
                       </span>

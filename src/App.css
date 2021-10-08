@@ -201,7 +201,7 @@ table.table tr:last-child td {
   padding: 15px 20px;
   font-size: 16px;
   font-weight: 500;
-
+  width:200px;
   position: sticky;
   top: 0px;
   border-right: 0;
@@ -412,7 +412,7 @@ ul.pagination li.active {
   margin-bottom: 15px;
 }
 .campa-box {
-  padding: 0px 5px;
+  padding: 2px 5px;
   width: 50%;
 }
 
@@ -1359,7 +1359,7 @@ select::-ms-expand {
 .create-rate-campaign {
   padding: 10px;
   width: 550px;
-  height: auto;
+  height: 300px;
 }
 
 .delete-loan-scenario {
@@ -1394,7 +1394,7 @@ select::-ms-expand {
 .create-rate-campaign .modal-footer {
   border: none;
   padding: 0px;
-  margin-top: 30px;
+  margin-top: 100px;
 }
 
 .delete-loan-scenario .modal-footer {

@@ -1528,7 +1528,7 @@ useEffect(() => {
     }
 
     formData.append("frequency", "Daily (M-F)")
-    formData.append("selectedDays", day)
+    // formData.append("selectedDays", null)
 
     axios
     .post(
@@ -1540,7 +1540,7 @@ useEffect(() => {
         setOpenRateModal(false)
         setRateLoanIdSelect("")
         getData()
-            showRateCampain(res.data.id)
+        showRateCampain(res.data.id)
       }).catch((e) => {
         console.log(e)
       })    
@@ -1676,7 +1676,7 @@ useEffect(() => {
               <div className="inputBox loanProduct" style={{ width: "100%" }}>
                 <label>Loan Scenario</label>
                 <Select
-                  maxMenuHeight={100}
+                  // maxMenuHeight={200}
                   value={rateLoanIdSelect}
                   onChange={handleRateLoanIdSelect}
                   options={RateLoanOptions}
