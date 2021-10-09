@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "react-dropdown";
 import EdiText from "react-editext";
 import "react-dropdown/style.css";
-import {MultiSelect} from "react-multi-select-component";
+import { MultiSelect } from "react-multi-select-component";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
@@ -273,7 +273,9 @@ const RateCampaign = ({ loanScenario, RateId }) => {
               setSelected([]);
             }
             setDateState(new Date(res.data?.data?.startDate));
-            setTDateState(new Date(res.data?.data?.terminationDate));
+            if (res.data?.data?.terminationDate !== null) {
+              setTDateState(new Date(res.data?.data?.terminationDate));
+            }
             setRateCampaign(res.data?.data);
             var contactId = { id: res.data?.data?.contactId };
             setLoanID(res.data.data.loanScenarioId);
@@ -602,6 +604,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   <div id="wrap" className="w100">
                     <MultiSelect
                       className="w100"
+                      hasSelectAll={false}
                       options={selectedDaysOption}
                       value={selected}
                       onChange={setDays}
@@ -714,7 +717,9 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                     }
                   >
                     <div>
-                      <span>{reformatDate(tDateState)}</span>
+                      <span>
+                        {tDateState ? reformatDate(tDateState) : "N/A"}
+                      </span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
                     </div>
                   </div>
