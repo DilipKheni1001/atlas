@@ -1688,6 +1688,15 @@ height: 16px;
   .rate-text h1 {
     font-size: 30px !important; 
   }
+
+  .loan-box{
+    width: 50%;
+  }
+
+  .campa-box .box-l {
+    width: fit-content;
+  }
+
 }
 
 @media (max-width: 1350px) {
@@ -1699,12 +1708,28 @@ height: 16px;
   .tablemain table {
     width: 100vw;
   }
+
+  .loan-box{
+    width: 50%;
+  }
+
+  .campa-box .box-l {
+    width: fit-content;
+  }
 }
 
 @media (max-width: 1200px) {
 
   .setting-page{
     width: 68%;
+  }
+
+
+  .loan-box{
+    width: 100%;
+  }
+  .campa-box{
+    width: 100%;
   }
 
   .errorMessage{
