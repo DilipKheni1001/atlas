@@ -38,6 +38,29 @@ const RateCampaign = ({ loanScenario, RateId }) => {
   const changeDate = (e) => {
     setDateState(e);
   };
+
+  const handleClearDate = async (field) => {
+    // setDateState()
+    var formData = new FormData();
+    formData.append("id", rateCampaign.id);
+    formData.append(field, "");
+
+    await axios
+      .post(
+        `https://atlas-admin.keystonefunding.com/api/ratecampaign/update`,
+        formData
+      )
+      .then((res) => {
+        setIsEqual("");
+        setTDateState();
+        console.log("Update-------------------------", res.data);
+        // console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   const changeTDate = (e) => {
     setTDateState(e);
   };
@@ -115,6 +138,18 @@ const RateCampaign = ({ loanScenario, RateId }) => {
     formData.append("id", rateCampaign.id);
     formData.append(field, val);
 
+    let days = [];
+    const newData = days
+      .map((item) => {
+        return item.value;
+      })
+      .join(";");
+
+    if (field == "frequency") {
+      if (val == "Daily (M-F)" || val == "Bi-Weekly" || val == "'Monthly") {
+        formData.append("selectedDays", newData);
+      }
+    }
     axios
       .post(
         `https://atlas-admin.keystonefunding.com/api/ratecampaign/update`,
@@ -124,7 +159,9 @@ const RateCampaign = ({ loanScenario, RateId }) => {
         setIsEqual("");
         setRateCampaign({ ...rateCampaign, [field]: val });
         console.log("Update-------------------------", res.data);
-        // console.log(res.data);
+        if (val !== "Weekly") {
+          setSelected([]);
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -140,7 +177,6 @@ const RateCampaign = ({ loanScenario, RateId }) => {
   const handleStartDate = (val, field) => {
     // setDateState(val)
     const sDate = formateDate(val);
-
     var formData = new FormData();
     formData.append("id", rateCampaign.id);
     formData.append(field, sDate);
@@ -196,7 +232,6 @@ const RateCampaign = ({ loanScenario, RateId }) => {
         return item.value;
       })
       .join(";");
-    // console.log(newData)
     var formData = new FormData();
     formData.append("id", rateCampaign.id);
     formData.append(field, newData);
@@ -273,7 +308,12 @@ const RateCampaign = ({ loanScenario, RateId }) => {
               setSelected([]);
             }
             setDateState(new Date(res.data?.data?.startDate));
-            if (res.data?.data?.terminationDate !== null) {
+            if (
+              res.data.data.terminationDate === null ||
+              res.data.data.terminationDate === undefined
+            ) {
+              setTDateState();
+            } else {
               setTDateState(new Date(res.data?.data?.terminationDate));
             }
             setRateCampaign(res.data?.data);
@@ -308,7 +348,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
       })
         .then((res) => {
           if (res.status === 200) {
-            console.log("loan", res.data.data[0]);
+            // console.log("loan", res.data.data[0]);
             setLoanScenarioContactId(res.data?.data[0].contactId);
             setLoanScenariosName(res.data?.data[0].scenarioName);
           }
@@ -518,19 +558,31 @@ const RateCampaign = ({ loanScenario, RateId }) => {
               <li className="head-price">
                 <p>Schedule</p>
               </li>
-              <li>
+              <li style={{ flexWrap: "wrap" }}>
                 <p>Start Date</p>
                 {isEqual === "startDate" ? (
-                  <div id="wrap">
+                  <div id="Calendarwrap">
                     <Calendar value={dateState} onChange={changeDate} />
-                    <div className="btn-div">
+                    <div className="btn-div centerBtn">
                       <button
+                        style={{
+                          marginTop: "5px",
+                          height: "25px",
+                          width: "25px",
+                          fontSize: "15px",
+                        }}
                         className="right-arrow icon-btn"
                         onClick={() => handleStartDate(dateState, "startDate")}
                       >
                         &#10003;
                       </button>
                       <button
+                        style={{
+                          marginTop: "5px",
+                          height: "25px",
+                          width: "25px",
+                          fontSize: "15px",
+                        }}
                         className="cross-arrow icon-btn"
                         onClick={() => onDateClose()}
                       >
@@ -605,6 +657,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                     <MultiSelect
                       className="w100"
                       hasSelectAll={false}
+                      disableSearch={true}
                       options={selectedDaysOption}
                       value={selected}
                       onChange={setDays}
@@ -687,14 +740,20 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                   </label>
                 </span>
               </li>
-              <li>
+              <li style={{ flexWrap: "wrap" }}>
                 <p>Termination Date</p>
                 {isEqual === "terminationDate" ? (
-                  <div id="wrap">
+                  <div id="Calendarwrap">
                     <Calendar value={tDateState} onChange={changeTDate} />
-                    <div className="btn-div">
+                    <div className="btn-div centerBtn">
                       <button
                         className="right-arrow icon-btn"
+                        style={{
+                          marginTop: "5px",
+                          height: "25px",
+                          width: "25px",
+                          fontSize: "15px",
+                        }}
                         onClick={() =>
                           handleTerminationDate(tDateState, "terminationDate")
                         }
@@ -703,9 +762,32 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                       </button>
                       <button
                         className="cross-arrow icon-btn"
+                        style={{
+                          marginTop: "5px",
+                          height: "25px",
+                          width: "25px",
+                          fontSize: "15px",
+                        }}
                         onClick={() => onTDateClose()}
                       >
                         &#10005;
+                      </button>
+                      <button className="clearBtn">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-trash"
+                          viewBox="0 0 16 16"
+                          onClick={() => handleClearDate("terminationDate")}
+                        >
+                          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                          <path
+                            fill-rule="evenodd"
+                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                          />
+                        </svg>
                       </button>
                     </div>
                   </div>

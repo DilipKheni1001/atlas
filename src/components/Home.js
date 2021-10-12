@@ -1916,11 +1916,10 @@ useEffect(() => {
                         {contactDetails?.rateCampaings?.map((data, index) => (
                           <div onClick={() => showRateCampain(data.id)} className="pro-detail-text new-pro" key={index}>
                             <h3 >
-                              {loanScenario.loanType +
-                                " " +
-                                loanScenario.loanProduct +
-                                "; " +
-                                data.additionalLoanProducts}
+                              {data.additionalLoanProducts !== null ? 
+                              loanScenario.loanType + " " + loanScenario.loanProduct + "; " + data.additionalLoanProducts 
+                                : loanScenario.loanType + " " + loanScenario.loanProduct
+                            }
                             </h3>
                             <svg
                               onClick={() => deleteRateCampaign(data.id)}

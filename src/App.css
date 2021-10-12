@@ -1205,7 +1205,7 @@ select::-ms-expand {
 .setting-page{
   margin: 0 auto;
   margin-bottom: 20px;
-  width: 41%;
+  width: 48%;
   padding: 0px 10px;
 }
 
@@ -1309,9 +1309,37 @@ select::-ms-expand {
 .btn-div {
   display: flex;
 }
+
+.centerBtn{
+  justify-content: center;
+}
+
+.clearBtn{
+  background-color: #40a2d9;
+  color: #fff;
+  height: 25px;
+  min-width: 25px;
+  padding: 0px;
+  border-radius: 20px;
+  font-size: 15px;
+  line-height: 0px;
+  border: none;
+  margin-top: 5px;
+  margin-left: 4px;
+}
+
 #wrap {
   width: auto;
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: auto;
+  margin-right: 0;
+}
+
+#Calendarwrap{
+  width: auto;
+  display: block;
   align-items: center;
   justify-content: flex-end;
   margin: auto;
@@ -1693,6 +1721,10 @@ height: 16px;
     width: 50%;
   }
 
+  .react-calendar{
+    width: auto !important;
+  }
+  
   .campa-box .box-l {
     width: fit-content;
   }
@@ -1724,6 +1756,29 @@ height: 16px;
     width: 68%;
   }
 
+  .react-calendar{
+    width: 100% !important;
+  }
+
+  .clearBtn{
+    min-width: 20px;
+    height: 20px;
+  }
+
+  .clearBtn svg{
+    height: 13px;
+    width: 13px;
+  }
+
+  button.cross-arrow.icon-btn{
+    height: 20px !important;
+    width:20px !important;
+  }
+
+  button.right-arrow.icon-btn{
+    height: 20px !important;
+    width: 20px !important;
+  }
 
   .loan-box{
     width: 100%;
