@@ -363,7 +363,7 @@ const RateCampaign = ({ loanScenario, RateId }) => {
     <div className="stone">
       <div className="stone-sec mb-20">
         <div className="stone-text">
-          <h1>Rate Campaign: {loanScenario.loanProduct}</h1>
+          <h1>Rate Campaign: {loanScenariosName}</h1>
           <span className="updated-date">
             Last Updated
             <br />

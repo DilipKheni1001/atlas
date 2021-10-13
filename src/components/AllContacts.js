@@ -10,6 +10,7 @@ const Hometable = (props) => {
   const [pageCount, setPageCount] = useState();
   const [currentPage, setcurrentPage] = useState(1);
   const [itemsPerPage, setitemsPerPage] = useState(50);
+  const [LoanScen, setLoanScen] = useState()
 
   const history = useHistory();
 
@@ -124,6 +125,20 @@ const Hometable = (props) => {
   const numberWithCommas = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+
+  useEffect(() => {
+  let loanScen = []
+
+  if(tableArr && tableArr.length !== 0){
+    tableArr?.map((t, index) => {
+      t.loanScenarios.map((l, index) => {
+        loanScen.push(l)
+      })
+    })
+    setLoanScen(loanScen) 
+  }
+},[tableArr])
+
   return (
     <>
       <div className="td-main">
@@ -515,6 +530,10 @@ const Hometable = (props) => {
                       <td>
                         <div className="loan-td">
                           {element?.rateCampaings?.map((ele, index) => {
+                            let names
+                            if(LoanScen && LoanScen.length !== 0){
+                              names = LoanScen?.filter(x => x.id == ele.loanScenarioId)
+                            }
                             return (
                               <div className="campa-box" key={index}>
                                 <div
@@ -523,11 +542,7 @@ const Hometable = (props) => {
                                     handleLoanPage(ele.loanScenarioId, ele.id)
                                   }
                                 >
-                                  {loanType +
-                                    " " +
-                                    loanProduct +
-                                    "; " +
-                                    ele.additionalLoanProducts}
+                                  {names && names[0].scenarioName}
                                 </div>
                               </div>
                             );
