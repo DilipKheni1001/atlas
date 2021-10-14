@@ -371,9 +371,6 @@ useEffect(() => {
 //   console.log("options", RateLoanOptions)
 // },[RateLoanOptions])
 
-
-
-
   const occupancyOptions = ["Owner-Occupied", "Second Home", "Investment"];
 
   const propertyCountryOptions = [
@@ -892,6 +889,30 @@ useEffect(() => {
   const handleProps = (e) => {
     setHeaders(e);
   };
+
+  useEffect(() => {
+    if (openRepriceModal) {
+      var eventMethod = window.addEventListener
+        ? "addEventListener"
+        : "attachEvent";
+      var eventer = window[eventMethod];
+      var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+  
+      eventer(
+        messageEvent,
+        function (e) {
+          var key = e.message ? "message" : "data";
+          var data = e[key];
+          if (data == "close-intelliquote-modal") {
+            setOpenRepriceModal(false);
+            getData()
+          }
+        },
+        false
+      );
+    }
+  },[openRepriceModal])
+  
 
   useEffect(() => {
     let governmentFundingFeeVal =
@@ -1913,13 +1934,15 @@ useEffect(() => {
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
-                        {contactDetails?.rateCampaings?.map((data, index) => (
+                        {contactDetails?.rateCampaings?.map((data, index) => {
+                          let RName
+                          if(contactDetails && contactDetails?.loanScenarios.length !== 0){
+                            RName = contactDetails?.loanScenarios.filter(x => x.id == data.loanScenarioId)
+                          }
+                          return(
                           <div onClick={() => showRateCampain(data.id)} className="pro-detail-text new-pro" key={index}>
-                            <h3 >
-                              {data.additionalLoanProducts !== null ? 
-                              loanScenario.loanType + " " + loanScenario.loanProduct + "; " + data.additionalLoanProducts 
-                                : loanScenario.loanType + " " + loanScenario.loanProduct
-                            }
+                            <h3>
+                              {RName[0].scenarioName}
                             </h3>
                             <svg
                               onClick={() => deleteRateCampaign(data.id)}
@@ -1938,7 +1961,7 @@ useEffect(() => {
                               />
                             </svg>
                           </div>
-                        ))}
+                        )})}
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>
@@ -2073,7 +2096,7 @@ useEffect(() => {
                             fill="#2CC14E"
                           />
                         </svg>
-                        {numberWithCommas(blockA)}
+                        {numberWithCommas(Math.round(blockA))}
                       </h1>
                     </div>
                   </div>

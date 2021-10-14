@@ -680,7 +680,8 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                       </button>
                     </div>
                   </div>
-                ) : (
+                ) : rateCampaign?.frequency &&
+                  rateCampaign?.frequency == "Weekly" ? (
                   <div
                     className="main-div w100"
                     onClick={() =>
@@ -698,6 +699,23 @@ const RateCampaign = ({ loanScenario, RateId }) => {
                               .join(", ")}
                       </span>
                       <button className="edit-arrow1 icon-btn1">&#9998;</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="main-div w100"
+                    style={{cursor:"default"}}
+                  >
+                    <div>
+                      <span>
+                        {selected && selected.length == 0
+                          ? defaultDays[0]
+                          : selected
+                              ?.map((item) => {
+                                return item.label;
+                              })
+                              .join(", ")}
+                      </span>
                     </div>
                   </div>
                 )}

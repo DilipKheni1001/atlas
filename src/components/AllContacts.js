@@ -483,10 +483,10 @@ const Hometable = (props) => {
                                           <p>Upfront costs</p>
                                           <h4>
                                             $
-                                            {Number(ele.blockADiscountFee) +
+                                            {Math.round(Number(ele.blockADiscountFee) +
                                               Number(ele.blockAOriginationFee) +
                                               Number(ele.blockAprocessingFee) +
-                                              Number(ele.blockATaxService)}
+                                              Number(ele.blockATaxService))}
                                           </h4>
                                         </div>
                                         <div className="col-md-3">
